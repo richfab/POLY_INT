@@ -1,0 +1,21 @@
+    LOCAL
+git status : permet de voir les changements qui n'ont pas été commités
+git add * : permet de tracker tous les fichiers du dossier
+git rm filename : permet d'arreter le suivi du fichier filename
+git commit -m "mesmage" : permet de commiter tous les changements avec le message de commit
+git branch new_branch : permet de creer la branche new_branch
+git checkout new_branch : permet de switcher a la branche new_branch
+git merge new_branch : permet de merger la branche new_branch avec celle dans laquelle je suis
+git log : permet de voir un historique des commits
+git log -p : permet de voir aussi les changements pour chaque log
+
+    ONLINE
+git remote add origin https://github.com/[username]/[repository_name].git : permet de connecter le repertoire local avec le repertoire GitHub (que l'on nomme origin par defaut)
+git push orgini master : permet d'envoyer les commits de master en ligne
+git remote rm origin : permet de supprimer un remote
+git remote -v : permet de voir les remote
+
+    UNIV-NANTES
+Se logger au réseau univ-nantes
+Dans le terminal exporter le proxy https : export https_proxy="https://cache.wifi.univ-nantes.fr:3128"
+Utiliser le repertoire https://github.com/...
