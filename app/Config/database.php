@@ -79,7 +79,7 @@ class DATABASE_CONFIG {
 		'login' => 'root',
 		'password' => 'root',
 		'database' => 'mydb',
-		'prefix' => 'POLY_INT',
+		'prefix' => 'POLY_INT_',
 		'encoding' => 'utf8',
 	);
 }

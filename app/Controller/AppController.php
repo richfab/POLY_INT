@@ -5,6 +5,8 @@
  * This file is application-wide controller file. You can put all
  * application-wide controller-related methods here.
  *
+ * PHP 5
+ *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  *
@@ -18,7 +20,6 @@
  * @since         CakePHP(tm) v 0.2.9
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
 App::uses('Controller', 'Controller');
 
 /**
@@ -31,4 +32,56 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+
+	public $components = array(
+        'Session',
+        'Auth' => array(
+            'loginRedirect' => '/',
+            'logoutRedirect' => '/',
+            'authorize' => array('Controller'),
+            'authenticate' => array(
+                'Form' => array(
+                    'fields' => array(
+                        'username' => 'email', 'password' => 'password'
+                    )
+                )
+            )
+        )
+    );
+    
+    public $helpers = array('Js' => array('Jquery'));
+
+    public function beforeFilter() {
+    
+    	//on autorise les utilisateurs non loggés a voir les pages statiques
+    	$this->Auth->allow(array('display'));
+    	
+    	if(isset($this->request->params['prefix']) && $this->request->params['prefix'] == 'admin'){
+            $this->layout = 'admin';
+        }
+        if($this->Auth->user('role') == 'admin'){
+            $this->layout = 'admin';
+        }
+    }
+    
+    public function isAuthorized($user = null) {
+    	// Chacun des utilisateurs enregistrés peut accéder aux fonctions publiques
+        if (empty($this->request->params['admin'])) {
+            return true;
+        }
+	    
+        // Admin can access every action
+        if (isset($user['role']) && $user['role'] === 'admin') {
+            return true;
+        }
+
+        // Default deny
+        return false;
+    }
+
+    //pour les boutons retour
+    public function beforeRender() {
+        $this->set('refer',$this->referer);
+    }
+
 }
