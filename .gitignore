@@ -1,3 +1,4 @@
 tmp/*
 app/tmp/*
 !empty
+/nbproject/*
