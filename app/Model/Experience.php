@@ -23,21 +23,22 @@ class Experience extends AppModel {
         ),
         'description' => array(
             'maxLength' => array(
-                'rule'    => array('maxLength', '255'),
-                'message' => 'La description doit comporter 255 caractères au maximum',
+                'rule'    => array('maxLength', '300'),
+                'message' => 'La description doit comporter 300 caractères au maximum',
                 'allowEmpty' => true
             )
         ),
         'note' => array(
         	'number' => array(
-                    'rule'       => array('range', -1, 6),
-                    'message'    => 'Veuillez entrer une note entre 0 et 5'
+                    'rule'       => array('range', 0, 6),
+                    'message'    => 'Veuillez entrer une note entre 1 et 5',
+                    'allowEmpty' => true
                 )
         ),
         'comment' => array(
             'maxLength' => array(
-                'rule'    => array('maxLength', '255'),
-                'message' => 'Le commentaire doit comporter 255 caractères au maximum',
+                'rule'    => array('maxLength', '10000'),
+                'message' => 'Le commentaire doit comporter 10000 caractères au maximum',
                 'allowEmpty' => true
             )
         )
