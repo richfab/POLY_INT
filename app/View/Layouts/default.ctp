@@ -31,6 +31,9 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 
 		echo $this->Html->css('cake.generic');
                 
+                echo $this->Html->css(array('bootstrap.min'));
+                echo $this->Html->script(array('jquery-1.11.0.min','bootstrap.min')); // Inclut la librairie Jquery
+                
                 //on inclut les fichiers js qui sont spécifiques a une vue
 		if(isset($jsIncludes)){
 		    echo $this->Html->script($jsIncludes);

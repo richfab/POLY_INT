@@ -71,6 +71,10 @@ class ExperiencesController extends AppController {
         }
     }
     
+    public function note(){
+        $this->set('jsIncludes',array('bootstrap-rating-input'));
+    } 
+   
     public function upload_experienceNumber($city_id = null, $increment_by = null){
         
         if($city_id != null && $increment_by != null){
