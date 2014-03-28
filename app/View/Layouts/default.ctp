@@ -20,42 +20,53 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 ?>
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
 	<?php echo $this->Html->charset(); ?>
-	<title>
+        <title>
 		<?php echo $cakeDescription ?>:
 		<?php echo $title_for_layout; ?>
-	</title>
+        </title>
 	<?php
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('cake.generic');
+                
+                //on inclut les fichiers js qui sont spécifiques a une vue
+		if(isset($jsIncludes)){
+		    echo $this->Html->script($jsIncludes);
+		}
+		
+		//on inclut les fichiers css qui sont spécifiques a une vue
+		if(isset($cssIncludes)){
+			echo $this->Html->css($cssIncludes);
+		}
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
-</head>
-<body>
-	<div id="container">
-		<div id="header">
-			<h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
-		</div>
-		<div id="content">
-
+    </head>
+    <body>
+        <div id="container">
+            <div id="header">
+                <h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
+            </div>
+            <div id="content">
+                
 			<?php echo $this->Session->flash(); ?>
-
+                
 			<?php echo $this->fetch('content'); ?>
-		</div>
-		<div id="footer">
+            </div>
+            <div id="footer">
 			<?php echo $this->Html->link(
 					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
 					'http://www.cakephp.org/',
 					array('target' => '_blank', 'escape' => false)
 				);
 			?>
-		</div>
-	</div>
+            </div>
+        </div>
+        <?php echo $this->Js->writeBuffer(); // Écrit les scripts en mémoire cache ?>
 	<?php echo $this->element('sql_dump'); ?>
-</body>
+    </body>
 </html>

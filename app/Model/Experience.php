@@ -3,8 +3,7 @@ App::uses('AuthComponent', 'Controller/Component');
 
 class Experience extends AppModel {
 
-    public $belongsTo = 'User';
-//    public $hasOne = array('Motive','City');
+    public $belongsTo = array('User','Motive','City');
 
     public $validate = array(
         'dateStart' => array(
