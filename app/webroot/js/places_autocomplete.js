@@ -18,8 +18,8 @@ function initialize() {
     var countryCode = /** @type {HTMLInputElement} */(document.getElementById('CountryCode'));
     var autocomplete = new google.maps.places.Autocomplete(input);
     
-    //la recherche est limitée aux lieux (pas les etablissements)
-    autocomplete.setTypes(['geocode']);
+    //la recherche est limitée aux villes
+    autocomplete.setTypes(['(cities)']);
     
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
         

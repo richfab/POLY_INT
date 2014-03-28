@@ -55,10 +55,17 @@ class ExperiencesController extends AppController {
             $this->request->data['Experience']['city_id'] = $city['City']['id'];
         	
             $this->Experience->create();
-            //TODO update numberExperience 
+            
             if ($this->Experience->save($this->request->data) && $this->upload_experienceNumber($city['City']['id'],1)) {
-                $this->Session->setFlash("Les modifications ont bien été enregistrées");
-                return $this->redirect(array('controller'=>'users', 'action' => 'profile'));
+                
+                $experience = $this->Experience->find('first', array(
+                    'conditions' => array('Experience.user_id' => $user_id),
+                    'order' => array(
+                        'Experience.created' => 'DESC'
+                    )
+                ));
+                
+                return $this->redirect(array('controller'=>'experience', 'action' => 'note', $experience['Experience']['id']));
             }
             $this->Session->setFlash("Erreur lors de l'enregistrement");
         }
