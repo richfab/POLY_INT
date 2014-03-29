@@ -24,5 +24,9 @@
 //    echo $this->Form->input('City.lon', array('label'=>'longitude'));
 //    echo $this->Form->input('City.Country.code', array('label'=>'code'));
 //    echo $this->Form->input('City.Country.name', array('label'=>'country_name'));
+    echo $this->Form->input('note',array('label'=>'Avis','type'=>'number','class'=>'rating','data-min' => 1, 'data-max' => 5));
+    echo $this->Form->input('comment',array('label'=>'Commentaire','type'=>'textarea'));
+    echo $this->Form->input('notify',array('label'=>"Envoyez-moi un email si quelqu'un est dans cette ville en même temps que moi"));
 ?>
-<?php echo $this->Form->end(__('Suivant'));
+<?php echo $this->Form->end(__('Enregistrer'));?>
+<?= $this->Html->link("Retour au profil", array('controller'=>'users', 'action' => 'profile')); ?>

@@ -11,14 +11,24 @@
     <p>-------------------------------------------------------------------</p>
     <p>Lieu : <?= $experience['City']['name'];?>, <?= $experience['City']['Country']['name'];?></p>
     <p>Motif : <?= $experience['Motive']['name'];?></p>
-    <p>Description : <?= $experience['Experience']['description'];?></p>
+    <?php if($experience['Experience']['description'] != ""): ?>
+        <p>Description : <?= $experience['Experience']['description'];?></p>
+    <?php else:?>
+        <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+            <?= $this->Html->link("Ajouter une description", array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id'])); ?>
+        <?php else: ?>
+            <p>Pas de description</p>
+        <?php endif; ?>
+    <?php endif; ?>
     <p>Du : <?= $this->Time->format($experience['Experience']['dateStart'], '%B %e, %Y');?> Au : <?= $this->Time->format($experience['Experience']['dateEnd'], '%B %e, %Y')?></p>
     <?php if($experience['Experience']['note'] != 0): ?>
         <p>Avis : <?= $experience['Experience']['note'];?>/5</p>
-        <p>"<?= $experience['Experience']['comment'];?>"</p>
+        <?php if($experience['Experience']['comment'] != ""): ?>
+            <p>"<?= $experience['Experience']['comment'];?>"</p>
+        <?php endif; ?>
     <?php else:?>
         <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-            <?= $this->Html->link("Ajouter un avis", array('controller'=>'experiences', 'action' => 'note', $experience['Experience']['id'])); ?>
+            <?= $this->Html->link("Ajouter un avis", array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id'])); ?>
         <?php else: ?>
             <p>Pas encore d'avis</p>
         <?php endif; ?>
