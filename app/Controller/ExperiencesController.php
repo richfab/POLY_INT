@@ -31,13 +31,21 @@ class ExperiencesController extends AppController {
         
         if ($this->request->is('post')) {
             
-            //etape 1 : on teste si la ville existe deja dans la base
+            //etape 1 : on teste si la ville de ce pays existe deja dans la base
             $city = $this->Experience->City->find('first', array(
                 'conditions' => array('City.name' => $this->request->data['City']['name']),
                 'recursive' => 0
             ));
-            //si la ville n'existe pas dans la bdd
-            if(empty($city)){
+            if(!empty($city)){
+                $country = $this->Experience->City->Country->find('first', array(
+                    'conditions' => array('Country.name' => $this->request->data['Country']['name'],
+                        'Country.id' => $city['City']['country_id']),
+                    'recursive' => 0
+                ));
+            }
+            
+            //si la ville de ce pays n'existe pas dans la bdd
+            if(empty($country)){
                 //etape 2 : on teste si le pays existe deja dans la bdd
                 $country = $this->Experience->City->Country->find('first', array(
                     'conditions' => array('Country.name' => $this->request->data['Country']['name']),
@@ -70,7 +78,8 @@ class ExperiencesController extends AppController {
                 
                 //on teste si la date de fin de l'experience est inférieure à la date du jour
                 $today = date("Y-m-d H:i:s"); 
-                if($experience['Experience']['dateEnd'] < $today){
+                
+                if($experience['Experience']['dateEnd'] <= $today){
                     return $this->redirect(array('controller'=>'experiences', 'action' => 'note', $experience['Experience']['id']));
                 }
                 else{
