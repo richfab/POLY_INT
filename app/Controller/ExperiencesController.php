@@ -30,6 +30,7 @@ class ExperiencesController extends AppController {
         $this->request->data['Experience']['user_id'] = $user_id;
         
         if ($this->request->is('post')) {
+            
             //etape 1 : on teste si la ville existe deja dans la base
             $city = $this->Experience->City->find('first', array(
                 'conditions' => array('City.name' => $this->request->data['City']['name']),
@@ -42,10 +43,12 @@ class ExperiencesController extends AppController {
                     'conditions' => array('Country.name' => $this->request->data['Country']['name']),
                     'recursive' => 0
                 ));
+                
                 //si le pays n'existe pas dans la bdd, on le creer
                 if(empty($country)){
                     $country = $this->Experience->City->Country->save($this->request->data);
                 }
+                
                 //puis on creer la ville
                 $this->request->data['City']['country_id'] = $country['Country']['id'];
                 $city = $this->Experience->City->save($this->request->data);
@@ -65,14 +68,92 @@ class ExperiencesController extends AppController {
                     )
                 ));
                 
-                return $this->redirect(array('controller'=>'experience', 'action' => 'note', $experience['Experience']['id']));
+                //on teste si la date de fin de l'experience est inférieure à la date du jour
+                $today = date("Y-m-d H:i:s"); 
+                if($experience['Experience']['dateEnd'] < $today){
+                    return $this->redirect(array('controller'=>'experiences', 'action' => 'note', $experience['Experience']['id']));
+                }
+                else{
+                    return $this->redirect(array('controller'=>'experiences', 'action' => 'notify', $experience['Experience']['id']));
+                }
             }
             $this->Session->setFlash("Erreur lors de l'enregistrement");
         }
     }
     
-    public function note(){
+    public function note($experience_id = null){
+        App::uses('AuthComponent', 'Controller/Component');
+        
+        $user_id = $this->Auth->user('id');
+        
+        //on inclut le script nécessaire aux étoile de notation
         $this->set('jsIncludes',array('bootstrap-rating-input'));
+        
+        //on verifie que l'experience est bien celle de l'utilisateur connecté
+        $experience = $this->Experience->find('first', array(
+            'conditions' => array('Experience.user_id' => $user_id)
+        ));
+        
+        if($experience['Experience']['user_id'] == $user_id){
+            
+            if ($this->request->is('post')) {
+            
+                $this->request->data['Experience']['user_id'] = $user_id;
+                $this->request->data['Experience']['id'] = $experience_id;
+
+                $this->Experience->create();
+
+                if ($this->Experience->save($this->request->data)) {
+                    return $this->redirect(array('controller'=>'experiences', 'action' => 'notify', $experience_id));
+                }
+                else{
+                    $this->Session->setFlash("Erreur lors de l'enregistrement");
+                }
+            
+            }
+            
+        }
+        else{
+            //l'utilisateur essaie de modifier une experience qui n'est pas la sienne
+            return $this->redirect(array('controller'=>'users', 'action' => 'login'));
+        }
+    } 
+    
+    public function notify($experience_id = null){
+        App::uses('AuthComponent', 'Controller/Component');
+        
+        $user_id = $this->Auth->user('id');
+        
+        //on inclut le script nécessaire aux étoile de notation
+        $this->set('jsIncludes',array('bootstrap-rating-input'));
+        
+        //on verifie que l'experience est bien celle de l'utilisateur connecté
+        $experience = $this->Experience->find('first', array(
+            'conditions' => array('Experience.user_id' => $user_id)
+        ));
+        
+        if($experience['Experience']['user_id'] == $user_id){
+            
+            if ($this->request->is('post')) {
+            
+                $this->request->data['Experience']['user_id'] = $user_id;
+                $this->request->data['Experience']['id'] = $experience_id;
+
+                $this->Experience->create();
+
+                if ($this->Experience->save($this->request->data)) {
+                    return $this->redirect(array('controller'=>'users', 'action' => 'profile'));
+                }
+                else{
+                    $this->Session->setFlash("Erreur lors de l'enregistrement");
+                }
+            
+            }
+        }
+        else{
+            //l'utilisateur essaie de modifier une experience qui n'est pas la sienne
+            return $this->redirect(array('controller'=>'users', 'action' => 'login'));
+        }
     } 
    
     public function upload_experienceNumber($city_id = null, $increment_by = null){

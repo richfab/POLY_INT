@@ -40,8 +40,13 @@ function initialize() {
         if (place.geometry) {
             
             var cityLong_name = place.address_components[0].long_name;
-            var countryLong_name = place.address_components[place.address_components.length-1].long_name;
-            var countryShort_name = place.address_components[place.address_components.length-1].short_name;
+            
+            for(var i in place.address_components){
+                if(place.address_components[i].types[0]==="country" && place.address_components[i].types[1]==="political"){
+                    var countryLong_name = place.address_components[i].long_name;
+                    var countryShort_name = place.address_components[i].short_name;
+                }
+            }
             
             cityLat.value = place.geometry.location.lat();
             cityLon.value = place.geometry.location.lng();

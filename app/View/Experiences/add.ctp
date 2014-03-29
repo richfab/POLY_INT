@@ -12,5 +12,10 @@
     echo $this->Form->input('City.lon', array('label'=>'longitude','type'=>'hidden'));
     echo $this->Form->input('Country.code', array('label'=>'code','type'=>'hidden'));
     echo $this->Form->input('Country.name', array('label'=>'country_name','type'=>'hidden'));
+//    echo $this->Form->input('City.name',array('label'=>'city_name'));
+//    echo $this->Form->input('City.lat', array('label'=>'latitude'));
+//    echo $this->Form->input('City.lon', array('label'=>'longitude'));
+//    echo $this->Form->input('Country.code', array('label'=>'code'));
+//    echo $this->Form->input('Country.name', array('label'=>'country_name'));
 ?>
 <?php echo $this->Form->end(__('Suivant'));
