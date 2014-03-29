@@ -119,10 +119,38 @@ class UsersController extends AppController {
             'recursive' => 2
         )));
     }
-
-    public function admin_index($year_id = null) {
-        $this->User->recursive = 0;
-        $this->set('users', $this->Paginate('User',array('role' => 'user')));
+    
+    public function edit() {
+    	App::uses('AuthComponent', 'Controller/Component');
+		
+        if($this->Auth->loggedIn()){
+            $user_id = $this->Auth->user('id');
+            $this->User->id = $user_id;
+        }
+        else{
+            return $this->redirect(array('action' => 'login'));
+        }
+        
+        //selectionne les ecoles par ordre alphabetique
+        $this->set('schools', $this->User->School->find('list', array(
+                        'order' => array('School.name' => 'ASC'))));
+        //selectionne les departements par ordre alphabetique
+        $this->set('departments', $this->User->Department->find('list', array(
+                        'order' => array('Department.name' => 'ASC'))));
+    			
+        if (!$this->User->exists()) {
+            throw new NotFoundException(__("Cet utilisateur n'existe pas"));
+        }
+        if ($this->request->is('post') || $this->request->is('put')) {
+            if ($this->User->save($this->request->data)) {
+                $this->Session->setFlash("Les modifications ont bien été enregistrées");
+                return $this->redirect(array('action' => 'profile'));
+            }
+            $this->Session->setFlash("Erreur lors de l'enregistrement");
+        } else {
+            $this->request->data = $this->User->read(null, $user_id);
+            unset($this->request->data['User']['password']);
+        }
     }
 }
 ?>

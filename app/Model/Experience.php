@@ -20,6 +20,13 @@ class Experience extends AppModel {
                 'allowEmpty' => false
             )
         ),
+        'input' => array(
+            'required' => array(
+                'rule'    => 'notEmpty',
+                'message' => 'Veuillez renseigner un lieu',
+                'allowEmpty' => false
+            )
+        ),
         'description' => array(
             'maxLength' => array(
                 'rule'    => array('maxLength', '300'),

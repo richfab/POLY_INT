@@ -16,8 +16,15 @@ class ExperiencesController extends AppController {
         $this->Auth->allow(array()); //ce que tout le monde a le droit de voir
     }
     
-    public function add(){
+    public function info($experience_id = null){
     	App::uses('AuthComponent', 'Controller/Component');
+        
+        if($experience_id != null){
+            $this->Experience->id = $experience_id;
+            if (!$this->Experience->exists()) {
+                throw new NotFoundException(__("Cette experience n'existe plus"));
+            }
+        }
         
         //selectionne les motifs par ordre alphabetique
         $this->set('motives', $this->Experience->Motive->find('list', array(
@@ -29,65 +36,88 @@ class ExperiencesController extends AppController {
         $user_id = $this->Auth->user('id');
         $this->request->data['Experience']['user_id'] = $user_id;
         
-        if ($this->request->is('post')) {
+        if ($this->request->is('post') || $this->request->is('put')) {
             
-            //etape 1 : on teste si la ville de ce pays existe deja dans la base
-            $city = $this->Experience->City->find('first', array(
-                'conditions' => array('City.name' => $this->request->data['City']['name']),
-                'recursive' => 0
-            ));
-            if(!empty($city)){
-                $country = $this->Experience->City->Country->find('first', array(
-                    'conditions' => array('Country.name' => $this->request->data['Country']['name'],
-                        'Country.id' => $city['City']['country_id']),
-                    'recursive' => 0
-                ));
-            }
-            
-            //si la ville de ce pays n'existe pas dans la bdd
-            if(empty($country)){
-                //etape 2 : on teste si le pays existe deja dans la bdd
-                $country = $this->Experience->City->Country->find('first', array(
-                    'conditions' => array('Country.name' => $this->request->data['Country']['name']),
-                    'recursive' => 0
-                ));
-                
-                //si le pays n'existe pas dans la bdd, on le creer
-                if(empty($country)){
-                    $country = $this->Experience->City->Country->save($this->request->data);
-                }
-                
-                //puis on creer la ville
-                $this->request->data['City']['country_id'] = $country['Country']['id'];
-                $city = $this->Experience->City->save($this->request->data);
+            //si c'est une modification d'experience, on decremente l'ancienne ville
+            if($experience_id != null){
+                $experience = $this->Experience->findById($experience_id);
+                $this->upload_experienceNumber($experience['Experience']['city_id'],-1);
             }
             
             //on renseigne l'id de la ville de l'experience
-            $this->request->data['Experience']['city_id'] = $city['City']['id'];
+            $city_id = $this->createCityAndCountryIfNeeded($this->request->data, $this->request->data['City']);
+            $this->request->data['Experience']['city_id'] = $city_id;
+            
+            //si c'est une modification d'experience on renseigne l'id
+            if($experience_id != null){
+                $this->request->data['Experience']['id'] = $experience_id;
+            }
         	
             $this->Experience->create();
             
-            if ($this->Experience->save($this->request->data) && $this->upload_experienceNumber($city['City']['id'],1)) {
+            if ($this->Experience->save($this->request->data) && $this->upload_experienceNumber($city_id,1)) {
                 
-                $experience = $this->Experience->find('first', array(
-                    'conditions' => array('Experience.user_id' => $user_id),
-                    'order' => array(
-                        'Experience.created' => 'DESC'
-                    )
-                ));
+                $experience_id = $this->Experience->id;
+                $experience = $this->Experience->findById($experience_id);
                 
                 //on teste si la date de fin de l'experience est inférieure à la date du jour
-                $today = date("Y-m-d H:i:s"); 
+//                $today = date("Y-m-d H:i:s"); 
                 
-                if($experience['Experience']['dateEnd'] <= $today){
+//                if($experience['Experience']['dateEnd'] <= $today){
                     return $this->redirect(array('controller'=>'experiences', 'action' => 'note', $experience['Experience']['id']));
-                }
-                else{
-                    return $this->redirect(array('controller'=>'experiences', 'action' => 'notify', $experience['Experience']['id']));
-                }
+//                }
+//                else{
+//                    return $this->redirect(array('controller'=>'experiences', 'action' => 'notify', $experience['Experience']['id']));
+//                }
             }
             $this->Session->setFlash("Erreur lors de l'enregistrement");
         }
+        else{
+            $this->request->data = $this->Experience->find('first', array('conditions' => array('Experience.id' => $experience_id), 'recursive' => 2));
+        }
+    }
+    
+    //cette fonction retourne l'id de la ville, qu'elle ait été créée ou non
+    public function createCityAndCountryIfNeeded($city_input = null, $country_input = null){
+        
+        //etape 1 : on teste si la ville de ce pays existe deja dans la base
+        $city = $this->Experience->City->find('first', array(
+            'conditions' => array('City.name' => $city_input['City']['name']),
+            'recursive' => 0
+        ));
+        //si on a trouvé une ville de ce nom
+        if(!empty($city)){
+            $country = $this->Experience->City->Country->find('first', array(
+                'conditions' => array('Country.code' => $country_input['Country']['code'],
+                    'Country.id' => $city['City']['country_id']),
+                'recursive' => 0
+            ));
+        }
+        
+        //si la ville de ce pays n'existe pas dans la bdd
+        if(empty($country)){
+            
+            //etape 2 : on teste si le pays existe deja dans la bdd
+            $country = $this->Experience->City->Country->find('first', array(
+                'conditions' => array('Country.code' => $country_input['Country']['code']),
+                'recursive' => 0
+            ));
+
+            //si le pays n'existe pas dans la bdd, on le creer
+            if(empty($country)){
+                $this->request->data['Country'] = $country_input['Country'];
+                $this->Experience->City->Country->create();
+                $country = $this->Experience->City->Country->save($this->request->data);
+            }
+
+            //puis on creer la ville
+            $this->request->data['City'] = $city_input['City'];
+            $this->request->data['City']['country_id'] = $country['Country']['id'];
+            $this->Experience->City->create();
+            $city = $this->Experience->City->save($this->request->data);
+        }
+        
+        return $city['City']['id'];
     }
     
     public function note($experience_id = null){
@@ -103,9 +133,10 @@ class ExperiencesController extends AppController {
             'conditions' => array('Experience.user_id' => $user_id)
         ));
         
+        //si l'utilisateur connecté est bien celui de l'experience
         if($experience['Experience']['user_id'] == $user_id){
             
-            if ($this->request->is('post')) {
+            if ($this->request->is('post') || $this->request->is('put')) {
             
                 $this->request->data['Experience']['user_id'] = $user_id;
                 $this->request->data['Experience']['id'] = $experience_id;
@@ -119,6 +150,9 @@ class ExperiencesController extends AppController {
                     $this->Session->setFlash("Erreur lors de l'enregistrement");
                 }
             
+            }
+            else{
+                $this->request->data = $this->Experience->findById($experience_id);
             }
             
         }
@@ -143,7 +177,7 @@ class ExperiencesController extends AppController {
         
         if($experience['Experience']['user_id'] == $user_id){
             
-            if ($this->request->is('post')) {
+            if ($this->request->is('post') || $this->request->is('put')) {
             
                 $this->request->data['Experience']['user_id'] = $user_id;
                 $this->request->data['Experience']['id'] = $experience_id;
@@ -157,6 +191,9 @@ class ExperiencesController extends AppController {
                     $this->Session->setFlash("Erreur lors de l'enregistrement");
                 }
             
+            }
+            else{
+                $this->request->data = $this->Experience->findById($experience_id);
             }
         }
         else{

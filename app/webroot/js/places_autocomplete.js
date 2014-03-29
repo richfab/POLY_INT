@@ -14,8 +14,8 @@ function initialize() {
     var cityName = /** @type {HTMLInputElement} */(document.getElementById('CityName'));
     var cityLat = /** @type {HTMLInputElement} */(document.getElementById('CityLat'));
     var cityLon = /** @type {HTMLInputElement} */(document.getElementById('CityLon'));
-    var countryName = /** @type {HTMLInputElement} */(document.getElementById('CountryName'));
-    var countryCode = /** @type {HTMLInputElement} */(document.getElementById('CountryCode'));
+    var countryName = /** @type {HTMLInputElement} */(document.getElementById('CityCountryName'));
+    var countryCode = /** @type {HTMLInputElement} */(document.getElementById('CityCountryCode'));
     var autocomplete = new google.maps.places.Autocomplete(input);
     
     //la recherche est limitée aux villes

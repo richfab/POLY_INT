@@ -17,15 +17,22 @@
         <p>Avis : <?= $experience['Experience']['note'];?>/5</p>
         <p>"<?= $experience['Experience']['comment'];?>"</p>
     <?php else:?>
-        <p>Pas encore d'avis</p>
+        <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+            <?= $this->Html->link("Ajouter un avis", array('controller'=>'experiences', 'action' => 'note', $experience['Experience']['id'])); ?>
+        <?php else: ?>
+            <p>Pas encore d'avis</p>
+        <?php endif; ?>
     <?php endif;?>
     <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-        <?= $this->Html->link("Modifier", array('controller'=>'experiences', 'action' => 'edit', $experience['Experience']['id'])); ?>
-        <?= $this->Form->postLink(
-            'Supprimer',
+        <?= $this->Html->link("Modifier", array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id'])); ?>
+        <?= $this->Form->postLink('Supprimer',
             array('controller'=>'experiences', 'action' => 'delete', $experience['Experience']['id']),
             array('confirm' => 'Etes vous sûr de vouloir supprimer cette expérience ?'));
         ?>
     <?php endif; ?>
 </div>
 <?php endforeach; ?>
+<p>-------------------------------------------------------------------</p>
+<?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+<p><?= $this->Html->link("Ajouter une expérience", array('controller' => 'experiences', 'action' => 'info')); ?></p>
+<?php endif; ?>
