@@ -1,5 +1,5 @@
 <h3>S'inscrire</h3>
-<?php echo $this->Form->create('User'); ?>
+<?= $this->Form->create('User'); ?>
     <?php
         echo $this->Form->input('email',array('label'=>'Email'));
         echo $this->Form->input('password',array('label'=>'Mot de passe'));
@@ -11,4 +11,4 @@
         echo $this->Form->input('Department.id');
         echo $this->Form->input('department_id',array('label'=>"Département"));
     ?>
-<?php echo $this->Form->end(__('Valider')); ?>
+<?= $this->Form->end(__('Valider')); ?>

@@ -46,7 +46,7 @@ class UsersController extends AppController {
             $this->User->create();
             
             if ($this->User->save($this->request->data)) {
-		$this->Session->setFlash("Votre inscription a bien été prise en compte. Un email de confirmation vient de vous être envoyé", 'default', array('class' => 'alert-box radius alert-success'));
+		$this->Session->setFlash("Votre inscription a bien été prise en compte. Un email de confirmation vient de vous être envoyé");
                 return $this->redirect(array('controller'=>'pages','action' => 'home'));
             }
             
@@ -68,7 +68,7 @@ class UsersController extends AppController {
                 $this->Session->setFlash("Voici votre nouveau mot de passe : $password. Vous pouvez le changer dans votre compte.");
             }
             else{
-                $this->Session->setFlash("Le lien n'est pas valide", 'default', array('class' => 'alert-box radius warning'));
+                $this->Session->setFlash("Le lien n'est pas valide");
             }
         }
 
@@ -90,6 +90,34 @@ class UsersController extends AppController {
                 $this->Session->setFlash("Un email avec un lien pour réinitialiser votre mot de passe vient de vous être envoyé");
             }
         }
+    }
+    
+    public function profile($user_id = null) {
+    	App::uses('AuthComponent', 'Controller/Component');
+		
+        if($this->Auth->loggedIn()){
+            
+            //si l'utilisateur veut voir son propre profile
+            if($user_id==null){
+                $user_id = $this->Auth->user('id');
+            }
+           //si l'utilisateur cherche a voir le profile de quelqu'un d'autre
+            $this->User->id = $user_id;
+            
+        }
+        else{
+            return $this->redirect(array('controller'=>'users', 'action' => 'login'));
+        }
+    			
+        if (!$this->User->exists()) {
+            throw new NotFoundException(__("Cet utilisateur n'existe pas"));
+        }
+        $this->set('user',$this->User->read(null, $user_id));
+        $this->set('experiences',$this->User->Experience->find('all', array(
+            'conditions' => array('user_id' => $user_id),
+            'order' => array('dateEnd' => 'DESC'),
+            'recursive' => 2
+        )));
     }
 
     public function admin_index($year_id = null) {

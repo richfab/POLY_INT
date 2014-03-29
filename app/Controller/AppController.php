@@ -69,7 +69,7 @@ class AppController extends Controller {
         if (empty($this->request->params['admin'])) {
             return true;
         }
-	    
+	
         // Admin can access every action
         if (isset($user['role']) && $user['role'] === 'admin') {
             return true;

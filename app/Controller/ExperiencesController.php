@@ -8,12 +8,12 @@ class ExperiencesController extends AppController {
     /* Set pagination options */
     public $paginate = array(
             'limit' => 20,
-            'order' => array('created' => 'DESC')
+            'order' => array('dateEnd' => 'DESC')
     );
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(); //ce que tout le monde a le droit de voir
+        $this->Auth->allow(array()); //ce que tout le monde a le droit de voir
     }
     
     public function add(){
@@ -163,7 +163,33 @@ class ExperiencesController extends AppController {
             //l'utilisateur essaie de modifier une experience qui n'est pas la sienne
             return $this->redirect(array('controller'=>'users', 'action' => 'login'));
         }
-    } 
+    }
+    
+    public function delete($experience_id = null) {
+        $this->request->onlyAllow('post');
+
+        $experience = $this->Experience->findById($experience_id);
+        
+        //on verifie que l'experience est bien celle de l'utilisateur connecté
+        App::uses('AuthComponent', 'Controller/Component');
+        $user_id = $this->Auth->user('id');
+        if($experience['Experience']['user_id'] != $user_id){
+            //l'utilisateur essaie de modifier une experience qui n'est pas la sienne
+            return $this->redirect(array('controller'=>'users', 'action' => 'login'));
+        }
+        
+        $this->Experience->id = $experience['Experience']['id'];
+        
+        if (!$this->Experience->exists()) {
+            throw new NotFoundException(__("Cette experience n'existe plus"));
+        }
+        if ($this->Experience->delete() && $this->upload_experienceNumber($experience['Experience']['city_id'],-1)) {
+            $this->Session->setFlash("L'expérience a bien été supprimée");
+            return $this->redirect($this->referer());
+        }
+        $this->Session->setFlash("L'expérience n'a pas pu être supprimée");
+        return $this->redirect($this->referer());
+    }
    
     public function upload_experienceNumber($city_id = null, $increment_by = null){
         
