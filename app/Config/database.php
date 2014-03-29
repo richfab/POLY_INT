@@ -61,7 +61,7 @@
  */
 class DATABASE_CONFIG {
 
-//	public $test = array(
+//	public $default = array(
 //		'datasource' => 'Database/Mysql',
 //		'persistent' => false,
 //		'host' => 'mysql51-72.perso',
