@@ -1,8 +1,8 @@
 <h1>Ajouter une expérience</h1>
 <?php echo $this->Form->create('Experience'); ?>
 <?php 
-    echo $this->Form->input('dateStart',array('label'=>'Date de début','type'=>'date','timeFormat'=>'24','dateFormat' => 'DMY'));
-    echo $this->Form->input('dateEnd',array('label'=>'Date de fin','type'=>'date','timeFormat'=>'24','dateFormat' => 'DMY'));
+    echo $this->Form->input('dateStart',array('label'=>'Du','type'=>'date','timeFormat'=>'24','dateFormat' => 'DMY'));
+    echo $this->Form->input('dateEnd',array('label'=>'Au','type'=>'date','timeFormat'=>'24','dateFormat' => 'DMY'));
     //si c'est une modification d'expérience, on renseigne le lieu
     if(!empty($this->data)){
         $input_value = $this->data['City']['name'].', '.$this->data['City']['Country']['name'];

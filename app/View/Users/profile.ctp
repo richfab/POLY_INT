@@ -37,7 +37,7 @@
         <?= $this->Html->link("Modifier", array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id'])); ?>
         <?= $this->Form->postLink('Supprimer',
             array('controller'=>'experiences', 'action' => 'delete', $experience['Experience']['id']),
-            array('confirm' => 'Etes vous sûr de vouloir supprimer cette expérience ?'));
+            array('confirm' => 'Es-tu sûr de vouloir supprimer cette expérience ?'));
         ?>
     <?php endif; ?>
 </div>

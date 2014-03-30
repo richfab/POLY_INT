@@ -3,6 +3,7 @@ class ExperiencesController extends AppController {
 
     public $helpers = array('Html', 'Form');
     
+    //pour l'extension json
     public $components = array("RequestHandler");
     
     /* Set pagination options */
@@ -13,7 +14,7 @@ class ExperiencesController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(array('get_map_init','get_map')); //ce que tout le monde a le droit de voir
+        $this->Auth->allow(array('get_map_init','get_map','get_experiences')); //ce que tout le monde a le droit de faire
     }
     
     public function info($experience_id = null){
@@ -41,11 +42,11 @@ class ExperiencesController extends AppController {
             //si c'est une modification d'experience, on decremente l'ancienne ville
             if($experience_id != null){
                 $experience = $this->Experience->findById($experience_id);
-                $this->upload_experienceNumber($experience['Experience']['city_id'],-1);
+                $this->_upload_experienceNumber($experience['Experience']['city_id'],-1);
             }
             
             //on renseigne l'id de la ville de l'experience
-            $city_id = $this->createCityAndCountryIfNeeded($this->request->data, $this->request->data['City']);
+            $city_id = $this->_createCityAndCountryIfNeeded($this->request->data, $this->request->data['City']);
             $this->request->data['Experience']['city_id'] = $city_id;
             
             //si c'est une modification d'experience on renseigne l'id
@@ -55,7 +56,7 @@ class ExperiencesController extends AppController {
         	
             $this->Experience->create();
             
-            if ($this->Experience->save($this->request->data) && $this->upload_experienceNumber($city_id,1)) {
+            if ($this->Experience->save($this->request->data) && $this->_upload_experienceNumber($city_id,1)) {
                 
                 $experience_id = $this->Experience->id;
                 $experience = $this->Experience->findById($experience_id);
@@ -75,7 +76,7 @@ class ExperiencesController extends AppController {
     }
     
     //cette fonction retourne l'id de la ville, qu'elle ait été créée ou non
-    public function createCityAndCountryIfNeeded($city_input = null, $country_input = null){
+    protected function _createCityAndCountryIfNeeded($city_input = null, $country_input = null){
         
         //etape 1 : on teste si la ville de ce pays existe deja dans la base
         $city = $this->Experience->City->find('first', array(
@@ -128,7 +129,7 @@ class ExperiencesController extends AppController {
         if (!$this->Experience->exists()) {
             throw new NotFoundException(__("Cette experience n'existe plus"));
         }
-        if ($this->Experience->delete() && $this->upload_experienceNumber($experience['Experience']['city_id'],-1)) {
+        if ($this->Experience->delete() && $this->_upload_experienceNumber($experience['Experience']['city_id'],-1)) {
             $this->Session->setFlash("L'expérience a bien été supprimée");
             return $this->redirect($this->referer());
         }
@@ -137,7 +138,7 @@ class ExperiencesController extends AppController {
     }
     
     public function get_map_init(){
-//        $this->request->onlyAllow('ajax');
+        $this->request->onlyAllow('ajax');
         $this->set('countries', $this->Experience->City->Country->find('all'));
     }
     
@@ -146,21 +147,7 @@ class ExperiencesController extends AppController {
         $this->request->onlyAllow('ajax');
         
         //on transforme l'objet de parametres en conditions
-        if(!empty($this->request->data['motive_id'])){
-            $conditions['Experience.motive_id'] = $this->request->data['motive_id'];
-        }
-        if(!empty($this->request->data['department_id'])){
-            $conditions['User.department_id'] = $this->request->data['department_id'];
-        }
-        if(!empty($this->request->data['school_id'])){
-            $conditions['User.school_id'] = $this->request->data['school_id'];
-        }
-        if(!empty($this->request->data['dateMin'])){
-            $conditions['Experience.dateEnd >='] = $this->request->data['dateMin'];
-        }
-        if(!empty($this->request->data['dateMax'])){
-            $conditions['Experience.dateStart <='] = $this->request->data['dateMax'];
-        }
+        $conditions = $this->filters_to_conditions($this->request->data);
         
          //on recupere le nombre d'experiences par ville
         $this->set('cities', $this->Experience->find('all', array(
@@ -174,8 +161,56 @@ class ExperiencesController extends AppController {
                     'fields' => array('City.country_id','(COUNT(*)) as experienceNumber'),
                     'group' => 'City.country_id')));
     }
+    
+    public function get_experiences(){
+        
+//        $this->request->onlyAllow('ajax');
+        App::uses('AuthComponent', 'Controller/Component');
+                
+         //on recupere les experiences si l'utilisateur est connecté
+        if($this->Auth->user('id')){
+            //on transforme l'objet de parametres en conditions
+            $conditions = $this->_filters_to_conditions($this->request->data);
+            
+            $this->set('experiences', $this->Experience->find('all', array(
+                        'conditions' => $conditions)));
+        }
+    }
+    
+    //fonction qui transforme l'objet de parametres en conditions pour le find
+    protected function _filters_to_conditions($request_data = null){
+        
+        $conditions = array();
+        
+        if(empty($request_data)){
+            return $conditions;
+        }
+        
+        if(!empty($request_data['motive_id'])){
+            $conditions['Experience.motive_id'] = $request_data['motive_id'];
+        }
+        if(!empty($request_data['department_id'])){
+            $conditions['User.department_id'] = $request_data['department_id'];
+        }
+        if(!empty($request_data['school_id'])){
+            $conditions['User.school_id'] = $request_data['school_id'];
+        }
+        if(!empty($request_data['dateMin'])){
+            $conditions['Experience.dateEnd >='] = $request_data['dateMin'];
+        }
+        if(!empty($request_data['dateMax'])){
+            $conditions['Experience.dateStart <='] = $request_data['dateMax'];
+        }
+        if(!empty($request_data['city_id'])){
+            $conditions['Experience.city_id'] = $request_data['city_id'];
+        }
+        if(!empty($request_data['country_id'])){
+            $conditions['City.country_id'] = $request_data['country_id'];
+        }
+        return $conditions;
+    }
    
-    public function upload_experienceNumber($city_id = null, $increment_by = null){
+    protected function _upload_experienceNumber($city_id = null, $increment_by = null){
         
         if($city_id != null && $increment_by != null){
             $city = $this->Experience->City->find('first', array(
