@@ -17,12 +17,12 @@
     echo $this->Form->input('City.name',array('label'=>'city_name','type'=>'hidden'));
     echo $this->Form->input('City.lat', array('label'=>'latitude','type'=>'hidden'));
     echo $this->Form->input('City.lon', array('label'=>'longitude','type'=>'hidden'));
-    echo $this->Form->input('City.Country.code', array('label'=>'code','type'=>'hidden'));
+    echo $this->Form->input('City.Country.id', array('label'=>'id','type'=>'hidden'));
     echo $this->Form->input('City.Country.name', array('label'=>'country_name','type'=>'hidden'));
 //    echo $this->Form->input('City.name',array('label'=>'city_name'));
 //    echo $this->Form->input('City.lat', array('label'=>'latitude'));
 //    echo $this->Form->input('City.lon', array('label'=>'longitude'));
-//    echo $this->Form->input('City.Country.code', array('label'=>'code'));
+//    echo $this->Form->input('City.Country.id', array('label'=>'id'));
 //    echo $this->Form->input('City.Country.name', array('label'=>'country_name'));
     echo $this->Form->input('note',array('label'=>'Avis','type'=>'number','class'=>'rating','data-min' => 1, 'data-max' => 5));
     echo $this->Form->input('comment',array('label'=>'Commentaire','type'=>'textarea'));

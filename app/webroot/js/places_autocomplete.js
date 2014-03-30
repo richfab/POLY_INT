@@ -15,7 +15,7 @@ function initialize() {
     var cityLat = /** @type {HTMLInputElement} */(document.getElementById('CityLat'));
     var cityLon = /** @type {HTMLInputElement} */(document.getElementById('CityLon'));
     var countryName = /** @type {HTMLInputElement} */(document.getElementById('CityCountryName'));
-    var countryCode = /** @type {HTMLInputElement} */(document.getElementById('CityCountryCode'));
+    var countryCode = /** @type {HTMLInputElement} */(document.getElementById('CityCountryId'));
     var autocomplete = new google.maps.places.Autocomplete(input);
     
     //la recherche est limitée aux villes

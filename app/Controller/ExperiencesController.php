@@ -13,7 +13,7 @@ class ExperiencesController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(array('get_map')); //ce que tout le monde a le droit de voir
+        $this->Auth->allow(array('get_map_init','get_map')); //ce que tout le monde a le droit de voir
     }
     
     public function info($experience_id = null){
@@ -69,6 +69,11 @@ class ExperiencesController extends AppController {
         }
     }
     
+    public function index(){
+        //on inclut le script pour la recuperation des experiences
+    	$this->set('jsIncludes',array('get_experiences'));
+    }
+    
     //cette fonction retourne l'id de la ville, qu'elle ait été créée ou non
     public function createCityAndCountryIfNeeded($city_input = null, $country_input = null){
         
@@ -79,21 +84,14 @@ class ExperiencesController extends AppController {
         ));
         //si on a trouvé une ville de ce nom
         if(!empty($city)){
-            $country = $this->Experience->City->Country->find('first', array(
-                'conditions' => array('Country.code' => $country_input['Country']['code'],
-                    'Country.id' => $city['City']['country_id']),
-                'recursive' => 0
-            ));
+            $country = $this->Experience->City->Country->findById($city['City']['country_id']);
         }
         
         //si la ville de ce pays n'existe pas dans la bdd
         if(empty($country)){
             
-            //etape 2 : on teste si le pays existe deja dans la bdd
-            $country = $this->Experience->City->Country->find('first', array(
-                'conditions' => array('Country.code' => $country_input['Country']['code']),
-                'recursive' => 0
-            ));
+            //etape 2 : on teste si le pays entré existe deja dans la bdd
+            $country = $this->Experience->City->Country->findById($country_input['Country']['id']);
 
             //si le pays n'existe pas dans la bdd, on le creer
             if(empty($country)){
@@ -138,11 +136,43 @@ class ExperiencesController extends AppController {
         return $this->redirect($this->referer());
     }
     
-    public function get_map(){
+    public function get_map_init(){
 //        $this->request->onlyAllow('ajax');
         $this->set('countries', $this->Experience->City->Country->find('all'));
-//        $this->set('countries', $this->Experience->City->Country->find('all'));
-//        $this->set('_serialize', array('countries'));
+    }
+    
+    public function get_map(){
+        
+        $this->request->onlyAllow('ajax');
+        
+        //on transforme l'objet de parametres en conditions
+        if(!empty($this->request->data['motive_id'])){
+            $conditions['Experience.motive_id'] = $this->request->data['motive_id'];
+        }
+        if(!empty($this->request->data['department_id'])){
+            $conditions['User.department_id'] = $this->request->data['department_id'];
+        }
+        if(!empty($this->request->data['school_id'])){
+            $conditions['User.school_id'] = $this->request->data['school_id'];
+        }
+        if(!empty($this->request->data['dateMin'])){
+            $conditions['Experience.dateEnd >='] = $this->request->data['dateMin'];
+        }
+        if(!empty($this->request->data['dateMax'])){
+            $conditions['Experience.dateStart <='] = $this->request->data['dateMax'];
+        }
+        
+         //on recupere le nombre d'experiences par ville
+        $this->set('cities', $this->Experience->find('all', array(
+                    'conditions' => $conditions,
+                    'fields' => array('City.id','City.name','City.lat','City.lon','(COUNT(*)) as experienceNumber'),
+                    'group' => 'Experience.city_id')));
+        
+        //on recupere le nombre d'experiences par pays
+        $this->set('countries', $this->Experience->find('all', array(
+                    'conditions' => $conditions,
+                    'fields' => array('City.country_id','(COUNT(*)) as experienceNumber'),
+                    'group' => 'City.country_id')));
     }
    
     public function upload_experienceNumber($city_id = null, $increment_by = null){
