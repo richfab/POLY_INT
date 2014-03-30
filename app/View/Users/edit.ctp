@@ -10,3 +10,4 @@
         echo $this->Form->input('department_id',array('label'=>"Département"));
     echo $this->Form->end('Enregistrer');
 ?>
+<?= $this->Html->link("Retour à mon profil", array('controller'=>'users', 'action' => 'profile')); ?>

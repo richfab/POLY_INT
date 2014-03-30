@@ -13,7 +13,7 @@ class ExperiencesController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(array()); //ce que tout le monde a le droit de voir
+        $this->Auth->allow(array('get_map')); //ce que tout le monde a le droit de voir
     }
     
     public function info($experience_id = null){
@@ -136,6 +136,13 @@ class ExperiencesController extends AppController {
         }
         $this->Session->setFlash("L'expérience n'a pas pu être supprimée");
         return $this->redirect($this->referer());
+    }
+    
+    public function get_map(){
+//        $this->request->onlyAllow('ajax');
+        $this->set('countries', $this->Experience->City->Country->find('all'));
+//        $this->set('countries', $this->Experience->City->Country->find('all'));
+//        $this->set('_serialize', array('countries'));
     }
    
     public function upload_experienceNumber($city_id = null, $increment_by = null){

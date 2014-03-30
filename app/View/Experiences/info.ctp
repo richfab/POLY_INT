@@ -29,4 +29,4 @@
     echo $this->Form->input('notify',array('label'=>"Envoyez-moi un email si quelqu'un est dans cette ville en même temps que moi"));
 ?>
 <?php echo $this->Form->end(__('Enregistrer'));?>
-<?= $this->Html->link("Retour au profil", array('controller'=>'users', 'action' => 'profile')); ?>
+<?= $this->Html->link("Retour à mon profil", array('controller'=>'users', 'action' => 'profile')); ?>
