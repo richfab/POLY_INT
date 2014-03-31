@@ -164,7 +164,7 @@ class ExperiencesController extends AppController {
     
     public function get_experiences(){
         
-//        $this->request->onlyAllow('ajax');
+//TODO        $this->request->onlyAllow('ajax');
         App::uses('AuthComponent', 'Controller/Component');
                 
          //on recupere les experiences si l'utilisateur est connecté
@@ -173,7 +173,8 @@ class ExperiencesController extends AppController {
             $conditions = $this->_filters_to_conditions($this->request->data);
             
             $this->set('experiences', $this->Experience->find('all', array(
-                        'conditions' => $conditions)));
+                        'conditions' => $conditions,
+                        'fields' => array('*','DATEDIFF(Experience.dateEnd, Experience.dateStart)/30 monthDiff'))));
         }
     }
     
