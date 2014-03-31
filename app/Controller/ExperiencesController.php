@@ -70,7 +70,7 @@ class ExperiencesController extends AppController {
         }
     }
     
-    public function index(){
+    public function explore(){
         //on inclut le script pour la recuperation des experiences
     	$this->set('jsIncludes',array('get_experiences'));
     }
@@ -147,7 +147,7 @@ class ExperiencesController extends AppController {
         $this->request->onlyAllow('ajax');
         
         //on transforme l'objet de parametres en conditions
-        $conditions = $this->filters_to_conditions($this->request->data);
+        $conditions = $this->_filters_to_conditions($this->request->data);
         
          //on recupere le nombre d'experiences par ville
         $this->set('cities', $this->Experience->find('all', array(
