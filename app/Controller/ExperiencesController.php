@@ -137,6 +137,21 @@ class ExperiencesController extends AppController {
         return $this->redirect($this->referer());
     }
     
+    public function delete_experience($experience_id = null) {
+
+        $experience = $this->Experience->findById($experience_id);
+        
+        $this->Experience->id = $experience['Experience']['id'];
+        
+        if (!$this->Experience->exists()) {
+            return false;
+        }
+        if ($this->Experience->delete() && $this->_upload_experienceNumber($experience['Experience']['city_id'],-1)) {
+            return true;
+        }
+        return false;
+    }
+    
     public function get_map_init(){
         $this->request->onlyAllow('ajax');
         $this->set('countries', $this->Experience->City->Country->find('all'));

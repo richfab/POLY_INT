@@ -152,5 +152,33 @@ class UsersController extends AppController {
             unset($this->request->data['User']['password']);
         }
     }
+    
+    public function delete(){
+        $this->request->onlyAllow('post');
+        
+        App::uses('AuthComponent', 'Controller/Component');
+        $user_id = $this->Auth->user('id');
+        
+        $user = $this->User->findById($user_id);
+        $experiences = $user['Experience'];
+        
+        App::import('Controller', 'Experiences');
+        $experiencesController = new ExperiencesController;
+        
+        foreach($experiences as $experience){
+            $experiencesController->delete_experience($experience['id']);
+        }
+        
+        $this->User->id = $user_id;
+        if (!$this->User->exists()) {
+            throw new NotFoundException(__("Le compte n'éxiste plus"));
+        }
+        if ($this->User->delete()) {
+            $this->Session->setFlash("Le compte a bien été supprimé");
+            return $this->redirect(array('action' => 'logout'));
+        }
+        $this->Session->setFlash("Le compte n'a pas pu être supprimé");
+        return $this->redirect($this->referer());
+    }
 }
 ?>
