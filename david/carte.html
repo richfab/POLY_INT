@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Carte | Polytech Explorer </title>
+
+	<!-- Loading css -->
+	<link rel="stylesheet" href="css/jquery-jvectormap-1.2.2.css" type="text/css" media="screen"/>
+	<link href="./css/bootstrap.css" rel="stylesheet">
+	<link href="./css/default.css" rel="stylesheet">
+        <link href="./css/map.css" rel="stylesheet">
+	<link href="./css/menu.css" rel="stylesheet">
+	<script src="js/modernizr.custom.63321.js"></script>
+
+</head>
+<body>
+	<script language="Javascript">
+  	// Hide the address bar (a mettre dans le style défaut)
+	window.addEventListener("load",function() {setTimeout(function(){window.scrollTo(0, 1);}, 0);});
+	</script>
+	
+	<div class="navbar navbar-default navbar-fixed-top" id="top-bar">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand text-hide" onclick="update_map();" href="#"><img src="./img/mini-logo.png" alt="" height="24px">Polytech Explorer</a>
+			</div>
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li class="active"><a href="./index.html">accueil</a></li>
+					<li><a href="./carte.html">explorer</a></li>
+					<li><a href="#">rechercher</a></li>
+					<li><a href="./apropos.html">a propos</a></li>
+					<li><a class="btn btn-default btn-green" href="#" role="button">inscription</a></li>
+					<li><a class="btn btn-default btn-orange" href="#" role="button">connexion</a></li>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</div>
+
+	
+	<div id="world-map" style="width: 100%; height: 600px; postion:relative; bottom:20px; top:100px; margin-top:50px;"></div>
+	
+	<div id="controller">
+		<div id="control-map">
+				<select id="cd-dropdown" class="">
+				 	<option value="-1" selected>Spécialité</option>
+				    <option value="1">Informatique</option>
+				    <option value="2">Electronique</option>
+				    <option value="3">Matériaux</option>
+				</select>
+				<select id="cd-dropdown2" class="">
+				 	<option value="-1" selected>Motif</option>
+				 	<option value="1">Semestre</option>
+				    <option value="2">Stage</option>
+				    <option value="3">Travail</option>
+				</select>
+				<select id="cd-dropdown3" class="">
+				 	<option value="-1" selected>Ecole</option>
+				    <option value="1">Nantes</option>
+				    <option value="2">Lille</option>
+				    <option value="3">Lyon</option>
+				</select>
+				<select id="cd-dropdown4" class="last">
+				 	<option value="-1" selected>Période</option>
+				 	<option value="1">Moins de 3 ans</option>
+				 	<option value="2">Moins de 2 ans</option>
+				    <option value="3">Aujourd'hui</option>
+				    <option value="4">A venir</option>
+				</select>
+		</div>
+		<div id="list-map" style="display:none">
+			<ul class="list-unstyled">
+				<li>
+					<a href="./profil.html">
+						<img src="./img/avatar.jpg" alt="">
+						<span class="name">Prénom NOM</span> | 
+						<span class="type">Stage (3 mois)</span>
+					</a>
+				</li>
+				<li>
+					<a href="./profil.html">
+						<img src="./img/avatar.jpg" alt="">
+						<span class="name">Prénom NOM</span> | 
+						<span class="type">Semestre d'étude (6 mois)</span>
+					</a>
+				</li>
+				<li class="last-child">
+					<a href="./profil.html">
+						<img src="./img/avatar.jpg" alt="">
+						<span class="name">Prénom NOM</span> | 
+						<span class="type">Stage (4 mois)</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<div id="footer">
+      <div class="container">
+        <p class="pull-left"><a href="http://fabienrichard.fr"></a></p>
+        <p class="pull-right"><a href="./mentions-legales.html">mentions légales</a> | <a href="./conditions-utilisations.html">conditions d'utilisations</a> | &#169; polytech explorer 2013</p>
+      </div>
+    </div>
+
+
+
+	<!-- Loading js -->
+	<script src="js/jquery-1.11.0.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jvector.js"></script>
+	<script src="js/jquery-jvectormap-1.2.2.min.js"></script>
+	<script src="js/jquery-jvectormap-world-mill-en.js"></script>
+	<script type="text/javascript" src="js/jquery.dropdown.js"></script>
+		<script type="text/javascript">
+			
+			$( function() {
+				
+				$( '#cd-dropdown' ).dropdown( {
+					gutter : 5,
+					stack : false,
+					slidingIn : 100
+				} );
+				
+				$( '#cd-dropdown2' ).dropdown( {
+					gutter : 5,
+					stack : false,
+					slidingIn : 100
+				} );
+				
+				$( '#cd-dropdown3' ).dropdown( {
+					gutter : 5,
+					stack : false,
+					slidingIn : 100
+				} );
+				
+				$( '#cd-dropdown4' ).dropdown( {
+					gutter : 5,
+					stack : false,
+					slidingIn : 100
+				} );
+
+			});
+
+		</script>
+</body>
+</html>
