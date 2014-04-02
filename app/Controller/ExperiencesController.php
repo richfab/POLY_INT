@@ -153,8 +153,10 @@ class ExperiencesController extends AppController {
     }
     
     public function get_map_init(){
-        $this->request->onlyAllow('ajax');
-        $this->set('countries', $this->Experience->City->Country->find('all'));
+//        $this->request->onlyAllow('ajax');
+        $this->set('countries', $this->Experience->City->Country->find('all',array(
+            'conditions' => array('Country.experienceNumber >' => 0)
+        )));
     }
     
     public function get_map(){
