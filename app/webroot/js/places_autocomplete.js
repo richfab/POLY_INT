@@ -39,6 +39,8 @@ function initialize() {
         // If the place has a geometry, then populate the citylat citylon fields
         if (place.geometry) {
             
+            console.log(place);
+            
             var cityLong_name = place.address_components[0].long_name;
             
             for(var i in place.address_components){
