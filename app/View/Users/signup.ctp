@@ -9,6 +9,6 @@
         echo $this->Form->input('School.id');
         echo $this->Form->input('school_id',array('label'=>"Polytech"));
         echo $this->Form->input('Department.id');
-        echo $this->Form->input('department_id',array('label'=>"Département"));
+        echo $this->Form->input('department_id',array('label'=>"Spécialité"));
     ?>
 <?= $this->Form->end(__('Valider')); ?>
