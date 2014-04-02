@@ -1,4 +1,4 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf190
+{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
 {\fonttbl\f0\fswiss\fcharset0 Helvetica;}
 {\colortbl;\red255\green255\blue255;}
 \paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
@@ -73,9 +73,8 @@ ENGINE = InnoDB;\
 -- Table `mydb`.`POLY_INT_countries`\
 -- -----------------------------------------------------\
 CREATE TABLE IF NOT EXISTS `mydb`.`POLY_INT_countries` (\
-  `id` INT NOT NULL AUTO_INCREMENT,\
+  `id` VARCHAR(3) NOT NULL,\
   `name` VARCHAR(45) NULL,\
-  `code` VARCHAR(3) NULL,\
   `experienceNumber` INT NULL DEFAULT 0,\
   `created` DATETIME NULL,\
   `modified` DATETIME NULL,\
@@ -94,10 +93,10 @@ CREATE TABLE IF NOT EXISTS `mydb`.`POLY_INT_cities` (\
   `experienceNumber` INT NULL DEFAULT 0,\
   `created` DATETIME NULL,\
   `modified` DATETIME NULL,\
-  `country_id` INT NOT NULL,\
+  `country_id` VARCHAR(3) NOT NULL,\
   PRIMARY KEY (`id`),\
-  INDEX `fk_cities_countries1_idx` (`country_id` ASC),\
-  CONSTRAINT `fk_cities_countries1`\
+  INDEX `fk_POLY_INT_cities_POLY_INT_countries1_idx` (`country_id` ASC),\
+  CONSTRAINT `fk_POLY_INT_cities_POLY_INT_countries1`\
     FOREIGN KEY (`country_id`)\
     REFERENCES `mydb`.`POLY_INT_countries` (`id`)\
     ON DELETE NO ACTION\
@@ -127,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`POLY_INT_experiences` (\
   `description` VARCHAR(140) NULL,\
   `note` INT NULL,\
   `comment` TINYTEXT NULL,\
-  `notify` TINYINT NULL,\
+  `notify` TINYINT(1) NULL,\
   `created` DATETIME NULL,\
   `modified` DATETIME NULL,\
   `city_id` INT NOT NULL,\
@@ -157,4 +156,39 @@ ENGINE = InnoDB;\
 \
 SET SQL_MODE=@OLD_SQL_MODE;\
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;\
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;}
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;\
+\
+-- -----------------------------------------------------\
+-- Data for table `mydb`.`POLY_INT_schools`\
+-- -----------------------------------------------------\
+START TRANSACTION;\
+USE `mydb`;\
+INSERT INTO `mydb`.`POLY_INT_schools` (`id`, `name`, `created`, `modified`) VALUES (1, 'Nantes', NULL, NULL);\
+INSERT INTO `mydb`.`POLY_INT_schools` (`id`, `name`, `created`, `modified`) VALUES (2, 'Tours', NULL, NULL);\
+\
+COMMIT;\
+\
+\
+-- -----------------------------------------------------\
+-- Data for table `mydb`.`POLY_INT_departments`\
+-- -----------------------------------------------------\
+START TRANSACTION;\
+USE `mydb`;\
+INSERT INTO `mydb`.`POLY_INT_departments` (`id`, `name`, `created`, `modified`) VALUES (1, 'Informatique', NULL, NULL);\
+INSERT INTO `mydb`.`POLY_INT_departments` (`id`, `name`, `created`, `modified`) VALUES (2, 'Mat\'e9riaux', NULL, NULL);\
+\
+COMMIT;\
+\
+\
+-- -----------------------------------------------------\
+-- Data for table `mydb`.`POLY_INT_motives`\
+-- -----------------------------------------------------\
+START TRANSACTION;\
+USE `mydb`;\
+INSERT INTO `mydb`.`POLY_INT_motives` (`id`, `name`, `created`, `modified`) VALUES (1, 'Stage', NULL, NULL);\
+INSERT INTO `mydb`.`POLY_INT_motives` (`id`, `name`, `created`, `modified`) VALUES (2, 'Semestre', NULL, NULL);\
+INSERT INTO `mydb`.`POLY_INT_motives` (`id`, `name`, `created`, `modified`) VALUES (3, 'Voyage', NULL, NULL);\
+\
+COMMIT;\
+\
+}
