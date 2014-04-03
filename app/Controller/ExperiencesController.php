@@ -14,7 +14,7 @@ class ExperiencesController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(array('get_map_init','get_map','get_experiences')); //ce que tout le monde a le droit de faire
+        $this->Auth->allow(array('explore','get_map_init','get_map','get_experiences')); //ce que tout le monde a le droit de faire
     }
     
     public function info($experience_id = null){
@@ -71,8 +71,10 @@ class ExperiencesController extends AppController {
     }
     
     public function explore(){
-        //on inclut le script pour la recuperation des experiences
-    	$this->set('jsIncludes',array('get_experiences'));
+        //on inclut les scripts pour la recuperation des experiences
+    	$this->set('jsIncludes',array('get_experiences','jvector','jquery-jvectormap.min','jquery-jvectormap-world-mill-en'));
+        //on inclut les style pour la carte
+        $this->set('cssIncludes',array('jvectormap'));
     }
     
     //cette fonction retourne l'id de la ville, qu'elle ait été créée ou non

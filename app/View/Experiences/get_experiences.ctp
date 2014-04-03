@@ -1,6 +1,7 @@
 <?php if(AuthComponent::user('id')) : ?>
     <?php foreach ($experiences as $experience): ?>
         <p><?= $this->Html->link($experience['User']['firstname'].' '.$experience['User']['lastname'].' | '.$experience['Motive']['name'].' ('.round($experience[0]['monthDiff'],0).' mois)', array('controller'=>'users', 'action' => 'profile', $experience['User']['id'])); ?></p>
+        <p><?= $experience['City']['name'];?>, <?= $experience['City']['country_id'];?></p>
         <p>-----------------------------------</p>
     <?php endforeach;?>
     <?php if(empty($experiences)): ?>
