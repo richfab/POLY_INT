@@ -52,7 +52,7 @@ function init_map(JSON){
 //                var mapObject = $('#world-map').vectorMap('get', 'mapObject');
 //                mapObject.addMarkers(JSON.cities.coords);
 //            }
-            console.log(code);
+            
         },
         onMarkerClick: function(event, code){
             $('#list-map').slideUp();

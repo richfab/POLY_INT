@@ -27,7 +27,6 @@ function fetch_map_values(filter){
         data : filter,
         dataType : 'json',
         success : function(data) {
-                console.log(url+"-->"+data);
                 update_map(data);
         },
         error : function(data) {

@@ -1,5 +1,5 @@
 var _data;
-var min_zoom_marker = 3.3;
+var min_zoom_marker = 3;
 
 $( document ).ready(function() {
     init_map();
@@ -35,7 +35,7 @@ function init_map(){
                 "fill-opacity": 1,
                 "stroke-width": 1,
                 "stroke-opacity": 1,
-                r: 6
+                r: 5
             }
         },
         markers: _data.cities.coords,
@@ -75,12 +75,22 @@ function init_map(){
         onViewportChange: function(event, scale){
             //on cache le div de la liste
             var mapObject = $('#world-map').vectorMap('get', 'mapObject');
-            if(scale>=min_zoom_marker){
+            var limit;
+            if(mapObject.baseScale>=1){
+                limit = min_zoom_marker/mapObject.baseScale;
+            }
+            else{
+                limit = min_zoom_marker*mapObject.baseScale;
+            }
+            console.log("base: "+mapObject.baseScale+" limit:"+limit+" current:"+scale);
+            if(scale>=limit){
                 //on affiche les marqueurs
+                console.log("affiche les marqueurs");
                 mapObject.addMarkers(_data.cities.coords);
             }
             else{
                 //on cache les marqueurs et la liste
+                console.log("cache les marqueurs");
                 mapObject.removeAllMarkers();
                 $('#list-map').slideUp(300);
             }
