@@ -49,19 +49,16 @@ class AppController extends Controller {
         )
     );
     
-    public $helpers = array('Js' => array('Jquery'));
+    public $helpers = array('Js' => array('Jquery'),'Html', 'Form', 'Bs', 'BsForm');
+    
+    public $titre = "Polytech International";
+    public $description = "Le passeport partagé entre tous les étudiants de Polytech";
 
     public function beforeFilter() {
     
     	//on autorise les utilisateurs non loggés a voir les pages statiques
     	$this->Auth->allow(array('display'));
-    	
-    	if(isset($this->request->params['prefix']) && $this->request->params['prefix'] == 'admin'){
-            $this->layout = 'admin';
-        }
-        if($this->Auth->user('role') == 'admin'){
-            $this->layout = 'admin';
-        }
+        $this->layout = 'bootstrap';
     }
     
     public function isAuthorized($user = null) {
@@ -78,10 +75,16 @@ class AppController extends Controller {
         // Default deny
         return false;
     }
-
-    //pour les boutons retour
+    
     public function beforeRender() {
+        //pour les boutons retour
         $this->set('refer',$this->referer);
+        $this->set('title_for_layout' , $this->titre);
+        $this->set('description_for_layout' , $this->description);
     }
+    
+    public function layout($layout) {
+		$this->layout = $layout;
+	}
 
 }
