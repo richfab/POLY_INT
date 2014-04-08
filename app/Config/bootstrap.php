@@ -86,6 +86,8 @@ Cache::config('default', array('engine' => 'File'));
  *
  * ));
  */
+CakePlugin::load('TwitterBootstrap');
+
 Configure::write('Dispatcher.filters', array(
 	'AssetDispatcher',
 	'CacheDispatcher'
