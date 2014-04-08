@@ -1,15 +1,15 @@
 <?php
 class UsersController extends AppController {
-	
+    
     /* Load the paginator helper for use */
     public $helpers = array('Paginator' => array('Paginator'));
-
+        
     /* Set pagination options */
     public $paginate = array(
             'limit' => 20,
             'order' => array('lastname' => 'ASC')
     );
-
+        
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('signup','forgotten_password'); // Letting users signup themselves and retrieve password
@@ -20,7 +20,10 @@ class UsersController extends AppController {
             if ($this->Auth->login()) {
                 return $this->redirect($this->Auth->redirect());
             }
-            $this->Session->setFlash("Mot de passe ou email incorrect");
+            $this->Session->setFlash(__("Mot de passe ou email incorrect"), 'alert', array(
+                'plugin' => 'BoostCake',
+                'class' => 'alert-danger'
+            ));
         }
     }
 	
@@ -35,21 +38,24 @@ class UsersController extends AppController {
         //selectionne les departements par ordre alphabetique
         $this->set('departments', $this->User->Department->find('list', array(
                         'order' => array('Department.name' => 'ASC'))));
-        
+                            
         if ($this->request->is('post')) {
-        
+            
             if (!($this->data['User']['password'] === $this->data['User']['password_confirm'])) {
-                $this->Session->setFlash("Les mots de passe ne correspondent pas");               
+                $this->Session->setFlash(__("Les mots de passe ne correspondent pas"), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-danger'
+                ));              
                 return;
             }
-			
+                
             $this->User->create();
-            
+                
             if ($this->User->save($this->request->data)) {
 		$this->Session->setFlash("Votre inscription a bien été prise en compte. Un email de confirmation vient de vous être envoyé");
                 return $this->redirect(array('controller'=>'pages','action' => 'home'));
             }
-            
+                
             $this->Session->setFlash("Erreur lors de l'inscription");
         }
     }
@@ -61,7 +67,7 @@ class UsersController extends AppController {
             $user = $this->User->find('first',array('conditions'=>array('User.id'=>$token[0],'MD5(User.password)'=>$token[1])));
             if($user){
                 App::uses('AuthComponent', 'Controller/Component');
-
+                    
                 $this->User->id = $user['User']['id'];
                 $password = substr(md5(uniqid(rand(),true)),0,8);
                 $this->User->saveField('password',$password);
@@ -71,7 +77,7 @@ class UsersController extends AppController {
                 $this->Session->setFlash("Le lien n'est pas valide");
             }
         }
-
+            
         if ($this->request->is('post')) {
             $user = $this->User->find('first',array('conditions'=>array('email'=>$this->request->data['User']['email'])));
             if(!$user){
@@ -91,10 +97,10 @@ class UsersController extends AppController {
             }
         }
     }
-    
+        
     public function profile($user_id = null) {
     	App::uses('AuthComponent', 'Controller/Component');
-		
+            
         if($this->Auth->loggedIn()){
             
             //si l'utilisateur veut voir son propre profile
@@ -103,12 +109,12 @@ class UsersController extends AppController {
             }
            //si l'utilisateur cherche a voir le profile de quelqu'un d'autre
             $this->User->id = $user_id;
-            
+                
         }
         else{
             return $this->redirect(array('controller'=>'users', 'action' => 'login'));
         }
-    			
+            
         if (!$this->User->exists()) {
             throw new NotFoundException(__("Cet utilisateur n'existe pas"));
         }
@@ -119,10 +125,10 @@ class UsersController extends AppController {
             'recursive' => 2
         )));
     }
-    
+        
     public function edit() {
     	App::uses('AuthComponent', 'Controller/Component');
-		
+            
         if($this->Auth->loggedIn()){
             $user_id = $this->Auth->user('id');
             $this->User->id = $user_id;
@@ -130,14 +136,14 @@ class UsersController extends AppController {
         else{
             return $this->redirect(array('action' => 'login'));
         }
-        
+            
         //selectionne les ecoles par ordre alphabetique
         $this->set('schools', $this->User->School->find('list', array(
                         'order' => array('School.name' => 'ASC'))));
         //selectionne les departements par ordre alphabetique
         $this->set('departments', $this->User->Department->find('list', array(
                         'order' => array('Department.name' => 'ASC'))));
-    			
+                            
         if (!$this->User->exists()) {
             throw new NotFoundException(__("Cet utilisateur n'existe pas"));
         }
@@ -152,23 +158,23 @@ class UsersController extends AppController {
             unset($this->request->data['User']['password']);
         }
     }
-    
+        
     public function delete(){
         $this->request->onlyAllow('post');
-        
+            
         App::uses('AuthComponent', 'Controller/Component');
         $user_id = $this->Auth->user('id');
-        
+            
         $user = $this->User->findById($user_id);
         $experiences = $user['Experience'];
-        
+            
         App::import('Controller', 'Experiences');
         $experiencesController = new ExperiencesController;
-        
+            
         foreach($experiences as $experience){
             $experiencesController->delete_experience($experience['id']);
         }
-        
+            
         $this->User->id = $user_id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__("Le compte n'éxiste plus"));

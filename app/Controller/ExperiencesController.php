@@ -72,9 +72,9 @@ class ExperiencesController extends AppController {
     
     public function explore(){
         //on inclut les scripts pour la recuperation des experiences
-    	$this->set('jsIncludes',array('get_experiences','jvector','jquery-jvectormap.min','jquery-jvectormap-world-mill-en'));
+    	$this->set('jsIncludes',array('get_experiences','jvector','jquery-jvectormap.min','jquery-jvectormap-world-mill-en','modernizr.custom.63321','jquery.dropdown'));
         //on inclut les style pour la carte
-        $this->set('cssIncludes',array('jvectormap'));
+        $this->set('cssIncludes',array('jvectormap','map','map-filter'));
     }
     
     //cette fonction retourne l'id de la ville, qu'elle ait été créée ou non

@@ -34,22 +34,36 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
 	public $components = array(
-        'Session',
-        'Auth' => array(
-            'loginRedirect' => '/',
-            'logoutRedirect' => '/',
-            'authorize' => array('Controller'),
-            'authenticate' => array(
-                'Form' => array(
-                    'fields' => array(
-                        'username' => 'email', 'password' => 'password'
+            'Session',
+            'Auth' => array(
+                'loginRedirect' => '/',
+                'logoutRedirect' => '/',
+                'authorize' => array('Controller'),
+                'authenticate' => array(
+                    'Form' => array(
+                        'fields' => array(
+                            'username' => 'email', 'password' => 'password'
+                        )
+                    )
+                ),
+                'flash' => array(
+                    'element' => 'alert',
+                    'key' => 'auth',
+                    'params' => array(
+                            'plugin' => 'BoostCake',
+                            'class' => 'alert-error'
                     )
                 )
             )
-        )
+        );
+        
+    public $helpers = array(
+            'Js' => array('Jquery'),
+            'Session',
+            'Html' => array('className' => 'BoostCake.BoostCakeHtml'),
+            'Form' => array('className' => 'BoostCake.BoostCakeForm'),
+            'Paginator' => array('className' => 'BoostCake.BoostCakePaginator'),
     );
-    
-    public $helpers = array('Js' => array('Jquery'));
 
     public function beforeFilter() {
     

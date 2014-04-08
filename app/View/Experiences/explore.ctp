@@ -1,5 +1,68 @@
-<input type="text" id="data_input" value='{"department_id" : 2, "school_id" : [1,2], "motive_id" : 1, "city_id" : 6, "country_id" : "MX", "dateMin" : "2013-03-01 00:00:00", "dateMax" : "2015-03-01 00:00:00"}'>
-<a onclick="get_map_init()"> GET MAP INIT</a>
-<a onclick="get_map();"> GET MAP </a>
-<div style="position:absolute;top:200px;left:30px;z-index:2;background-color:white" id="list-map"></div>
-<div id="world-map" style="width: 100%; height: 600px; postion:relative; bottom:20px; top:100px; margin-top:50px;"></div>
+<div id="world-map" style="width: 100%; height: 600px; postion:relative; bottom:20px; top:100px;"></div>
+                
+<div id="controller">
+    <div id="control-map">
+        <select id="cd-dropdown" class="">
+            <option value="-1" selected>Spécialité</option>
+            <option value="1">Informatique</option>
+            <option value="2">Electronique</option>
+            <option value="3">Matériaux</option>
+        </select>
+        <select id="cd-dropdown2" class="">
+            <option value="-1" selected>Motif</option>
+            <option value="1">Semestre</option>
+            <option value="2">Stage</option>
+            <option value="3">Travail</option>
+        </select>
+        <select id="cd-dropdown3" class="">
+            <option value="-1" selected>Ecole</option>
+            <option value="1">Nantes</option>
+            <option value="2">Lille</option>
+            <option value="3">Lyon</option>
+        </select>
+        <select id="cd-dropdown4" class="last">
+            <option value="-1" selected>Période</option>
+            <option value="1">Moins de 3 ans</option>
+            <option value="2">Moins de 2 ans</option>
+            <option value="3">Aujourd'hui</option>
+            <option value="4">A venir</option>
+        </select>
+    </div>
+    <div id="list-map" style="display:none">
+        <ul class="list-unstyled">
+            
+        </ul>
+    </div>
+</div>
+<input type="text" id="data_input" value='{}' style="display:none">
+<script type="text/javascript">
+            
+$( function() {
+
+    $( '#cd-dropdown' ).dropdown( {
+        gutter : 5,
+        stack : false,
+        slidingIn : 100
+    } );
+
+    $( '#cd-dropdown2' ).dropdown( {
+        gutter : 5,
+        stack : false,
+        slidingIn : 100
+    } );
+
+    $( '#cd-dropdown3' ).dropdown( {
+        gutter : 5,
+        stack : false,
+        slidingIn : 100
+    } );
+
+    $( '#cd-dropdown4' ).dropdown( {
+        gutter : 5,
+        stack : false,
+        slidingIn : 100
+    } );
+
+});
+
+</script>

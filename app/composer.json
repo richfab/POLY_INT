@@ -1,0 +1,5 @@
+{"config":{"vendor-dir":"Vendor"},
+    "require": {
+        "slywalker/boost_cake": "*"
+    }
+}
