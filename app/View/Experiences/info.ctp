@@ -1,5 +1,4 @@
-<h2>Ajouter une expérience</h2>
-    
+<h2>Expérience</h2>
 <?php 
     echo $this->Form->create('Experience', array(
         'inputDefaults' => array(
@@ -40,17 +39,20 @@
     echo $this->Form->input('comment',array('label'=>'Commentaire','type'=>'textarea'));
 //    echo $this->Form->input('notify',array('label'=>"Envoyez-moi un email si quelqu'un est dans cette ville en même temps que moi",'class' => false));?>
 <div class="form-group">
-        <?php echo $this->Form->submit("Enregistrer", array(
-                'div' => 'col col-md-9 col-md-offset-3',
-                'class' => 'btn btn-blue'
+    <div class="col col-md-9 col-md-offset-3">
+        <?= $this->Html->link("Retour", array('controller'=>'users', 'action' => 'profile'),
+                array('class' => 'btn btn-orange'
         )); ?>
+        <?php echo $this->Form->button('Enregistrer', array(
+                'class' => 'btn btn-blue'
+        ));?>
+    </div>
 </div>
-<?= $this->Html->link("Retour à mon profil", array('controller'=>'users', 'action' => 'profile')); ?>
-    
+
 <?php echo $this->Form->end(); ?>
-    
+
 <script type="text/javascript">
     $('.datepicker').datepicker({
         format: 'yyyy-mm-dd'}
-    );
+            );
 </script>

@@ -15,7 +15,7 @@ class UsersController extends AppController {
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                return $this->redirect($this->Auth->redirect());
+                return $this->redirect(array('controller'=>'pages', 'action' => 'home'));
             }
             $this->Session->setFlash(__("Mot de passe ou email incorrect"), 'alert', array(
                 'plugin' => 'BoostCake',
@@ -53,7 +53,7 @@ class UsersController extends AppController {
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));
-                return $this->redirect(array('controller'=>'pages','action' => 'home'));
+                return $this->redirect(array('controller'=>'users','action' => 'login'));
             }
             $this->Session->setFlash(__("Erreur lors de l'inscription"), 'alert', array(
                  'plugin' => 'BoostCake',

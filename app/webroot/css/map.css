@@ -11,3 +11,7 @@ and open the template in the editor.
 .jvectormap-region{
     transition: fill .4s ease;
 }
+
+.list-unstyled {
+    margin-bottom: 0px;
+}

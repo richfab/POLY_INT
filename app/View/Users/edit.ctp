@@ -21,17 +21,25 @@
     echo $this->Form->input('department_id', array('placeholder' => 'Spécialité','label' => 'Spécialité'));?>
         
     <div class="form-group">
-        <?php echo $this->Form->submit("Enregistrer", array(
-                'div' => 'col col-md-9 col-md-offset-3',
-                'class' => 'btn btn-blue'
-        )); ?>
+        <div class="col col-md-9 col-md-offset-3">
+            <?= $this->Html->link("Retour", array('controller'=>'users', 'action' => 'profile'),
+                    array('class' => 'btn btn-orange'
+            )); ?>
+            <?php echo $this->Form->button('Enregistrer', array(
+                    'class' => 'btn btn-blue'
+            ));?>
+        </div>
     </div>  
     
 <?php echo $this->Form->end(); ?>
-
-<p><?= $this->Form->postLink('Supprimer mon compte',
-    array('controller'=>'users', 'action' => 'delete'),
-    array(),
-    'Es-tu sûr de vouloir supprimer ton compte ? Tes expériences et tes informations seront définitivement supprimées.');
-?></p>
-<?= $this->Html->link("Retour à mon profil", array('controller'=>'users', 'action' => 'profile')); ?>
+<p>
+    <?= $this->Html->link("Changer mot de passe", array('controller'=>'users', 'action' => 'change_password'),
+                        array('class' => 'btn btn-default'
+                )); ?>
+</p>
+<p>
+    <?= $this->Form->postLink('Supprimer mon compte',
+        array('controller'=>'users', 'action' => 'delete'),
+        array("class" => "btn btn-default btn-xs"),
+        'Es-tu sûr de vouloir supprimer ton compte ? Tes expériences et tes informations seront définitivement supprimées.');?>
+</p>

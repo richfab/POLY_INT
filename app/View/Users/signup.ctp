@@ -14,7 +14,7 @@
     ));
     echo $this->Form->input('email', array('placeholder' => 'Email'));
     echo $this->Form->input('password', array('placeholder' => 'Mot de passe','label' => 'Mot de passe'));
-    echo $this->Form->input('password_confirm', array('placeholder' => 'Confirmation','label' => 'Confirmation'));
+    echo $this->Form->input('password_confirm', array('placeholder' => 'Confirmation','label' => 'Confirmation',"type"=>"password"));
     echo $this->Form->input('firstname', array('placeholder' => 'Prénom','label' => 'Prénom'));
     echo $this->Form->input('lastname', array('placeholder' => 'Nom','label' => 'Nom'));
     echo $this->Form->input('School.id');
