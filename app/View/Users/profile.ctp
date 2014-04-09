@@ -34,6 +34,9 @@
         
         <p>Lieu : <?= $experience['City']['name'];?>, <?= $experience['City']['Country']['name'];?></p>
         <p>Motif : <?= $experience['Motive']['name'];?></p>
+        <?php if($experience['Experience']['establishment'] != ""): ?>
+            <p>Établissement : <?= $experience['Experience']['establishment'];?></p>
+        <?php endif; ?>
         <?php if($experience['Experience']['description'] != ""): ?>
             <p>Description : <?= $experience['Experience']['description'];?></p>
         <?php else:?>

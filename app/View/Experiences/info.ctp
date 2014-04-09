@@ -24,6 +24,7 @@
     echo $this->Form->input('input',array('label'=>'Ville *', 'value'=>$input_value));
     echo $this->Form->input('Motive.id');
     echo $this->Form->input('motive_id',array('label'=>"Motif *"));
+    echo $this->Form->input('establishment',array('label'=>'Établissement'));
     echo $this->Form->input('description',array('label'=>'Description'));
     echo $this->Form->input('City.name',array('label'=>'city_name','type'=>'hidden'));
     echo $this->Form->input('City.lat', array('label'=>'latitude','type'=>'hidden'));

@@ -27,10 +27,17 @@ class Experience extends AppModel {
                 'allowEmpty' => false
             )
         ),
+        'establishment' => array(
+            'maxLength' => array(
+                'rule'    => array('maxLength', '140'),
+                'message' => "L'établissement doit comporter 140 caractères au maximum",
+                'allowEmpty' => true
+            )
+        ),
         'description' => array(
             'maxLength' => array(
-                'rule'    => array('maxLength', '300'),
-                'message' => 'La description doit comporter 300 caractères au maximum',
+                'rule'    => array('maxLength', '140'),
+                'message' => 'La description doit comporter 140 caractères au maximum',
                 'allowEmpty' => true
             )
         ),
