@@ -25,12 +25,13 @@
                 'div' => 'col col-md-9 col-md-offset-3',
                 'class' => 'btn btn-blue'
         )); ?>
-    </div>
-
-    <p><?= $this->Form->postLink('Supprimer mon compte',
-        array('controller'=>'users', 'action' => 'delete'),
-        array('confirm' => 'Es-tu sûr de vouloir supprimer ton compte ? Tes expériences et tes informations seront définitivement supprimées.'));
-    ?></p>
-    <?= $this->Html->link("Retour à mon profil", array('controller'=>'users', 'action' => 'profile')); ?>
+    </div>  
     
 <?php echo $this->Form->end(); ?>
+
+<p><?= $this->Form->postLink('Supprimer mon compte',
+    array('controller'=>'users', 'action' => 'delete'),
+    array(),
+    'Es-tu sûr de vouloir supprimer ton compte ? Tes expériences et tes informations seront définitivement supprimées.');
+?></p>
+<?= $this->Html->link("Retour à mon profil", array('controller'=>'users', 'action' => 'profile')); ?>

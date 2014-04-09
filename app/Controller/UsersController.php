@@ -1,8 +1,5 @@
 <?php
 class UsersController extends AppController {
-    
-    /* Load the paginator helper for use */
-    public $helpers = array('Paginator' => array('Paginator'));
         
     /* Set pagination options */
     public $paginate = array(
