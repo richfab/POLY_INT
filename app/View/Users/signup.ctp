@@ -1,4 +1,4 @@
-<h3>S'inscrire</h3>
+<h2>S'inscrire</h2>
     
 <?php 
     echo $this->Form->create('User', array(
@@ -23,9 +23,9 @@
     echo $this->Form->input('department_id', array('placeholder' => 'Spécialité','label' => 'Spécialité'));?>
         
     <div class="form-group">
-        <?php echo $this->Form->submit('Valider', array(
+        <?php echo $this->Form->submit("S'inscrire", array(
                 'div' => 'col col-md-9 col-md-offset-3',
-                'class' => 'btn btn-default'
+                'class' => 'btn btn-blue'
         )); ?>
     </div>
 <?php echo $this->Form->end(); ?>

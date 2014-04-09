@@ -30,26 +30,26 @@ html,body{
     border-bottom: 1px solid #C9C9C9;
 }
 
-a.btn-green {
+input.btn-blue, a.btn-blue {
     color: #fff!important;
     background-color: #3498db;
     border-color: #fff;
 }
 
 
-a.btn-green:hover {
+input.btn-blue:hover, a.btn-blue:hover {
     color: #3498db!important;
     background-color: #fff;
     border-color: #3498db;
 }
 
-a.btn-orange {
+input.btn-orange, a.btn-orange {
     color: #fff!important;
     background-color: #e74c3c;
     border-color: #fff;
 }
 
-a.btn-orange:hover {
+input.btn-orange:hover, a.btn-orange:hover {
     color: #e74c3c!important;
     background-color: #fff;
     border-color: #e74c3c;

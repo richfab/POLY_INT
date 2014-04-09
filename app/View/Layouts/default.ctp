@@ -82,7 +82,7 @@ $title_description = "Polytech International : L'unique passeport partagé entre
                                     <?= $this->Html->link(
                                             'mon profil',
                                             array('controller'=>'users', 'action'=>'profile'),
-                                            array('class'=>'btn btn-default btn-green'));?>
+                                            array('class'=>'btn btn-default btn-blue'));?>
                                 </li>
                                 <li>
                                     <?= $this->Html->link(
@@ -95,7 +95,7 @@ $title_description = "Polytech International : L'unique passeport partagé entre
                                     <?= $this->Html->link(
                                             'inscription',
                                             array('controller'=>'users', 'action'=>'signup'),
-                                            array('class'=>'btn btn-default btn-green'));?>
+                                            array('class'=>'btn btn-default btn-blue'));?>
                                 <li>
                                     <?= $this->Html->link(
                                             'connexion',
