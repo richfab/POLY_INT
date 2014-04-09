@@ -228,3 +228,13 @@ h2 > span.wut {
     font-size: 50px;
     letter-spacing: 0.07em;
 }
+
+.alert{
+    margin-top: 20px;
+}
+
+.close.edit-delete{
+    font-size: 14px;
+    font-weight: normal;
+    margin-left: 5px;
+}
