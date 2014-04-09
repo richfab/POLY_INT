@@ -29,7 +29,7 @@
         </select>
     </div>
     <div id="list-map" style="display:none">
-        <ul class="list-unstyled">
+        <ul id="ul-map" class="list-unstyled">
             
         </ul>
     </div>

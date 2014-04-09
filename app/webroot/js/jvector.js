@@ -51,15 +51,18 @@ function init_map(){
         },
         onRegionClick: function(event, code){
             $('#world-map').vectorMap('set', 'focus', code);
-            $('#list-map').slideUp(300);
+            
             //on ajoute le parametre country_id
             var country_json = $.parseJSON('{"country_id":"'+code+'"}');
             //on recupere les params initiaux
             var filter = get_filter_params();
             //on join les deux tableaux de parametres
             $.extend(filter,country_json);
-            get_experiences(filter);
-            $('#list-map').slideDown(300);
+            
+            $('#list-map').slideUp(300, function(){
+                $("#ul-map").empty();
+                get_experiences(filter);
+            });
         },
         onMarkerClick: function(event, code){
             $('#list-map').slideUp(300);

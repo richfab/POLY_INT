@@ -50,6 +50,7 @@ function get_experiences(filter){
         dataType : 'html',
         success : function(data) {
                 $('#list-map').html(data);
+                $('#list-map').slideDown(300);
         },
         error : function(data) {
                 alert("Une erreur est survenue, veuillez réessayer dans quelques instants.");

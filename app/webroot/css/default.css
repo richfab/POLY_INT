@@ -73,17 +73,17 @@ a.btn-test {
     font-family: 'Open Sans', sans-serif
 }
 
-.col-lg-3 {
+.col-md-3 {
     text-align: center;
 }
-.col-lg-3 h2{
+.col-md-3 h2{
     font-size: 20px;
     color: #333;
     text-transform: uppercase;
     font-size: 15px;
     letter-spacing: 0.07em
 }
-.col-lg-3 > p{
+.col-md-3 > p{
     text-align: justify;
     color: #666;
     letter-spacing: 0.02em;
@@ -168,15 +168,16 @@ h2 > span.wut {
 }
 
 #list-map a {
-    height: 64px;
     display: block;
     
 }
 
 #list-map li {
-    height: 64px;
     border-bottom: 1px solid #e7e7e7;
-    
+}
+
+.list-map-message{
+    padding: 5px;
 }
 
 #list-map li.last-child {

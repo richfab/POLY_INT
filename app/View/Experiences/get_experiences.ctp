@@ -7,12 +7,16 @@
         <?php endforeach;?>
         <?php if(empty($experiences)): ?>
             <li>
-                Sois le premier à <?= $this->Html->link("poster une expérience", array('controller'=>'experiences', 'action' => 'info'),array("style"=>"display:inline-block")); ?> dans ce pays
+                <div class="list-map-message">
+                    Sois le premier à <?= $this->Html->link("poster une expérience", array('controller'=>'experiences', 'action' => 'info'),array("style"=>"display:inline-block")); ?> dans ce pays
+                </div>
             </li>
         <?php endif; ?>
     <?php else: ?>
             <li>
-                <?= $this->Html->link("Connecte-toi", array('controller'=>'users', 'action' => 'login'),array("style"=>"display:inline-block")); ?> ou <?= $this->Html->link("inscris-toi", array('controller'=>'users', 'action' => 'signup'),array("style"=>"display:inline-block")); ?> pour consulter les expériences
+                <div class="list-map-message">
+                    <?= $this->Html->link("Connecte-toi", array('controller'=>'users', 'action' => 'login'),array("style"=>"display:inline-block")); ?> ou <?= $this->Html->link("inscris-toi", array('controller'=>'users', 'action' => 'signup'),array("style"=>"display:inline-block")); ?> pour consulter les expériences
+                </div>
             </li>
     <?php endif; ?>
 </ul>

@@ -5,9 +5,9 @@
         'inputDefaults' => array(
                 'div' => 'form-group',
                 'label' => array(
-                        'class' => 'col col-md-3 control-label'
+                        'class' => 'col col-sm-3 control-label'
                 ),
-                'wrapInput' => 'col col-md-9',
+                'wrapInput' => 'col col-sm-6',
                 'class' => 'form-control'
         ),
         'class' => 'well form-horizontal'
