@@ -15,24 +15,21 @@
  * @since         CakePHP(tm) v 0.10.0.1076
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+$title_description = "Polytech International : L'unique passeport partagé entre tous les étudiants de Polytech";
 ?>
 <!DOCTYPE html>
 <html>
     <head>
 	<?php echo $this->Html->charset(); ?>
         <title>
-		<?php echo $cakeDescription ?>:
+		<?php echo $title_description ?>:
 		<?php echo $title_for_layout; ?>
         </title>
 	<?php
 		echo $this->Html->meta('icon');
-
-		echo $this->Html->css('cake.generic');
                 
-                echo $this->Html->css(array('bootstrap.min'));
-                echo $this->Html->script(array('jquery-1.11.0.min','bootstrap.min')); // Inclut la librairie Jquery
+                echo $this->Html->css(array('bootstrap','default'));
+                echo $this->Html->script(array('jquery-1.11.0.min','bootstrap')); // Inclut la librairie Jquery
                 
                 //on inclut les fichiers js qui sont spécifiques a une vue
 		if(isset($jsIncludes)){
@@ -50,25 +47,87 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 	?>
     </head>
     <body>
+        
         <div id="container">
-            <div id="header">
-                <h1><?php echo $this->Html->link($cakeDescription, 'http://cakephp.org'); ?></h1>
+            
+            <div class="navbar navbar-default navbar-fixed-top" id="top-bar">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <?= $this->Html->link(
+                                $this->Html->image('mini-logo.png', array('alt' => 'Logo','height'=>'24px')),
+                                array('controller'=>'pages', 'action'=>'index'),
+                                array('class'=>'navbar-brand text-hide','escape' => false));?>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li>
+                                <?= $this->Html->link('accueil',array('controller'=>'pages', 'action'=>'index'));?>
+                            </li>
+                            <li>
+                                <?= $this->Html->link('explorer',array('controller'=>'experiences', 'action'=>'explore'));?>
+                            </li>
+                            <li>
+                                <?= $this->Html->link('rechercher',array('controller'=>'experiences', 'action'=>'search'));?>
+                            </li>
+                            <li>
+                                <?= $this->Html->link('a propos',array('controller'=>'pages', 'action'=>'about'));?>
+                            </li>
+                            <?php if(AuthComponent::user('id')): ?>
+                                <li>
+                                    <?= $this->Html->link(
+                                            'mon profil',
+                                            array('controller'=>'users', 'action'=>'profile'),
+                                            array('class'=>'btn btn-default btn-blue'));?>
+                                </li>
+                                <li>
+                                    <?= $this->Html->link(
+                                            'déconnexion',
+                                            array('controller'=>'users', 'action'=>'logout'),
+                                            array('class'=>'btn btn-default btn-orange'));?>
+                                </li>
+                            <?php else:?>
+                                <li>
+                                    <?= $this->Html->link(
+                                            'inscription',
+                                            array('controller'=>'users', 'action'=>'signup'),
+                                            array('class'=>'btn btn-default btn-blue'));?>
+                                <li>
+                                    <?= $this->Html->link(
+                                            'connexion',
+                                            array('controller'=>'users', 'action'=>'login'),
+                                            array('class'=>'btn btn-default btn-orange'));?>
+                                </li>
+                            <?php endif;?>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div id="content">
-                
-			<?php echo $this->Session->flash(); ?>
-                
-			<?php echo $this->fetch('content'); ?>
+            
+            <?php if(($this->params['controller']=='pages' && $this->params['action']=='display' && $this->params['pass'][0]=='home')||($this->params['controller']=='experiences' && $this->params['action']=='explore')): ?>
+                <div id="content">
+            <?php else: ?>
+                <div id="content" class="container">
+            <?php endif;?>
+                    
+                <?php echo $this->Session->flash(); ?>
+
+                <?php echo $this->fetch('content'); ?>
             </div>
+            
             <div id="footer">
-			<?php echo $this->Html->link(
-					$this->Html->image('cake.power.gif', array('alt' => $cakeDescription, 'border' => '0')),
-					'http://www.cakephp.org/',
-					array('target' => '_blank', 'escape' => false)
-				);
-			?>
+                <div class="container">
+                    <p class="pull-left"><a href="http://fabienrichard.fr"></a></p>
+                    <p class="pull-right"><a href="./mentions-legales.html">mentions légales</a> | <a href="./conditions-utilisations.html">conditions d'utilisations</a> | &#169; polytech explorer 2013</p>
+                </div>
             </div>
+            
         </div>
+        
         <?php echo $this->Js->writeBuffer(); // Écrit les scripts en mémoire cache ?>
 	<?php echo $this->element('sql_dump'); ?>
     </body>

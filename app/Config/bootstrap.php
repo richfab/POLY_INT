@@ -105,3 +105,6 @@ CakeLog::config('error', array(
 	'types' => array('warning', 'error', 'critical', 'alert', 'emergency'),
 	'file' => 'error',
 ));
+
+CakePlugin::load('Composer', array('bootstrap' => true));
+CakePlugin::load('BoostCake');

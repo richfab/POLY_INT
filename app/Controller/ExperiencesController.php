@@ -1,7 +1,5 @@
 <?php
 class ExperiencesController extends AppController {
-
-    public $helpers = array('Html', 'Form');
     
     //pour l'extension json
     public $components = array("RequestHandler");
@@ -31,8 +29,9 @@ class ExperiencesController extends AppController {
         $this->set('motives', $this->Experience->Motive->find('list', array(
                         'order' => array('Motive.name' => 'ASC'))));
         
-        //on inclut le script google maps pour l'autocomplete des lieux et celui de la distance
-    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places','places_autocomplete','bootstrap-rating-input'));
+        //on inclut le script google maps pour l'autocomplete des lieux
+    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places','places_autocomplete','bootstrap-rating-input','bootstrap-datepicker'));
+        $this->set('cssIncludes',array('datepicker'));
         
         $user_id = $this->Auth->user('id');
         $this->request->data['Experience']['user_id'] = $user_id;
@@ -61,9 +60,16 @@ class ExperiencesController extends AppController {
                 $experience_id = $this->Experience->id;
                 $experience = $this->Experience->findById($experience_id);
                 
+                $this->Session->setFlash(__("Les modifications ont bien été enregistrées"), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
                 return $this->redirect(array('controller'=>'users', 'action' => 'profile'));             
             }
-            $this->Session->setFlash("Erreur lors de l'enregistrement");
+            $this->Session->setFlash(__("Erreur lors de l'enregistrement"), 'alert', array(
+                'plugin' => 'BoostCake',
+                'class' => 'alert-danger'
+            ));
         }
         else{
             $this->request->data = $this->Experience->find('first', array('conditions' => array('Experience.id' => $experience_id), 'recursive' => 2));
@@ -72,9 +78,9 @@ class ExperiencesController extends AppController {
     
     public function explore(){
         //on inclut les scripts pour la recuperation des experiences
-    	$this->set('jsIncludes',array('get_experiences','jvector','jquery-jvectormap.min','jquery-jvectormap-world-mill-en'));
+    	$this->set('jsIncludes',array('get_experiences','jvector','jquery-jvectormap.min','jquery-jvectormap-world-mill-en','modernizr.custom.63321','jquery.dropdown'));
         //on inclut les style pour la carte
-        $this->set('cssIncludes',array('jvectormap'));
+        $this->set('cssIncludes',array('jvectormap','map','map-filter'));
     }
     
     //cette fonction retourne l'id de la ville, qu'elle ait été créée ou non
@@ -132,10 +138,16 @@ class ExperiencesController extends AppController {
             throw new NotFoundException(__("Cette experience n'existe plus"));
         }
         if ($this->Experience->delete() && $this->_upload_experienceNumber($experience['Experience']['city_id'],-1)) {
-            $this->Session->setFlash("L'expérience a bien été supprimée");
+            $this->Session->setFlash(__("L'expérience a bien été supprimée"), 'alert', array(
+                'plugin' => 'BoostCake',
+                'class' => 'alert-success'
+            ));
             return $this->redirect($this->referer());
         }
-        $this->Session->setFlash("L'expérience n'a pas pu être supprimée");
+        $this->Session->setFlash(__("L'expérience n'a pas pu être supprimée"), 'alert', array(
+            'plugin' => 'BoostCake',
+            'class' => 'alert-danger'
+        ));
         return $this->redirect($this->referer());
     }
     
