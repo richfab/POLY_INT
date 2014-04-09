@@ -12,7 +12,7 @@ class ExperiencesController extends AppController {
 
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(array('explore','get_map_init','get_map','get_experiences')); //ce que tout le monde a le droit de faire
+        $this->Auth->allow(array('explore','get_map_init','get_map','get_experiences','search')); //ce que tout le monde a le droit de faire
     }
     
     public function info($experience_id = null){
@@ -30,8 +30,7 @@ class ExperiencesController extends AppController {
                         'order' => array('Motive.name' => 'ASC'))));
         
         //on inclut le script google maps pour l'autocomplete des lieux
-    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places','places_autocomplete','bootstrap-rating-input','bootstrap-datepicker'));
-        $this->set('cssIncludes',array('datepicker'));
+    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places','places_autocomplete','bootstrap-rating-input'));
         
         $user_id = $this->Auth->user('id');
         $this->request->data['Experience']['user_id'] = $user_id;
@@ -193,9 +192,13 @@ class ExperiencesController extends AppController {
                     'group' => 'City.country_id')));
     }
     
+    public function search(){
+        $this->set('jsIncludes',array('get_experiences'));
+    }
+    
     public function get_experiences(){
         
-//TODO        $this->request->onlyAllow('ajax');
+        $this->request->onlyAllow('ajax');
         App::uses('AuthComponent', 'Controller/Component');
                 
          //on recupere les experiences si l'utilisateur est connecté
@@ -205,8 +208,10 @@ class ExperiencesController extends AppController {
             
             $this->set('experiences', $this->Experience->find('all', array(
                         'conditions' => $conditions,
+                        'recursive' => 2,
                         'fields' => array('*','DATEDIFF(Experience.dateEnd, Experience.dateStart)/30 monthDiff'))));
         }
+        $this->render('/Experiences/'.$this->request->data['view_to_render']);
     }
     
     //fonction qui transforme l'objet de parametres en conditions pour le find

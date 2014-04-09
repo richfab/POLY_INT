@@ -24,10 +24,8 @@
             <option value="4">A venir</option>
         </select>
     </div>
-    <div id="list-map" style="display:none">
-        <ul id="ul-map" class="list-unstyled">
-            
-        </ul>
+    <div id="list-map" class="experience-list" style="display:none">
+        
     </div>
 </div>
 <input type="text" id="data_input" value='{}' style="display:none">

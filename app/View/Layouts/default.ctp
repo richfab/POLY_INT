@@ -20,6 +20,7 @@ $title_description = "Polytech International : L'unique passeport partagé entre
 <!DOCTYPE html>
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php echo $this->Html->charset(); ?>
         <title>
 		<?php echo $title_description ?>:
@@ -122,13 +123,12 @@ $title_description = "Polytech International : L'unique passeport partagé entre
             <div id="footer">
                 <div class="container">
                     <p class="pull-left"><a href="http://fabienrichard.fr"></a></p>
-                    <p class="pull-right"><a href="./mentions-legales.html">mentions légales</a> | <a href="./conditions-utilisations.html">conditions d'utilisations</a> | &#169; polytech explorer 2013</p>
+                    <p class="pull-right"><a href="./mentions-legales.html">mentions légales</a> | <a href="./conditions-utilisations.html">conditions d'utilisations</a></p>
                 </div>
             </div>
             
         </div>
         
         <?php echo $this->Js->writeBuffer(); // Écrit les scripts en mémoire cache ?>
-	<?php echo $this->element('sql_dump'); ?>
     </body>
 </html>

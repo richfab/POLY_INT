@@ -59,6 +59,3 @@
         
     </div>
 <?php endforeach; ?>
-<?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-
-<?php endif; ?>

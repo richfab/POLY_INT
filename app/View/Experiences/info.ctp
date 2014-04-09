@@ -12,8 +12,8 @@
         'class' => 'well form-horizontal'
     ));?>
     <?php
-    echo $this->Form->input('dateStart',array('label'=>'Du',"class"=>"form-control datepicker","type"=>"text"));
-    echo $this->Form->input('dateEnd',array('label'=>'Au',"class"=>"form-control datepicker","type"=>"text"));
+    echo $this->Form->input('dateStart',array('label'=>'Du *','dateFormat' => 'DMY','wrapInput'=>'col col-sm-4','style'=>'width:initial;display:inline-block'));
+    echo $this->Form->input('dateEnd',array('label'=>'Au *','dateFormat' => 'DMY','wrapInput'=>'col col-sm-4','style'=>'width:initial;display:inline-block'));
     //si c'est une modification d'expérience, on renseigne le lieu
     if(!empty($this->data)){
         $input_value = $this->data['City']['name'].', '.$this->data['City']['Country']['name'];
@@ -21,9 +21,9 @@
     else{
         $input_value = '';
     }
-    echo $this->Form->input('input',array('label'=>'Ville', 'value'=>$input_value));
+    echo $this->Form->input('input',array('label'=>'Ville *', 'value'=>$input_value));
     echo $this->Form->input('Motive.id');
-    echo $this->Form->input('motive_id',array('label'=>"Motif"));
+    echo $this->Form->input('motive_id',array('label'=>"Motif *"));
     echo $this->Form->input('description',array('label'=>'Description'));
     echo $this->Form->input('City.name',array('label'=>'city_name','type'=>'hidden'));
     echo $this->Form->input('City.lat', array('label'=>'latitude','type'=>'hidden'));
@@ -50,9 +50,3 @@
 </div>
 
 <?php echo $this->Form->end(); ?>
-
-<script type="text/javascript">
-    $('.datepicker').datepicker({
-        format: 'yyyy-mm-dd'}
-            );
-</script>
