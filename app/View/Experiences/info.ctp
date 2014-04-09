@@ -13,8 +13,8 @@
         'class' => 'well form-horizontal'
     ));?>
     <?php
-    echo $this->Form->input('dateStart',array('label'=>'Du',"class"=>"datepicker","type"=>"text"));
-    echo $this->Form->input('dateEnd',array('label'=>'Au',"class"=>"datepicker","type"=>"text"));
+    echo $this->Form->input('dateStart',array('label'=>'Du',"class"=>"form-control datepicker","type"=>"text"));
+    echo $this->Form->input('dateEnd',array('label'=>'Au',"class"=>"form-control datepicker","type"=>"text"));
     //si c'est une modification d'expérience, on renseigne le lieu
     if(!empty($this->data)){
         $input_value = $this->data['City']['name'].', '.$this->data['City']['Country']['name'];
