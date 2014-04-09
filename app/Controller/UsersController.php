@@ -49,7 +49,7 @@ class UsersController extends AppController {
             $this->User->create();
                 
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__("Ton inscription a bien été prise en compte. Un email de confirmation vient de t'être envoyé"), 'alert', array(
+                $this->Session->setFlash(__("Ton inscription a bien été prise en compte"), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));

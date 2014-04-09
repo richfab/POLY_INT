@@ -5,8 +5,6 @@
         <select id="cd-dropdown" class="">
             <option value="-1" selected>Spécialité</option>
             <option value="1">Informatique</option>
-            <option value="2">Electronique</option>
-            <option value="3">Matériaux</option>
         </select>
         <select id="cd-dropdown2" class="">
             <option value="-1" selected>Motif</option>
@@ -17,14 +15,12 @@
         <select id="cd-dropdown3" class="">
             <option value="-1" selected>Ecole</option>
             <option value="1">Nantes</option>
-            <option value="2">Lille</option>
-            <option value="3">Lyon</option>
         </select>
         <select id="cd-dropdown4" class="last">
             <option value="-1" selected>Période</option>
-            <option value="1">Moins de 3 ans</option>
-            <option value="2">Moins de 2 ans</option>
-            <option value="3">Aujourd'hui</option>
+            <option value="1">< 5 ans</option>
+            <option value="2">< 1 an</option>
+            <option value="3">Maintenant</option>
             <option value="4">A venir</option>
         </select>
     </div>
