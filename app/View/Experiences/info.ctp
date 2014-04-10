@@ -22,7 +22,7 @@
         $input_value = '';
     }?>
 <?php
-    echo $this->Form->input('input',array('label'=>'Ville *', 'value'=>$input_value));
+    echo $this->Form->input('input',array('label'=>'Ville *', 'value'=>$input_value, 'location-types'=>'(cities)'));
     echo $this->Form->input('Motive.id');
     echo $this->Form->input('motive_id',array('label'=>"Motif *"));
     echo $this->Form->input('establishment',array('label'=>'Établissement'));

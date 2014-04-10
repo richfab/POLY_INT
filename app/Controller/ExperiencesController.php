@@ -203,8 +203,8 @@ class ExperiencesController extends AppController {
     }
     
     public function search(){
-        //on inclut les scripts pour la recuperation des experiences
-    	$this->set('jsIncludes',array('get_experiences','modernizr.custom.63321','jquery.dropdown'));
+        //on inclut les scripts pour la recuperation des experiences et google maps pour l'autocomplete des lieux
+    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places','places_autocomplete','get_experiences','modernizr.custom.63321','jquery.dropdown'));
         //on inclut les style pour la carte
         $this->set('cssIncludes',array('filter'));
         
@@ -267,6 +267,9 @@ class ExperiencesController extends AppController {
         }
         if(!empty($request_data['city_id'])){
             $conditions['Experience.city_id'] = $request_data['city_id'];
+        }
+        if(!empty($request_data['city_name'])){
+            $conditions['City.name'] = $request_data['city_name'];
         }
         if(!empty($request_data['country_id'])){
             $conditions['City.country_id'] = $request_data['country_id'];

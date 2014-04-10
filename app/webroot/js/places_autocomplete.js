@@ -11,6 +11,7 @@ document.onkeypress = stopEnter;
 function initialize() {
     
     var input = /** @type {HTMLInputElement} */(document.getElementById('ExperienceInput'));
+    var location_types = $('#ExperienceInput').attr('location-types');
     var cityName = /** @type {HTMLInputElement} */(document.getElementById('CityName'));
     var cityLat = /** @type {HTMLInputElement} */(document.getElementById('CityLat'));
     var cityLon = /** @type {HTMLInputElement} */(document.getElementById('CityLon'));
@@ -19,9 +20,11 @@ function initialize() {
     var autocomplete = new google.maps.places.Autocomplete(input);
     
     //la recherche est limitée aux villes
-    autocomplete.setTypes(['(cities)']);
+    autocomplete.setTypes([location_types]);
     
     google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        
+        var countryLong_name,countryShort_name,cityLong_name = '';
         
         var place = autocomplete.getPlace();
         console.log(place);
@@ -41,12 +44,13 @@ function initialize() {
             
             console.log(place);
             
-            var cityLong_name = place.address_components[0].long_name;
-            
             for(var i in place.address_components){
                 if(place.address_components[i].types[0]==="country" && place.address_components[i].types[1]==="political"){
-                    var countryLong_name = place.address_components[i].long_name;
-                    var countryShort_name = place.address_components[i].short_name;
+                    countryLong_name = place.address_components[i].long_name;
+                    countryShort_name = place.address_components[i].short_name;
+                }
+                if(place.address_components[i].types[place.address_components[i].types.length-2]==="locality" && place.address_components[i].types[place.address_components[i].types.length-1]==="political"){
+                    cityLong_name = place.address_components[i].long_name;
                 }
             }
             

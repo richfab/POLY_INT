@@ -82,15 +82,21 @@ function get_filter_params(){
     }
     if($('input[name=motive_id]').val() !== '-1'){
         var motive_id = $.parseJSON('{"motive_id":"'+$('input[name=motive_id]').val()+'"}');
-    }
+    }   
     if($('input[name=school_id]').val() !== '-1'){
         var school_id = $.parseJSON('{"school_id":"'+$('input[name=school_id]').val()+'"}');
     }
-    if($('input[name=key_word]').length !== 0){
+    if($('input[name=key_word]').length !== 0 && $('input[name=key_word]').val() !== ''){
         var key_word = $.parseJSON('{"key_word":"'+$('input[name=key_word]').val()+'"}');
     }
+    if($('input[name=city_name]').length !== 0 && $('input[name=city_name]').val() !== ''){
+        var city_name = $.parseJSON('{"city_name":"'+$('input[name=city_name]').val()+'"}');
+    }
+    if($('input[name=country_id]').length !== 0 && $('input[name=country_id]').val() !== ''){
+        var country_id = $.parseJSON('{"country_id":"'+$('input[name=country_id]').val()+'"}');
+    }
     
-    $.extend(filter,deparment_id,motive_id,school_id,key_word);
+    $.extend(filter,deparment_id,motive_id,school_id,key_word,city_name,country_id);
     
     return filter;
 }

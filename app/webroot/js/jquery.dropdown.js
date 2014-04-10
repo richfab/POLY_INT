@@ -9,14 +9,14 @@
  * http://www.codrops.com
  */
 ;( function( $, window, undefined ) {
-
+    
     'use strict';
-
+    
     $.DropDown = function( options, element ) {
         this.$el = $( element );
         this._init( options );
     };
-
+    
     // the options
     $.DropDown.defaults = {
         speed : 300,
@@ -35,75 +35,81 @@
         slidingIn : false,
         onOptionSelect : function(opt) { return false; }
     };
-
+    
     $.DropDown.prototype = {
-
+        
         _init : function( options ) {
-
+            
             // options
             this.options = $.extend( true, {}, $.DropDown.defaults, options );
             this._layout();
             this._initEvents();
-
+            
         },
         _layout : function() {
-
+            
             var self = this;
             this.minZIndex = 1000;
             var value = this._transformSelect();
             this.opts = this.listopts.children( 'li' );
             this.optsCount = this.opts.length;
             this.size = { width : this.dd.width(), height : this.dd.height() };
-			
+            
             var elName = this.$el.attr( 'name' ), elId = this.$el.attr( 'id' ),
             inputName = elName !== undefined ? elName : elId !== undefined ? elId : 'cd-dropdown-' + ( new Date() ).getTime();
-
+            
             this.inputEl = $( '<input type="hidden" name="' + inputName + '" value="' + value + '"></input>' ).insertAfter( this.selectlabel );
-			
+            
             this.selectlabel.css( 'z-index', this.minZIndex + this.optsCount );
             this._positionOpts();
             if( Modernizr.csstransitions ) {
                 setTimeout( function() { self.opts.css( 'transition', 'all ' + self.options.speed + 'ms ' + self.options.easing ); }, 25 );
             }
-
+            
         },
         _transformSelect : function() {
-
+            
             var optshtml = '', selectlabel = '', value = -1;
             this.$el.children( 'option' ).each( function() {
-
+                
                 var $this = $( this ),
                 val = isNaN( $this.attr( 'value' ) ) ? $this.attr( 'value' ) : Number( $this.attr( 'value' ) ) ,
                 classes = $this.attr( 'class' ),
+                data_to_display = $this.attr( 'option-title' ),
                 selected = $this.attr( 'selected' ),
+                is_toutes = '',
                 label = $this.text();
-
+                
+                if( val === 0 ){
+                    is_toutes = 'selected';
+                }
+                
                 if( val !== -1 ) {
                     optshtml += 
                             classes !== undefined ? 
-                    '<li data-value="' + val + '"><span class="' + classes + '">' + label + '</span></li>' :
-                            '<li data-value="' + val + '"><span>' + label + '</span></li>';
+                    '<li data-value="' + val + '" option-title="'+data_to_display+'" class="'+is_toutes+'"><span class="' + classes + '">' + label + '</span></li>' :
+                            '<li data-value="' + val + '" option-title="'+data_to_display + '" class="'+is_toutes+'"><span>' + label + '</span></li>';
                 }
-
+                
                 if( selected ) {
                     selectlabel = label;
                     value = val;
                 }
-
+                
             } );
-
+            
             this.listopts = $( '<ul/>' ).append( optshtml );
             this.selectlabel = $( '<span/>' ).append( selectlabel );
             this.dd = $( '<div class="cd-dropdown"/>' ).append( this.selectlabel, this.listopts ).insertAfter( this.$el );
             this.$el.remove();
-
+            
             return value;
-
+            
         },
         _positionOpts : function( anim ) {
-
+            
             var self = this;
-
+            
             this.listopts.css( 'height', 'auto' );
             this.opts
                     .each( function( i ) {
@@ -116,7 +122,7 @@
                     transform : 'none'
                 } );
             } );
-
+            
             if( !this.options.slidingIn ) {
                 this.opts
                         .eq( this.optsCount - 1 )
@@ -128,35 +134,47 @@
                         .eq( this.optsCount - 3 )
                         .css( { top : this.options.stack ? 3 : 0, left : 0, transform : 'none' } );
             }
-
+            
         },
         _initEvents : function() {
-			
+            
             var self = this;
-			
+            
             this.selectlabel.on( 'mousedown.dropdown', function( event ) {
                 self.opened ? self.close() : self.open();
                 return false;
-
+                
             } );
-
+            
             this.opts.on( 'click.dropdown', function() {
                 if( self.opened ) {
                     var opt = $( this );
                     self.options.onOptionSelect( opt );
                     self.inputEl.val( opt.data( 'value' ) );
-                    self.selectlabel.html( opt.html() );
-                    self.close();
+                    opt.siblings().each(
+                            function(){
+                                $(this).removeClass( 'selected' );
+                    });
+                    opt.addClass( 'selected' );
+                    if(opt.attr("data-value")==='0'){
+                        self.selectlabel.html( opt.attr('option-title') );
+                    }
+                    else{
+                        self.selectlabel.html( opt.html() );
+                    }
+                    setTimeout(function(){
+                        self.close();
+                    },100);
                 }
             } );
-
+            
         },
         open : function() {
             var self = this;
             this.dd.toggleClass( 'cd-active' );
             this.listopts.css( 'height', ( this.optsCount + 1 ) * ( this.size.height + this.options.gutter ) );
             this.opts.each( function( i ) {
-
+                
                 $( this ).css( {
                     opacity : 1,
                     top : self.options.rotated ? self.size.height + self.options.gutter : ( i + 1 ) * ( self.size.height + self.options.gutter ),
@@ -172,13 +190,13 @@
                     : 'none',
                     transitionDelay : self.options.delay && Modernizr.csstransitions ? self.options.slidingIn ? ( i * self.options.delay ) + 'ms' : ( ( self.optsCount - 1 - i ) * self.options.delay ) + 'ms' : 0
                 } );
-
+                
             } );
             this.opened = true;
-
+            
         },
         close : function() {
-
+            
             var self = this;
             this.dd.toggleClass( 'cd-active' );
             if( this.options.delay && Modernizr.csstransitions ) {
@@ -188,11 +206,11 @@
             }
             this._positionOpts( true );
             this.opened = false;
-
+            
         }
-
+        
     }
-
+    
     $.fn.dropdown = function( options ) {
         var instance = $.data( this, 'dropdown' );
         if ( typeof options === 'string' ) {
@@ -208,5 +226,5 @@
         }
         return instance;
     };
-
+    
 } )( jQuery, window );
