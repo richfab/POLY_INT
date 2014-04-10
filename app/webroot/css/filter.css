@@ -1,6 +1,6 @@
-@import url('map-filter-demo.css');
-@import url('map-filter-common.css');
-@import url('map-filter-icons.css');
+@import url('filter-demo.css');
+@import url('filter-common.css');
+@import url('filter-icons.css');
 
 .cd-dropdown ul {
 	position: absolute;

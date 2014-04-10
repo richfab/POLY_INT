@@ -10,11 +10,8 @@
             <p>Pas de description</p>
         <?php endif; ?>
         <p>Du : <?= $this->Time->format($experience['Experience']['dateStart'], '%B %e, %Y');?> Au : <?= $this->Time->format($experience['Experience']['dateEnd'], '%B %e, %Y')?></p>
-        <?php if($experience['Experience']['note'] != 0): ?>
-            <p>Avis : <?= $experience['Experience']['note'];?>/5</p>
-            <?php if($experience['Experience']['comment'] != ""): ?>
-                <p>"<?= $experience['Experience']['comment'];?>"</p>
-            <?php endif; ?>
+        <?php if($experience['Experience']['comment'] != ""): ?>
+            <p>Avis : "<?= $experience['Experience']['comment'];?>"</p>
         <?php else:?>
             <p>Pas encore d'avis</p>
         <?php endif;?>

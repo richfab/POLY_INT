@@ -140,17 +140,33 @@ h2 > span.wut {
     font-style: italic;
 }
 
-#control-map {
-    position: absolute;
-    width: 435px;
+.control-map {
     height: 30px;
-    background-color: #fff;
     z-index: 10;
     top: 60px;
     left: 10px;
+}
+
+#filter-map.control-map {
+    width: 435px;
+    position: absolute;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3),0 -3px 8px rgba(0,0,0,0.2);
     border: 1px solid #e7e7e7;
     border-radius: 2px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3),0 -3px 8px rgba(0,0,0,0.2);
+    background-color: #fff;
+}
+
+#filter-search.control-map {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+#filter-search.control-map .cd-dropdown{
+    width: 130px;
+}
+
+#filter-search .cd-dropdown > span {
+	height: 32px;
 }
 
 #list-map {

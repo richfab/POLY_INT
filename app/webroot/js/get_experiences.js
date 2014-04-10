@@ -7,6 +7,7 @@ function get_map_init(){
 function get_map(){
     var filter = get_filter_params();
     fetch_map_values(filter);
+    //TODO actualiser la liste si le pays est selectionne
 }
 
 function fetch_map_values(filter){
@@ -73,5 +74,23 @@ function get_experiences_search(){
 }
 
 function get_filter_params(){
-    return $.parseJSON($("#data_input").val());
+    
+    var filter = {};
+    
+    if($('input[name=department_id]').val() !== '-1'){
+        var deparment_id = $.parseJSON('{"department_id":"'+$('input[name=department_id]').val()+'"}');
+    }
+    if($('input[name=motive_id]').val() !== '-1'){
+        var motive_id = $.parseJSON('{"motive_id":"'+$('input[name=motive_id]').val()+'"}');
+    }
+    if($('input[name=school_id]').val() !== '-1'){
+        var school_id = $.parseJSON('{"school_id":"'+$('input[name=school_id]').val()+'"}');
+    }
+    if($('input[name=key_word]').length !== 0){
+        var key_word = $.parseJSON('{"key_word":"'+$('input[name=key_word]').val()+'"}');
+    }
+    
+    $.extend(filter,deparment_id,motive_id,school_id,key_word);
+    
+    return filter;
 }

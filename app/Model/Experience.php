@@ -41,13 +41,6 @@ class Experience extends AppModel {
                 'allowEmpty' => true
             )
         ),
-        'note' => array(
-        	'number' => array(
-                    'rule'       => array('range', 0, 6),
-                    'message'    => 'Veuillez entrer une note entre 1 et 5',
-                    'allowEmpty' => true
-                )
-        ),
         'comment' => array(
             'maxLength' => array(
                 'rule'    => array('maxLength', '10000'),

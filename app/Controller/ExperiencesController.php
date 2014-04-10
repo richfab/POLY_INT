@@ -79,7 +79,17 @@ class ExperiencesController extends AppController {
         //on inclut les scripts pour la recuperation des experiences
     	$this->set('jsIncludes',array('get_experiences','jvector','jquery-jvectormap.min','jquery-jvectormap-world-mill-en','modernizr.custom.63321','jquery.dropdown'));
         //on inclut les style pour la carte
-        $this->set('cssIncludes',array('jvectormap','map','map-filter'));
+        $this->set('cssIncludes',array('jvectormap','map','filter'));
+        
+        //selectionne les motifs par ordre alphabetique
+        $this->set('motives', $this->Experience->Motive->find('list', array(
+                        'order' => array('Motive.name' => 'ASC'))));
+        //selectionne les ecoles par ordre alphabetique
+        $this->set('schools', $this->Experience->User->School->find('list', array(
+                        'order' => array('School.name' => 'ASC'))));
+        //selectionne les departements par ordre alphabetique
+        $this->set('departments', $this->Experience->User->Department->find('list', array(
+                        'order' => array('Department.name' => 'ASC'))));
     }
     
     //cette fonction retourne l'id de la ville, qu'elle ait été créée ou non
@@ -193,7 +203,20 @@ class ExperiencesController extends AppController {
     }
     
     public function search(){
-        $this->set('jsIncludes',array('get_experiences'));
+        //on inclut les scripts pour la recuperation des experiences
+    	$this->set('jsIncludes',array('get_experiences','modernizr.custom.63321','jquery.dropdown'));
+        //on inclut les style pour la carte
+        $this->set('cssIncludes',array('filter'));
+        
+        //selectionne les motifs par ordre alphabetique
+        $this->set('motives', $this->Experience->Motive->find('list', array(
+                        'order' => array('Motive.name' => 'ASC'))));
+        //selectionne les ecoles par ordre alphabetique
+        $this->set('schools', $this->Experience->User->School->find('list', array(
+                        'order' => array('School.name' => 'ASC'))));
+        //selectionne les departements par ordre alphabetique
+        $this->set('departments', $this->Experience->User->Department->find('list', array(
+                        'order' => array('Department.name' => 'ASC'))));
     }
     
     public function get_experiences(){
@@ -231,6 +254,10 @@ class ExperiencesController extends AppController {
         }
         if(!empty($request_data['school_id'])){
             $conditions['User.school_id'] = $request_data['school_id'];
+        }
+        if(!empty($request_data['key_word'])){
+            $conditions['OR'] = array('Experience.description LIKE' => '%'.$request_data['key_word'].'%',
+                'Experience.comment LIKE' => '%'.$request_data['key_word'].'%');
         }
         if(!empty($request_data['dateMin'])){
             $conditions['Experience.dateEnd >='] = $request_data['dateMin'];

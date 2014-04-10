@@ -1,22 +1,26 @@
 <div id="world-map" style="width: 100%; height: 600px; postion:relative; bottom:20px; top:100px;"></div>
                 
 <div id="controller">
-    <div id="control-map">
-        <select id="cd-dropdown" class="">
+    <div class="control-map" id="filter-map">
+        <select id="department_id" class="select-dropdown">
             <option value="-1" selected>Spécialité</option>
-            <option value="1">Informatique</option>
+            <?php foreach ($departments as $key => $department):?>
+                <option value="<?= $key; ?>"><?= $department; ?></option>
+            <?php endforeach;?>
         </select>
-        <select id="cd-dropdown2" class="">
+        <select id="motive_id" class="select-dropdown">
             <option value="-1" selected>Motif</option>
-            <option value="1">Semestre</option>
-            <option value="2">Stage</option>
-            <option value="3">Travail</option>
+            <?php foreach ($motives as $key => $motive):?>
+                <option value="<?= $key; ?>"><?= $motive; ?></option>
+            <?php endforeach;?>
         </select>
-        <select id="cd-dropdown3" class="">
+        <select id="school_id" class="select-dropdown">
             <option value="-1" selected>Ecole</option>
-            <option value="1">Nantes</option>
+            <?php foreach ($schools as $key => $school):?>
+                <option value="<?= $key; ?>"><?= $school; ?></option>
+            <?php endforeach;?>
         </select>
-        <select id="cd-dropdown4" class="last">
+        <select id="period_id" class="select-dropdown last">
             <option value="-1" selected>Période</option>
             <option value="1">< 5 ans</option>
             <option value="2">< 1 an</option>
@@ -33,29 +37,22 @@
             
 $( function() {
 
-    $( '#cd-dropdown' ).dropdown( {
-        gutter : 5,
-        stack : false,
-        slidingIn : 100
-    } );
-
-    $( '#cd-dropdown2' ).dropdown( {
-        gutter : 5,
-        stack : false,
-        slidingIn : 100
-    } );
-
-    $( '#cd-dropdown3' ).dropdown( {
-        gutter : 5,
-        stack : false,
-        slidingIn : 100
-    } );
-
-    $( '#cd-dropdown4' ).dropdown( {
-        gutter : 5,
-        stack : false,
-        slidingIn : 100
-    } );
+    $( '.select-dropdown' ).each(function() {
+        $(this).dropdown( {
+            gutter : 5,
+            stack : false,
+            slidingIn : 100
+        });
+    });
+    
+    $( '.cd-dropdown li' ).click(function() {
+        get_map();
+    });
+    
+    $( '.cd-dropdown > span' ).click(function(){
+        $('.experience-list').slideUp(300);
+//        $(this).html('<span>coucou</span>');
+    });
 
 });
 
