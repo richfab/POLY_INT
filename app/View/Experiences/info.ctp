@@ -20,7 +20,8 @@
     }
     else{
         $input_value = '';
-    }
+    }?>
+<?php
     echo $this->Form->input('input',array('label'=>'Ville *', 'value'=>$input_value));
     echo $this->Form->input('Motive.id');
     echo $this->Form->input('motive_id',array('label'=>"Motif *"));
@@ -36,8 +37,7 @@
 //    echo $this->Form->input('City.lon', array('label'=>'longitude'));
 //    echo $this->Form->input('City.Country.id', array('label'=>'id','type'=>'text'));
 //    echo $this->Form->input('City.Country.name', array('label'=>'country_name'));
-    echo $this->Form->input('note',array('label'=>'Avis','type'=>'number','class'=>'rating','data-min' => 1, 'data-max' => 5));
-    echo $this->Form->input('comment',array('label'=>'Commentaire','type'=>'textarea'));
+    echo $this->Form->input('comment',array('label'=>'Avis','type'=>'textarea'));
 //    echo $this->Form->input('notify',array('label'=>"Envoyez-moi un email si quelqu'un est dans cette ville en même temps que moi",'class' => false));?>
 <div class="form-group">
     <div class="col col-md-9 col-md-offset-3">

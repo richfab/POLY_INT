@@ -30,7 +30,7 @@ class ExperiencesController extends AppController {
                         'order' => array('Motive.name' => 'ASC'))));
         
         //on inclut le script google maps pour l'autocomplete des lieux
-    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places','places_autocomplete','bootstrap-rating-input'));
+    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places','places_autocomplete'));
         
         $user_id = $this->Auth->user('id');
         $this->request->data['Experience']['user_id'] = $user_id;

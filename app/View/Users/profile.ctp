@@ -47,11 +47,8 @@
             <?php endif; ?>
         <?php endif; ?>
         <p>Du : <?= $this->Time->format($experience['Experience']['dateStart'], '%B %e, %Y');?> Au : <?= $this->Time->format($experience['Experience']['dateEnd'], '%B %e, %Y')?></p>
-        <?php if($experience['Experience']['note'] != 0): ?>
-            <p>Avis : <?= $experience['Experience']['note'];?>/5</p>
-            <?php if($experience['Experience']['comment'] != ""): ?>
-                <p>"<?= $experience['Experience']['comment'];?>"</p>
-            <?php endif; ?>
+        <?php if($experience['Experience']['comment'] != ""): ?>
+            <p>Avis : "<?= $experience['Experience']['comment'];?>"</p>
         <?php else:?>
             <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
                 <?= $this->Html->link("Ajouter un avis", array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id'])); ?>
