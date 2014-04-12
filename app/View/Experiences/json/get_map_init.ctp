@@ -1,5 +1,4 @@
 <?php
-//    debug($countries);die();
     $data = array();
     foreach ($countries as $country):
         $data['countries'][$country['Country']['id']] = $country['Country']['experienceNumber'];
@@ -12,5 +11,5 @@
             }
         endforeach;
     endforeach;
-    echo json_encode($data, JSON_UNESCAPED_UNICODE);
+    echo json_encode($data);
 ?>

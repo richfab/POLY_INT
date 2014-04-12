@@ -30,7 +30,7 @@ class ExperiencesController extends AppController {
                         'order' => array('Motive.name' => 'ASC'))));
         
         //on inclut le script google maps pour l'autocomplete des lieux
-    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places','places_autocomplete'));
+    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete'));
         
         $user_id = $this->Auth->user('id');
         $this->request->data['Experience']['user_id'] = $user_id;
@@ -204,7 +204,7 @@ class ExperiencesController extends AppController {
     
     public function search(){
         //on inclut les scripts pour la recuperation des experiences et google maps pour l'autocomplete des lieux
-    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places','places_autocomplete','get_experiences','modernizr.custom.63321','jquery.dropdown'));
+    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','get_experiences','modernizr.custom.63321','jquery.dropdown'));
         //on inclut les style pour la carte
         $this->set('cssIncludes',array('filter'));
         
@@ -256,14 +256,20 @@ class ExperiencesController extends AppController {
             $conditions['User.school_id'] = $request_data['school_id'];
         }
         if(!empty($request_data['key_word'])){
-            $conditions['OR'] = array('Experience.description LIKE' => '%'.$request_data['key_word'].'%',
-                'Experience.comment LIKE' => '%'.$request_data['key_word'].'%');
+            $conditions['Experience.description LIKE'] = '%'.$request_data['key_word'].'%';
         }
-        if(!empty($request_data['dateMin'])){
-            $conditions['Experience.dateEnd >='] = $request_data['dateMin'];
+        //maintenant
+        if(!empty($request_data['date_min']) && !empty($request_data['date_max']) && ($request_data['date_min'] === $request_data['date_max'])){
+            $conditions['AND'] = array('Experience.dateEnd >=' => $request_data['date_min'],
+                'Experience.dateStart <=' => $request_data['date_max']);
         }
-        if(!empty($request_data['dateMax'])){
-            $conditions['Experience.dateStart <='] = $request_data['dateMax'];
+        //future
+        if(!empty($request_data['date_min'])){
+            $conditions['Experience.dateEnd >='] = $request_data['date_min'];
+        }
+        //passee
+        if(!empty($request_data['date_max'])){
+            $conditions['Experience.dateStart <='] = $request_data['date_max'];
         }
         if(!empty($request_data['city_id'])){
             $conditions['Experience.city_id'] = $request_data['city_id'];
@@ -273,6 +279,10 @@ class ExperiencesController extends AppController {
         }
         if(!empty($request_data['country_id'])){
             $conditions['City.country_id'] = $request_data['country_id'];
+        }
+        if(!empty($request_data['user_name'])){
+            $conditions['OR'] = array('User.firstname LIKE' => '%'.$request_data['user_name'].'%',
+                'User.lastname LIKE' => '%'.$request_data['user_name'].'%');
         }
         return $conditions;
     }

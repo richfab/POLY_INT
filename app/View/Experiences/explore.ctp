@@ -1,42 +1,16 @@
 <div id="world-map" style="width: 100%; height: 600px; postion:relative; bottom:20px; top:100px;"></div>
                 
 <div id="controller">
-    <div class="control-map" id="filter-map">
-        <select id="department_id" class="select-dropdown">
-            <option value="-1" selected>Spécialité</option>
-            <option value="0" option-title="Spécialité">Toutes</option>
-            <?php foreach ($departments as $key => $department):?>
-                <option value="<?= $key; ?>"><?= $department; ?></option>
-            <?php endforeach;?>
-        </select>
-        <select id="motive_id" class="select-dropdown">
-            <option value="-1" selected>Motif</option>
-            <option value="0" option-title="Motif">Tous</option>
-            <?php foreach ($motives as $key => $motive):?>
-                <option value="<?= $key; ?>"><?= $motive; ?></option>
-            <?php endforeach;?>
-        </select>
-        <select id="school_id" class="select-dropdown">
-            <option value="-1" selected>École</option>
-            <option value="0" option-title="École">Toutes</option>
-            <?php foreach ($schools as $key => $school):?>
-                <option value="<?= $key; ?>"><?= $school; ?></option>
-            <?php endforeach;?>
-        </select>
-        <select id="period_id" class="select-dropdown last">
-            <option value="-1" selected>Période</option>
-            <option value="0" option-title="Période">Toutes</option>
-            <option value="1">< 5 ans</option>
-            <option value="2">< 1 an</option>
-            <option value="3">Maintenant</option>
-            <option value="4">A venir</option>
-        </select>
+    <div class="control-map hidden-xs" id="filter-map">
+        <?php echo $this->element('filter-selects'); ?>
     </div>
-    <div id="list-map" class="experience-list" style="display:none">
-        
-    </div>
+    <input type="hidden" name="date_min" id="date_min">
+    <input type="hidden" name="date_max" id="date_max">
 </div>
-<input type="text" id="data_input" value='{}' style="display:none">
+<div id="list-map" class="experience-list" style="display:none">
+
+</div>
+<?= $this->Html->image('loader.GIF', array('alt' => 'loader','id'=>'loader-map','height'=>'40px'));?>
 <script type="text/javascript">
             
 $( function() {
@@ -49,6 +23,7 @@ $( function() {
         });
     });
     
+    //au click sur une option on lance la recherche
     $( '.cd-dropdown li' ).click(function() {
         get_map();
     });

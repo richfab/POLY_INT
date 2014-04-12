@@ -1,6 +1,7 @@
 /*debut utile pour bring footer to bottom*/
 html,body{
     height: 100%;
+    background-color: #f4f4f4;
 }
 
 #container{
@@ -16,6 +17,25 @@ html,body{
 
 .navbar-default {
     background-color: #fff;
+}
+
+@media (min-width: 768px) {
+    .nav > li > a {
+        margin: 0px;
+        padding: 5px 0px 5px 0px;
+    }
+    
+    .menu-item:hover{
+        border-bottom: 2px solid black;
+    }
+    
+    .menu-separator{
+        width: 30px;
+    }
+    
+    .nav > li > a.btn {
+        padding: 5px 10px;
+    }
 }
 
 #presentation {
@@ -67,7 +87,6 @@ a.btn-test {
 }
 
 .marketing {
-    padding-top: 20px;
     font-family: 'Open Sans', sans-serif
 }
 
@@ -125,7 +144,6 @@ h2 > span.wut {
 }
 
 .block-color {
-    background-color: #ecf0f1;
     color: #fff;
     padding: 30px;
 }
@@ -140,49 +158,25 @@ h2 > span.wut {
     font-style: italic;
 }
 
-.control-map {
-    height: 30px;
-    z-index: 10;
-    top: 60px;
-    left: 10px;
-}
-
-#filter-map.control-map {
-    width: 435px;
-    position: absolute;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3),0 -3px 8px rgba(0,0,0,0.2);
-    border: 1px solid #e7e7e7;
-    border-radius: 2px;
-    background-color: #fff;
-}
-
-#filter-search.control-map {
-    margin-top: 30px;
-    margin-bottom: 30px;
-}
-
-#filter-search.control-map .cd-dropdown{
-    width: 130px;
-}
-
-#filter-search .cd-dropdown > span {
-	height: 32px;
-}
-
 #list-map {
     position: absolute;
-    width: 426px;
+    width: 411px;
     background-color: #fff;
     z-index: 10;
-    top: 90px;
-    left: 15px;
+    top: 100px;
+    left: 35px;
     border: 1px solid #e7e7e7;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3),0 4px 15px -5px rgba(0,0,0,0.0);
+    max-height: 75%;
+    overflow-x: hidden;
 }
 
 #list-map a {
-    display: block;
-    
+    display: block;  
+}
+
+#list-map p {
+    margin: 0;
 }
 
 #list-map li {
@@ -197,9 +191,21 @@ h2 > span.wut {
     border-bottom: none;
 }
 
+#loader-map{
+    position: absolute;
+    z-index: 100;
+    display: none;
+}
+
+#list-search > #loader-search{
+    width: 100%;
+    text-align: center;
+}
+
 .access {
     text-align: center;
     padding-bottom: 40px;
+    padding-top: 40px;
 }
 .access a{
     font-variant: small-caps;
@@ -253,4 +259,22 @@ h2 > span.wut {
     font-size: 14px;
     font-weight: normal;
     margin-left: 5px;
+}
+
+.edit-delete-label{
+    font-family: arial;
+}
+
+#search-filters{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.well{
+    background-color: white;
+}
+
+.profile-info-search > p {
+    margin: 0 0 5px;
+    text-align: right;
 }

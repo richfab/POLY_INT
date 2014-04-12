@@ -1,5 +1,6 @@
 var _data;
 var min_zoom_marker = 3;
+var selected_region = {};
 
 $( document ).ready(function() {
     init_map();
@@ -45,9 +46,13 @@ function init_map(){
                     );
         },
         onRegionLabelShow: function(event, label, code){
-            label.html(
-                    '<b>'+label.html()+'</b></br>'+ effectif_to_experience(_data.countries[code])
-                    );
+            if(_data.countries){
+                var label_content = '<b>'+label.html()+'</b></br>'+ effectif_to_experience(_data.countries[code]);
+            }
+            else{
+                var label_content = '<b>'+label.html()+'</b></br>'+ effectif_to_experience(0);
+            }
+            label.html(label_content);
         },
         onRegionClick: function(event, code){
             $('#world-map').vectorMap('set', 'focus', code);
@@ -61,10 +66,13 @@ function init_map(){
             //on join les trois tableaux de parametres
             $.extend(filter,view_to_render,country_json);
             
-            $('#list-map').slideUp(300, function(){
+            $('#list-map').slideUp(100, function(){
                 $("#ul-map").empty();
                 get_experiences(filter);
             });
+            
+            selected_region.type = 'country_id';
+            selected_region.id = code;
         },
         onMarkerClick: function(event, code){
             //on recupere les params initiaux
@@ -76,10 +84,13 @@ function init_map(){
             //on join les trois tableaux de parametres
             $.extend(filter,view_to_render,city_id);
             
-            $('#list-map').slideUp(300, function(){
+            $('#list-map').slideUp(100, function(){
                 $("#ul-map").empty();
                 get_experiences(filter);
             });
+            
+            selected_region.type = 'city_id';
+            selected_region.id = _data.cities.id[code];
         },
         onViewportChange: function(event, scale){
             //on cache le div de la liste
@@ -91,15 +102,17 @@ function init_map(){
             else{
                 limit = min_zoom_marker*mapObject.baseScale;
             }
-//            console.log("base: "+mapObject.baseScale+" limit:"+limit+" current:"+scale);
             if(scale>=limit){
                 //on affiche les marqueurs
-                mapObject.addMarkers(_data.cities.coords);
+                if(_data.cities){
+                    mapObject.addMarkers(_data.cities.coords);
+                }
             }
             else{
                 //on cache les marqueurs et la liste
                 mapObject.removeAllMarkers();
-                $('#list-map').slideUp(300);
+                $('#list-map').slideUp(100);
+                selected_region = {};
             }
         }
     });
@@ -129,7 +142,7 @@ function update_map(data){
 
 //fonction qui ajoute ' experience' ou ' experiences' a un nombre d'experience
 function effectif_to_experience(experienceNumber){
-    if(experienceNumber===undefined){
+    if(experienceNumber===undefined || experienceNumber===0){
         return ('Aucune expérience');
     }
     else if(experienceNumber>1){

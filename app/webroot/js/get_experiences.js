@@ -7,12 +7,25 @@ function get_map_init(){
 function get_map(){
     var filter = get_filter_params();
     fetch_map_values(filter);
-    //TODO actualiser la liste si le pays est selectionne
+    
+    //si une region (ville ou pays) est selectionnee on raffraichit aussi la liste correspondante
+    if(selected_region.type){
+        //on ajoute le parametre de vue a rendre
+        var view_to_render = $.parseJSON('{"view_to_render":"get_experiences_map"}');
+        //on ajoute le parametre country_id
+        var country_or_city_json = $.parseJSON('{"'+selected_region.type+'":"'+selected_region.id+'"}');
+        //on join les trois tableaux de parametres
+        $.extend(filter,view_to_render,country_or_city_json);
+        get_experiences(filter);
+    }
 }
 
 function fetch_map_values(filter){
     
-    //TODO on affiche le loader
+    //on affiche le loader au milieu de la carte
+    $('#loader-map').css('top',$('#world-map').height()/2);
+    $('#loader-map').css('left',$('#world-map').width()/2);
+    $('#loader-map').fadeIn();
     
     //si les parametres de filtre sont vides, on charge les infos de la carte par défaut
     if($.isEmptyObject(filter)){
@@ -31,10 +44,10 @@ function fetch_map_values(filter){
             update_map(data);
         },
         error : function(data) {
-            alert("Une erreur est survenue, veuillez réessayer dans quelques instants.");
+            //            alert("Une erreur est survenue, veuillez réessayer dans quelques instants.");
         },
         complete : function(data) {
-            //TODO on cache le loader
+            $('#loader-map').fadeOut();
         }
     });
 }
@@ -42,7 +55,8 @@ function fetch_map_values(filter){
 //fonction permettant de recuperer les experiences dans la base de donnees pour l'affichage de la liste sur la carte
 function get_experiences(filter){
     
-    //TODO on affiche le loader
+    //on affiche le loader
+    $('#list-search').html('<div id="loader-search"><img height="40px" src="/explorer/img/loader.GIF"/></div>');
     
     $.ajax({
         type:"POST",
@@ -54,7 +68,7 @@ function get_experiences(filter){
             $('.experience-list').slideDown(300);
         },
         error : function(data) {
-            alert("Une erreur est survenue, veuillez réessayer dans quelques instants.");
+            //            alert("Une erreur est survenue, veuillez réessayer dans quelques instants.");
         },
         complete : function(data) {
             //TODO on cache le loader
@@ -95,8 +109,17 @@ function get_filter_params(){
     if($('input[name=country_id]').length !== 0 && $('input[name=country_id]').val() !== ''){
         var country_id = $.parseJSON('{"country_id":"'+$('input[name=country_id]').val()+'"}');
     }
+    if($('input[name=user_name]').length !== 0 && $('input[name=user_name]').val() !== ''){
+        var user_name = $.parseJSON('{"user_name":"'+$('input[name=user_name]').val()+'"}');
+    }
+    if($('input[name=date_min]').length !== 0 && $('input[name=date_min]').val() !== ''){
+        var date_min = $.parseJSON('{"date_min":"'+$('input[name=date_min]').val()+'"}');
+    }
+    if($('input[name=date_max]').length !== 0 && $('input[name=date_max]').val() !== ''){
+        var date_max = $.parseJSON('{"date_max":"'+$('input[name=date_max]').val()+'"}');
+    }
     
-    $.extend(filter,deparment_id,motive_id,school_id,key_word,city_name,country_id);
+    $.extend(filter,deparment_id,motive_id,school_id,key_word,city_name,country_id,user_name,date_min,date_max);
     
     return filter;
 }

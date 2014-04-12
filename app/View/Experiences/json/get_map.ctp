@@ -13,5 +13,4 @@
             $data['cities']['experienceNumbers'][] = $city[0]['experienceNumber'];
         }
     endforeach;
-    echo json_encode($data, JSON_UNESCAPED_UNICODE);
-?>
+    echo json_encode($data);?>

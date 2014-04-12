@@ -60,17 +60,19 @@ function initialize() {
             cityName.value = cityLong_name;
             countryName.value = countryLong_name;
             countryCode.value = countryShort_name;
+            
+            $('#ExperienceInputDiv').removeClass('has-error');
         }
     });
     
     //cette fonction permet d'empecher l'utilisateur de modifier a la main le lieu en vidant les champs citylat, citylon et input eu moment ou l'utilisateur clique dans le champs input pour le modifier
-    input.onfocus = function() {
+    input.onkeydown = function() {
+        $('#ExperienceInputDiv').addClass('has-error');
         cityName.value = '';
   	cityLat.value = '';
         cityLon.value = '';
         countryName.value = '';
         countryCode.value = '';
-        input.value = '';
     };
 }
 

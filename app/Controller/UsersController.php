@@ -15,7 +15,7 @@ class UsersController extends AppController {
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                return $this->redirect(array('controller'=>'pages', 'action' => 'home'));
+                return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Session->setFlash(__("Mot de passe ou email incorrect"), 'alert', array(
                 'plugin' => 'BoostCake',

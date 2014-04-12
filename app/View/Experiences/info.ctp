@@ -21,9 +21,10 @@
     else{
         $input_value = '';
     }?>
-<?php
-    echo $this->Form->input('input',array('label'=>'Ville *', 'value'=>$input_value, 'location-types'=>'(cities)'));
-    echo $this->Form->input('Motive.id');
+    <div id="ExperienceInputDiv">
+        <?php echo $this->Form->input('input',array('label'=>'Ville *', 'value'=>$input_value, 'location-types'=>'(cities)'));?>
+    </div>
+    <?php echo $this->Form->input('Motive.id');
     echo $this->Form->input('motive_id',array('label'=>"Motif *"));
     echo $this->Form->input('establishment',array('label'=>'Établissement'));
     echo $this->Form->input('description',array('label'=>'Description'));
@@ -39,15 +40,15 @@
 //    echo $this->Form->input('City.Country.name', array('label'=>'country_name'));
     echo $this->Form->input('comment',array('label'=>'Avis','type'=>'textarea'));
 //    echo $this->Form->input('notify',array('label'=>"Envoyez-moi un email si quelqu'un est dans cette ville en même temps que moi",'class' => false));?>
-<div class="form-group">
-    <div class="col col-md-9 col-md-offset-3">
+    <div class="form-group">
+        <div class="col col-md-9 col-md-offset-3">
         <?= $this->Html->link("Retour", array('controller'=>'users', 'action' => 'profile'),
                 array('class' => 'btn btn-orange'
         )); ?>
         <?php echo $this->Form->button('Enregistrer', array(
                 'class' => 'btn btn-blue'
         ));?>
+        </div>
     </div>
-</div>
-
+        
 <?php echo $this->Form->end(); ?>

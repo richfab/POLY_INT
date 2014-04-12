@@ -1,41 +1,36 @@
-<div id="controller">
-    <div class="control-map" id="filter-search">
-        <select id="department_id" class="select-dropdown">
-            <option value="-1" selected>Spécialité</option>
-            <option value="0" option-title="Spécialité">Toutes</option>
-            <?php foreach ($departments as $key => $department):?>
-            <option value="<?= $key; ?>"><?= $department; ?></option>
-            <?php endforeach;?>
-        </select>
-        <select id="motive_id" class="select-dropdown">
-            <option value="-1" selected>Motif</option>
-            <option value="0" option-title="Motif">Tous</option>
-            <?php foreach ($motives as $key => $motive):?>
-            <option value="<?= $key; ?>"><?= $motive; ?></option>
-            <?php endforeach;?>
-        </select>
-        <select id="school_id" class="select-dropdown">
-            <option value="-1" selected>École</option>
-            <option value="0" option-title="École">Toutes</option>
-            <?php foreach ($schools as $key => $school):?>
-            <option value="<?= $key; ?>"><?= $school; ?></option>
-            <?php endforeach;?>
-        </select>
-        <select id="period_id" class="select-dropdown last">
-            <option value="-1" selected>Période</option>
-            <option value="0" option-title="Période">Toutes</option>
-            <option value="1">< 5 ans</option>
-            <option value="2">< 1 an</option>
-            <option value="3">Maintenant</option>
-            <option value="4">A venir</option>
-        </select>
+<div id="search-filters">
+    <div id="controller">
+        <div class="control-map row" id="filter-search">
+            <?php echo $this->element('filter-selects'); ?>
+        </div>
+    </div>
+    <div class="row" id="filter-search-inputs">
+        <div class="col-sm-3" id="ExperienceInputDiv">
+            <input type="text" id="ExperienceInput" location-types="(regions)" name="input" class="form-control">
+        </div>
+        <input type="hidden" id="CityName" name="city_name"><input type="hidden" id="CityCountryId" name="country_id">
+        <input type="hidden" id="CityLat"><input type="hidden" id="CityLon"><input type="hidden" id="CityCountryName">
+        <div class="col-sm-3">    
+            <input type="text" name="key_word" class="form-control" placeholder="Mots clé">
+        </div>
+        <div class="col-sm-3">    
+            <input type="text" name="user_name" class="form-control" placeholder="Nom ou prénom">
+        </div>
+        <div class="col-sm-2">
+            <button class="btn btn-blue form-control" onclick="get_experiences_search();"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
+        </div>
+        <input type="hidden" name="date_min" id="date_min">
+        <input type="hidden" name="date_max" id="date_max">
     </div>
 </div>
-<input type="text" id="ExperienceInput" location-types="(regions)" name="input" class="form-control" style="width: initial;display: inline-block">
-<input type="text" id="CityName" name="city_name" hidden="true"><input type="text" id="CityCountryId" name="country_id" hidden="true">
-<input type="text" id="CityLat" hidden="true"><input type="text" id="CityLon" hidden="true"><input type="text" id="CityCountryName" hidden="true">
-<input type="text" name="key_word" class="form-control" style="width: initial;display: inline-block" placeholder="Mots clé">
-<button class="btn btn-blue" onclick="get_experiences_search();">Rechercher</button>
+    
+<div id="list-search" class="experience-list">
+    <ul id="ul-map">
+        
+    </ul>
+</div>
+
+
 <script type="text/javascript">
     
     $( function() {
@@ -43,17 +38,21 @@
             $( this ).dropdown( {
                 gutter : 5,
                 stack : false,
-                slidingIn : 100
+                slidingIn : 50
             });
         });
         //on lance la recherche au chargement
         get_experiences_search();
+
+        //fonction qui valide la soumission du formulaire lors de l'appui sur la touche entrée
+        function stopEnter(evt) {
+            var evt = (evt) ? evt : ((event) ? event : null);
+            var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+            if ((evt.keyCode == 13) && (node.type == "text")) {
+                get_experiences_search();
+            }
+        }
+        document.onkeypress = stopEnter;
     });
     
 </script>
-    
-<div id="list-search" class="experience-list">
-    <ul id="ul-map">
-        
-    </ul>
-</div>

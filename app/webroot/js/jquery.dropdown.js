@@ -49,7 +49,7 @@
         _layout : function() {
             
             var self = this;
-            this.minZIndex = 1000;
+            this.minZIndex = 1;
             var value = this._transformSelect();
             this.opts = this.listopts.children( 'li' );
             this.optsCount = this.opts.length;
@@ -60,7 +60,7 @@
             
             this.inputEl = $( '<input type="hidden" name="' + inputName + '" value="' + value + '"></input>' ).insertAfter( this.selectlabel );
             
-            this.selectlabel.css( 'z-index', this.minZIndex + this.optsCount );
+            this.selectlabel.css( 'z-index', this.minZIndex);
             this._positionOpts();
             if( Modernizr.csstransitions ) {
                 setTimeout( function() { self.opts.css( 'transition', 'all ' + self.options.speed + 'ms ' + self.options.easing ); }, 25 );
@@ -74,6 +74,8 @@
                 
                 var $this = $( this ),
                 val = isNaN( $this.attr( 'value' ) ) ? $this.attr( 'value' ) : Number( $this.attr( 'value' ) ) ,
+                date_min = $this.attr( 'date-min' ),
+                date_max = $this.attr( 'date-max' ),
                 classes = $this.attr( 'class' ),
                 data_to_display = $this.attr( 'option-title' ),
                 selected = $this.attr( 'selected' ),
@@ -87,8 +89,8 @@
                 if( val !== -1 ) {
                     optshtml += 
                             classes !== undefined ? 
-                    '<li data-value="' + val + '" option-title="'+data_to_display+'" class="'+is_toutes+'"><span class="' + classes + '">' + label + '</span></li>' :
-                            '<li data-value="' + val + '" option-title="'+data_to_display + '" class="'+is_toutes+'"><span>' + label + '</span></li>';
+                    '<li data-value="' + val + '" option-title="'+data_to_display+'" class="'+is_toutes+'" date-min="'+date_min+'" date-max="'+date_max+'"><span class="' + classes + '">' + label + '</span></li>' :
+                            '<li data-value="' + val + '" option-title="'+data_to_display + '" class="'+is_toutes+'" date-min="'+date_min+'" date-max="'+date_max+'"><span>' + label + '</span></li>';
                 }
                 
                 if( selected ) {
@@ -100,7 +102,7 @@
             
             this.listopts = $( '<ul/>' ).append( optshtml );
             this.selectlabel = $( '<span/>' ).append( selectlabel );
-            this.dd = $( '<div class="cd-dropdown"/>' ).append( this.selectlabel, this.listopts ).insertAfter( this.$el );
+            this.dd = $( '<div class="cd-dropdown col-sm-3"/>' ).append( this.selectlabel, this.listopts ).insertAfter( this.$el );
             this.$el.remove();
             
             return value;
@@ -161,6 +163,11 @@
                     }
                     else{
                         self.selectlabel.html( opt.html() );
+                    }
+                    //si c'est un drop down de periode
+                    if(self.inputEl.attr('name') === 'period_id'){
+                        $("#date_min").val(opt.attr("date-min"));
+                        $("#date_max").val(opt.attr("date-max"));
                     }
                     setTimeout(function(){
                         self.close();

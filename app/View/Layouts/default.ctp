@@ -66,18 +66,22 @@ $title_description = "Polytech International : L'unique passeport partagé entre
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <?= $this->Html->link('accueil',array('controller'=>'pages', 'action'=>'index'));?>
+                            <li class="menu-item">
+                                <?= $this->Html->link('<span class="glyphicon glyphicon-home"></span> accueil',array('controller'=>'pages', 'action'=>'index'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
-                            <li>
-                                <?= $this->Html->link('explorer',array('controller'=>'experiences', 'action'=>'explore'));?>
+                            <li class="menu-separator"></li>
+                            <li class="menu-item">
+                                <?= $this->Html->link('<span class="glyphicon glyphicon-globe"></span> explorer',array('controller'=>'experiences', 'action'=>'explore'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
-                            <li>
-                                <?= $this->Html->link('rechercher',array('controller'=>'experiences', 'action'=>'search'));?>
+                            <li class="menu-separator"></li>
+                            <li class="menu-item">
+                                <?= $this->Html->link('<span class="glyphicon glyphicon-search"></span> rechercher',array('controller'=>'experiences', 'action'=>'search'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
-                            <li>
-                                <?= $this->Html->link('a propos',array('controller'=>'pages', 'action'=>'about'));?>
+                            <li class="menu-separator"></li>
+                            <li class="menu-item">
+                                <?= $this->Html->link('<span class="glyphicon glyphicon-info-sign"></span> a propos',array('controller'=>'pages', 'action'=>'about'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
+                            <li class="menu-separator"></li>
                             <?php if(AuthComponent::user('id')): ?>
                                 <li>
                                     <?= $this->Html->link(
