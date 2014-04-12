@@ -31,6 +31,9 @@
     color: #fff;
 }
 
+.filter-selected.cd-dropdown  > span{
+    color: #e74c3c;
+}
 
 .control-map {
     z-index: 10;
