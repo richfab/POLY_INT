@@ -228,10 +228,19 @@ class ExperiencesController extends AppController {
         if($this->Auth->user('id')){
             //on transforme l'objet de parametres en conditions
             $conditions = $this->_filters_to_conditions($this->request->data);
+            if(!empty($this->request->data['result_limit'])){
+                $result_limit = $this->request->data['result_limit'];
+            }
+            else{
+                $result_limit = 100000;
+            }
+            
+            $this->set('result_limit',$result_limit);
             
             $this->set('experiences', $this->Experience->find('all', array(
                         'conditions' => $conditions,
                         'recursive' => 2,
+                        'limit' => $result_limit,
                         'fields' => array('*','DATEDIFF(Experience.dateEnd, Experience.dateStart)/30 monthDiff'))));
         }
         $this->render('/Experiences/'.$this->request->data['view_to_render']);

@@ -21,6 +21,7 @@
         </div>
         <input type="hidden" name="date_min" id="date_min">
         <input type="hidden" name="date_max" id="date_max">
+        <input type="hidden" name="result_limit" id="result_limit" value="0">
     </div>
 </div>
     

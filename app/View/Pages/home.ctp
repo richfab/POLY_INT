@@ -39,7 +39,7 @@
         <div class="col-md-3">
             <?= $this->Html->image('11.png', array('alt' => 'social'));?>
             <h2>Social</h2>
-            <p>Contactez facilement avec les étudiants déjà présent dans un pays</p>
+            <p>Contactez facilement les étudiants déjà présent dans un pays</p>
         </div>
     </div>
 </div>

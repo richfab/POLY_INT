@@ -26,6 +26,13 @@
         </div>
     </div>
 <?php endforeach; ?>
+    <?php 
+        //si le nombre de resultats est egale a la limite de resultat on affiche un bouton plus
+        if(count($experiences) == $result_limit): ?>
+        <p style="text-align: center">
+            <a onclick="this.remove();get_experiences_search()">plus</a>
+        </p>
+    <?php endif;?>
     <?php if(empty($experiences)): ?>
         <p>Aucune expérience trouvée.</p>
     <?php endif; ?>

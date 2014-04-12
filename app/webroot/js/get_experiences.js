@@ -56,7 +56,7 @@ function fetch_map_values(filter){
 function get_experiences(filter){
     
     //on affiche le loader
-    $('#list-search').html('<div id="loader-search"><img height="40px" src="/explorer/img/loader.GIF"/></div>');
+    $('<div id="loader-search"><img height="40px" src="/explorer/img/loader.GIF"/></div>').appendTo('#list-search');
     
     $.ajax({
         type:"POST",
@@ -77,6 +77,8 @@ function get_experiences(filter){
 }
 
 function get_experiences_search(){
+    //incremente le nombre de resultats max
+    $('input[name=result_limit]').val($('input[name=result_limit]').val()*1+20);
     //on recupere les params initiaux
     var filter = get_filter_params();
     //on ajoute le parametre de vue a rendre
@@ -118,8 +120,11 @@ function get_filter_params(){
     if($('input[name=date_max]').length !== 0 && $('input[name=date_max]').val() !== ''){
         var date_max = $.parseJSON('{"date_max":"'+$('input[name=date_max]').val()+'"}');
     }
+    if($('input[name=result_limit]').length !== 0){
+        var result_limit = $.parseJSON('{"result_limit":"'+$('input[name=result_limit]').val()+'"}');
+    }
     
-    $.extend(filter,deparment_id,motive_id,school_id,key_word,city_name,country_id,user_name,date_min,date_max);
+    $.extend(filter,deparment_id,motive_id,school_id,key_word,city_name,country_id,user_name,date_min,date_max,result_limit);
     
     return filter;
 }
