@@ -10,7 +10,7 @@
 <div class="access">
     <?= $this->Html->link(
         'poster une experience',
-        array('controller'=>'experiences', 'action'=>'explore'),
+        array('controller'=>'experiences', 'action'=>'info'),
         array('class'=>'btn btn-default btn-blue',"role"=>"button"));?>
     <?= $this->Html->link(
         'explorer la carte',
