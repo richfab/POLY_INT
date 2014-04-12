@@ -240,6 +240,7 @@ class ExperiencesController extends AppController {
             $this->set('experiences', $this->Experience->find('all', array(
                         'conditions' => $conditions,
                         'recursive' => 2,
+                        'order' => array('Experience.dateStart' => 'ASC'),
                         'limit' => $result_limit,
                         'fields' => array('*','DATEDIFF(Experience.dateEnd, Experience.dateStart)/30 monthDiff'))));
         }
