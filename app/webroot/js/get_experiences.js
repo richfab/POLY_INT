@@ -25,7 +25,7 @@ function fetch_map_values(filter){
     //on affiche le loader au milieu de la carte
     $('#loader-map').css('top',$('#world-map').height()/2);
     $('#loader-map').css('left',$('#world-map').width()/2);
-    $('#loader-map').fadeIn();
+    $('#loader-map').show();
     
     //si les parametres de filtre sont vides, on charge les infos de la carte par défaut
     if($.isEmptyObject(filter)){
@@ -47,7 +47,7 @@ function fetch_map_values(filter){
             //            alert("Une erreur est survenue, veuillez réessayer dans quelques instants.");
         },
         complete : function(data) {
-            $('#loader-map').fadeOut();
+            $('#loader-map').hide();
         }
     });
 }
@@ -74,6 +74,15 @@ function get_experiences(filter){
             //TODO on cache le loader
         }
     });
+}
+
+function search_button(){
+    //on vide la liste des resultats
+    $('#list-search').empty();
+    //on remet la limite a 0
+    $('input[name=result_limit]').val(0);
+    //on lance la recherche
+    get_experiences_search();
 }
 
 function get_experiences_search(){

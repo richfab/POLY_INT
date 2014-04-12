@@ -66,8 +66,13 @@ function initialize() {
     });
     
     //cette fonction permet d'empecher l'utilisateur de modifier a la main le lieu en vidant les champs citylat, citylon et input eu moment ou l'utilisateur clique dans le champs input pour le modifier
-    input.onkeydown = function() {
-        $('#ExperienceInputDiv').addClass('has-error');
+    input.onkeyup = function() {
+        if($('#ExperienceInput').val() !== ""){
+            $('#ExperienceInputDiv').addClass('has-error');
+        }
+        else{
+            $('#ExperienceInputDiv').removeClass('has-error');
+        }
         cityName.value = '';
   	cityLat.value = '';
         cityLon.value = '';

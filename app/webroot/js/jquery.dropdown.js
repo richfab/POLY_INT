@@ -160,8 +160,10 @@
                     opt.addClass( 'selected' );
                     if(opt.attr("data-value")==='0'){
                         self.selectlabel.html( opt.attr('option-title') );
+                        self.dd.removeClass( 'cd-active' );
                     }
                     else{
+                        self.dd.addClass( 'cd-active' );
                         self.selectlabel.html( opt.html() );
                     }
                     //si c'est un drop down de periode
@@ -178,7 +180,7 @@
         },
         open : function() {
             var self = this;
-            this.dd.toggleClass( 'cd-active' );
+            this.dd.addClass( 'cd-active' );
             this.listopts.css( 'height', ( this.optsCount + 1 ) * ( this.size.height + this.options.gutter ) );
             this.opts.each( function( i ) {
                 
@@ -205,7 +207,6 @@
         close : function() {
             
             var self = this;
-            this.dd.toggleClass( 'cd-active' );
             if( this.options.delay && Modernizr.csstransitions ) {
                 this.opts.each( function( i ) {
                     $( this ).css( { 'transition-delay' : self.options.slidingIn ? ( ( self.optsCount - 1 - i ) * self.options.delay ) + 'ms' : ( i * self.options.delay ) + 'ms' } );

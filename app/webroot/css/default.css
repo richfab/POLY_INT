@@ -270,6 +270,10 @@ h2 > span.wut {
     margin-bottom: 30px;
 }
 
+#filter-search-inputs input{
+    color: #e74c3c;
+}
+
 .well{
     background-color: white;
 }

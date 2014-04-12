@@ -272,13 +272,15 @@ class ExperiencesController extends AppController {
             $conditions['AND'] = array('Experience.dateEnd >=' => $request_data['date_min'],
                 'Experience.dateStart <=' => $request_data['date_max']);
         }
-        //future
-        if(!empty($request_data['date_min'])){
-            $conditions['Experience.dateEnd >='] = $request_data['date_min'];
-        }
-        //passee
-        if(!empty($request_data['date_max'])){
-            $conditions['Experience.dateStart <='] = $request_data['date_max'];
+        else{
+            //future
+            if(!empty($request_data['date_min'])){
+                $conditions['Experience.dateStart >='] = $request_data['date_min'];
+            }
+            //passee
+            if(!empty($request_data['date_max'])){
+                $conditions['Experience.dateEnd <='] = $request_data['date_max'];
+            }
         }
         if(!empty($request_data['city_id'])){
             $conditions['Experience.city_id'] = $request_data['city_id'];
