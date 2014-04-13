@@ -198,6 +198,7 @@ h2 > span.wut {
 
 #list-search{
     margin-bottom: 30px;
+    min-height: 200px;
 }
 
 #list-search > #loader-search{
