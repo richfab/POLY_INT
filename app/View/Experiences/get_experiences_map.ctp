@@ -11,7 +11,7 @@
                         <p><?= $experience['Motive']['name'].' ('.round($experience[0]['monthDiff'],0).' mois)'.' - '.$experience['City']['name'];?>, <?= $experience['City']['country_id']; ?></p>
                         <p style="font-size: 12px">
                             <?php
-                                $today = new DateTime("now");
+                                $today = new DateTime(date('Y-m-d'));
                                 $date_start = date_create($experience['Experience']['dateStart']);
                                 $date_end = date_create($experience['Experience']['dateEnd']);
                                 //en ce moment
