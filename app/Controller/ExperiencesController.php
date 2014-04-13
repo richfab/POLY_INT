@@ -146,7 +146,7 @@ class ExperiencesController extends AppController {
         if (!$this->Experience->exists()) {
             throw new NotFoundException(__("Cette experience n'existe plus"));
         }
-        if ($this->Experience->delete() && $this->_upload_experienceNumber($experience['Experience']['city_id'],-1)) {
+        if ($this->delete_experience($experience['Experience']['id'])) {
             $this->Session->setFlash(__("L'expérience a bien été supprimée"), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
