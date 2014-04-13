@@ -4,9 +4,8 @@
     border-right: solid 1px #EEEEEE;
 }
 
-#filter-map .cd-dropdown,
-.cd-select {
-    width: 105px;
+#filter-map .cd-dropdown, .cd-select {
+    width: 90px;
     position: relative;
     display: inline-block;
 }
@@ -31,13 +30,17 @@
     position: absolute;
     right: 0px;
     top: 15%;
-    width: 25px;
+    width: 15px;
     text-align: center;
     font-size: 9px;
     height: 70%;
     line-height: 18px;
-    border-left: 1px solid #ddd;
     background-color: white;
+}
+
+#filter-search .cd-dropdown > span:after {
+    width: 25px;
+    border-left: 1px solid #ddd;
 }
 
 .cd-dropdown.cd-active > span:after {
@@ -64,7 +67,6 @@
     display: block;
     color: #bcbcbc;
     cursor: pointer;
-    font-weight: 700;
 }
 
 .cd-dropdown > span,

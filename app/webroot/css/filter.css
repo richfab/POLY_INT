@@ -49,6 +49,19 @@
     background-color: #fff;
 }
 
+#filter-map > .cd-dropdown:nth-child(1){
+    min-width: 125px;
+}
+#filter-map > .cd-dropdown:nth-child(2){
+    min-width: 90px;
+}
+#filter-map > .cd-dropdown:nth-child(3){
+    min-width: 100px;
+}
+#filter-map > .cd-dropdown:nth-child(4){
+    min-width: 110px;
+}
+
 #filter-search.control-map {
     margin-bottom: 10px;
 }
