@@ -46,14 +46,14 @@
         get_experiences_search();
 
         //fonction qui valide la soumission du formulaire lors de l'appui sur la touche entrée
-        function stopEnter(evt) {
+        function pressEnter(evt) {
             var evt = (evt) ? evt : ((event) ? event : null);
             var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
             if ((evt.keyCode == 13) && (node.type == "text")) {
-                get_experiences_search();
+                search_button();
             }
         }
-        document.onkeypress = stopEnter;
+        document.onkeypress = pressEnter;
     });
     
 </script>

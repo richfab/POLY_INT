@@ -165,7 +165,6 @@ h2 > span.wut {
     z-index: 10;
     top: 100px;
     left: 35px;
-    border: 1px solid #e7e7e7;
     box-shadow: 0 2px 6px rgba(0,0,0,0.3),0 4px 15px -5px rgba(0,0,0,0.0);
     max-height: 75%;
     overflow-x: hidden;
@@ -195,6 +194,10 @@ h2 > span.wut {
     position: absolute;
     z-index: 100;
     display: none;
+}
+
+#list-search{
+    margin-bottom: 30px;
 }
 
 #list-search > #loader-search{
