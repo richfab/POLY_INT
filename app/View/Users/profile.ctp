@@ -46,7 +46,7 @@
                 <p>Pas de description</p>
             <?php endif; ?>
         <?php endif; ?>
-        <p>Du : <?= $this->Time->format($experience['Experience']['dateStart'], '%B %e, %Y');?> Au : <?= $this->Time->format($experience['Experience']['dateEnd'], '%B %e, %Y')?></p>
+        <p>Du <?= $this->Time->format($experience['Experience']['dateStart'], '%e %B %Y');?> au <?= $this->Time->format($experience['Experience']['dateEnd'], '%e %B %Y')?></p>
         <?php if($experience['Experience']['comment'] != ""): ?>
             <p>Avis : "<?= $experience['Experience']['comment'];?>"</p>
         <?php else:?>

@@ -26,8 +26,8 @@
     </div>
     <?php echo $this->Form->input('Motive.id');
     echo $this->Form->input('motive_id',array('label'=>"Motif *"));
-    echo $this->Form->input('establishment',array('label'=>'Établissement'));
-    echo $this->Form->input('description',array('label'=>'Description'));
+    echo $this->Form->input('establishment',array('label'=>'Établissement *','placeholder'=>"Nom de l'entreprise ou de l'université"));
+    echo $this->Form->input('description',array('label'=>'Description','rows'=>3,'placeholder'=>'Description de la mission'));
     echo $this->Form->input('City.name',array('label'=>'city_name','type'=>'hidden'));
     echo $this->Form->input('City.lat', array('label'=>'latitude','type'=>'hidden'));
     echo $this->Form->input('City.lon', array('label'=>'longitude','type'=>'hidden'));
@@ -38,7 +38,7 @@
 //    echo $this->Form->input('City.lon', array('label'=>'longitude'));
 //    echo $this->Form->input('City.Country.id', array('label'=>'id','type'=>'text'));
 //    echo $this->Form->input('City.Country.name', array('label'=>'country_name'));
-    echo $this->Form->input('comment',array('label'=>'Avis','type'=>'textarea'));
+    echo $this->Form->input('comment',array('label'=>'Avis','type'=>'textarea','placeholder'=>"Avis sur l'expérience"));
 //    echo $this->Form->input('notify',array('label'=>"Envoyez-moi un email si quelqu'un est dans cette ville en même temps que moi",'class' => false));?>
     <div class="form-group">
         <div class="col col-md-9 col-md-offset-3">
