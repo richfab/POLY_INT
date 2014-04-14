@@ -5,3 +5,5 @@ app/tmp/*
 /nbproject/*
 
 app/Config/database.php
+
+app/Config/database.php

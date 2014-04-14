@@ -78,7 +78,7 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'root',
 		'password' => 'root',
-		'database' => 'mydb',
+		'database' => 'polytech_abroad',
 		'prefix' => 'POLY_INT_',
 		'encoding' => 'utf8',
 	);
