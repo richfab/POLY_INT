@@ -228,25 +228,39 @@ class ExperiencesController extends AppController {
         if($this->Auth->user('id')){
             //on transforme l'objet de parametres en conditions
             $conditions = $this->_filters_to_conditions($this->request->data);
+            
+            //on définit l'ordre de retour des resultats
+            $order = $this->_filters_to_order($this->request->data);
+            
+            //on definit la limite du nombre de resultats
             if(!empty($this->request->data['result_limit'])){
                 $result_limit = $this->request->data['result_limit'];
             }
             else{
-                $result_limit = 100000;
+                $result_limit = PHP_INT_MAX;
             }
-            
             $this->set('result_limit',$result_limit);
             
             $this->set('experiences', $this->Experience->find('all', array(
                         'conditions' => $conditions,
                         'recursive' => 2,
-                        'order' => array('Experience.dateStart' => 'ASC'),
+                        'order' => $order,
                         'limit' => $result_limit,
                         'fields' => array('*','DATEDIFF(Experience.dateEnd, Experience.dateStart)/30 monthDiff'))));
         }
         $this->render('/Experiences/'.$this->request->data['view_to_render']);
     }
     
+    protected function _filters_to_order($request_data = null) {
+        //si on cherche a afficher les expériences à venir on classe les expérience de la plus petite date de début à la plus grande
+        if(!empty($request_data['date_min']) && empty($request_data['date_max'])){
+            return array('Experience.dateStart' => 'ASC');
+        }
+        //sinon on les classe de la date de début la plus grande a la plus petite
+        return array('Experience.dateStart' => 'DESC');
+    }
+
+
     //fonction qui transforme l'objet de parametres en conditions pour le find
     protected function _filters_to_conditions($request_data = null){
         
