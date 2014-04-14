@@ -1,7 +1,9 @@
 <div id="search-filters">
     <div id="controller">
         <div class="control-map row" id="filter-search">
-            <?php echo $this->element('filter-selects'); ?>
+            
+            <?php echo $this->element('filter_selects'); ?>
+            
         </div>
     </div>
     <div class="row" id="filter-search-inputs">

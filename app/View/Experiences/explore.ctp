@@ -2,7 +2,7 @@
                 
 <div id="controller">
     <div class="control-map hidden-xs" id="filter-map">
-        <?php echo $this->element('filter-selects'); ?>
+        <?php echo $this->element('filter_selects'); ?>
     </div>
     <input type="hidden" name="date_min" id="date_min">
     <input type="hidden" name="date_max" id="date_max">

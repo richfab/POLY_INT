@@ -9,18 +9,9 @@
                 <p><?= $experience['User']['Department']['name'];?></p>
             </div>
             <div class="col-sm-9">
-                <p><?= $experience['Motive']['name'];?> à <strong><?= $experience['Experience']['establishment']; ?></strong> - <?= $experience['City']['name'];?>, <?= $experience['City']['Country']['name'];?></p>
-                <?php if($experience['Experience']['description'] != ""): ?>
-                    <?= $experience['Experience']['description'];?></p>
-                <?php else:?>
-                    <p>Pas de description</p>
-                <?php endif; ?>
-                <p>Du <?= $this->Time->format($experience['Experience']['dateStart'], '%e %B %Y');?> au <?= $this->Time->format($experience['Experience']['dateEnd'], '%e %B %Y')?></p>
-                <?php if($experience['Experience']['comment'] != ""): ?>
-                    <p>"<?= $experience['Experience']['comment'];?>"</p>
-                <?php else:?>
-                    <p>Pas encore d'avis</p>
-                <?php endif;?>
+                
+                <?php echo $this->element('experience_info',array('experience'=>$experience)); ?>
+                
             </div>
         </div>
     </div>
