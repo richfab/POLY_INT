@@ -8,10 +8,12 @@
             )); ?></p>
     <?php endif; ?>
     <h3 style="display: inline-block">Expériences</h3>
-    <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-        <p style="text-align:right;display: inline-block"><?= $this->Html->link("ajouter", array('controller' => 'experiences', 'action' => 'info')); ?></p>
-    <?php endif; ?>
 
+    <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+        <div class="well">
+            <p><?= $this->Html->link("Ajouter une expérience", array('controller' => 'experiences', 'action' => 'info')); ?></p>
+        </div>
+    <?php endif; ?>
 
 <?php foreach ($experiences as $experience): ?>
     <div class="well">
@@ -35,8 +37,3 @@
         
     </div>
 <?php endforeach; ?>
-<?php if(empty($experiences)): ?>
-    <div class="well">
-        <p><?= $this->Html->link("Ajoute ta première expérience", array('controller' => 'experiences', 'action' => 'info')); ?></p>
-    </div>
-<?php endif; ?>
