@@ -12,9 +12,13 @@
         <p style="text-align:right;display: inline-block"><?= $this->Html->link("ajouter", array('controller' => 'experiences', 'action' => 'info')); ?></p>
     <?php endif; ?>
 
-
+<div class="timeline">
 <?php foreach ($experiences as $experience): ?>
-    <div class="well">
+
+        
+
+    <div class="panel">
+        <div class="panel-body">
         
         <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
             
@@ -31,7 +35,13 @@
                     )); ?>
         <?php endif; ?>
         
+        <span class="arrow"></span>
+
+        <span class="timeline-icon blue">
+            <i class="fa fa-user-md"></i>
+        </span>
         
+        <span class="blue timeline-date">Du <?= $this->Time->format($experience['Experience']['dateStart'], '%e %B %Y');?> au <?= $this->Time->format($experience['Experience']['dateEnd'], '%e %B %Y')?></span>
         <p>Lieu : <?= $experience['City']['name'];?>, <?= $experience['City']['Country']['name'];?></p>
         <p>Motif : <?= $experience['Motive']['name'];?></p>
         <?php if($experience['Experience']['establishment'] != ""): ?>
@@ -46,7 +56,7 @@
                 <p>Pas de description</p>
             <?php endif; ?>
         <?php endif; ?>
-        <p>Du <?= $this->Time->format($experience['Experience']['dateStart'], '%e %B %Y');?> au <?= $this->Time->format($experience['Experience']['dateEnd'], '%e %B %Y')?></p>
+        
         <?php if($experience['Experience']['comment'] != ""): ?>
             <p>Avis : "<?= $experience['Experience']['comment'];?>"</p>
         <?php else:?>
@@ -56,6 +66,7 @@
                 <p>Pas encore d'avis</p>
             <?php endif; ?>
         <?php endif;?>
+        </div>
         
     </div>
 <?php endforeach; ?>
@@ -64,3 +75,4 @@
         <p><?= $this->Html->link("Ajoute ta première expérience", array('controller' => 'experiences', 'action' => 'info')); ?></p>
     </div>
 <?php endif; ?>
+</div>

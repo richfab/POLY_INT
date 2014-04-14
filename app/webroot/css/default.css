@@ -286,3 +286,77 @@ h2 > span.wut {
     margin: 0 0 5px;
     text-align: right;
 }
+.timeline {
+    border-collapse: collapse;
+    border-spacing: 0px;
+    display: table;
+    position: relative;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.timeline:before {
+    position: absolute;
+    z-index: 0;
+    background-color: #D8D9DF;
+    left: 43px;
+    content: "";
+    bottom: 0px;
+    width: 4px;
+    top: 30px;
+}
+
+.arrow {
+    border-bottom: 8px solid transparent;
+    border-top: 8px solid transparent;
+    display: block;
+    height: 0px;
+    left: 93px;
+    position: absolute;
+    top: 13px;
+    width: 0px;
+}
+
+.arrow {
+    border-right: 8px solid rgb(255, 255, 255) !important;
+}
+
+.blue {
+    color: #3498db;
+}
+
+.timeline-date {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.timeline-icon.blue {
+    background: none repeat scroll 0% 0% #3498db;
+}
+
+.panel {
+    margin-left: 100px;
+}
+
+.timeline .timeline-icon {
+    border-radius:50%;
+    -webkit-border-radius:50%;
+    display:block;
+    height:30px;
+    width:30px;
+    text-align:center;
+    color:#fff;
+}
+.timeline .timeline-icon i {
+    margin-top:9px;
+}
+.timeline-icon {
+    left:auto;
+    right:-60px;
+}
+
+.timeline-icon {
+    left: 30px;
+    position: absolute;
+    top: 5px;
+}
