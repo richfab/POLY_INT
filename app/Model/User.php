@@ -46,10 +46,6 @@ class User extends AppModel {
                 'message' => 'Le nom doit comporter 20 caractères au maximum',
                 'allowEmpty' => false
             )
-        ),
-        'facebook_url' => array(
-            'rule' => 'url',
-            'message' => "L'adresse de votre profil Facebook doit être du type http://facebook.com/nom_utilisateur"
         )
     );
         
