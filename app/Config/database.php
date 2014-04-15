@@ -81,5 +81,6 @@ class DATABASE_CONFIG {
 		'database' => 'mydb',
 		'prefix' => 'POLY_INT_',
 		'encoding' => 'utf8',
+                'unix_socket' => '/Applications/MAMP/tmp/mysql/mysql.sock'
 	);
 }

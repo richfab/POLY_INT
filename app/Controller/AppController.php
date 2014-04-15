@@ -34,6 +34,7 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 
 	public $components = array(
+            'Paginator',
             'Session',
             'Auth' => array(
                 'loginRedirect' => '/',
