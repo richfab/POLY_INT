@@ -2,9 +2,22 @@
 App::uses('AuthComponent', 'Controller/Component');
 
 class City extends AppModel {
+    
+    public $displayField = 'name';
 
-    public $belongsTo = 'Country';
-    public $hasMany = 'Experience';
+    public $belongsTo = array(
+		'Country' => array(
+			'className' => 'Country',
+			'foreignKey' => 'country_id'
+		)
+	);
+    
+    public $hasMany = array(
+		'Experience' => array(
+			'className' => 'Experience',
+			'foreignKey' => 'city_id'
+		)
+	);
 
     public $validate = array(
         'name' => array(

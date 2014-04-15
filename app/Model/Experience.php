@@ -2,8 +2,32 @@
 App::uses('AuthComponent', 'Controller/Component');
 
 class Experience extends AppModel {
+    
+    public $displayField = 'id';
 
-    public $belongsTo = array('User','Motive','City');
+    public $belongsTo = array(
+		'City' => array(
+			'className' => 'City',
+			'foreignKey' => 'city_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Motive' => array(
+			'className' => 'Motive',
+			'foreignKey' => 'motive_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
 
     public $validate = array(
         'dateStart' => array(

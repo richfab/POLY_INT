@@ -3,7 +3,12 @@ App::uses('AuthComponent', 'Controller/Component');
 
 class Motive extends AppModel {
 
-    public $hasMany = 'Experience';
+    public $hasMany = array(
+		'Experience' => array(
+			'className' => 'Experience',
+			'foreignKey' => 'motive_id'
+		)
+	);
 
     public $validate = array(
         'name' => array(

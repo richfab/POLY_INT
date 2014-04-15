@@ -4,7 +4,8 @@ class School extends AppModel {
     public $hasMany = array(
         'User' => array(
             'className' => 'User',
-            'order' => 'User.lastname ASC'
+            'order' => 'User.lastname ASC',
+            'conditions' => array('User.role' => 'user')
         )
     );
 	

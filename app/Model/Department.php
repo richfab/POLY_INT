@@ -1,10 +1,14 @@
 <?php
 class Department extends AppModel {
     
+    public $displayField = 'name';
+    
     public $hasMany = array(
         'User' => array(
             'className' => 'User',
-            'order' => 'User.lastname ASC'
+            'foreignKey' => 'department_id',
+            'order' => 'User.lastname ASC',
+            'conditions' => array('User.role' => 'user')
         )
     );
 	

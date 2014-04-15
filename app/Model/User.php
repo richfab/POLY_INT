@@ -3,14 +3,41 @@ App::uses('AuthComponent', 'Controller/Component');
     
 class User extends AppModel {
     
-    public $belongsTo = array('Department','School');
-    public $hasMany = array(
-        'Experience' => array(
-            'className' => 'Experience',
-            'order' => 'Experience.dateEnd DESC'
-        )
-    );
+    public $displayField = 'email';
         
+    public $belongsTo = array(
+		'School' => array(
+			'className' => 'School',
+			'foreignKey' => 'school_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
+		'Department' => array(
+			'className' => 'Department',
+			'foreignKey' => 'department_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
+            
+    public $hasMany = array(
+		'Experience' => array(
+			'className' => 'Experience',
+			'foreignKey' => 'user_id',
+			'dependent' => false,
+			'conditions' => '',
+			'fields' => '',
+			'order' => 'Experience.dateEnd DESC',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		)
+	);
+            
     public $validate = array(
         'email' => array(
             'format' => array(
@@ -51,16 +78,16 @@ class User extends AppModel {
         
     //chiffrage du mot de passe avant enregistrement
     public function beforeSave($options = array()) {
-	    if (isset($this->data[$this->alias]['password'])) {
-	        $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
-	    }
-	    if (isset($this->data[$this->alias]['firstname'])) {
-	        $this->data[$this->alias]['firstname'] = ucwords(strtolower($this->data[$this->alias]['firstname']));
-	    }
-	    if (isset($this->data[$this->alias]['lastname'])) {
-	        $this->data[$this->alias]['lastname'] = ucwords(strtolower($this->data[$this->alias]['lastname']));
-	    }
-	    return true;
-	}
+        if (isset($this->data[$this->alias]['password'])) {
+            $this->data[$this->alias]['password'] = AuthComponent::password($this->data[$this->alias]['password']);
+        }
+        if (isset($this->data[$this->alias]['firstname'])) {
+            $this->data[$this->alias]['firstname'] = ucwords(strtolower($this->data[$this->alias]['firstname']));
+        }
+        if (isset($this->data[$this->alias]['lastname'])) {
+            $this->data[$this->alias]['lastname'] = ucwords(strtolower($this->data[$this->alias]['lastname']));
+        }
+        return true;
+    }
 }
 ?>
