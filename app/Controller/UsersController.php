@@ -17,6 +17,9 @@ class UsersController extends AppController {
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
+                if($this->Auth->user('role')==="admin"){
+                    return $this->redirect(array('controller'=>'users','action' => 'index','admin'=>true));
+                }
                 return $this->redirect($this->Auth->redirectUrl());
             }
             $this->Session->setFlash(__("Mot de passe ou email incorrect"), 'alert', array(
