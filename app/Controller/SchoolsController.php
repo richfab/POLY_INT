@@ -46,6 +46,10 @@ class SchoolsController extends AppController {
  * @return void
  */
 	public function admin_add() {
+            
+                //on inclut le script jscolor pour le color picker
+                $this->set('jsIncludes',array('jscolor'));
+            
 		if ($this->request->is('post')) {
 			$this->School->create();
 			if ($this->School->save($this->request->data)) {
@@ -65,6 +69,9 @@ class SchoolsController extends AppController {
  * @return void
  */
 	public function admin_edit($id = null) {
+                //on inclut le script jscolor pour le color picker
+                $this->set('jsIncludes',array('jscolor'));
+            
 		if (!$this->School->exists($id)) {
 			throw new NotFoundException(__('Invalid school'));
 		}

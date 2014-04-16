@@ -4,6 +4,7 @@
 	<tr>
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('name'); ?></th>
+			<th><?php echo $this->Paginator->sort('color'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
@@ -12,6 +13,7 @@
 	<tr>
 		<td><?php echo h($school['School']['id']); ?>&nbsp;</td>
 		<td><?php echo h($school['School']['name']); ?>&nbsp;</td>
+		<td style="background-color: #<?php echo $school['School']['color']; ?>"><?php echo h($school['School']['color']); ?>&nbsp;</td>
 		<td><?php echo h($school['School']['created']); ?>&nbsp;</td>
 		<td><?php echo h($school['School']['modified']); ?>&nbsp;</td>
 		<td class="actions">

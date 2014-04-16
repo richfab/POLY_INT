@@ -5,6 +5,7 @@
 	<?php
 		echo $this->Form->input('id');
 		echo $this->Form->input('name');
+		echo $this->Form->input('color',array('class' => 'color {required:true}'));
 	?>
 	</fieldset>
 <?php echo $this->Form->end(__('Submit')); ?>

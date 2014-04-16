@@ -30,6 +30,16 @@ $cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework
 		echo $this->Html->meta('icon');
 
 		echo $this->Html->css('cake.generic');
+                
+                //on inclut les fichiers js qui sont spécifiques a une vue
+		if(isset($jsIncludes)){
+		    echo $this->Html->script($jsIncludes);
+		}
+		
+		//on inclut les fichiers css qui sont spécifiques a une vue
+		if(isset($cssIncludes)){
+			echo $this->Html->css($cssIncludes);
+		}
 
 		echo $this->fetch('meta');
 		echo $this->fetch('css');

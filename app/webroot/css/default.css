@@ -286,3 +286,12 @@ h2 > span.wut {
     margin: 0 0 5px;
     text-align: right;
 }
+
+#profile_info{
+    margin-top: 30px;
+}
+
+#avatar_profile{
+    border-radius: 100%;
+    padding: 1px;
+}

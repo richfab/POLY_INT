@@ -20,6 +20,13 @@ class School extends AppModel {
                 'rule'    => 'isUnique',
                 'message' => "Ce nom d'école est déjà utilisé"
             )
+        ),
+        'color' => array(
+            'between' => array(
+                'rule'    => array('between', 1, 7),
+                'message' => 'La couleur doit être du type FFFFFF',
+                'allowEmpty' => false
+            )
         )
     );
         

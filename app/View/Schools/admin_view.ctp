@@ -11,6 +11,11 @@
 			<?php echo h($school['School']['name']); ?>
 			&nbsp;
 		</dd>
+		<dt><?php echo __('Color'); ?></dt>
+                <dd style="background-color: #<?php echo $school['School']['color']; ?>">
+			<?php echo h($school['School']['color']); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Created'); ?></dt>
 		<dd>
 			<?php echo h($school['School']['created']); ?>
@@ -40,6 +45,7 @@
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
 		<th><?php echo __('Id'); ?></th>
+		<th><?php echo __('Role'); ?></th>
 		<th><?php echo __('Email'); ?></th>
 		<th><?php echo __('Firstname'); ?></th>
 		<th><?php echo __('Lastname'); ?></th>
@@ -52,6 +58,7 @@
 	<?php foreach ($school['User'] as $user): ?>
 		<tr>
 			<td><?php echo $user['id']; ?></td>
+			<td><?php echo $user['role']; ?></td>
 			<td><?php echo $user['email']; ?></td>
 			<td><?php echo $user['firstname']; ?></td>
 			<td><?php echo $user['lastname']; ?></td>
