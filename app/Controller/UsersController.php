@@ -286,6 +286,17 @@ class UsersController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->User->id = $id;
+                
+                $user = $this->User->findById($id);
+                $experiences = $user['Experience'];
+
+                App::import('Controller', 'Experiences');
+                $experiencesController = new ExperiencesController;
+
+                foreach($experiences as $experience){
+                    $experiencesController->delete_experience($experience['id']);
+                }
+                
 		if (!$this->User->exists()) {
 			throw new NotFoundException(__('Invalid user'));
 		}

@@ -418,11 +418,12 @@ class ExperiencesController extends AppController {
  */
 	public function admin_delete($id = null) {
 		$this->Experience->id = $id;
+                $experience = $this->Experience->findById($id);
 		if (!$this->Experience->exists()) {
 			throw new NotFoundException(__('Invalid experience'));
 		}
 		$this->request->onlyAllow('post', 'delete');
-		if ($this->Experience->delete()) {
+		if ($this->Experience->delete() && $this->_upload_experienceNumber($experience['Experience']['city_id'],-1)) {
 			$this->Session->setFlash(__('The experience has been deleted.'));
 		} else {
 			$this->Session->setFlash(__('The experience could not be deleted. Please, try again.'));
