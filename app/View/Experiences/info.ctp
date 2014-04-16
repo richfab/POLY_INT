@@ -22,7 +22,7 @@
         $input_value = '';
     }?>
     <div id="ExperienceInputDiv">
-        <?php echo $this->Form->input('input',array('label'=>'Ville *', 'value'=>$input_value, 'location-types'=>'(cities)'));?>
+        <?php echo $this->Form->input('input',array('label'=>'Ville *', 'value'=>$input_value, 'location-types'=>'(cities)','afterInput'=>'<span class="help-block">De préférence une grande ville pour une meilleure visibilité</span>'));?>
     </div>
     <?php echo $this->Form->input('Motive.id');
     echo $this->Form->input('motive_id',array('label'=>"Motif *"));
