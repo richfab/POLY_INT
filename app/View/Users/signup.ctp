@@ -12,7 +12,7 @@
         ),
         'class' => 'well form-horizontal'
     ));
-    echo $this->Form->input('email', array('placeholder' => 'Email'));
+    echo $this->Form->input('email', array('placeholder' => 'Votre adresse etu'));
     echo $this->Form->input('password', array('placeholder' => 'Mot de passe','label' => 'Mot de passe'));
     echo $this->Form->input('password_confirm', array('placeholder' => 'Confirmation','label' => 'Confirmation',"type"=>"password"));
     echo $this->Form->input('firstname', array('placeholder' => 'Prénom','label' => 'Prénom'));
