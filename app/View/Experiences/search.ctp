@@ -52,7 +52,9 @@
             var evt = (evt) ? evt : ((event) ? event : null);
             var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
             if ((evt.keyCode == 13) && (node.type == "text")) {
-                search_button();
+                if(evt.srcElement.name !== 'input'){ //si le champs n'est pas celui du lieu
+                    search_button();
+                }
             }
         }
         document.onkeypress = pressEnter;
