@@ -22,6 +22,6 @@
             )); ?>
 </div>
     
-<?= $this->Html->link('Oublié ?', array('action' => 'forgotten_password')); ?>
-<?= $this->Html->link("S'inscire", array('action' => 'signup')); ?>
+<p><?= $this->Html->link('Mot de passe oublié ?', array('action' => 'forgotten_password')); ?></p>
+<p><?= $this->Html->link("S'inscire", array('action' => 'signup')); ?></p>
 <?php echo $this->Form->end(); ?>

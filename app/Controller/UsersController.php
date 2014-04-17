@@ -121,6 +121,106 @@ class UsersController extends AppController {
         
     }
     
+    //fonction qui permet de recuperer son nouveau mot de passe a partir du lien recu par email ou qui permet de saisir son email en cas de mot de passe oublié
+    public function forgotten_password(){
+        
+        if(!empty($this->request->params['named']['token'])){
+            
+            $token = $this->request->params['named']['token'];
+            $token = explode('-',$token);
+            
+            $user = $this->User->find('first',array('conditions'=> array('User.id'=>$token[0],'MD5(User.password)'=>$token[1])));
+            
+            if($user){
+                App::uses('AuthComponent', 'Controller/Component');
+
+                $this->User->id = $user['User']['id'];
+                
+                $password = substr(md5(uniqid(rand(),true)),0,8);
+                $this->User->saveField('password',$password);
+                
+                $this->Session->setFlash(__("Voici ton nouveau mot de passe : $password. Il est conseillé de le changer dans les paramêtres de ton profil"), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+            }
+            else{
+                $this->Session->setFlash(__("Ce lien n'est pas valide"), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-danger'
+                ));
+            }
+        }
+
+        if($this->request->is('post')) {
+            $user = $this->User->findByEmail($this->request->data['User']['email']);
+            if(!$user){
+                $this->Session->setFlash(__("Aucun utilisateur ne correspond à cet email"), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-danger'
+                ));
+            }
+            else{
+                App::uses('CakeEmail','Network/Email');
+                
+                $link = array('controller'=>'users','action'=>'forgotten_password','token'=>$user['User']['id'].'-'.md5($user['User']['password']));
+                
+                $email = new CakeEmail('default');
+                $email->to($user['User']['email'])
+                        ->subject('Réinitialisation mot de passe')
+                        ->emailFormat('html')
+                        ->template('forgotten_password')
+                        ->viewVars(array('firstname'=>$user['User']['firstname'],'link'=>$link))
+                        ->send();
+                
+                $this->Session->setFlash(__("Un email avec un lien pour réinitialiser le mot de passe vient d'être envoyé à ".$user['User']['email']), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+            }
+        }
+    }
+    
+    //page qui peut etre appelée a partir de la page profil et qui permet de changer son mot de passe
+    public function change_password() {
+    	App::uses('AuthComponent', 'Controller/Component');
+		
+        if($this->Auth->loggedIn()){
+            $id = $this->Auth->user('id');
+            $this->User->id = $id;
+        }
+        else{
+            return $this->redirect(array('action' => 'login'));
+        }
+        if (!$this->User->exists()) {
+            throw new NotFoundException(__("Cet utilisateur n'existe pas"));
+        }
+        if ($this->request->is('post') || $this->request->is('put')) {
+            if (!($this->data['User']['password'] === $this->data['User']['password_confirm'])) {
+                $this->Session->setFlash(__("Les mots de passe ne correspondent pas"), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-danger'
+                ));
+                return;
+            }
+            if ($this->User->save($this->request->data)) {
+                $this->Session->setFlash(__("Les modifications ont bien été enregistrées"), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+                return $this->redirect(array('action' => 'profile'));
+            }
+            $this->Session->setFlash(__("Erreur lors de l'enregistrement"), 'alert', array(
+                'plugin' => 'BoostCake',
+                'class' => 'alert-danger'
+            ));
+        }
+        else{
+            $this->request->data = $this->User->read(null, $id);
+            unset($this->request->data['User']['password']);
+        }
+    }
+    
     public function in_signup() {
         //selectionne les ecoles par ordre alphabetique
         $this->set('schools', $this->User->School->find('list', array(
