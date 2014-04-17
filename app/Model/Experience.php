@@ -23,7 +23,7 @@ class Experience extends AppModel {
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',
-			'conditions' => '',
+			'conditions' => array('User.role' => 'user','User.active' => '1'),
 			'fields' => '',
 			'order' => ''
 		)

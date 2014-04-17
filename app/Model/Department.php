@@ -8,7 +8,7 @@ class Department extends AppModel {
             'className' => 'User',
             'foreignKey' => 'department_id',
             'order' => 'User.lastname ASC',
-            'conditions' => array('User.role' => 'user')
+            'conditions' => array('User.role' => 'user','User.active' => '1')
         )
     );
 	

@@ -6,21 +6,33 @@ class UsersController extends AppController {
     /* Set pagination options */
     public $paginate = array(
             'limit' => 20,
-            'order' => array('lastname' => 'ASC')
+            'order' => array('lastname' => 'ASC'),
+            'conditions' => array('User.role' => 'user','User.active' => '1')
     );
         
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('signup','in_signup','forgotten_password'); // Letting users signup themselves and retrieve password
+        $this->Auth->allow('signup','activate','forgotten_password'); // Letting users signup themselves and retrieve password
     }
 	
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
-                if($this->Auth->user('role')==="admin"){
+                if($this->Auth->user('role')==='admin'){
                     return $this->redirect(array('controller'=>'users','action' => 'index','admin'=>true));
                 }
-                return $this->redirect($this->Auth->redirectUrl());
+                //si le user a activé son compte
+                if($this->Auth->user('active')){
+                    return $this->redirect($this->Auth->redirectUrl());
+                }
+                else{
+                    $this->Session->setFlash(__("Tu dois d'abord activer ton compte à l'aide du lien d'activation qui t'a été envoyé par email"), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-danger'
+                    ));
+                    $this->Auth->logout();
+                    return $this->redirect(array('controller'=>'users','action' => 'login'));
+                }
             }
             $this->Session->setFlash(__("Mot de passe ou email incorrect"), 'alert', array(
                 'plugin' => 'BoostCake',
@@ -52,9 +64,25 @@ class UsersController extends AppController {
             }
                 
             $this->User->create();
+            //on force le role a être user
+            $this->request->data['User']['role'] = 'user';
                 
             if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__("Ton inscription a bien été prise en compte"), 'alert', array(
+                
+                $user = $this->User->findByEmail($this->request->data['User']['email']);
+                $activation_link = array('controller'=>'users', 'action' => 'activate',  $this->User->id.'-'.md5($user['User']['password']));
+                
+                App::uses('CakeEmail','Network/Email');
+            	$user = $this->request->data;
+                $email = new CakeEmail('default');
+                $email->to($user['User']['email'])
+                        ->subject('Bienvenue sur Polytech Expats !')
+                        ->emailFormat('html')
+                        ->template('signup')
+                        ->viewVars(array('firstname' => $user['User']['firstname'],'activation_link' => $activation_link))
+                        ->send();
+                                
+                $this->Session->setFlash(__("Ton inscription a bien été prise en compte. Un email d'activation vient d'être envoyé à ".$user['User']['email']), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));
@@ -65,6 +93,32 @@ class UsersController extends AppController {
                  'class' => 'alert-danger'
              ));
         }
+    }
+    
+    //fonction qui permet a partir d'un lien, d'activer son compte
+    public function activate($token = null){
+        $token = explode('-', $token);
+        $user = $this->User->find('first', array(
+            'conditions' => array('User.id' => $token[0], 'MD5(User.password)' => $token[1], 'active' => 0)
+        ));
+        if(!empty($user)){
+            $this->User->id = $user['User']['id'];
+            $this->User->saveField('active',1);
+            $this->Session->setFlash(__("Ton compte a bien été activé"), 'alert', array(
+                 'plugin' => 'BoostCake',
+                 'class' => 'alert-success'
+             ));
+            $this->Auth->login($user['User']);
+            return $this->redirect(array('controller'=>'users','action' => 'profile'));
+        }
+        else{
+            $this->Session->setFlash(__("Ce lien d'activation n'est pas valide"), 'alert', array(
+                 'plugin' => 'BoostCake',
+                 'class' => 'alert-danger'
+             ));
+            return $this->redirect(array('controller'=>'users','action' => 'login'));
+        }
+        
     }
     
     public function in_signup() {
@@ -211,6 +265,7 @@ class UsersController extends AppController {
  * @return void
  */
 	public function admin_index() {
+                $this->Paginator->settings = $this->paginate;
 		$this->User->recursive = 0;
 		$this->set('users', $this->Paginator->paginate());
 	}

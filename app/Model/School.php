@@ -5,7 +5,7 @@ class School extends AppModel {
         'User' => array(
             'className' => 'User',
             'order' => 'User.lastname ASC',
-            'conditions' => array('User.role' => 'user')
+            'conditions' => array('User.role' => 'user','User.active' => '1')
         )
     );
 	
