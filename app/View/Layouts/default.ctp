@@ -15,7 +15,7 @@
  * @since         CakePHP(tm) v 0.10.0.1076
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-$title_description = "Polytech International : L'unique passeport partagé entre tous les étudiants de Polytech";
+$title_description = "Polytech Expats : L'unique passeport partagé entre tous les étudiants de Polytech";
 ?>
 <!DOCTYPE html>
 <html>

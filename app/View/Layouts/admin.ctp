@@ -16,14 +16,14 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-$cakeDescription = __d('cake_dev', 'CakePHP: the rapid development php framework');
+$title_description = "Polytech Expats : L'unique passeport partagé entre tous les étudiants de Polytech";
 ?>
 <!DOCTYPE html>
 <html>
     <head>
 	<?php echo $this->Html->charset(); ?>
         <title>
-		<?php echo $cakeDescription ?>:
+		<?php echo $title_description; ?>:
 		<?php echo $title_for_layout; ?>
         </title>
 	<?php
