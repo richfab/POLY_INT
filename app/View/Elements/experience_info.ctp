@@ -1,11 +1,17 @@
-<p><?= $experience['Motive']['name'];?> à <strong><?= $experience['Experience']['establishment']; ?></strong> - <?= $experience['City']['name'];?>, <?= $experience['City']['Country']['name'];?></p>
-<?php if($experience['Experience']['description'] != ""): ?>
-    <p><?= $experience['Experience']['description'];?></p>
-<?php else:?>
-    <?php if($experience['Experience']['user_id'] == AuthComponent::user('id')) : ?>
-    <p><?= $this->Html->link("Ajouter une description", array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id'])); ?></p>
-    <?php else: ?>
-        <p>Pas de description</p>
+<p><?= $experience['Motive']['name'];?> à 
+    <?php if($experience['Motive']['name'] !== 'Voyage'): ?>
+        <strong><?= $experience['Experience']['establishment']; ?></strong> - 
+    <?php endif; ?>
+<?= $experience['City']['name'];?>, <?= $experience['City']['Country']['name'];?></p>
+<?php if($experience['Motive']['name'] !== 'Voyage'): ?>
+    <?php if($experience['Experience']['description'] != ""): ?>
+        <p><?= $experience['Experience']['description'];?></p>
+    <?php else:?>
+        <?php if($experience['Experience']['user_id'] == AuthComponent::user('id')) : ?>
+        <p><?= $this->Html->link("Ajouter une description", array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id'])); ?></p>
+        <?php else: ?>
+            <p>Pas de description</p>
+        <?php endif; ?>
     <?php endif; ?>
 <?php endif; ?>
 <p>Du <?= $this->Time->format($experience['Experience']['dateStart'], '%e %B %Y');?> au <?= $this->Time->format($experience['Experience']['dateEnd'], '%e %B %Y')?></p>

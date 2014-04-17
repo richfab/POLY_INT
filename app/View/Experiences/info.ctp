@@ -21,9 +21,9 @@
     else{
         $input_value = '';
     }?>
-    <div id="ExperienceInputDiv">
+<div id="ExperienceInputDiv">
         <?php echo $this->Form->input('input',array('label'=>'Ville *', 'value'=>$input_value, 'location-types'=>'(cities)','afterInput'=>'<span class="help-block">De préférence une grande ville pour une meilleure visibilité</span>'));?>
-    </div>
+</div>
     <?php echo $this->Form->input('Motive.id');
     echo $this->Form->input('motive_id',array('label'=>"Motif *"));
     echo $this->Form->input('establishment',array('label'=>'Établissement *','placeholder'=>"Nom de l'entreprise ou de l'université"));
@@ -33,22 +33,42 @@
     echo $this->Form->input('City.lon', array('label'=>'longitude','type'=>'hidden'));
     echo $this->Form->input('City.Country.id', array('label'=>'id','type'=>'hidden'));
     echo $this->Form->input('City.Country.name', array('label'=>'country_name','type'=>'hidden'));
-//    echo $this->Form->input('City.name',array('label'=>'city_name'));
-//    echo $this->Form->input('City.lat', array('label'=>'latitude'));
-//    echo $this->Form->input('City.lon', array('label'=>'longitude'));
-//    echo $this->Form->input('City.Country.id', array('label'=>'id','type'=>'text'));
-//    echo $this->Form->input('City.Country.name', array('label'=>'country_name'));
     echo $this->Form->input('comment',array('label'=>'Avis','type'=>'textarea','placeholder'=>"Avis sur l'expérience"));
 //    echo $this->Form->input('notify',array('label'=>"Envoyez-moi un email si quelqu'un est dans cette ville en même temps que moi",'class' => false));?>
-    <div class="form-group">
-        <div class="col col-md-9 col-md-offset-3">
+<div class="form-group">
+    <div class="col col-md-9 col-md-offset-3">
         <?= $this->Html->link("Retour", array('controller'=>'users', 'action' => 'profile'),
                 array('class' => 'btn btn-orange'
         )); ?>
         <?php echo $this->Form->button('Enregistrer', array(
                 'class' => 'btn btn-blue'
         ));?>
-        </div>
     </div>
-        
+</div>
+    
 <?php echo $this->Form->end(); ?>
+    
+<script type="text/javascript">
+    $( function() {
+        
+        //cette fonction permet de supprimer les champs description et etablissement si le motif "Voyage" est sélectionné
+        
+        var experienceMotiveIdDiv = $('#ExperienceMotiveId').parent().parent();
+        var experienceEstablishmentDiv = $('#ExperienceEstablishment').parent().parent();
+        var experienceDescriptionDiv = $('#ExperienceDescription').parent().parent();
+        
+        $('#ExperienceMotiveId').change(checkIfVoyage);
+        checkIfVoyage();
+        
+        function checkIfVoyage(){
+            if($('#ExperienceMotiveId').find(":selected").text() === 'Voyage'){
+                experienceEstablishmentDiv.remove();
+                experienceDescriptionDiv.remove();
+            }
+            else{
+                experienceMotiveIdDiv.after(experienceEstablishmentDiv);
+                experienceEstablishmentDiv.after(experienceDescriptionDiv);
+            }
+        }
+    });
+</script>
