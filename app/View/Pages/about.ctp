@@ -5,8 +5,6 @@
     Il n'est pour l'instant destiné qu'à la promo info4 de Polytech Nantes
 </h4>
 <h4>
-    Le nom et le logo ne sont pas encore fixés. <a href="mailto:fabien.richard@etu.univ-nantes.fr">Envoyez-moi un email</a> si vous avez des idées de noms ! 
+    N'hésitez pas à nous dire ce qui bug ou pourrait être amélioré.
 </h4>
-<h4>
-    Vous pouvez aussi me dire ce qui bug ou pourrait être amélioré.
-</h4>
+<p><a href="http://fabienrichard.fr" target="_blank">Fabien Richard</a> (architecture) - <a href="http://davidbonachera.fr" target="_blank">David Bonachera</a> (design) - <a>David Tollec</a> (sécurité)	
