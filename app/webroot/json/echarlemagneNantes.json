@@ -1,0 +1,32 @@
+[
+    {
+        "email" : "automatic@email.fr",
+        "firstname" : "first_auto",
+        "lastname" : "last_auto",
+        "school_id" : "1",
+        "department_id" : "1",
+        "dateStart" : "2014-05-19",
+        "dateEnd" : "2014-08-19",
+        "establishment" : "etablishement_auto",
+        "description" : "description_auto",
+        "comment" : "comment_auto",
+        "city_name" : "Accra",
+        "country_name" : "Ghana",
+        "motive_id" : "1"
+    },
+    {
+        "email" : "automatic2@email.fr",
+        "firstname" : "first2_auto",
+        "lastname" : "last2_auto",
+        "school_id" : "1",
+        "department_id" : "1",
+        "dateStart" : "2014-05-19",
+        "dateEnd" : "2014-08-19",
+        "establishment" : "etablishement2_auto",
+        "description" : "description2_auto",
+        "comment" : "comment2_auto",
+        "city_name" : "Madrid",
+        "country_name" : "Espagne",
+        "motive_id" : "1"
+    }
+]

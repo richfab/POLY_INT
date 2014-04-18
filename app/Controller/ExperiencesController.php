@@ -9,7 +9,8 @@ class ExperiencesController extends AppController {
     /* Set pagination options */
     public $paginate = array(
             'limit' => 20,
-            'order' => array('dateEnd' => 'DESC')
+            'order' => array('dateEnd' => 'DESC'),
+            'conditions' => array('User.active'=>'1')
     );
 
     public function beforeFilter() {
@@ -253,6 +254,63 @@ class ExperiencesController extends AppController {
         $this->render('/Experiences/'.$this->request->data['view_to_render']);
     }
     
+    public function echarlemagne(){
+        //on inclut les scripts pour la recuperation des experiences et google maps pour l'autocomplete des lieux
+    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','add_experiences'));
+    }
+    
+    public function add_experience_ajax(){
+        
+        $this->request->onlyAllow('ajax');
+        App::uses('AuthComponent', 'Controller/Component');
+                
+         //on recupere les experiences si c'est un utilisateur admin qui est connecté
+        if($this->Auth->user('id') && $this->Auth->user('role') == 'admin'){
+            
+            //on recherche l'email de l'etudiant pour savoir s'il a deja un compte
+            $user = $this->Experience->User->findByEmail($this->request->data['email']);
+            
+            //l'etudiant n'existe pas -> on le créer
+            if(empty($user)){
+                $this->Experience->User->create();
+                $user['User']['email'] = $this->request->data['email'];
+                $user['User']['firstname'] = $this->request->data['firstname'];
+                $user['User']['lastname'] = $this->request->data['lastname'];
+                $user['User']['school_id'] = $this->request->data['school_id'];
+                $user['User']['department_id'] = $this->request->data['department_id'];
+                $user = $this->Experience->User->save($user);
+            }
+            
+            //ajout de la ville si besoin
+            $city = array();
+            $city['City']['name'] = $this->request->data['city_name'];
+            $city['City']['lat'] = $this->request->data['city_lat'];
+            $city['City']['lon'] = $this->request->data['city_lon'];
+            $city['City']['Country']['id'] = $this->request->data['country_id'];
+            $city['City']['Country']['name'] = $this->request->data['country_name'];
+            $city_id = $this->_createCityAndCountryIfNeeded($city, $city['City']);
+            
+            //puis ajout de l'experience
+            $this->Experience->create();
+            $experience = array();
+            $experience['Experience']['dateStart'] = $this->request->data['dateStart'];
+            $experience['Experience']['dateEnd'] = $this->request->data['dateEnd'];
+            $experience['Experience']['establishment'] = $this->request->data['establishment'];
+            $experience['Experience']['description'] = $this->request->data['description'];
+            $experience['Experience']['comment'] = $this->request->data['comment'];
+            $experience['Experience']['city_id'] = $city_id;
+            $experience['Experience']['motive_id'] = $this->request->data['motive_id'];
+            $experience['Experience']['user_id'] = $user['User']['id'];
+            
+            if($this->Experience->save($experience) && $this->_upload_experienceNumber($city_id,1)){
+                return new CakeResponse(array('body'=> json_encode(array('errorMessage'=>0)),'status'=>200));
+            }
+            
+            return new CakeResponse(array('body'=> json_encode(array('errorMessage'=>"Erreur lors de l'ajout")),'status'=>500));
+        }
+        return new CakeResponse(array('body'=> json_encode(array('errorMessage'=>"Vous n'êtes pas admin")),'status'=>500));
+    }
+    
     protected function _filters_to_order($request_data = null) {
         //si on cherche a afficher les expériences à venir on classe les expérience de la plus petite date de début à la plus grande
         if(!empty($request_data['date_min']) && empty($request_data['date_max'])){
@@ -267,6 +325,8 @@ class ExperiencesController extends AppController {
     protected function _filters_to_conditions($request_data = null){
         
         $conditions = array();
+        //on ne recupere que les experiences dont l'etudiant a été validé
+        $conditions['User.active'] = 1;
         
         if(empty($request_data)){
             return $conditions;
@@ -341,6 +401,7 @@ class ExperiencesController extends AppController {
  * @return void
  */
 	public function admin_index() {
+                $this->Paginator->settings = $this->paginate;
 		$this->Experience->recursive = 0;
 		$this->set('experiences', $this->Paginator->paginate());
 	}

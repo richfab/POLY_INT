@@ -75,6 +75,7 @@
 		<th class="actions"><?php echo __('Actions'); ?></th>
 	</tr>
 	<?php foreach ($city['Experience'] as $experience): ?>
+            <?php if($experience['User']):?>
 		<tr>
 			<td><?php echo $experience['id']; ?></td>
 			<td><?php echo $experience['dateStart']; ?></td>
@@ -94,6 +95,7 @@
 				<?php echo $this->Form->postLink(__('Delete'), array('controller' => 'experiences', 'action' => 'delete', $experience['id']), null, __('Are you sure you want to delete # %s?', $experience['id'])); ?>
 			</td>
 		</tr>
+            <?php endif;?>
 	<?php endforeach; ?>
 	</table>
 <?php endif; ?>

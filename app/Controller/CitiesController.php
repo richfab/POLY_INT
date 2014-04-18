@@ -14,6 +14,13 @@ class CitiesController extends AppController {
  * @var array
  */
 	public $components = array('Paginator');
+        
+        /* Set pagination options */
+        public $paginate = array(
+                'limit' => 20,
+                'order' => array('lastname' => 'ASC'),
+                'conditions' => array('User.role' => 'user','User.active' => '1')
+        );
 
 /**
  * admin_index method
@@ -33,6 +40,7 @@ class CitiesController extends AppController {
  * @return void
  */
 	public function admin_view($id = null) {
+                $this->City->recursive = 2;
 		if (!$this->City->exists($id)) {
 			throw new NotFoundException(__('Invalid city'));
 		}
