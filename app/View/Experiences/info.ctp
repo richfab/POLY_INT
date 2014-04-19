@@ -35,7 +35,7 @@
     echo $this->Form->input('City.Country.name', array('label'=>'country_name','type'=>'hidden'));
     echo $this->Form->input('comment',array('label'=>'Avis','type'=>'textarea','placeholder'=>"Avis sur l'expérience"));
     echo $this->Form->input('Typenotification.id');
-    echo $this->Form->input('typenotification_id',array('label'=>"Notifications *","disabled"=>true,"afterInput"=>"<span class='help-block'><strong>Fonctionnalité à venir : </strong>Recevoir un email si quelqu'un est au même en endroit en même temps</span>"));?>
+    echo $this->Form->input('typenotification_id',array('label'=>"Notifications *","afterInput"=>"<span class='help-block'><strong>Fonctionnalité à venir : </strong>Recevoir un email si quelqu'un est au même en endroit en même temps</span>"));?>
 <div class="form-group">
     <div class="col col-md-9 col-md-offset-3">
         <?= $this->Html->link("Retour", array('controller'=>'users', 'action' => 'profile'),
