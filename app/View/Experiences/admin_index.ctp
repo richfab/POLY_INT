@@ -8,7 +8,6 @@
 			<th><?php echo $this->Paginator->sort('establishment'); ?></th>
 			<th><?php echo $this->Paginator->sort('description'); ?></th>
 			<th><?php echo $this->Paginator->sort('comment'); ?></th>
-			<th><?php echo $this->Paginator->sort('notify'); ?></th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
 			<th><?php echo $this->Paginator->sort('city_id'); ?></th>
@@ -24,7 +23,6 @@
 		<td><?php echo h($experience['Experience']['establishment']); ?>&nbsp;</td>
 		<td><?php echo h($experience['Experience']['description']); ?>&nbsp;</td>
 		<td><?php echo h($experience['Experience']['comment']); ?>&nbsp;</td>
-		<td><?php echo h($experience['Experience']['notify']); ?>&nbsp;</td>
 		<td><?php echo h($experience['Experience']['created']); ?>&nbsp;</td>
 		<td><?php echo h($experience['Experience']['modified']); ?>&nbsp;</td>
 		<td>

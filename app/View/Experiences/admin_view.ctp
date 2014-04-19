@@ -31,11 +31,6 @@
 			<?php echo h($experience['Experience']['comment']); ?>
 			&nbsp;
 		</dd>
-		<dt><?php echo __('Notify'); ?></dt>
-		<dd>
-			<?php echo h($experience['Experience']['notify']); ?>
-			&nbsp;
-		</dd>
 		<dt><?php echo __('Created'); ?></dt>
 		<dd>
 			<?php echo h($experience['Experience']['created']); ?>

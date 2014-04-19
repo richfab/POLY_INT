@@ -44,7 +44,6 @@
 		<th><?php echo __('Establishment'); ?></th>
 		<th><?php echo __('Description'); ?></th>
 		<th><?php echo __('Comment'); ?></th>
-		<th><?php echo __('Notify'); ?></th>
 		<th><?php echo __('Created'); ?></th>
 		<th><?php echo __('Modified'); ?></th>
 		<th><?php echo __('City Id'); ?></th>
@@ -60,7 +59,6 @@
 			<td><?php echo $experience['establishment']; ?></td>
 			<td><?php echo $experience['description']; ?></td>
 			<td><?php echo $experience['comment']; ?></td>
-			<td><?php echo $experience['notify']; ?></td>
 			<td><?php echo $experience['created']; ?></td>
 			<td><?php echo $experience['modified']; ?></td>
 			<td><?php echo $experience['city_id']; ?></td>

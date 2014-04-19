@@ -8,7 +8,6 @@
 		echo $this->Form->input('establishment');
 		echo $this->Form->input('description');
 		echo $this->Form->input('comment');
-		echo $this->Form->input('notify');
 		echo $this->Form->input('city_id');
 		echo $this->Form->input('motive_id');
 		echo $this->Form->input('user_id');
