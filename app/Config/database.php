@@ -78,7 +78,7 @@ class DATABASE_CONFIG {
 		'host' => 'localhost',
 		'login' => 'root',
 		'password' => 'root',
-		'database' => 'mydb',
+		'database' => 'fabienrichard',
 		'prefix' => 'POLY_INT_',
 		'encoding' => 'utf8',
                 'unix_socket' => '/Applications/MAMP/tmp/mysql/mysql.sock'

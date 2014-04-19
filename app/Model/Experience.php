@@ -20,6 +20,13 @@ class Experience extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
+		'Typenotification' => array(
+			'className' => 'Typenotification',
+			'foreignKey' => 'typenotification_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		),
 		'User' => array(
 			'className' => 'User',
 			'foreignKey' => 'user_id',

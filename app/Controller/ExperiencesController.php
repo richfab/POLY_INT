@@ -32,6 +32,10 @@ class ExperiencesController extends AppController {
         $this->set('motives', $this->Experience->Motive->find('list', array(
                         'order' => array('Motive.name' => 'ASC'))));
         
+        //selectionne les motifs par ordre alphabetique
+        $this->set('typenotifications', $this->Experience->Typenotification->find('list', array(
+                        'order' => array('Typenotification.id' => 'DESC'))));
+        
         //on inclut le script google maps pour l'autocomplete des lieux
     	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete'));
         
