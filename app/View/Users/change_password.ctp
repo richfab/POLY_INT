@@ -10,6 +10,7 @@
         ),
         'class' => 'well form-horizontal'
     ));
+    echo $this->Form->input('old_password',array('label'=>'Ancien mot de passe','placeholder' => 'Ancien mot de passe', 'type' => 'password'));
     echo $this->Form->input('password',array('label'=>'Nouveau mot de passe','placeholder' => 'Nouveau mot de passe'));
     echo $this->Form->input('password_confirm',array('label'=>'Confirmer','placeholder' => 'Confirmer', 'type' => 'password'));?>
 

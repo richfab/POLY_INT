@@ -203,17 +203,28 @@ class UsersController extends AppController {
                 ));
                 return;
             }
-            if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__("Les modifications ont bien été enregistrées"), 'alert', array(
+            //on verifie que l'ancien mot de passe correspond
+            $user = $this->User->findById($id);
+            if(AuthComponent::password($this->request->data['User']['old_password']) === $user['User']['password']){
+            
+                if ($this->User->save($this->request->data)) {
+                    $this->Session->setFlash(__("Les modifications ont bien été enregistrées"), 'alert', array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-success'
+                    ));
+                    return $this->redirect(array('action' => 'profile'));
+                }
+                $this->Session->setFlash(__("Erreur lors de l'enregistrement"), 'alert', array(
                     'plugin' => 'BoostCake',
-                    'class' => 'alert-success'
+                    'class' => 'alert-danger'
                 ));
-                return $this->redirect(array('action' => 'profile'));
             }
-            $this->Session->setFlash(__("Erreur lors de l'enregistrement"), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-danger'
-            ));
+            else{
+                $this->Session->setFlash(__("L'ancien mot de passe est incorrect"), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-danger'
+                ));
+            }
         }
         else{
             $this->request->data = $this->User->read(null, $id);
