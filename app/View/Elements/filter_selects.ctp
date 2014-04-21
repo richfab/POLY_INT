@@ -27,3 +27,5 @@
     <option value="3" date-min="<?= date('Y-m-d');?>" date-max="<?= date('Y-m-d');?>">Maintenant</option>
     <option value="4" date-min="<?= date('Y-m-d');?>" date-max="" >A venir</option>
 </select>
+<!--utile pour le nombre de resultats a afficher-->
+<input type="hidden" name="offset" id="offset" value="0">

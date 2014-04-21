@@ -19,18 +19,15 @@
             <input type="text" name="user_name" class="form-control" placeholder="Nom ou prénom">
         </div>
         <div class="col-sm-2">
-            <button class="btn btn-blue form-control" onclick="search_button();"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
+            <button class="btn btn-blue form-control" onclick="new_search('get_experiences_search');"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
         </div>
         <input type="hidden" name="date_min" id="date_min">
         <input type="hidden" name="date_max" id="date_max">
-        <input type="hidden" name="result_limit" id="result_limit" value="0">
     </div>
 </div>
     
 <div id="list-search" class="experience-list">
-    <ul id="ul-map">
-        
-    </ul>
+    
 </div>
 
 
@@ -45,7 +42,7 @@
             });
         });
         //on lance la recherche au chargement
-        get_experiences_search();
+        get_experiences('get_experiences_search');
 
         //fonction qui valide la soumission du formulaire lors de l'appui sur la touche entrée
         function pressEnter(evt) {
@@ -53,7 +50,7 @@
             var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
             if ((evt.keyCode == 13) && (node.type == "text")) {
                 if(evt.srcElement.name !== 'input'){ //si le champs n'est pas celui du lieu
-                    search_button();
+                    new_search('get_experiences_search');
                 }
             }
         }

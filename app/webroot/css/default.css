@@ -201,7 +201,7 @@ h2 > span.wut {
     min-height: 200px;
 }
 
-#list-search > #loader-search{
+.loader-list{
     width: 100%;
     text-align: center;
 }

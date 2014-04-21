@@ -8,11 +8,25 @@ var geocoder;
 
 function echarlemagne(){
     
+    var count = 0;
     geocoder = new google.maps.Geocoder();
     
     $.getJSON( "../app/webroot/json/echarlemagneNantes.json", function( data ) {
         $.each(data, function(i, item) {
-            experience_to_geocode(data[i]);
+            data[i].motive_id = "1"; //stage
+            data[i].school_id = "1"; //nantes
+            data[i].typenotification_id = "1"; //jamais
+            data[i].comment = ""; //sans commentaire
+            if(!data[i].description){
+                data[i].description = "";
+            }
+            //si le pays n'est pas la France
+            if(data[i].country_name !== "FRANCE"){
+                setTimeout(function(){
+                    experience_to_geocode(data[i]);
+                },1000*count);
+                count++;
+            }
         });
     });
     
@@ -44,21 +58,20 @@ function experience_to_geocode(experience){
     });
 }
 
-function send_to_db(_data){
+function send_to_db(experience){
     
     $.ajax({
         type:"PUT",
         url : 'add_experience_ajax',
-        data : _data,
+        data : experience,
         dataType : 'json',
         success : function(data) {
-            console.log('inserted : '+_data);
+            console.log('inserted : '+experience.email +' à '+experience.city_name+', '+experience.country_name);
         },
         error : function(data) {
-            console.log('error trying to insert : '+_data);
+            console.log('error trying to insert : '+experience.email +' à '+experience.city_name+', '+experience.country_name);
         },
         complete : function(data) {
-            alert('done');
         }
     });
     

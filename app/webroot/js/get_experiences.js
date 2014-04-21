@@ -1,25 +1,26 @@
 ////////////*FONCTIONS DE RECUPERATION DES DONNEES*////////////
-//fonction permettant de recuperer les infos dans la base de donnees pour l'affichage de la carte
+
+//recupere les infos dans la base de donnees pour l'affichage de la carte au chargement de la page explore
 function get_map_init(){
     fetch_map_values('{}');
 }
 
+//recupere les infos dans la base de donnees pour l'affichage de la carte au changement de filtres
 function get_map(){
     var filter = get_filter_params();
     fetch_map_values(filter);
     
     //si une region (ville ou pays) est selectionnee on raffraichit aussi la liste correspondante
     if(selected_region.type){
-        //on ajoute le parametre de vue a rendre
-        var view_to_render = $.parseJSON('{"view_to_render":"get_experiences_map"}');
         //on ajoute le parametre country_id
         var country_or_city_json = $.parseJSON('{"'+selected_region.type+'":"'+selected_region.id+'"}');
         //on join les trois tableaux de parametres
-        $.extend(filter,view_to_render,country_or_city_json);
-        get_experiences(filter);
+        $.extend(filter,country_or_city_json);
+        new_search('get_experiences_map',filter);
     }
 }
 
+//recupere les infos dans la bdd a partir des paramêtres de filtre
 function fetch_map_values(filter){
     
     //on affiche le loader au milieu de la carte
@@ -42,19 +43,36 @@ function fetch_map_values(filter){
             update_map(data);
         },
         error : function(data) {
-            //            alert("Une erreur est survenue, veuillez réessayer dans quelques instants.");
+            //alert("Une erreur est survenue, veuillez réessayer dans quelques instants.");
         },
         complete : function(data) {
+            //on cache le loader du milieu de la carte
             $('#loader-map').hide();
         }
     });
 }
 
-//fonction permettant de recuperer les experiences dans la base de donnees pour l'affichage de la liste sur la carte
-function get_experiences(filter){
+//recuperer les experiences dans la base de donnees pour l'affichage de la liste sur la carte
+function get_experiences(_view_to_render, _filter){
     
-    //on affiche le loader
-    $('<div id="loader-search"><img height="40px" src="/explorer/img/loader.GIF"/></div>').appendTo('#list-search');
+    //on recupere les params initiaux
+    var filter = get_filter_params();
+    
+    //si une region (ville ou pays) est selectionnee on raffraichit aussi la liste correspondante
+    if(_view_to_render === 'get_experiences_map' && selected_region.type){
+        //on ajoute le parametre country_id
+        var country_or_city_json = $.parseJSON('{"'+selected_region.type+'":"'+selected_region.id+'"}');
+        //on join les deux tableaux de parametres
+        $.extend(filter,country_or_city_json);
+    }
+    
+    //on ajoute le parametre de vue a rendre
+    var view_to_render = $.parseJSON('{"view_to_render":"'+_view_to_render+'"}');
+    //on join les trois tableaux de parametres
+    $.extend(filter,_filter,view_to_render);
+    
+    //on affiche le loader pour la page search
+    $('#list-search').append('<div class="loader-list"><img height="40px" src="/explorer/img/loader.GIF"/></div>');
     //on affiche le loader au milieu de la carte
     show_loader_map();
     
@@ -64,47 +82,46 @@ function get_experiences(filter){
         data : filter,
         dataType : 'html',
         success : function(data) {
-            $('.experience-list').html(data);
-            $('.experience-list').slideDown(300);
+            $('.experience-list').append(data);
+            $('#list-map').slideDown(300);
         },
         error : function(data) {
-            //            alert("Une erreur est survenue, veuillez réessayer dans quelques instants.");
+            //alert("Une erreur est survenue, veuillez réessayer dans quelques instants.");
         },
         complete : function(data) {
             //TODO on cache le loader
             $('#loader-map').hide();
+            $('.loader-list').remove();
+            
+            //incremente le offset pour le 'plus' de la liste des resultats
+            $('input[name=offset]').val($('input[name=offset]').val()*1+20);
         }
     });
 }
 
+//affiche un gif de chargement au milieu de la carte
 function show_loader_map(){
     $('#loader-map').css('top',$('#world-map').height()/2);
     $('#loader-map').css('left',$('#world-map').width()/2);
     $('#loader-map').show();
 }
 
-function search_button(){
+//réinitialise le offset, vide la liste des experiences et lance la recherche d'experiences
+function new_search(view_to_render,filter){
     //on vide la liste des resultats
-    $('#list-search').empty();
-    //on remet la limite a 0
-    $('input[name=result_limit]').val(0);
-    //on lance la recherche
-    get_experiences_search();
-}
-
-function get_experiences_search(){
-    //incremente le nombre de resultats max
-    $('input[name=result_limit]').val($('input[name=result_limit]').val()*1+20);
-    //on recupere les params initiaux
-    var filter = get_filter_params();
-    //on ajoute le parametre de vue a rendre
-    var view_to_render = $.parseJSON('{"view_to_render":"get_experiences_search"}');
-    //on join les trois tableaux de parametres
-    $.extend(filter,view_to_render);
+    $('.experience-list').empty();
     
-    get_experiences(filter);
+    //on remet le offset a 0
+    $('input[name=offset]').val(0);
+    if(filter){
+        filter.offset = "0";
+    }
+    
+    //on lance la recherche
+    get_experiences(view_to_render,filter);
 }
 
+//recupre les parametres de filtres et le offset
 function get_filter_params(){
     
     var filter = {};
@@ -136,11 +153,11 @@ function get_filter_params(){
     if($('input[name=date_max]').length !== 0 && $('input[name=date_max]').val() !== ''){
         var date_max = $.parseJSON('{"date_max":"'+$('input[name=date_max]').val()+'"}');
     }
-    if($('input[name=result_limit]').length !== 0){
-        var result_limit = $.parseJSON('{"result_limit":"'+$('input[name=result_limit]').val()+'"}');
+    if($('input[name=offset]').length !== 0){
+        var offset = $.parseJSON('{"offset":"'+$('input[name=offset]').val()+'"}');
     }
     
-    $.extend(filter,deparment_id,motive_id,school_id,key_word,city_name,country_id,user_name,date_min,date_max,result_limit);
+    $.extend(filter,deparment_id,motive_id,school_id,key_word,city_name,country_id,user_name,date_min,date_max,offset);
     
     return filter;
 }

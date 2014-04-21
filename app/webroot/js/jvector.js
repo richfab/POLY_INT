@@ -59,16 +59,13 @@ function init_map(){
             
             //on recupere les params initiaux
             var filter = get_filter_params();
-            //on ajoute le parametre de vue a rendre
-            var view_to_render = $.parseJSON('{"view_to_render":"get_experiences_map"}');
             //on ajoute le parametre country_id
             var country_json = $.parseJSON('{"country_id":"'+code+'"}');
             //on join les trois tableaux de parametres
-            $.extend(filter,view_to_render,country_json);
+            $.extend(filter,country_json);
             
             $('#list-map').slideUp(100, function(){
-                $("#ul-map").empty();
-                get_experiences(filter);
+                new_search('get_experiences_map',filter);
             });
             
             selected_region.type = 'country_id';
@@ -77,16 +74,13 @@ function init_map(){
         onMarkerClick: function(event, code){
             //on recupere les params initiaux
             var filter = get_filter_params();
-            //on ajoute le parametre de vue a rendre
-            var view_to_render = $.parseJSON('{"view_to_render":"get_experiences_map"}');
             //on ajoute le parametre city_id
             var city_id = $.parseJSON('{"city_id":"'+_data.cities.id[code]+'"}'); 
             //on join les trois tableaux de parametres
-            $.extend(filter,view_to_render,city_id);
+            $.extend(filter,city_id);
             
             $('#list-map').slideUp(100, function(){
-                $("#ul-map").empty();
-                get_experiences(filter);
+                new_search('get_experiences_map',filter);
             });
             
             selected_region.type = 'city_id';
