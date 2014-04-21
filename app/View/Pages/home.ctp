@@ -3,7 +3,7 @@
 
 <div class="block-color hidden-xs">
     <div class="container">
-        <h2>Polytech Expats est un véritable passeport partagé entre tous les étudiants du réseau Polytech. C'est l'unique plate-forme qui permet de contacter rapidement n'importe quel étudiant de Polytech parti en stage ou en semestre à l'étranger.</h2>
+        <h2>Polytech Abroad est un véritable passeport partagé entre tous les étudiants du réseau Polytech. C'est l'unique plate-forme qui permet de contacter rapidement n'importe quel étudiant de Polytech parti en stage ou en semestre à l'étranger.</h2>
     </div>
 </div>
     
