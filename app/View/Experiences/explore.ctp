@@ -17,7 +17,7 @@
     </ul>-->
     <ul class="list-unstyled experience-list"></ul>
 </div>
-<?= $this->Html->image('loader.GIF', array('alt' => 'loader','id'=>'loader-map','height'=>'40px'));?>
+<?= $this->Html->image('loader.GIF', array('alt' => 'loader','id'=>'loader-map','height'=>'20px','style'=>'z-index:9999'));?>
 <script type="text/javascript">
     
     $( function() {

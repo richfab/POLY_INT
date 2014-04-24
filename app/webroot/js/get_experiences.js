@@ -1,3 +1,6 @@
+//tableau de compteurs pour l'affichage temporisé du logo de chargement (loader)
+var timeoutID = [];
+
 ////////////*FONCTIONS DE RECUPERATION DES DONNEES*////////////
 
 //recupere les infos dans la base de donnees pour l'affichage de la carte au chargement de la page explore
@@ -47,7 +50,7 @@ function fetch_map_values(filter){
         },
         complete : function(data) {
             //on cache le loader du milieu de la carte
-            $('#loader-map').hide();
+            hide_loader_map();
         }
     });
 }
@@ -89,8 +92,8 @@ function get_experiences(_view_to_render, _filter){
             //alert("Une erreur est survenue, veuillez réessayer dans quelques instants.");
         },
         complete : function(data) {
-            //TODO on cache le loader
-            $('#loader-map').hide();
+            // on cache le loader
+            hide_loader_map();
             $('.loader-list').remove();
             
             //incremente le offset pour le 'plus' de la liste des resultats
@@ -99,11 +102,22 @@ function get_experiences(_view_to_render, _filter){
     });
 }
 
-//affiche un gif de chargement au milieu de la carte
+function hide_loader_map(){
+    //on annule le compteur pour le cas ou la réponse à été plus rapide que le délais pour afficher le loader
+    window.clearTimeout(timeoutID.pop());
+    //on cache le loader
+    $('#loader-map').hide();
+}
+
+//affiche un gif de chargement au milieu de la carte après un certain délais
 function show_loader_map(){
-    $('#loader-map').css('top',$('#world-map').height()/2);
-    $('#loader-map').css('left',$('#world-map').width()/2);
-    $('#loader-map').show();
+    //on place le loader a droite du logo du site
+    $('#loader-map').css('top',$('.navbar-brand').offset().top+10);
+    $('#loader-map').css('left',$('.navbar-brand').offset().left+$('.navbar-brand').width()+20);
+    //on ajoute un compteur au tableau de compteurs
+    timeoutID.push(window.setTimeout(function(){
+        $('#loader-map').show(); 
+    }, 500));
 }
 
 //réinitialise le offset, vide la liste des experiences et lance la recherche d'experiences
