@@ -179,6 +179,7 @@
             
         },
         open : function() {
+            
             var self = this;
             this.dd.toggleClass( 'cd-active' );
             this.listopts.css( 'height', ( this.optsCount + 1 ) * ( this.size.height + this.options.gutter ) );

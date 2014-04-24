@@ -35,6 +35,7 @@ html,body{
     
     .nav > li > a.btn {
         padding: 5px 10px;
+        margin-left: 5px;
     }
 }
 

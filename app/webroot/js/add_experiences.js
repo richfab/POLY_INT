@@ -24,7 +24,7 @@ function echarlemagne(){
             if(data[i].country_name !== "FRANCE"){
                 setTimeout(function(){
                     experience_to_geocode(data[i]);
-                },1000*count);
+                },2000*count);
                 count++;
             }
         });
@@ -53,7 +53,7 @@ function experience_to_geocode(experience){
             send_to_db(experience);
         }
         else{
-            console.log('error trying to geocode : '+address);
+            console.log('error trying to geocode : '+JSON.stringify(experience));
         }
     });
 }
@@ -66,10 +66,10 @@ function send_to_db(experience){
         data : experience,
         dataType : 'json',
         success : function(data) {
-            console.log('inserted : '+experience.email +' à '+experience.city_name+', '+experience.country_name);
+            console.log('inserted : '+JSON.stringify(experience));
         },
         error : function(data) {
-            console.log('error trying to insert : '+experience.email +' à '+experience.city_name+', '+experience.country_name);
+            console.log('error trying to insert : '+JSON.stringify(experience));
         },
         complete : function(data) {
         }
