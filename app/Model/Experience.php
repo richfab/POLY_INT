@@ -35,6 +35,13 @@ class Experience extends AppModel {
 			'order' => ''
 		)
 	);
+    
+    public $hasMany = array(
+		'Recommendation' => array(
+			'className' => 'Recommendation',
+			'foreignKey' => 'experience_id'
+		)
+	);
 
     public $validate = array(
         'dateStart' => array(

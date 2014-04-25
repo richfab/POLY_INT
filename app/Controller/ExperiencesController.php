@@ -256,12 +256,14 @@ class ExperiencesController extends AppController {
         }
         $this->render('/Experiences/'.$this->request->data['view_to_render']);
     }
-        
+    
+    //fonction utile a l'ajout d'experience a partir d'une base de donnees comme celle de echarlemagne par exemple
     public function echarlemagne(){
         //on inclut les scripts pour la recuperation des experiences et google maps pour l'autocomplete des lieux
     	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','add_experiences'));
     }
-        
+    
+    //fonction utile a l'ajout d'experience a partir d'une base de donnees comme celle de echarlemagne par exemple
     public function add_experience_ajax(){
         
         $this->request->onlyAllow('ajax');

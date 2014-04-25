@@ -1,3 +1,5 @@
+    
+
 <div class="row" id="profile_info">
     <div class="col col-sm-10">
         <h1><?= $user['User']['firstname'];?> <?= $user['User']['lastname'];?></h1>
@@ -17,7 +19,7 @@
     </div>
 </div>
 <h3 style="display: inline-block">Expériences</h3>
-        
+
     <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
 <div class="well">
     <p><?= $this->Html->link("Ajouter une expérience", array('controller' => 'experiences', 'action' => 'info')); ?></p>
@@ -43,6 +45,13 @@
         <?php endif; ?>
             
         <?php echo $this->element('experience_info',array('experience'=>$experience)); ?>
-            
+    
+    <form class="form-inline recommendation-form">
+        <input class="recommendation-experience_id" name="RecommandationExperience_id" type="hidden" value="<?= $experience['Experience']['id'];?>"/>
+        <input name="RecommandationContent" class="form-control recommendation-content"/>
+        <button type="button" onclick="add_recommendation(this);" class="btn btn-default">Enregistrer</button>
+        <input class="recommendation-recommendationtype_id" name="RecommandationRecommandationtype_id" value="1"/>
+    </form>
+        
 </div>
 <?php endforeach; ?>

@@ -268,6 +268,9 @@ class UsersController extends AppController {
         
     public function profile($user_id = null) {
     	App::uses('AuthComponent', 'Controller/Component');
+        
+        //on inclut les scripts pour l'envoi des recommandations en ajax
+    	$this->set('jsIncludes',array('add_recommendation'));
             
         if($this->Auth->loggedIn()){
             
