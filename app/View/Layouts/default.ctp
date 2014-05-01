@@ -75,6 +75,10 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
                             </li>
                             <li class="menu-separator"></li>
                             <li class="menu-item">
+                                <?= $this->Html->link('<span class="glyphicon glyphicon-comment"></span> partager',array('controller'=>'recommendations', 'action'=>'search'),array('style'=>'display:inline-block','escape'=>false));?>
+                            </li>
+                            <li class="menu-separator"></li>
+                            <li class="menu-item">
                                 <?= $this->Html->link('<span class="glyphicon glyphicon-search"></span> rechercher',array('controller'=>'experiences', 'action'=>'search'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
                             <li class="menu-separator"></li>

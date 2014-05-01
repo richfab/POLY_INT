@@ -1,3 +1,11 @@
+<?php
+
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+?>
     
 
 <div class="row" id="profile_info">
@@ -27,7 +35,7 @@
     <?php endif; ?>
         
 <?php foreach ($experiences as $experience): ?>
-<div class="well">
+    <div class="well">
     
         <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
     
@@ -45,13 +53,62 @@
         <?php endif; ?>
             
         <?php echo $this->element('experience_info',array('experience'=>$experience)); ?>
-    
-    <form class="form-inline recommendation-form">
-        <input class="recommendation-experience_id" name="RecommandationExperience_id" type="hidden" value="<?= $experience['Experience']['id'];?>"/>
-        <input name="RecommandationContent" class="form-control recommendation-content"/>
-        <button type="button" onclick="add_recommendation(this);" class="btn btn-default">Enregistrer</button>
-        <input class="recommendation-recommendationtype_id" name="RecommandationRecommandationtype_id" value="1"/>
-    </form>
         
-</div>
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h5 class="panel-title panel-title-recommendations">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?= $experience['Experience']['id']; ?>">
+                            <span style="width:20px" class="glyphicon glyphicon-tags"></span> Bons plans
+                        </a>
+                    </h5>
+                </div>
+                <div id="collapse<?= $experience['Experience']['id']; ?>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+                            <p><small>Recommandez des hébergements, des bars, des moyens de transports, etc :</small></p>
+                            <?php foreach ($recommendationtypes as $recommendationtype) : ?>
+
+                                <div class="input-group form-group">
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-<?= $recommendationtype['Recommendationtype']['icon'];?>"></span></span>
+
+                                <?php $recommendationIsEmpty=true;?>
+
+                                <?php foreach ($experience['Recommendation'] as $recommendation):?>
+                                    <?php if($recommendation['recommendationtype_id'] === $recommendationtype['Recommendationtype']['id']):?>
+                                        <?php $recommendationIsEmpty=false;?>
+                                        <input name="RecommandationContent" placeholder="<?= $recommendationtype['Recommendationtype']['name']; ?>" value="<?= $recommendation['content'];?>" recommendation_id="<?= $recommendation['id'];?>" experience_id="<?= $experience['Experience']['id']; ?>" recommendationtype_id="<?= $recommendationtype['Recommendationtype']['id'];?>" class="form-control recommendation-content"/>
+                                    <?php endif;?>
+                                <?php endforeach;?>
+
+                                <?php if($recommendationIsEmpty):?>
+                                    <input name="RecommandationContent" placeholder="<?= $recommendationtype['Recommendationtype']['name']; ?>" experience_id="<?= $experience['Experience']['id']; ?>" recommendationtype_id="<?= $recommendationtype['Recommendationtype']['id'];?>" class="form-control recommendation-content"/>
+                                <?php endif;?>
+
+                                </div>
+                            <?php endforeach;?>
+
+                            <button type="button" onclick="add_recommendations(this);" class="btn btn-default">Enregistrer</button>
+                        <?php else :?>
+                            <?php foreach ($experience['Recommendation'] as $recommendation):?>
+                                <div class="row">
+                                    <div class="col-sm-1" style="text-align:right;">
+                                        <p><span class="glyphicon glyphicon-<?= $recommendationtypes_list[$recommendation['recommendationtype_id']];?> recommendationtype-icon selected"></span></p>
+                                    </div>
+                                    <div class="col-sm-11">
+                                        <p><?= $recommendation['content']; ?></p>
+                                    </div>
+                                </div>
+                            <?php endforeach;?>
+                            <?php if (!$experience['Recommendation']) :?>
+                                <p>Aucun bon plan</p>
+                            <?php endif;?>
+                        <?php endif;?>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+    </div>
 <?php endforeach; ?>

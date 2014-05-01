@@ -3,7 +3,7 @@
         <li>
             <div class="row">
                 <div class="col-xs-2">
-                    <?= $this->Html->image('avatar.png', array('alt' => 'avatar','class' => 'avatar','height' => '60px','onload' => "this.style.backgroundColor='#".$experience['User']['School']['color']."'"));?>
+                    <?= $this->Html->image('avatar.png', array('alt' => 'avatar','class' => 'avatar','height' => '60px','onload' => "this.style.backgroundColor='#".$school_colors[$experience['User']['school_id']]."'"));?>
                 </div>
                 <div class="col-xs-10">
                     <p><?= $this->Html->link($experience['User']['firstname'].' '.$experience['User']['lastname'],array('controller'=>'users', 'action' => 'profile', $experience['User']['id']));?></p>

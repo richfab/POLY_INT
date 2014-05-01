@@ -1,4 +1,4 @@
-//tableau de compteurs pour l'affichage temporisé du logo de chargement (loader)
+//tableau de compteurs pour l'affichage temporisé du logo de chargement (loader) utile pour la carte
 var timeoutID = [];
 
 ////////////*FONCTIONS DE RECUPERATION DES DONNEES*////////////
@@ -55,7 +55,7 @@ function fetch_map_values(filter){
     });
 }
 
-//recuperer les experiences dans la base de donnees pour l'affichage de la liste sur la carte
+//recuperer les experiences dans la base de donnees pour l'affichage de la liste
 function get_experiences(_view_to_render, _filter){
     
     //on recupere les params initiaux

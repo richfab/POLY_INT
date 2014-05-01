@@ -4,6 +4,11 @@ html,body{
     background-color: #f4f4f4;
 }
 
+.well{
+    font-weight: 300;
+    font-size: 15px;
+}
+
 #container{
     min-height: 100%;
     position: relative;
@@ -197,7 +202,7 @@ h2 > span.wut {
     display: none;
 }
 
-#list-search{
+#list-search, #recommendation-list{
     margin-bottom: 30px;
     min-height: 200px;
 }
@@ -295,4 +300,32 @@ h2 > span.wut {
 #avatar_profile, #avatar_search{
     border-radius: 100%;
     padding: 1px;
+}
+
+#Recommendationtypes{
+    text-align: center;
+}
+
+#Recommendationtypes .recommendationtype-icon{
+    margin-left: 20px;
+}
+
+.recommendationtype-icon{
+    border-radius: 100%;
+    width: 30px!important;
+    height: 30px;
+    text-align: center;
+    line-height: 2;
+    border: 1px solid #cccccc;
+    cursor: pointer;
+    background-color: white;
+}
+
+.recommendationtype-icon.selected{
+    border-color: #e74c3c;
+}
+
+.panel-title-recommendations{
+    font-size: 14px;
+    color: #e74c3c;
 }

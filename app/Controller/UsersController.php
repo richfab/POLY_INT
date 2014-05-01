@@ -290,10 +290,17 @@ class UsersController extends AppController {
             throw new NotFoundException(__("Cet utilisateur n'existe pas"));
         }
         $this->set('user',$this->User->read(null, $user_id));
+        $this->set('countries',$this->User->Experience->City->Country->find('list'));
         $this->set('experiences',$this->User->Experience->find('all', array(
             'conditions' => array('user_id' => $user_id),
             'order' => array('dateEnd' => 'DESC'),
-            'recursive' => 2
+            'recursive' => 1
+        )));
+        //recupere les recommendationtypes
+        $this->set('recommendationtypes',$this->User->Experience->Recommendation->Recommendationtype->find('all'));
+        //recupere les recommendationtypes par liste
+        $this->set('recommendationtypes_list',$this->User->Experience->Recommendation->Recommendationtype->find('list',array(
+            'fields' => array('Recommendationtype.icon')
         )));
     }
         

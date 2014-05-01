@@ -3,10 +3,10 @@
     <div class="well">
         <div class="row">
             <div class="col-sm-2 profile-info-search">
-                <p><?= $this->Html->image('avatar.png', array('alt' => 'avatar','class' => 'avatar','id' => 'avatar_search','width' => '60px','onload' => "this.style.backgroundColor='#".$experience['User']['School']['color']."'"));?></p>
+                <p><?= $this->Html->image('avatar.png', array('alt' => 'avatar','class' => 'avatar','id' => 'avatar_search','width' => '60px','onload' => "this.style.backgroundColor='#".$school_colors[$experience['User']['school_id']]."'"));?></p>
                 <p><?= $this->Html->link($experience['User']['firstname'].' '.$experience['User']['lastname'],array('controller'=>'users', 'action' => 'profile', $experience['User']['id']));?></p>
-                <p>Polytech <?= $experience['User']['School']['name'];?></p>
-                <p><?= $experience['User']['Department']['name'];?></p>
+                <p>Polytech <?= $school_names[$experience['User']['school_id']];?></p>
+                <p><?= $departments[$experience['User']['department_id']];?></p>
             </div>
             <div class="col-sm-9">
                 

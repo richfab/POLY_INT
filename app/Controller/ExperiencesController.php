@@ -78,7 +78,9 @@ class ExperiencesController extends AppController {
             ));
         }
         else{
-            $this->request->data = $this->Experience->find('first', array('conditions' => array('Experience.id' => $experience_id), 'recursive' => 2));
+            $this->request->data = $this->Experience->find('first', array('conditions' => array('Experience.id' => $experience_id), 'recursive' => 1));
+            //recupere les pays
+            $this->set('countries',$this->Experience->City->Country->find('list'));
         }
     }
         
@@ -212,7 +214,7 @@ class ExperiencesController extends AppController {
     public function search(){
         //on inclut les scripts pour la recuperation des experiences et google maps pour l'autocomplete des lieux
     	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','get_experiences','modernizr.custom.63321','jquery.dropdown'));
-        //on inclut les style pour la carte
+        //on inclut les style pour les filtres
         $this->set('cssIncludes',array('filter'));
             
         //selectionne les motifs par ordre alphabetique
@@ -248,11 +250,20 @@ class ExperiencesController extends AppController {
                 
             $this->set('experiences', $this->Experience->find('all', array(
                         'conditions' => $conditions,
-                        'recursive' => 2,
+                        'recursive' => 1,
                         'order' => $order,
                         'limit' => $result_limit,
                         'offset' => $offset,
                         'fields' => array('*','DATEDIFF(Experience.dateEnd, Experience.dateStart)/30 monthDiff'))));
+            
+            //recupere les pays
+            $this->set('countries',$this->Experience->City->Country->find('list'));
+            //recupere les departements
+            $this->set('departments',$this->Experience->User->Department->find('list'));
+            //recupere les ecoles
+            $this->set('school_names',$this->Experience->User->School->find('list'));
+            $this->set('school_colors',$this->Experience->User->School->find('list',array(
+                                                                'fields' => array('School.color'))));
         }
         $this->render('/Experiences/'.$this->request->data['view_to_render']);
     }
@@ -363,9 +374,6 @@ class ExperiencesController extends AppController {
             if(!empty($request_data['date_max'])){
                 $conditions['Experience.dateStart <='] = $request_data['date_max'];
             }
-        }
-        if(!empty($request_data['city_id'])){
-            $conditions['Experience.city_id'] = $request_data['city_id'];
         }
         if(!empty($request_data['city_name'])){
             $conditions['City.name'] = $request_data['city_name'];

@@ -39,7 +39,8 @@ class Experience extends AppModel {
     public $hasMany = array(
 		'Recommendation' => array(
 			'className' => 'Recommendation',
-			'foreignKey' => 'experience_id'
+			'foreignKey' => 'experience_id',
+                        'order' => 'Recommendation.recommendationtype_id'
 		)
 	);
 

@@ -1,22 +1,24 @@
-function add_recommendation(save_button){
+function add_recommendations(save_button){
     
     $(save_button).attr('disabled',true);
     
-    var recommendation = {};
-    recommendation.content = $(save_button).siblings('.recommendation-content').val();
-    recommendation.experience_id = $(save_button).siblings('.recommendation-experience_id').val();
-    recommendation.recommendationtype_id = $(save_button).siblings('.recommendation-recommendationtype_id').val();
+    var collection = $(save_button).siblings('.input-group').children('.recommendation-content');
     
-    console.log(recommendation);
-    if(recommendation.content !== ''){
-        send_to_db(recommendation, save_button);
-    }
-    else{
-        $(save_button).attr('disabled',false);
-    }
+    collection.each(function(index){
+        var recommendation = {};
+        recommendation.content = $(this).val();
+        recommendation.id = $(this).attr('recommendation_id');
+        recommendation.experience_id = $(this).attr('experience_id');
+        recommendation.recommendationtype_id = $(this).attr('recommendationtype_id');
+        
+        console.log(recommendation);
+        
+        var islast = (collection.size()-1 === index) ? true : false;
+        send_to_db(recommendation, save_button, islast);
+    });
 }
 
-function send_to_db(recommendation, save_button){
+function send_to_db(recommendation, save_button, islast){
     
     $.ajax({
         type:"PUT",
@@ -29,7 +31,9 @@ function send_to_db(recommendation, save_button){
             console.log('error trying to insert : '+JSON.stringify(recommendation));
         },
         complete : function(data) {
-            $(save_button).attr('disabled',false);
+            if(islast){
+                $(save_button).attr('disabled',false);
+            }
         }
     });
     

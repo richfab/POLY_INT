@@ -2,7 +2,7 @@
     <?php if($experience['Motive']['name'] !== 'Voyage'): ?>
         <strong><?= $experience['Experience']['establishment']; ?></strong> - 
     <?php endif; ?>
-<?= $experience['City']['name'];?>, <?= $experience['City']['Country']['name'];?></p>
+<?= $experience['City']['name'];?>, <?= $countries[$experience['City']['country_id']];?></p>
 <?php if($experience['Motive']['name'] !== 'Voyage'): ?>
     <?php if($experience['Experience']['description'] != ""): ?>
         <p><?= $experience['Experience']['description'];?></p>
@@ -21,6 +21,6 @@
     <?php if($experience['Experience']['user_id'] == AuthComponent::user('id')) : ?>
     <p><?= $this->Html->link("Ajouter un avis", array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id'])); ?></p>
     <?php else: ?>
-        <p>Pas encore d'avis</p>
+        <!--<p>Pas encore d'avis</p>-->
     <?php endif; ?>
 <?php endif;?>
