@@ -47,11 +47,19 @@ html,body{
 #presentation {
     background-attachment: fixed;
     background: #323234 url(../img/background3.jpg) no-repeat;
-    background-position: center 50px;
-    background-attachment: fixed;
+    background-position: center;
     height: 300px;
     width: 100%;
     border-bottom: 1px solid #C9C9C9;
+}
+
+.linkedin-name{
+    font-variant: normal;
+    font-weight: 500;
+    padding: 7px;
+    background-color: #007bb6;
+    color: white;
+    border-radius: 5px;
 }
 
 button.btn-blue, input.btn-blue, a.btn-blue {
@@ -284,6 +292,11 @@ h2 > span.wut {
     color: #e74c3c;
 }
 
+#filter-search-inputs > div{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .well{
     background-color: white;
 }
@@ -328,4 +341,8 @@ h2 > span.wut {
 .panel-title-recommendations{
     font-size: 14px;
     color: #e74c3c;
+}
+
+#legal,#about{
+    margin-top: 30px;
 }

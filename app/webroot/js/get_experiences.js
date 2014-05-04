@@ -112,7 +112,7 @@ function hide_loader_map(){
 //affiche un gif de chargement au milieu de la carte après un certain délais
 function show_loader_map(){
     //on place le loader a droite du logo du site
-    $('#loader-map').css('top',$('.navbar-brand').offset().top+10);
+    $('#loader-map').css('top',$('.navbar-brand').offset().top+14);
     $('#loader-map').css('left',$('.navbar-brand').offset().left+$('.navbar-brand').width()+20);
     //on ajoute un compteur au tableau de compteurs
     timeoutID.push(window.setTimeout(function(){

@@ -27,7 +27,11 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
 		<?php echo $title_for_layout; ?>
         </title>
 	<?php
-		echo $this->Html->meta('icon');
+		echo $this->Html->meta(
+                    'favicon.ico',
+                    '/favicon-plane.ico',
+                    array('type' => 'icon')
+                );
                 
                 echo $this->Html->css(array('bootstrap','default'));
                 echo $this->Html->script(array('jquery-1.11.0.min','bootstrap')); // Inclut la librairie Jquery
@@ -82,10 +86,6 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
                                 <?= $this->Html->link('<span class="glyphicon glyphicon-search"></span> rechercher',array('controller'=>'experiences', 'action'=>'search'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
                             <li class="menu-separator"></li>
-                            <li class="menu-item">
-                                <?= $this->Html->link('<span class="glyphicon glyphicon-info-sign"></span> a propos',array('controller'=>'pages', 'action'=>'about'),array('style'=>'display:inline-block','escape'=>false));?>
-                            </li>
-                            <li class="menu-separator"></li>
                             <?php if(AuthComponent::user('id')): ?>
                                 <li>
                                     <?= $this->Html->link(
@@ -130,8 +130,12 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
             
             <div id="footer">
                 <div class="container">
-                    <p class="pull-left"><a href="http://fabienrichard.fr"></a></p>
-                    <p class="pull-right"><a href="./mentions-legales.html">mentions légales</a> | <a href="./conditions-utilisations.html">conditions d'utilisations</a></p>
+                    <p class="pull-right">
+                        <?= $this->Html->link('mentions légales',
+                                array('controller' => 'pages', 'action' => 'legal'));?> | 
+                        <?= $this->Html->link('a propos',
+                                array('controller' => 'pages', 'action' => 'about'));?>
+                    </p>
                 </div>
             </div>
             

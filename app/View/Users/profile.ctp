@@ -59,14 +59,14 @@
                 <div class="panel-heading">
                     <h5 class="panel-title panel-title-recommendations">
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapse<?= $experience['Experience']['id']; ?>">
-                            <span style="width:20px" class="glyphicon glyphicon-tags"></span> Bons plans
+                            <span style="width:20px" class="glyphicon glyphicon-comment"></span> Bons plans
                         </a>
                     </h5>
                 </div>
                 <div id="collapse<?= $experience['Experience']['id']; ?>" class="panel-collapse collapse">
                     <div class="panel-body">
                         <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-                            <p><small>Recommandez des hébergements, des bars, des moyens de transports, etc :</small></p>
+                            <p><small>Recommande des hébergements, des sorties, des moyens de transports, etc :</small></p>
                             <?php foreach ($recommendationtypes as $recommendationtype) : ?>
 
                                 <div class="input-group form-group">

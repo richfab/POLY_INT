@@ -1,4 +1,4 @@
-<div class="container" id="presentation">
+<div class="" id="presentation">
 </div>
 
 <div class="block-color hidden-xs">
@@ -24,22 +24,26 @@
         <div class="col-md-3">
             <?= $this->Html->image('5.png', array('alt' => 'geolocalisation'));?>
             <h2>Geolocalisation</h2>
-            <p>Retrouvez les étudiants de Polytech en stage ou semestre à l'étranger</p>
+            <p>Retrouve les étudiants de Polytech en stage ou semestre à l'étranger</p>
         </div>
         <div class="col-md-3">
             <?= $this->Html->image('8.png', array('alt' => 'temps'));?>
             <h2>Depuis 2013</h2>
-            <p>Remontez le temps et découvrez où sont partis les étudiants avant vous</p>
+            <p>Remonte le temps et découvrez où sont partis les étudiants avant vous</p>
         </div>
         <div class="col-md-3">
             <?= $this->Html->image('14.png', array('alt' => 'retour experience'));?>
             <h2>Retour d'experience</h2>
-            <p>Consultez les avis des étudiants pour choisir la meilleure destination</p>
+            <p>Consulte les avis des étudiants pour choisir la meilleure destination</p>
         </div>
         <div class="col-md-3">
             <?= $this->Html->image('11.png', array('alt' => 'social'));?>
             <h2>Social</h2>
-            <p>Contactez facilement les étudiants déjà présent dans un pays</p>
+            <p>Contacte facilement les étudiants déjà présent dans un pays</p>
         </div>
     </div>
+</div>
+
+<div class="access">
+    <h4>Échange aussi sur la <a href="https://www.linkedin.com/groups?gid=6576008" target="_blank"><span class="linkedin-name">communauté LinkedIn</span></a> de Polytech Abroad</h4>
 </div>
