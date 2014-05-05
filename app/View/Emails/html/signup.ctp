@@ -3,7 +3,7 @@
 </p>
     
 <p>
-    Ton inscription à Polytech Expats a bien été prise en compte !
+    Ton inscription à Polytech Abroad a bien été prise en compte !
 </p>
 
 <p>

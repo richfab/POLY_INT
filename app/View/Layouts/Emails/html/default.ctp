@@ -24,6 +24,6 @@
     <body>
 	<?php echo $this->fetch('content'); ?>
             
-        <p>L'équipe de Polytech Expats</p>
+        <p>L'équipe de Polytech Abroad</p>
     </body>
 </html>
