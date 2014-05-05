@@ -1,4 +1,4 @@
-//fonction qui empeche la soumission du formulaire lors de l'appui sur la touche entrée (utile lors de la selection du lieu dans la liste)
+//fonction qui empeche la soumission du formulaire lors de l'appui sur la touche entrée (utile lors de la selection du lieu dans la liste avec entrer)
 function stopEnter(evt) {
     var evt = (evt) ? evt : ((event) ? event : null);
     var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
@@ -27,7 +27,6 @@ function initialize() {
         var countryLong_name,countryShort_name,cityLong_name = '';
         
         var place = autocomplete.getPlace();
-        console.log(place);
         
         if (!place.geometry) {
             // empty cityLat and cityLon fields
@@ -41,8 +40,6 @@ function initialize() {
         
         // If the place has a geometry, then populate the citylat citylon fields
         if (place.geometry) {
-            
-            console.log(place);
             
             for(var i in place.address_components){
                 if(place.address_components[i].types[0]==="country" && place.address_components[i].types[1]==="political"){
@@ -61,23 +58,33 @@ function initialize() {
             countryName.value = countryLong_name;
             countryCode.value = countryShort_name;
             
+            //le lieu a bien été selectionné dans la liste, on valide le champ
             $('#ExperienceInputDiv').removeClass('has-error');
+            $('#validatePlaceButton').attr('disabled',false);
         }
     });
     
-    //cette fonction permet d'empecher l'utilisateur de modifier a la main le lieu en vidant les champs citylat, citylon et input eu moment ou l'utilisateur clique dans le champs input pour le modifier
-    input.onkeyup = function() {
-        if($('#ExperienceInput').val() !== ""){
-            $('#ExperienceInputDiv').addClass('has-error');
+    //cette fonction vide le nom de la ville, le pays, la lat et lon dès que l'utilisateur appuie sur une touche (sauf entrer)
+    input.onkeyup = function(evt) {
+        var evt = (evt) ? evt : ((event) ? event : null);
+        //si ce n'est pas la touche entrée (13), on ne fait rien
+        if (evt.keyCode !== 13) {
+            //si le champs input est vide, ce n'est pas une erreur
+            if($('#ExperienceInput').val() === ""){
+                $('#ExperienceInputDiv').removeClass('has-error');
+                $('#validatePlaceButton').attr('disabled',false);
+            }
+            //sinon, c'est une erreur (l'utilisateur a essayé de rentrer un lieu 'a la main')
+            else{
+                $('#ExperienceInputDiv').addClass('has-error');
+                $('#validatePlaceButton').attr('disabled',true);
+            }
+            cityName.value = '';
+            cityLat.value = '';
+            cityLon.value = '';
+            countryName.value = '';
+            countryCode.value = '';
         }
-        else{
-            $('#ExperienceInputDiv').removeClass('has-error');
-        }
-        cityName.value = '';
-  	cityLat.value = '';
-        cityLon.value = '';
-        countryName.value = '';
-        countryCode.value = '';
     };
 }
 

@@ -19,7 +19,7 @@
             <input type="text" name="user_name" class="form-control" placeholder="Nom ou prénom">
         </div>
         <div class="col-sm-2">
-            <button class="btn btn-blue form-control" onclick="new_search('get_experiences_search');"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
+            <button id="validatePlaceButton" class="btn btn-blue form-control" onclick="new_search('get_experiences_search');"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
         </div>
         <input type="hidden" name="date_min" id="date_min">
         <input type="hidden" name="date_max" id="date_max">

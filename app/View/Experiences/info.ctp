@@ -42,7 +42,8 @@
                 array('class' => 'btn btn-orange'
         )); ?>
         <?php echo $this->Form->button('Enregistrer', array(
-                'class' => 'btn btn-blue'
+                'class' => 'btn btn-blue',
+                'id' => 'validatePlaceButton'
         ));?>
     </div>
 </div>
@@ -53,7 +54,6 @@
     $( function() {
         
         //cette fonction permet de supprimer les champs description et etablissement si le motif "Voyage" est sélectionné
-        
         var experienceMotiveIdDiv = $('#ExperienceMotiveId').parent().parent();
         var experienceEstablishmentDiv = $('#ExperienceEstablishment').parent().parent();
         var experienceDescriptionDiv = $('#ExperienceDescription').parent().parent();

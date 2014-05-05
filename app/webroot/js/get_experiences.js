@@ -100,6 +100,7 @@ function get_experiences(_view_to_render, _filter){
             $('input[name=offset]').val($('input[name=offset]').val()*1+20);
         }
     });
+    console.log(filter);
 }
 
 function hide_loader_map(){

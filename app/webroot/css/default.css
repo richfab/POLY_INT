@@ -60,6 +60,7 @@ html,body{
     background-color: #007bb6;
     color: white;
     border-radius: 5px;
+    line-height: 3;
 }
 
 button.btn-blue, input.btn-blue, a.btn-blue {

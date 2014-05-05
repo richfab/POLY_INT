@@ -375,6 +375,9 @@ class ExperiencesController extends AppController {
                 $conditions['Experience.dateStart <='] = $request_data['date_max'];
             }
         }
+        if(!empty($request_data['city_id'])){
+            $conditions['Experience.city_id'] = $request_data['city_id'];
+        }
         if(!empty($request_data['city_name'])){
             $conditions['City.name'] = $request_data['city_name'];
         }
