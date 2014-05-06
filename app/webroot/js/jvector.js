@@ -46,30 +46,39 @@ function init_map(){
                     );
         },
         onRegionLabelShow: function(event, label, code){
-            if(_data.countries){
-                var label_content = '<b>'+label.html()+'</b></br>'+ effectif_to_experience(_data.countries[code]);
+            //si c'est la France
+            if(code === 'FR'){
+                var label_content = '<b>'+label.html()+'</b>';
             }
             else{
-                var label_content = '<b>'+label.html()+'</b></br>'+ effectif_to_experience(0);
+                if(_data.countries){
+                    var label_content = '<b>'+label.html()+'</b></br>'+ effectif_to_experience(_data.countries[code]);
+                }
+                else{
+                    var label_content = '<b>'+label.html()+'</b></br>'+ effectif_to_experience(0);
+                }
             }
             label.html(label_content);
         },
         onRegionClick: function(event, code){
             $('#world-map').vectorMap('set', 'focus', code);
             
-            //on recupere les params initiaux
-            var filter = get_filter_params();
-            //on ajoute le parametre country_id
-            var country_json = $.parseJSON('{"country_id":"'+code+'"}');
-            //on join les trois tableaux de parametres
-            $.extend(filter,country_json);
-            
-            $('#list-map').slideUp(100, function(){
-                new_search('get_experiences_map',filter);
-            });
-            
-            selected_region.type = 'country_id';
-            selected_region.id = code;
+            //si ce n'est pas la France 
+            if(code !== 'FR'){
+                //on recupere les params initiaux
+                var filter = get_filter_params();
+                //on ajoute le parametre country_id
+                var country_json = $.parseJSON('{"country_id":"'+code+'"}');
+                //on join les trois tableaux de parametres
+                $.extend(filter,country_json);
+                
+                $('#list-map').slideUp(100, function(){
+                    new_search('get_experiences_map',filter);
+                });
+                
+                selected_region.type = 'country_id';
+                selected_region.id = code;
+            }
         },
         onMarkerClick: function(event, code){
             //on recupere les params initiaux
