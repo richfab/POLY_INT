@@ -34,7 +34,7 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
                 );
                 
                 echo $this->Html->css(array('bootstrap','default'));
-                echo $this->Html->script(array('jquery-1.11.0.min','bootstrap')); // Inclut la librairie Jquery
+                echo $this->Html->script(array('jquery-1.11.0.min','bootstrap','modernizr.min')); // Inclut la librairie Jquery
                 
                 //on inclut les fichiers js qui sont spécifiques a une vue
 		if(isset($jsIncludes)){

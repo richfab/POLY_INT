@@ -6,8 +6,8 @@
  * and open the template in the editor.
  */
 ?>
-    
 
+    
 <div class="row" id="profile_info">
     <div class="col col-sm-10">
         <h1><?= $user['User']['firstname'];?> <?= $user['User']['lastname'];?></h1>
@@ -27,18 +27,18 @@
     </div>
 </div>
 <h3 style="display: inline-block">Expériences</h3>
-
+    
     <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
 <div class="well">
     <p><?= $this->Html->link("Ajouter une expérience", array('controller' => 'experiences', 'action' => 'info')); ?></p>
 </div>
     <?php endif; ?>
-        
+
 <?php foreach ($experiences as $experience): ?>
 <div class="well">
     
         <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-    
+            
             <?= $this->Form->postLink('<span class="edit-delete-label">Supprimer</span>',
                 array('controller'=>'experiences', 'action' => 'delete', $experience['Experience']['id']),
                 array('confirm' => 'Es-tu sûr de vouloir supprimer cette expérience ?',
@@ -51,18 +51,18 @@
                         'class' => 'glyphicon glyphicon-pencil close edit-delete'
                     )); ?>
         <?php endif; ?>
-            
-        <?php echo $this->element('experience_info',array('experience'=>$experience)); ?>
     
-        <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+        <?php echo $this->element('experience_info',array('experience'=>$experience)); ?>
             
+        <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+    
     <div id="addRecommendation">
         <p>Partager un bon plan : 
             <?php foreach ($recommendationtypes as $recommendationtype) :?>
             <span class="glyphicon glyphicon-<?= $recommendationtype['Recommendationtype']['icon'];?> recommendationtype-icon recommendationtype-icon-selectable" recommendationtype_description="<?= $recommendationtype['Recommendationtype']['description'];?>" recommendationtype_id="<?= $recommendationtype['Recommendationtype']['id'];?>" data-toggle="tooltip" title="<?= $recommendationtype['Recommendationtype']['name']; ?>"></span>
             <?php endforeach;?>
         </p>
-            
+        
         <div class="addRecommendationForm">
             <div class="form-group">
                 <textarea rows=3 placeholder="" experience_id="<?= $experience['Experience']['id']; ?>" recommendationtype_id="" class="RecommendationContent form-control"></textarea>
@@ -73,10 +73,10 @@
             </div>
         </div>
     </div>
-        
-        
-        <?php endif; ?>
     
+    
+        <?php endif; ?>
+            
     <div class="panel-group" id="accordion">
         <div class="panel panel-default panel-recommendations">
             <div class="panel-heading panel-heading-recommendations">
@@ -112,11 +112,11 @@
             </div>
         </div>
     </div>
-        
-        
+    
+    
 </div>
 <?php endforeach; ?>
-
+    
 <script type="text/javascript">
     
     $( function() {
@@ -136,7 +136,10 @@
         });
         
         //pour les tooltips
-        $('.recommendationtype-icon').tooltip();
+        if (!Modernizr.touch) {  
+            $('.recommendationtype-icon').tooltip(); 
+        }
+        
     });
     
 </script>
