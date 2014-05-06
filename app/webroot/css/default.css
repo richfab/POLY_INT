@@ -333,10 +333,23 @@ h2 > span.wut {
     border: 1px solid #cccccc;
     cursor: pointer;
     background-color: white;
+    -webkit-transition: border-color ease 0.3s;
+    -moz-transition: border-color ease 0.3s;
+    -o-transition: border-color ease 0.3s;
+    transition: border-color ease 0.3s;
 }
 
 .recommendationtype-icon.selected{
     border-color: #e74c3c;
+}
+
+.recommendationtype-icon:hover{
+    border-color: #e74c3c;
+    
+}
+
+.panel-recommendations{
+    border: none;
 }
 
 .panel-title-recommendations{
@@ -344,6 +357,14 @@ h2 > span.wut {
     color: #e74c3c;
 }
 
+.panel-heading-recommendations{
+    background-color: transparent!important;
+}
+
 #legal,#about{
     margin-top: 30px;
+}
+
+.addRecommendationForm{
+    display: none;
 }

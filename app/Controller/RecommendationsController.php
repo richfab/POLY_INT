@@ -18,26 +18,38 @@ class RecommendationsController extends AppController {
         //ajout de la recommandation
         $this->Recommendation->create();
         $recommendation = array();
-        $recommendation['Recommendation']['id'] = $this->request->data['id'];
         $recommendation['Recommendation']['content'] = $this->request->data['content'];
         $recommendation['Recommendation']['experience_id'] = $this->request->data['experience_id'];
         $recommendation['Recommendation']['recommendationtype_id'] = $this->request->data['recommendationtype_id'];
         
-        //on ajoute la recommandation que si son contenu n'est pas vide
-        if($recommendation['Recommendation']['content'] !== ''){
-            if($this->Recommendation->save($recommendation)){
-                return new CakeResponse(array('body'=> json_encode(array('errorMessage'=>0)),'status'=>200));
-            }
+        //on ajoute la recommandation
+        if($this->Recommendation->save($recommendation)){
+            return new CakeResponse(array('body'=> json_encode(array('errorMessage'=>0)),'status'=>200));
         }
-        //sinon on la supprime (on ne fait rien si elle n'existait pas déjà)
-        else if($recommendation['Recommendation']['id']){
-            if($this->Recommendation->delete($recommendation['Recommendation']['id'])){
-                return new CakeResponse(array('body'=> json_encode(array('errorMessage'=>0)),'status'=>200));
-            }
+        else{
+            return new CakeResponse(array('body'=> json_encode(array('errorMessage'=>"Erreur lors de l'enregistrement")),'status'=>500));
         }
-
-        return new CakeResponse(array('body'=> json_encode(array('errorMessage'=>"Erreur lors de l'enregistrement")),'status'=>500));
         
+    }
+    
+    public function delete($id = null) {
+        $this->Recommendation->id = $id;
+        if (!$this->Recommendation->exists()) {
+                throw new NotFoundException(__("Ce bon plan n'éxiste plus"));
+        }
+        $this->request->onlyAllow('post', 'delete');
+        if ($this->Recommendation->delete()) {
+                $this->Session->setFlash(__("Le bon plan a bien été supprimé"), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+        } else {
+                $this->Session->setFlash(__("Le bon plan n'a pas pu être supprimé"), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-danger'
+                ));
+        }
+        return $this->redirect($this->referer());
     }
     
     public function search(){
