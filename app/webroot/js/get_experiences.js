@@ -75,7 +75,7 @@ function get_experiences(_view_to_render, _filter){
     $.extend(filter,_filter,view_to_render);
     
     //on affiche le loader pour la page search
-    $('#list-search').append('<div class="loader-list"><img height="40px" src="/explorer/img/loader.GIF"/></div>');
+    $('#list-search').append('<div class="loader-list"><img height="40px" src="/abroad/img/loader.GIF"/></div>');
     //on affiche le loader au milieu de la carte
     show_loader_map();
     

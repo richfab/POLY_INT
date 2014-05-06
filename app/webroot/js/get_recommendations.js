@@ -4,7 +4,7 @@ function get_recommendations(){
     var filter = get_filter_params();
     
     //on affiche le loader pour la page search
-    $('#recommendation-list').append('<div class="loader-list"><img height="40px" src="/explorer/img/loader.GIF"/></div>');
+    $('#recommendation-list').append('<div class="loader-list"><img height="40px" src="/abroad/img/loader.GIF"/></div>');
     
     $.ajax({
         type:"POST",
