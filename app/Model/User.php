@@ -48,6 +48,10 @@ class User extends AppModel {
             'isUnique' => array(
                 'rule'    => 'isUnique',
                 'message' => 'Cet email est déjà utilisé'
+            ),
+            'etu' => array(
+                'rule'    => array('custom', '/@e/'),
+                'message' => "Veuillez utiliser votre adresse etudiant"
             )
         ),
         'password' => array(

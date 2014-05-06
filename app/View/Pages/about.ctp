@@ -3,7 +3,7 @@
     Ce site est en version Beta.
 </h4>
 <h4>
-    Nous sommes 2 étudiants en informatique à Polytech Nantes.
+    Nous sommes 2 étudiants en informatique à Polytech Nantes à le développer.
 </h4>
 <h4>
     N'hésitez pas à nous dire ce qui bug ou pourrait être amélioré.
