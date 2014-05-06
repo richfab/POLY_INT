@@ -394,8 +394,17 @@ class ExperiencesController extends AppController {
             $conditions['City.country_id'] = $request_data['country_id'];
         }
         if(!empty($request_data['user_name'])){
-            $conditions['OR'] = array('User.firstname LIKE' => '%'.$request_data['user_name'].'%',
-                'User.lastname LIKE' => '%'.$request_data['user_name'].'%');
+            //on separe le nom du prenom
+            $names = explode(' ',$request_data['user_name']);
+            if(count($names) > 1){
+                $conditions['AND']['User.firstname LIKE'] = '%'.$names[0].'%';
+                $conditions['AND']['User.lastname LIKE'] = '%'.$names[1].'%';
+            }
+            //si un seul mot a été entré (nom ou prenom)
+            else{
+                $conditions['OR'] = array('User.firstname LIKE' => '%'.$request_data['user_name'].'%',
+                    'User.lastname LIKE' => '%'.$request_data['user_name'].'%');
+            }
         }
         return $conditions;
     }
