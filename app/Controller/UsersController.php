@@ -26,7 +26,7 @@ class UsersController extends AppController {
                     return $this->redirect($this->Auth->redirectUrl());
                 }
                 else{
-                    $this->Session->setFlash(__("Tu dois d'abord activer ton compte à l'aide du lien d'activation qui t'a été envoyé par email"), 'alert', array(
+                    $this->Session->setFlash(__("Tu dois d'abord activer ton compte à l'aide du lien d'activation qui t'a été envoyé par email (cela peut prendre un peu de temps)"), 'alert', array(
                         'plugin' => 'BoostCake',
                         'class' => 'alert-danger'
                     ));
