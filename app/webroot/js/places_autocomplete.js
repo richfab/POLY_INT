@@ -59,8 +59,14 @@ function initialize() {
             countryCode.value = countryShort_name;
             
             //le lieu a bien été selectionné dans la liste, on valide le champ
-            $('#ExperienceInputDiv').removeClass('has-error');
-            $('#validatePlaceButton').attr('disabled',false);
+            //si ce n'est pas la France :
+            if(countryCode.value !== 'FR'){
+                $('#ExperienceInputDiv').removeClass('has-error');
+                $('#validatePlaceButton').attr('disabled',false);
+            }
+            else{
+                alert("Désolé, les expériences en France ne sont pas affichées sur Polytech Abroad.");
+            }
         }
     });
     
@@ -69,12 +75,12 @@ function initialize() {
         var evt = (evt) ? evt : ((event) ? event : null);
         //si ce n'est pas la touche entrée (13), on ne fait rien
         if (evt.keyCode !== 13) {
-            //si le champs input est vide, ce n'est pas une erreur
+            //si le champs input est vide et que le pays n'est pas la France, ce n'est pas une erreur
             if($('#ExperienceInput').val() === ""){
                 $('#ExperienceInputDiv').removeClass('has-error');
                 $('#validatePlaceButton').attr('disabled',false);
             }
-            //sinon, c'est une erreur (l'utilisateur a essayé de rentrer un lieu 'a la main')
+            //sinon, c'est une erreur (l'utilisateur a essayé de rentrer un lieu 'a la main' ou un lieu en France)
             else{
                 $('#ExperienceInputDiv').addClass('has-error');
                 $('#validatePlaceButton').attr('disabled',true);

@@ -58,6 +58,15 @@ class ExperiencesController extends AppController {
             if($experience_id != null){
                 $this->request->data['Experience']['id'] = $experience_id;
             }
+            
+            //l'utilisateur essaie d'ajouter une expérience en France
+            if($this->request->data['City']['Country']['id'] === 'FR'){
+                $this->Session->setFlash(__("Désolé, les expériences en France ne sont pas affichées sur Polytech Abroad"), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-danger'
+                ));
+                return $this->redirect($this->referer());
+            }
         	
             $this->Experience->create();
                 

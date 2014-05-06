@@ -101,7 +101,7 @@
                                         ));
                                     ?>
                                 <?php endif;?>
-                            <p><?= $recommendation['content']; ?></p>
+                            <p><?= nl2br($recommendation['content']); ?></p>
                         </div>
                     </div>
                         <?php endforeach;?>

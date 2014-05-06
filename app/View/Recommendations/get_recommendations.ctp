@@ -7,7 +7,7 @@
                 <p><?= $recommendation['Experience']['City']['name'];?>, <?= $countries[$recommendation['Experience']['City']['country_id']];?></p>
             </div>
             <div class="col-sm-9">
-                <p><?= $recommendation['Recommendation']['content']; ?></p>
+                <p><?= nl2br($recommendation['Recommendation']['content']); ?></p>
                 <p><small>le <?= $this->Time->format($recommendation['Recommendation']['modified'], '%e %B %Y');?> par 
                 <?= $this->Html->link($recommendation['Experience']['User']['firstname'].' '.$recommendation['Experience']['User']['lastname'],array('controller'=>'users', 'action' => 'profile', $recommendation['Experience']['User']['id']));?></small></p>
             </div>
