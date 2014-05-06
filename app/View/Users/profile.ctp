@@ -12,7 +12,6 @@
     <div class="col col-sm-10">
         <h1><?= $user['User']['firstname'];?> <?= $user['User']['lastname'];?></h1>
         <p><span class="glyphicon glyphicon-book"></span> Polytech <?= $user['School']['name'];?> - <?= $user['Department']['name'];?></p>
-        <p><span class="glyphicon glyphicon-envelope"></span> <?= $user['User']['email'];?></p>
 <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
         <p><?= $this->Html->link('<span class="edit-delete-label">Modifier</span>', array('action' => 'edit'),
         array('escape' => false,
