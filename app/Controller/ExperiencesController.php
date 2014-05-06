@@ -95,7 +95,7 @@ class ExperiencesController extends AppController {
         
     public function explore(){
         //on inclut les scripts pour la recuperation des experiences
-    	$this->set('jsIncludes',array('get_experiences','jvector','jquery-jvectormap.min','jquery-jvectormap-world-mill-en','modernizr.custom.63321','jquery.dropdown'));
+    	$this->set('jsIncludes',array('get_experiences','logo_fly','jvector','jquery-jvectormap.min','jquery-jvectormap-world-mill-en','jquery.dropdown'));
         //on inclut les style pour la carte
         $this->set('cssIncludes',array('jvectormap','map','filter'));
             
@@ -222,7 +222,7 @@ class ExperiencesController extends AppController {
         
     public function search(){
         //on inclut les scripts pour la recuperation des experiences et google maps pour l'autocomplete des lieux
-    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','get_experiences','modernizr.custom.63321','jquery.dropdown'));
+    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','get_experiences','logo_fly','modernizr.custom.63321','jquery.dropdown'));
         //on inclut les style pour les filtres
         $this->set('cssIncludes',array('filter'));
             

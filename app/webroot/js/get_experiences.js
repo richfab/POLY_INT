@@ -1,6 +1,3 @@
-//tableau de compteurs pour l'affichage temporisé du logo de chargement (loader) utile pour la carte
-var timeoutID = [];
-
 ////////////*FONCTIONS DE RECUPERATION DES DONNEES*////////////
 
 //recupere les infos dans la base de donnees pour l'affichage de la carte au chargement de la page explore
@@ -27,7 +24,7 @@ function get_map(){
 function fetch_map_values(filter){
     
     //on affiche le loader au milieu de la carte
-    show_loader_map();
+    start_logo_fly();
     
     //si les parametres de filtre sont vides, on charge les infos de la carte par défaut
     if($.isEmptyObject(filter)){
@@ -50,7 +47,7 @@ function fetch_map_values(filter){
         },
         complete : function(data) {
             //on cache le loader du milieu de la carte
-            hide_loader_map();
+            stop_logo_fly();
         }
     });
 }
@@ -74,10 +71,7 @@ function get_experiences(_view_to_render, _filter){
     //on join les trois tableaux de parametres
     $.extend(filter,_filter,view_to_render);
     
-    //on affiche le loader pour la page search
-    $('#list-search').append('<div class="loader-list"><img height="40px" src="/abroad/img/loader.GIF"/></div>');
-    //on affiche le loader au milieu de la carte
-    show_loader_map();
+    start_logo_fly();
     
     $.ajax({
         type:"POST",
@@ -93,7 +87,7 @@ function get_experiences(_view_to_render, _filter){
         },
         complete : function(data) {
             // on cache le loader
-            hide_loader_map();
+            stop_logo_fly();
             $('.loader-list').remove();
             
             //incremente le offset pour le 'plus' de la liste des resultats
@@ -101,24 +95,6 @@ function get_experiences(_view_to_render, _filter){
         }
     });
     console.log(filter);
-}
-
-function hide_loader_map(){
-    //on annule le compteur pour le cas ou la réponse à été plus rapide que le délais pour afficher le loader
-    window.clearTimeout(timeoutID.pop());
-    //on cache le loader
-    $('#loader-map').hide();
-}
-
-//affiche un gif de chargement au milieu de la carte après un certain délais
-function show_loader_map(){
-    //on place le loader a droite du logo du site
-    $('#loader-map').css('top',$('.navbar-brand').offset().top+14);
-    $('#loader-map').css('left',$('.navbar-brand').offset().left+$('.navbar-brand').width()+20);
-    //on ajoute un compteur au tableau de compteurs
-    timeoutID.push(window.setTimeout(function(){
-        $('#loader-map').show(); 
-    }, 500));
 }
 
 //réinitialise le offset, vide la liste des experiences et lance la recherche d'experiences

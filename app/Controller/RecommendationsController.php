@@ -54,7 +54,7 @@ class RecommendationsController extends AppController {
     
     public function search(){
         //on inclut les scripts pour la recuperation des experiences et google maps pour l'autocomplete des lieux
-    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','get_recommendations'));
+    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','get_recommendations','logo_fly'));
         
         //recupere les recommendationtypes
         $this->set('recommendationtypes',$this->Recommendation->Recommendationtype->find('all'));

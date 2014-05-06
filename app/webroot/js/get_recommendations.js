@@ -3,8 +3,7 @@ function get_recommendations(){
     
     var filter = get_filter_params();
     
-    //on affiche le loader pour la page search
-    $('#recommendation-list').append('<div class="loader-list"><img height="40px" src="/abroad/img/loader.GIF"/></div>');
+    start_logo_fly();
     
     $.ajax({
         type:"POST",
@@ -18,7 +17,7 @@ function get_recommendations(){
             //alert("Une erreur est survenue, veuillez réessayer dans quelques instants.");
         },
         complete : function(data) {
-            $('.loader-list').remove();
+            stop_logo_fly();
             
             //incremente le offset pour le 'plus' de la liste des resultats
             $('input[name=offset]').val($('input[name=offset]').val()*1+20);

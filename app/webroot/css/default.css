@@ -240,6 +240,19 @@ h2 > span.wut {
     padding: 12px 10px;
 }
 
+#brand_logo.fly{
+    -webkit-animation:spin 2s ease infinite;
+    -moz-animation:spin 2s ease infinite;
+    animation:spin 2s ease infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(-360deg); } }
+@-webkit-keyframes spin { 100% { 
+            transform-origin:left top;
+            -ms-transform-origin:left top; /* IE 9 */
+            -webkit-transform-origin:left top; /* Opera, Chrome, and Safari */
+           -webkit-transform: rotate(-360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(-360deg); transform:rotate(-360deg); } }
+
 #profil {
     margin-top: 50px;
     padding: 20px 0;
