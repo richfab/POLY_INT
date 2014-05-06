@@ -49,9 +49,6 @@
             });
         });
         
-        //pour les tooltips
-        $('.recommendationtype-icon').tooltip();
-        
         //on lance la recherche au chargement
         get_recommendations();
 

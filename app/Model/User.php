@@ -50,7 +50,7 @@ class User extends AppModel {
                 'message' => 'Cet email est déjà utilisé'
             ),
             'etu' => array(
-                'rule'    => array('custom', '/@e/'),
+                'rule'    => array('custom', '/@[ep]/'),
                 'message' => "Veuillez utiliser votre adresse etudiant"
             )
         ),

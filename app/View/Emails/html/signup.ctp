@@ -11,5 +11,6 @@
 </p>
 
 <p>
-    <?php echo $this->Html->link('Activer mon compte', $this->Html->url($activation_link,true)); ?>
+    <?php echo $this->Html->link('Activer mon compte', $this->Html->url($activation_link,true)); ?> <br/>
+    ou copie ce lien dans la barre d'adresse de ton navigateur : <?= $this->Html->url($activation_link,true);?>
 </p>

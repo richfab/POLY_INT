@@ -24,7 +24,9 @@ function get_recommendations(){
             $('input[name=offset]').val($('input[name=offset]').val()*1+20);
             
             //pour les tooltips
-            $('.recommendationtype-icon').tooltip();
+            if (!Modernizr.touch) {
+                $('.recommendationtype-icon').tooltip(); 
+            }
         }
     });
 }
@@ -51,9 +53,9 @@ function get_filter_params(){
     
     var recommendationtypelist = [0];
     $('.recommendationtype-icon').each(function(){
-       if($(this).hasClass('selected')){
-           recommendationtypelist.push($(this).attr('recommendationtype_id'));
-       }
+        if($(this).hasClass('selected')){
+            recommendationtypelist.push($(this).attr('recommendationtype_id'));
+        }
     });
     var recommendationtypes = {"recommendationtypes":recommendationtypelist};
     

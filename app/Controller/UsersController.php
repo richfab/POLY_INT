@@ -76,13 +76,13 @@ class UsersController extends AppController {
             	$user = $this->request->data;
                 $email = new CakeEmail('default');
                 $email->to($user['User']['email'])
-                        ->subject('Bienvenue sur Polytech Expats !')
+                        ->subject('Bienvenue sur Polytech Abroad !')
                         ->emailFormat('html')
                         ->template('signup')
                         ->viewVars(array('firstname' => $user['User']['firstname'],'activation_link' => $activation_link))
                         ->send();
                                 
-                $this->Session->setFlash(__("Ton inscription a bien été prise en compte. Un email d'activation vient d'être envoyé à ".$user['User']['email']), 'alert', array(
+                $this->Session->setFlash(__("Ton inscription a bien été prise en compte. Un email d'activation sera bientôt envoyé à ".$user['User']['email']), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));
