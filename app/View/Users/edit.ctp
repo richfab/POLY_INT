@@ -13,6 +13,12 @@
         'class' => 'well form-horizontal'
     ));
     echo $this->Form->input('email', array('placeholder' => 'Email'));
+    echo $this->Form->input('email_is_hidden', array(
+		'wrapInput' => 'col col-sm-9 col-sm-offset-3',
+		'label' => array('class' => null,
+                    'text' => 'Masquer mon email dans mon profil pour ne pas être contacté'),
+		'class' => false
+	));
     echo $this->Form->input('firstname', array('placeholder' => 'Prénom','label' => 'Prénom'));
     echo $this->Form->input('lastname', array('placeholder' => 'Nom','label' => 'Nom'));
     echo $this->Form->input('School.id');

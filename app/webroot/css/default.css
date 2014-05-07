@@ -381,3 +381,7 @@ h2 > span.wut {
 .addRecommendationForm{
     display: none;
 }
+
+#UserEditForm .checkbox{
+    margin-top: -15px;
+}
