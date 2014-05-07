@@ -1,15 +1,31 @@
-<div class="well" style="margin-top: 70px">
-    <p style="text-align: center;padding-top:100px">
-        <?= $this->Html->image('plane.png', array('id'=>'signup_plane', 'class' => 'fly', 'alt' => 'Logo', 'style'=>'opacity:0.5'));?>
-    </p>
-    <h4 style="margin-top: -200px; color: #e74c3c">Ceci est la version bêta de Polytech Abroad.</h4>
-    <p>
-        Grâce aux 200 premiers inscrits, nous nous attachons à rendre le site le plus pratique possible.
-    </p>
-    <h4 style="text-align: right; margin-top: 150px;">
-        Restez connectés, on&nbsp;revient&nbsp;!
-    </h4>
-    <p style="text-align: right">
-        <a target="_blank" href="https://facebook.com/PolytechAbroad">https://facebook.com/PolytechAbroad</a>
-    </p>
-</div>
+<h2>S'inscrire</h2>
+    
+<?php 
+    echo $this->Form->create('User', array(
+        'inputDefaults' => array(
+                'div' => 'form-group',
+                'label' => array(
+                        'class' => 'col col-sm-3 control-label'
+                ),
+                'wrapInput' => 'col col-sm-6',
+                'class' => 'form-control'
+        ),
+        'class' => 'well form-horizontal'
+    ));
+    echo $this->Form->input('email', array('placeholder' => 'Votre adresse etu'));
+    echo $this->Form->input('password', array('placeholder' => 'Mot de passe','label' => 'Mot de passe'));
+    echo $this->Form->input('password_confirm', array('placeholder' => 'Confirmation','label' => 'Confirmation',"type"=>"password"));
+    echo $this->Form->input('firstname', array('placeholder' => 'Prénom','label' => 'Prénom'));
+    echo $this->Form->input('lastname', array('placeholder' => 'Nom','label' => 'Nom'));
+    echo $this->Form->input('School.id');
+    echo $this->Form->input('school_id', array('placeholder' => 'Polytech','label' => 'Polytech'));
+    echo $this->Form->input('Department.id');
+    echo $this->Form->input('department_id', array('placeholder' => 'Spécialité','label' => 'Spécialité'));?>
+        
+    <div class="form-group">
+        <?php echo $this->Form->submit("S'inscrire", array(
+                'div' => 'col col-md-9 col-md-offset-3',
+                'class' => 'btn btn-blue'
+        )); ?>
+    </div>
+<?php echo $this->Form->end(); ?>

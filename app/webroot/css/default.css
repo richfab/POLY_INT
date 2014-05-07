@@ -9,6 +9,10 @@ html,body{
     font-size: 15px;
 }
 
+h1, h2, h3 {
+    font-weight: 200;
+}
+
 #container{
     min-height: 100%;
     position: relative;
@@ -262,6 +266,14 @@ h2 > span.wut {
 #profil {
     margin-top: 50px;
     padding: 20px 0;
+}
+
+.contact-logo{
+    height: 20px;
+}
+
+.contact-logo.disabled{
+    opacity: 0.5;
 }
 
 #block-temps {

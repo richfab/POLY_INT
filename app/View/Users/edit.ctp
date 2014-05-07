@@ -1,4 +1,4 @@
-<h2>Modifier mes informations</h2>
+<h2>Mes informations</h2>
 
 <?php 
     echo $this->Form->create('User', array(
@@ -12,19 +12,20 @@
         ),
         'class' => 'well form-horizontal'
     ));
-    echo $this->Form->input('email', array('placeholder' => 'Email'));
+    echo $this->Form->input('firstname', array('placeholder' => 'Prénom','label' => 'Prénom *'));
+    echo $this->Form->input('lastname', array('placeholder' => 'Nom','label' => 'Nom *'));
+    echo $this->Form->input('School.id');
+    echo $this->Form->input('school_id', array('placeholder' => 'Polytech','label' => 'Polytech *'));
+    echo $this->Form->input('Department.id');
+    echo $this->Form->input('department_id', array('placeholder' => 'Spécialité','label' => 'Spécialité *'));
+    echo $this->Form->input('email', array('placeholder' => 'Email', 'label' => 'Email *'));
     echo $this->Form->input('email_is_hidden', array(
 		'wrapInput' => 'col col-sm-9 col-sm-offset-3',
 		'label' => array('class' => null,
-                    'text' => 'Masquer mon email dans mon profil pour ne pas être contacté'),
+                    'text' => 'Masquer mon email dans mon profil'),
 		'class' => false
 	));
-    echo $this->Form->input('firstname', array('placeholder' => 'Prénom','label' => 'Prénom'));
-    echo $this->Form->input('lastname', array('placeholder' => 'Nom','label' => 'Nom'));
-    echo $this->Form->input('School.id');
-    echo $this->Form->input('school_id', array('placeholder' => 'Polytech','label' => 'Polytech'));
-    echo $this->Form->input('Department.id');
-    echo $this->Form->input('department_id', array('placeholder' => 'Spécialité','label' => 'Spécialité'));?>
+    echo $this->Form->input('linkedin', array('placeholder' => 'http://fr.linkedin.com/in/pseudo', 'label' => 'LinkedIn'));?>
         
     <div class="form-group">
         <div class="col col-md-9 col-md-offset-3">

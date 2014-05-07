@@ -54,6 +54,13 @@ class User extends AppModel {
                 'message' => "Veuillez utiliser votre adresse etudiant"
             )
         ),
+        'linkedin' => array(
+            'adress' => array(
+                'rule' => 'url',
+                'message' => 'Entrez une adresse de profil LinkedIn valide',
+                'allowEmpty' => true
+            )
+        ),
         'password' => array(
             'rule'    => array('minLength', '6'),
             'message' => 'Le mot de passe doit comporter 6 caractères au minimum',
@@ -90,6 +97,11 @@ class User extends AppModel {
         }
         if (isset($this->data[$this->alias]['lastname'])) {
             $this->data[$this->alias]['lastname'] = ucwords(strtolower($this->data[$this->alias]['lastname']));
+        }
+        if (isset($this->data[$this->alias]['linkedin']) && $this->data[$this->alias]['linkedin'] !== '') {
+            if(substr($this->data[$this->alias]['linkedin'],0,4) !== 'http'){
+                $this->data[$this->alias]['linkedin'] = 'https://'.$this->data[$this->alias]['linkedin'];
+            }
         }
         return true;
     }
