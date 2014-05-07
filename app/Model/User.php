@@ -51,7 +51,7 @@ class User extends AppModel {
             ),
             'etu' => array(
                 'rule'    => array('custom', '/@[ep]/'),
-                'message' => "Veuillez utiliser votre adresse etudiant"
+                'message' => "Veuillez utiliser votre adresse étudiant"
             )
         ),
         'linkedin' => array(
