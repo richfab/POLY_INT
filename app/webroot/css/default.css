@@ -245,6 +245,12 @@ h2 > span.wut {
     -moz-animation:spin 2s ease infinite;
     animation:spin 2s ease infinite;
 }
+/*TODO a supprimer lors de la réouverture des inscriptions*/
+#signup_plane.fly{
+    -webkit-animation:spin 2s ease 1;
+    -moz-animation:spin 2s ease 1;
+    animation:spin 2s ease 1;
+}
 @-moz-keyframes spin { 100% { -moz-transform: rotate(-360deg); } }
 @-webkit-keyframes spin { 100% { 
             transform-origin:left top;
