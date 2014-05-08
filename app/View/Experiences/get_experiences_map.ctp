@@ -3,7 +3,7 @@
         <li>
             <div class="row row-experience" onclick="window.location.href='<?= $this->Html->url(array('controller'=>'users', 'action' => 'profile', $experience['User']['id'],'#' => $experience['Experience']['id']),true);?>'">
                 <div class="col-xs-2">
-                    <?= $this->Html->image('avatar.png', array('alt' => 'avatar','class' => 'avatar','height' => '60px','onload' => "this.style.backgroundColor='#".$school_colors[$experience['User']['school_id']]."'"));?>
+                    <?= $this->Html->link($this->Html->image('avatar.png', array('alt' => 'avatar','class' => 'avatar','height' => '60px','onload' => "this.style.backgroundColor='#".$school_colors[$experience['User']['school_id']]."'")),array('controller'=>'users', 'action' => 'profile', $experience['User']['id']),array('escape' => false));?>
                 </div>
                 <div class="col-xs-10">
                     <p><?= $this->Html->link($experience['User']['firstname'].' '.$experience['User']['lastname'],array('controller'=>'users', 'action' => 'profile', $experience['User']['id']));?></p>

@@ -3,7 +3,7 @@
     <div class="well well-experience-search" onclick="window.location.href='<?= $this->Html->url(array('controller'=>'users', 'action' => 'profile', $experience['User']['id'],'#' => $experience['Experience']['id']),true);?>'">
         <div class="row">
             <div class="col-sm-2 profile-info-search">
-                <p><?= $this->Html->image('avatar.png', array('alt' => 'avatar','class' => 'avatar','id' => 'avatar_search','width' => '60px','onload' => "this.style.backgroundColor='#".$school_colors[$experience['User']['school_id']]."'"));?></p>
+                <p><?= $this->Html->link($this->Html->image('avatar.png', array('alt' => 'avatar','class' => 'avatar','id' => 'avatar_search','width' => '60px','onload' => "this.style.backgroundColor='#".$school_colors[$experience['User']['school_id']]."'")),array('controller'=>'users', 'action' => 'profile', $experience['User']['id']),array('escape' => false));?></p>
                 <p><?= $this->Html->link($experience['User']['firstname'].' '.$experience['User']['lastname'],array('controller'=>'users', 'action' => 'profile', $experience['User']['id']));?></p>
                 <p>Polytech <?= $school_names[$experience['User']['school_id']];?></p>
                 <p><?= $departments[$experience['User']['department_id']];?></p>
