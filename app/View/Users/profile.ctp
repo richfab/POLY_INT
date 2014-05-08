@@ -12,14 +12,14 @@
     <div class="col col-sm-10">
         <h1><?= $user['User']['firstname'];?> <?= $user['User']['lastname'];?>
             <?php if(!$user['User']['email_is_hidden']):?>
-                <a href="mailto:<?= $user['User']['email'];?>"><?= $this->Html->image('contact-email.png',array('class' => 'contact-logo'));?></a>
+                <a href="mailto:<?= $user['User']['email'];?>"><?= $this->Html->image('contact-email.png',array('class' => 'contact-logo', 'title' => 'Email', 'data-toggle' => 'tooltip'));?></a>
             <?php else:?>
-                <?= $this->Html->image('contact-email.png',array('class' => 'contact-logo disabled'));?>
+                <?= $this->Html->image('contact-email.png',array('class' => 'contact-logo disabled', 'title' => 'Email', 'data-toggle' => 'tooltip'));?>
             <?php endif;?>
             <?php if($user['User']['linkedin']):?>
-                <a href="<?= $user['User']['linkedin'];?>" target="_blank"><?= $this->Html->image('contact-linkedin.png',array('class' => 'contact-logo'));?></a>
+                <a href="<?= $user['User']['linkedin'];?>" target="_blank"><?= $this->Html->image('contact-linkedin.png',array('class' => 'contact-logo', 'title' => 'Profil LinkedIn', 'data-toggle' => 'tooltip'));?></a>
             <?php else:?>
-                <?= $this->Html->image('contact-linkedin.png',array('class' => 'contact-logo disabled'));?>
+                <?= $this->Html->image('contact-linkedin.png',array('class' => 'contact-logo disabled', 'title' => 'Profil LinkedIn', 'data-toggle' => 'tooltip'));?>
             <?php endif;?>
         </h1>
         <p class="help-block"><span class="glyphicon glyphicon-book"></span> Polytech <?= $user['School']['name'];?> &middot; <?= $user['Department']['name'];?></p>
@@ -149,7 +149,8 @@
         });
         
         //pour les tooltips
-        if (!Modernizr.touch) {  
+        if (!Modernizr.touch) {
+            $('.contact-logo').tooltip();
             $('.recommendationtype-icon').tooltip(); 
         }
         

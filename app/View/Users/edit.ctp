@@ -18,8 +18,8 @@
     echo $this->Form->input('school_id', array('placeholder' => 'Polytech','label' => 'Polytech *'));
     echo $this->Form->input('Department.id');
     echo $this->Form->input('department_id', array('placeholder' => 'Spécialité','label' => 'Spécialité *'));
-    //echo $this->Form->input('email', array('placeholder' => 'Email', 'label' => 'Email *'));
     echo $this->Form->input('linkedin', array('placeholder' => 'http://fr.linkedin.com/in/pseudo', 'label' => 'LinkedIn'));
+    echo $this->Form->input('email', array('placeholder' => 'Email', 'label' => 'Email *'));
     echo $this->Form->input('email_is_hidden', array(
 		'wrapInput' => 'col col-sm-9 col-sm-offset-3',
 		'label' => array('class' => null,

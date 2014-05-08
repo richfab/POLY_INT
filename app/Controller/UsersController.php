@@ -62,6 +62,17 @@ class UsersController extends AppController {
                 ));              
                 return;
             }
+            
+            //TODO générer a partir de la BDD
+            $regexp_emails = "/@(etu.univ-nantes.fr|univ-nantes.fr|polytech-lille.net|etud.univ-montp2.fr|etu.univ-tours.fr|etu.univ-orleans.fr|polytech.upmc.fr|u-psud.fr|etudiant.univ-bpclermont.fr|etu.univ-lyon1.fr|etu.univ-savoie.fr|polytech.unice.fr|etu.univ-amu.fr|e.ujf-grenoble.fr)/";
+            
+            if (!preg_match($regexp_emails,$this->data['User']['email'])){
+                $this->Session->setFlash(__("Ton adresse étudiante est nécessaire pour l'inscription. Tu pourras la changer dans ton profil une fois inscrit."), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-danger'
+                ));              
+                return;
+            }
                 
             $this->User->create();
             //on force le role a être user

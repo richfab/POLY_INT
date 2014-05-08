@@ -48,10 +48,6 @@ class User extends AppModel {
             'isUnique' => array(
                 'rule'    => 'isUnique',
                 'message' => 'Cet email est déjà utilisé'
-            ),
-            'etu' => array(
-                'rule'    => array('custom', '/@(etu.univ-nantes.fr|univ-nantes.fr|polytech-lille.net|etud.univ-montp2.fr|etu.univ-tours.fr|etu.univ-orleans.fr|polytech.upmc.fr|u-psud.fr|etudiant.univ-bpclermont.fr|etu.univ-lyon1.fr|etu.univ-savoie.fr|polytech.unice.fr|etu.univ-amu.fr|e.ujf-grenoble.fr)/'),
-                'message' => "Veuillez utiliser votre adresse étudiant"
             )
         ),
         'linkedin' => array(
