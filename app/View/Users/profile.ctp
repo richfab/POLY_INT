@@ -48,7 +48,7 @@
     <?php endif; ?>
         
 <?php foreach ($experiences as $experience): ?>
-<div class="well">
+<div class="well well-experience" id="<?= $experience['Experience']['id'];?>">
     
         <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
             
@@ -155,6 +155,19 @@
         }
         
         $('.recommendation-text').readmore();
+        
+        
+        //DEBUT jump to moins la hauteur de la navbar
+        function offsetAnchor() {
+            window.scrollTo(window.scrollX, window.scrollY - 60);
+        }
+        $(window).on("hashchange", function () {
+            offsetAnchor();
+        });
+        window.setTimeout(function() {
+            offsetAnchor();
+        }, 1);
+        //FIN jump to
         
     });
     

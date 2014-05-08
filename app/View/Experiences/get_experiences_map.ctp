@@ -1,7 +1,7 @@
 <?php if(AuthComponent::user('id')) : ?>
     <?php foreach ($experiences as $experience): ?>
         <li>
-            <div class="row">
+            <div class="row row-experience" onclick="window.location.href='<?= $this->Html->url(array('controller'=>'users', 'action' => 'profile', $experience['User']['id'],'#' => $experience['Experience']['id']),true);?>'">
                 <div class="col-xs-2">
                     <?= $this->Html->image('avatar.png', array('alt' => 'avatar','class' => 'avatar','height' => '60px','onload' => "this.style.backgroundColor='#".$school_colors[$experience['User']['school_id']]."'"));?>
                 </div>

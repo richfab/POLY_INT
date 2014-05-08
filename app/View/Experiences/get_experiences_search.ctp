@@ -1,6 +1,6 @@
 <?php if(AuthComponent::user('id')) : ?>
     <?php foreach ($experiences as $experience): ?>
-    <div class="well">
+    <div class="well well-experience-search" onclick="window.location.href='<?= $this->Html->url(array('controller'=>'users', 'action' => 'profile', $experience['User']['id'],'#' => $experience['Experience']['id']),true);?>'">
         <div class="row">
             <div class="col-sm-2 profile-info-search">
                 <p><?= $this->Html->image('avatar.png', array('alt' => 'avatar','class' => 'avatar','id' => 'avatar_search','width' => '60px','onload' => "this.style.backgroundColor='#".$school_colors[$experience['User']['school_id']]."'"));?></p>

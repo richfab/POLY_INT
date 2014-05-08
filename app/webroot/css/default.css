@@ -189,10 +189,6 @@ h2 > span.wut {
     overflow-x: hidden;
 }
 
-#list-map a {
-    display: block;  
-}
-
 #list-map p {
     margin: 0;
 }
@@ -209,10 +205,9 @@ h2 > span.wut {
     border-bottom: none;
 }
 
-#loader-map{
-    position: absolute;
-    z-index: 100;
-    display: none;
+.row-experience:hover{
+    cursor: pointer;
+    background-color: #f4f4f4;
 }
 
 #list-search, #recommendation-list{
@@ -220,9 +215,9 @@ h2 > span.wut {
     min-height: 200px;
 }
 
-.loader-list{
-    width: 100%;
-    text-align: center;
+.well-experience-search:hover{
+    cursor: pointer;
+    border-color: #ABABAB;
 }
 
 .access {
