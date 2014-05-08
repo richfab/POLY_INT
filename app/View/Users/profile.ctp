@@ -78,7 +78,7 @@
             
         <div class="addRecommendationForm">
             <div class="form-group">
-                <textarea rows=3 placeholder="" experience_id="<?= $experience['Experience']['id']; ?>" recommendationtype_id="" class="RecommendationContent form-control"></textarea>
+                <textarea rows=6 placeholder="" experience_id="<?= $experience['Experience']['id']; ?>" recommendationtype_id="" class="RecommendationContent form-control"></textarea>
             </div>
             <div class="form-group">    
                 <button type="button" onclick="add_recommendation($(this));" class="btn btn-blue">Partager</button>
