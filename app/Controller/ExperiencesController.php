@@ -222,7 +222,7 @@ class ExperiencesController extends AppController {
         
     public function search(){
         //on inclut les scripts pour la recuperation des experiences et google maps pour l'autocomplete des lieux
-    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','get_experiences','logo_fly','modernizr.custom.63321','jquery.dropdown'));
+    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','get_experiences','logo_fly','jquery.dropdown'));
         //on inclut les style pour les filtres
         $this->set('cssIncludes',array('filter'));
             

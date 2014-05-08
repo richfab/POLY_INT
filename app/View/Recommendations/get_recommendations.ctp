@@ -18,7 +18,7 @@
         //si le nombre de resultats est egale a la limite de resultat on affiche un bouton plus
         if(count($recommendations) == $result_limit): ?>
         <p style="text-align: center">
-            <a style="cursor: pointer" onclick="this.remove();get_recommendations()">plus</a>
+            <a style="cursor: pointer" onclick="$(this).remove();get_recommendations()">plus</a>
         </p>
     <?php endif;?>
     <?php //si aucune recommendation n'a été trouvée
