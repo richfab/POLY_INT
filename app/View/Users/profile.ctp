@@ -6,18 +6,18 @@
  * and open the template in the editor.
  */
 ?>
-
+    
     
 <div class="row" id="profile_info">
     <div class="col col-sm-10">
         <h1><?= $user['User']['firstname'];?> <?= $user['User']['lastname'];?>
             <?php if(!$user['User']['email_is_hidden']):?>
-                <a href="mailto:<?= $user['User']['email'];?>"><?= $this->Html->image('contact-email.png',array('class' => 'contact-logo', 'title' => 'Email', 'data-toggle' => 'tooltip'));?></a>
+            <a href="mailto:<?= $user['User']['email'];?>"><?= $this->Html->image('contact-email.png',array('class' => 'contact-logo', 'title' => 'Email', 'data-toggle' => 'tooltip'));?></a>
             <?php else:?>
                 <?= $this->Html->image('contact-email.png',array('class' => 'contact-logo disabled', 'title' => 'Email', 'data-toggle' => 'tooltip'));?>
             <?php endif;?>
             <?php if($user['User']['linkedin']):?>
-                <a href="<?= $user['User']['linkedin'];?>" target="_blank"><?= $this->Html->image('contact-linkedin.png',array('class' => 'contact-logo', 'title' => 'Profil LinkedIn', 'data-toggle' => 'tooltip'));?></a>
+            <a href="<?= $user['User']['linkedin'];?>" target="_blank"><?= $this->Html->image('contact-linkedin.png',array('class' => 'contact-logo', 'title' => 'Profil LinkedIn', 'data-toggle' => 'tooltip'));?></a>
             <?php else:?>
                 <?= $this->Html->image('contact-linkedin.png',array('class' => 'contact-logo disabled', 'title' => 'Profil LinkedIn', 'data-toggle' => 'tooltip'));?>
             <?php endif;?>
@@ -46,7 +46,7 @@
     <p><?= $this->Html->link("Ajouter une expérience", array('controller' => 'experiences', 'action' => 'info')); ?></p>
 </div>
     <?php endif; ?>
-
+        
 <?php foreach ($experiences as $experience): ?>
 <div class="well">
     
@@ -64,18 +64,18 @@
                         'class' => 'glyphicon glyphicon-pencil close edit-delete'
                     )); ?>
         <?php endif; ?>
-    
+            
         <?php echo $this->element('experience_info',array('experience'=>$experience)); ?>
             
         <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-    
+            
     <div id="addRecommendation">
         <p>Partager un bon plan : 
             <?php foreach ($recommendationtypes as $recommendationtype) :?>
             <span class="glyphicon glyphicon-<?= $recommendationtype['Recommendationtype']['icon'];?> recommendationtype-icon recommendationtype-icon-selectable" recommendationtype_description="<?= $recommendationtype['Recommendationtype']['description'];?>" recommendationtype_id="<?= $recommendationtype['Recommendationtype']['id'];?>" data-toggle="tooltip" title="<?= $recommendationtype['Recommendationtype']['name']; ?>"></span>
             <?php endforeach;?>
         </p>
-        
+            
         <div class="addRecommendationForm">
             <div class="form-group">
                 <textarea rows=3 placeholder="" experience_id="<?= $experience['Experience']['id']; ?>" recommendationtype_id="" class="RecommendationContent form-control"></textarea>
@@ -86,8 +86,8 @@
             </div>
         </div>
     </div>
-    
-    
+        
+        
         <?php endif; ?>
             
     <div class="panel-group" id="accordion">
@@ -114,7 +114,7 @@
                                         ));
                                     ?>
                                 <?php endif;?>
-                            <p><?= nl2br($recommendation['content']); ?></p>
+                            <p class="recommendation-text"><?= nl2br($recommendation['content']); ?></p>
                         </div>
                     </div>
                         <?php endforeach;?>
@@ -125,8 +125,8 @@
             </div>
         </div>
     </div>
-    
-    
+        
+        
 </div>
 <?php endforeach; ?>
     
@@ -153,6 +153,8 @@
             $('.contact-logo').tooltip();
             $('.recommendationtype-icon').tooltip(); 
         }
+        
+        $('.recommendation-text').readmore();
         
     });
     

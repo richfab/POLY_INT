@@ -281,7 +281,7 @@ class UsersController extends AppController {
     	App::uses('AuthComponent', 'Controller/Component');
         
         //on inclut les scripts pour l'envoi des recommandations en ajax
-    	$this->set('jsIncludes',array('recommendations'));
+    	$this->set('jsIncludes',array('recommendations','readmore'));
             
         if($this->Auth->loggedIn()){
             

@@ -26,6 +26,8 @@ function get_recommendations(){
             if (!Modernizr.touch) {
                 $('.recommendationtype-icon').tooltip(); 
             }
+            //pour le readmore
+            $('.recommendation-text').readmore();
         }
     });
 }
