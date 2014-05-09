@@ -77,6 +77,8 @@ class UsersController extends AppController {
             $this->User->create();
             //on force le role a être user
             $this->request->data['User']['role'] = 'user';
+            //on sauvegarde l'email utilisé a l'inscription
+            $this->request->data['User']['email_at_signup'] = $this->request->data['User']['email'];
                 
             if ($this->User->save($this->request->data)) {
                 
