@@ -342,6 +342,10 @@ h2 > span.wut {
     margin-top: 30px;
 }
 
+#wells-experience-profile{
+    margin-bottom: 50px;
+}
+
 #avatar_profile, #avatar_search{
     border-radius: 100%;
     padding: 1px;

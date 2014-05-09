@@ -46,89 +46,90 @@
     <p><?= $this->Html->link("Ajouter une expérience", array('controller' => 'experiences', 'action' => 'info')); ?></p>
 </div>
     <?php endif; ?>
-        
-<?php foreach ($experiences as $experience): ?>
-<div class="well well-experience" id="<?= $experience['Experience']['id'];?>">
-    
-        <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-            
-            <?= $this->Form->postLink('<span class="edit-delete-label">Supprimer</span>',
-                array('controller'=>'experiences', 'action' => 'delete', $experience['Experience']['id']),
-                array('confirm' => 'Es-tu sûr de vouloir supprimer cette expérience ?',
-                    'escape' => false,
-                    'class' => 'glyphicon glyphicon-remove close edit-delete'
-                ));
-            ?>
-            <?= $this->Html->link('<span class="edit-delete-label">Modifier</span>', array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id']),
-                    array('escape' => false,
-                        'class' => 'glyphicon glyphicon-pencil close edit-delete'
-                    )); ?>
-        <?php endif; ?>
-            
-        <?php echo $this->element('experience_info',array('experience'=>$experience)); ?>
-            
-        <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-            
-    <div id="addRecommendation">
-        <p>Partager un bon plan : 
-            <?php foreach ($recommendationtypes as $recommendationtype) :?>
-            <span class="glyphicon glyphicon-<?= $recommendationtype['Recommendationtype']['icon'];?> recommendationtype-icon recommendationtype-icon-selectable" recommendationtype_description="<?= $recommendationtype['Recommendationtype']['description'];?>" recommendationtype_id="<?= $recommendationtype['Recommendationtype']['id'];?>" data-toggle="tooltip" title="<?= $recommendationtype['Recommendationtype']['name']; ?>"></span>
-            <?php endforeach;?>
-        </p>
-            
-        <div class="addRecommendationForm">
-            <div class="form-group">
-                <textarea rows=6 placeholder="" experience_id="<?= $experience['Experience']['id']; ?>" recommendationtype_id="" class="RecommendationContent form-control"></textarea>
-            </div>
-            <div class="form-group">    
-                <button type="button" onclick="add_recommendation($(this));" class="btn btn-blue">Partager</button>
-                <button type="button" onclick="closeAddRecommendationForm($(this));" class="btn btn-orange">Annuler</button>
-            </div>
-        </div>
-    </div>
-        
-        
-        <?php endif; ?>
-            
-    <div class="panel-group" id="accordion">
-        <div class="panel panel-default panel-recommendations">
-            <div class="panel-heading panel-heading-recommendations">
-                <h5 class="panel-title panel-title-recommendations">
-                    <span style="width:20px" class="glyphicon glyphicon-comment"></span> Bons plans
-                </h5>
-            </div>
-            <div class="panel-collapse">
-                <div class="panel-body">
-                        <?php foreach ($experience['Recommendation'] as $recommendation):?>
-                    <div class="row">
-                        <div class="col-sm-1" style="text-align:right;">
-                            <p><span class="glyphicon glyphicon-<?= $recommendationtypes_list[$recommendation['recommendationtype_id']];?> recommendationtype-icon selected"></span></p>
-                        </div>
-                        <div class="col-sm-11">
-                                <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-                                    <?= $this->Form->postLink('<span class="edit-delete-label"></span>',
-                                        array('controller'=>'recommendations', 'action' => 'delete', $recommendation['id']),
-                                        array('confirm' => 'Es-tu sûr de vouloir supprimer ce bon plan ?',
-                                            'escape' => false,
-                                            'class' => 'glyphicon glyphicon-remove close edit-delete'
-                                        ));
-                                    ?>
-                                <?php endif;?>
-                            <p class="recommendation-text"><?= nl2br($recommendation['content']); ?></p>
-                        </div>
-                    </div>
-                        <?php endforeach;?>
-                        <?php if (!$experience['Recommendation']) :?>
-                    <p>Aucun bon plan</p>
-                        <?php endif;?>
+<div id="wells-experience-profile">
+    <?php foreach ($experiences as $experience): ?>
+    <div class="well well-experience" id="<?= $experience['Experience']['id'];?>">
+
+            <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+
+                <?= $this->Form->postLink('<span class="edit-delete-label">Supprimer</span>',
+                    array('controller'=>'experiences', 'action' => 'delete', $experience['Experience']['id']),
+                    array('confirm' => 'Es-tu sûr de vouloir supprimer cette expérience ?',
+                        'escape' => false,
+                        'class' => 'glyphicon glyphicon-remove close edit-delete'
+                    ));
+                ?>
+                <?= $this->Html->link('<span class="edit-delete-label">Modifier</span>', array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id']),
+                        array('escape' => false,
+                            'class' => 'glyphicon glyphicon-pencil close edit-delete'
+                        )); ?>
+            <?php endif; ?>
+
+            <?php echo $this->element('experience_info',array('experience'=>$experience)); ?>
+
+            <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+
+        <div id="addRecommendation">
+            <p>Partager un bon plan : 
+                <?php foreach ($recommendationtypes as $recommendationtype) :?>
+                <span class="glyphicon glyphicon-<?= $recommendationtype['Recommendationtype']['icon'];?> recommendationtype-icon recommendationtype-icon-selectable" recommendationtype_description="<?= $recommendationtype['Recommendationtype']['description'];?>" recommendationtype_id="<?= $recommendationtype['Recommendationtype']['id'];?>" data-toggle="tooltip" title="<?= $recommendationtype['Recommendationtype']['name']; ?>"></span>
+                <?php endforeach;?>
+            </p>
+
+            <div class="addRecommendationForm">
+                <div class="form-group">
+                    <textarea rows=6 placeholder="" experience_id="<?= $experience['Experience']['id']; ?>" recommendationtype_id="" class="RecommendationContent form-control"></textarea>
+                </div>
+                <div class="form-group">    
+                    <button type="button" onclick="add_recommendation($(this));" class="btn btn-blue">Partager</button>
+                    <button type="button" onclick="closeAddRecommendationForm($(this));" class="btn btn-orange">Annuler</button>
                 </div>
             </div>
         </div>
+
+
+            <?php endif; ?>
+
+        <div class="panel-group" id="accordion">
+            <div class="panel panel-default panel-recommendations">
+                <div class="panel-heading panel-heading-recommendations">
+                    <h5 class="panel-title panel-title-recommendations">
+                        <span style="width:20px" class="glyphicon glyphicon-comment"></span> Bons plans
+                    </h5>
+                </div>
+                <div class="panel-collapse">
+                    <div class="panel-body">
+                            <?php foreach ($experience['Recommendation'] as $recommendation):?>
+                        <div class="row">
+                            <div class="col-sm-1" style="text-align:right;">
+                                <p><span class="glyphicon glyphicon-<?= $recommendationtypes_list[$recommendation['recommendationtype_id']];?> recommendationtype-icon selected"></span></p>
+                            </div>
+                            <div class="col-sm-11">
+                                    <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+                                        <?= $this->Form->postLink('<span class="edit-delete-label"></span>',
+                                            array('controller'=>'recommendations', 'action' => 'delete', $recommendation['id']),
+                                            array('confirm' => 'Es-tu sûr de vouloir supprimer ce bon plan ?',
+                                                'escape' => false,
+                                                'class' => 'glyphicon glyphicon-remove close edit-delete'
+                                            ));
+                                        ?>
+                                    <?php endif;?>
+                                <p class="recommendation-text"><?= nl2br($recommendation['content']); ?></p>
+                            </div>
+                        </div>
+                            <?php endforeach;?>
+                            <?php if (!$experience['Recommendation']) :?>
+                        <p>Aucun bon plan</p>
+                            <?php endif;?>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
-        
-        
+    <?php endforeach; ?>
 </div>
-<?php endforeach; ?>
     
 <script type="text/javascript">
     
@@ -159,7 +160,9 @@
         
         //DEBUT jump to moins la hauteur de la navbar
         function offsetAnchor() {
-            window.scrollTo(window.scrollX, window.scrollY - 60);
+            if($(document).height() > window.scrollY+$(window).height()){
+                window.scrollTo(window.scrollX, window.scrollY - 60);
+            }
         }
         $(window).on("hashchange", function () {
             offsetAnchor();
