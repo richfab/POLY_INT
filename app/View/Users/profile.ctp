@@ -114,7 +114,7 @@
                                             ));
                                         ?>
                                     <?php endif;?>
-                                <p class="recommendation-text"><?= nl2br($recommendation['content']); ?></p>
+                                    <?php echo $this->element('recommendation_text',array('recommendation'=>$recommendation)); ?>
                             </div>
                         </div>
                             <?php endforeach;?>
@@ -160,6 +160,7 @@
         
         //DEBUT jump to moins la hauteur de la navbar
         function offsetAnchor() {
+            //si on n'essaie pas de descendre jusqu'en bas du profile pour voir la derniere experience
             if($(document).height() > window.scrollY+$(window).height()){
                 window.scrollTo(window.scrollX, window.scrollY - 60);
             }
