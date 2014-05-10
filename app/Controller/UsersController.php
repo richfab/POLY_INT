@@ -19,7 +19,7 @@ class UsersController extends AppController {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 if($this->Auth->user('role')==='admin'){
-                    return $this->redirect(array('controller'=>'users','action' => 'index','admin'=>true));
+                    return $this->redirect(array('controller' => 'dashboards', 'action' => 'index','admin'=>true));
                 }
                 //si le user a activé son compte
                 if($this->Auth->user('active')){
@@ -60,6 +60,8 @@ class UsersController extends AppController {
         $this->request->onlyAllow('post', 'accept_request');
         
         if($this->User->save($user)){
+                //on envoie l'email d'activation
+                $this->__send_activation_email($user);
                 $this->Session->setFlash(__('The user has been accepted. An activation email has been sent to the user.'));
         } else {
                 $this->Session->setFlash(__('The user could not be accepted. Please, try again.'));

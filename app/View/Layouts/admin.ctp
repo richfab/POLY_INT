@@ -49,9 +49,10 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
     <body>
         <div id="container">
             <div id="header">
+                    <?php echo $this->Html->link('Dashboard', array('controller' => 'dashboards', 'action' => 'index','admin'=>true)); ?>
                     <?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index','admin'=>true)); ?>
                     <?php echo $this->Html->link('Experiences', array('controller' => 'experiences', 'action' => 'index','admin'=>true)); ?>
-                <?php echo $this->Html->link('Recommendations', array('controller' => 'recommendations', 'action' => 'index','admin'=>true)); ?>
+                    <?php echo $this->Html->link('Recommendations', array('controller' => 'recommendations', 'action' => 'index','admin'=>true)); ?>
                     <?php echo $this->Html->link('Schools', array('controller' => 'schools', 'action' => 'index','admin'=>true)); ?>
                     <?php echo $this->Html->link('Departments', array('controller' => 'departments', 'action' => 'index','admin'=>true)); ?>
                     <?php echo $this->Html->link('Disconnect', array('controller' => 'users', 'action' => 'logout','admin'=>false),array('style' => 'float:right')); ?>
