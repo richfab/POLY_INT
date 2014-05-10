@@ -29,7 +29,7 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css('cake.generic');
+		echo $this->Html->css(array('cake.generic'));
                 
                 //on inclut les fichiers js qui sont spécifiques a une vue
 		if(isset($jsIncludes)){
@@ -51,11 +51,12 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
             <div id="header">
                     <?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index','admin'=>true)); ?>
                     <?php echo $this->Html->link('Experiences', array('controller' => 'experiences', 'action' => 'index','admin'=>true)); ?>
+                <?php echo $this->Html->link('Recommendations', array('controller' => 'recommendations', 'action' => 'index','admin'=>true)); ?>
                     <?php echo $this->Html->link('Schools', array('controller' => 'schools', 'action' => 'index','admin'=>true)); ?>
                     <?php echo $this->Html->link('Departments', array('controller' => 'departments', 'action' => 'index','admin'=>true)); ?>
                     <?php echo $this->Html->link('Disconnect', array('controller' => 'users', 'action' => 'logout','admin'=>false),array('style' => 'float:right')); ?>
                     <a style="float: right"> | </a>
-                    <?php echo $this->Html->link('Côté utilisateur',array('controller'=>'pages', 'action'=>'index','admin'=>false),array('style' => 'float:right')); ?>
+                    <?php echo $this->Html->link('User site',array('controller'=>'pages', 'action'=>'index','admin'=>false),array('style' => 'float:right')); ?>
             </div>
             <div id="content">
                 

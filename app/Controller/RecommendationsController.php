@@ -3,8 +3,18 @@ App::uses('AppController', 'Controller');
     
 class RecommendationsController extends AppController {
     
-    //pour l'extension json
-    public $components = array("RequestHandler");
+    /**
+ * Components
+ *
+ * @var array
+ */
+    public $components = array('RequestHandler','Paginator', 'Session');
+
+    /* Set pagination options */
+    public $paginate = array(
+            'limit' => 20,
+            'order' => array('created' => 'DESC')
+    );
         
     public function beforeFilter() {
         parent::beforeFilter();
@@ -127,6 +137,53 @@ class RecommendationsController extends AppController {
         }
         return $conditions;
     }
+    
+    /**
+ * admin_index method
+ *
+ * @return void
+ */
+	public function admin_index() {
+            $this->Paginator->settings = $this->paginate;
+            $this->Recommendation->recursive = 0;
+            $this->set('recommendations', $this->Paginator->paginate());
+	}
+
+/**
+ * admin_view method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function admin_view($id = null) {
+		if (!$this->Recommendation->exists($id)) {
+			throw new NotFoundException(__('Invalid recommendation'));
+		}
+		$options = array('conditions' => array('Recommendation.' . $this->Recommendation->primaryKey => $id));
+		$this->set('recommendation', $this->Recommendation->find('first', $options));
+	}
+
+/**
+ * admin_delete method
+ *
+ * @throws NotFoundException
+ * @param string $id
+ * @return void
+ */
+	public function admin_delete($id = null) {
+		$this->Recommendation->id = $id;
+		if (!$this->Recommendation->exists()) {
+			throw new NotFoundException(__('Invalid recommendation'));
+		}
+		$this->request->onlyAllow('post', 'delete');
+		if ($this->Recommendation->delete()) {
+			$this->Session->setFlash(__('The recommendation has been deleted.'));
+		} else {
+			$this->Session->setFlash(__('The recommendation could not be deleted. Please, try again.'));
+		}
+		return $this->redirect(array('action' => 'index'));
+	}
             
 }
 ?>

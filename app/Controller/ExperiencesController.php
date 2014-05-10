@@ -438,6 +438,7 @@ class ExperiencesController extends AppController {
  */
 	public function admin_index() {
                 $this->Paginator->settings = $this->paginate;
+                $this->Paginator->settings['order'] = array('created' => 'DESC');
 		$this->Experience->recursive = 0;
 		$this->set('experiences', $this->Paginator->paginate());
 	}
@@ -455,27 +456,6 @@ class ExperiencesController extends AppController {
 		}
 		$options = array('conditions' => array('Experience.' . $this->Experience->primaryKey => $id));
 		$this->set('experience', $this->Experience->find('first', $options));
-	}
-            
-/**
- * admin_add method
- *
- * @return void
- */
-	public function admin_add() {
-		if ($this->request->is('post')) {
-			$this->Experience->create();
-			if ($this->Experience->save($this->request->data)) {
-				$this->Session->setFlash(__('The experience has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The experience could not be saved. Please, try again.'));
-			}
-		}
-		$cities = $this->Experience->City->find('list');
-		$motives = $this->Experience->Motive->find('list');
-		$users = $this->Experience->User->find('list');
-		$this->set(compact('cities', 'motives', 'users'));
 	}
             
 /**

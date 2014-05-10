@@ -50,6 +50,17 @@ class User extends AppModel {
                 'message' => 'Cet email est déjà utilisé'
             )
         ),
+        'email_at_signup' => array(
+            'format' => array(
+                'rule'       => 'email',
+                'message'    => 'Entrez un email valide',
+                'allowEmpty' => false
+            ),
+            'isUnique' => array(
+                'rule'    => 'isUnique',
+                'message' => 'Cet email est déjà utilisé'
+            )
+        ),
         'linkedin' => array(
             'adress' => array(
                 'rule' => 'url',

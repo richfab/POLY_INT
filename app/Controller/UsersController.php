@@ -6,13 +6,13 @@ class UsersController extends AppController {
     /* Set pagination options */
     public $paginate = array(
             'limit' => 20,
-            'order' => array('lastname' => 'ASC'),
+            'order' => array('created' => 'DESC'),
             'conditions' => array('User.role' => 'user','User.active' => '1')
     );
         
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('signup','activate','forgotten_password'); // Letting users signup themselves and retrieve password
+        $this->Auth->allow('signup','signup_request','activate','forgotten_password'); // Letting users signup themselves and retrieve password
     }
 	
     public function login() {
@@ -40,9 +40,31 @@ class UsersController extends AppController {
             ));
         }
     }
-	
+    
     public function logout() {
         return $this->redirect($this->Auth->logout());
+    }
+    
+    //cette fonction permet a un administrateur d'accepter une demande d'inscription faite avec un email non étudiant
+    public function admin_accept_request($id = null) {
+        
+        $this->User->create();
+        $this->User->id = $id;
+
+        $user = $this->User->findById($id);
+        $user['User']['email'] = $user['User']['email_at_signup'];
+
+        if (!$this->User->exists()) {
+                throw new NotFoundException(__('Invalid user'));
+        }
+        $this->request->onlyAllow('post', 'accept_request');
+        
+        if($this->User->save($user)){
+                $this->Session->setFlash(__('The user has been accepted. An activation email has been sent to the user.'));
+        } else {
+                $this->Session->setFlash(__('The user could not be accepted. Please, try again.'));
+        }
+        return $this->redirect(array('action' => 'index'));
     }
 	
     public function signup() {
@@ -82,18 +104,11 @@ class UsersController extends AppController {
                 
             if ($this->User->save($this->request->data)) {
                 
+                //TODO a factoriser pour la methode d'acceptation d'une demande d'inscription
                 $user = $this->User->findByEmail($this->request->data['User']['email']);
-                $activation_link = array('controller'=>'users', 'action' => 'activate',  $this->User->id.'-'.md5($user['User']['password']));
                 
-                App::uses('CakeEmail','Network/Email');
-            	$user = $this->request->data;
-                $email = new CakeEmail('default');
-                $email->to($user['User']['email'])
-                        ->subject('Bienvenue sur Polytech Abroad !')
-                        ->emailFormat('html')
-                        ->template('signup')
-                        ->viewVars(array('firstname' => $user['User']['firstname'],'activation_link' => $activation_link))
-                        ->send();
+                //on envoie l'email d'activation
+                $this->__send_activation_email($user);
                                 
                 $this->Session->setFlash(__("Ton inscription a bien été prise en compte. Un email d'activation sera bientôt envoyé à ".$user['User']['email']), 'alert', array(
                     'plugin' => 'BoostCake',
@@ -102,6 +117,69 @@ class UsersController extends AppController {
                 return $this->redirect(array('controller'=>'users','action' => 'login'));
             }
             $this->Session->setFlash(__("Erreur lors de l'inscription"), 'alert', array(
+                 'plugin' => 'BoostCake',
+                 'class' => 'alert-danger'
+             ));
+        }
+    }
+    
+    //envoie un email d'activation a l'utilisateur passé en paramêtre
+    private function __send_activation_email($user) {
+        
+        $activation_link = array('controller'=>'users', 'action' => 'activate',  $this->User->id.'-'.md5($user['User']['password']));
+                
+        App::uses('CakeEmail','Network/Email');
+        $user = $this->request->data;
+        $email = new CakeEmail('default');
+        $email->to($user['User']['email'])
+                ->subject('Bienvenue sur Polytech Abroad !')
+                ->emailFormat('html')
+                ->template('signup')
+                ->viewVars(array('firstname' => $user['User']['firstname'],'activation_link' => $activation_link))
+                ->send();
+    }
+    
+    public function signup_request() {
+        //selectionne les ecoles par ordre alphabetique
+        $this->set('schools', $this->User->School->find('list', array(
+                        'order' => array('School.name' => 'ASC'))));
+        //selectionne les departements par ordre alphabetique
+        $this->set('departments', $this->User->Department->find('list', array(
+                        'order' => array('Department.name' => 'ASC'))));
+                            
+        if ($this->request->is('post')) {
+            
+            if (!($this->data['User']['password'] === $this->data['User']['password_confirm'])) {
+                $this->Session->setFlash(__("Les mots de passe ne correspondent pas"), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-danger'
+                ));              
+                return;
+            }
+                
+            $this->User->create();
+            //on force le role a être user
+            $this->request->data['User']['role'] = 'user';
+                
+            if ($this->User->save($this->request->data)) {
+                
+                App::uses('CakeEmail','Network/Email');
+            	$user = $this->request->data;
+                $email = new CakeEmail('default');
+                $email->to($user['User']['email_at_signup'])
+                        ->subject('Bienvenue sur Polytech Abroad !')
+                        ->emailFormat('html')
+                        ->template('signup_request')
+                        ->viewVars(array('firstname' => $user['User']['firstname']))
+                        ->send();
+                                
+                $this->Session->setFlash(__("Ta demande d'inscription a bien été prise en compte. Un email de confirmation sera bientôt envoyé à ".$user['User']['email_at_signup']), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+                return $this->redirect(array('controller'=>'users','action' => 'login'));
+            }
+            $this->Session->setFlash(__("Erreur lors de la demande d'inscription"), 'alert', array(
                  'plugin' => 'BoostCake',
                  'class' => 'alert-danger'
              ));
@@ -245,6 +323,7 @@ class UsersController extends AppController {
         }
     }
     
+    //inscription par linkedin
     public function in_signup() {
         //selectionne les ecoles par ordre alphabetique
         $this->set('schools', $this->User->School->find('list', array(
@@ -401,6 +480,9 @@ class UsersController extends AppController {
 	public function admin_index() {
                 $this->Paginator->settings = $this->paginate;
 		$this->User->recursive = 0;
+                $this->set('user_requests', $this->User->find('all',array(
+                    'conditions' => array('email' => NULL)
+                )));
 		$this->set('users', $this->Paginator->paginate());
 	}
 
