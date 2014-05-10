@@ -59,7 +59,7 @@ class UsersController extends AppController {
         }
         $this->request->onlyAllow('post', 'accept_request');
         
-        if($this->User->save($user)){
+        if($this->User->saveField('email',$user['User']['email'])){
                 //on envoie l'email d'activation
                 $this->__send_activation_email($user);
                 $this->Session->setFlash(__('The user has been accepted. An activation email has been sent to the user.'));
@@ -128,10 +128,9 @@ class UsersController extends AppController {
     //envoie un email d'activation a l'utilisateur passé en paramêtre
     private function __send_activation_email($user) {
         
-        $activation_link = array('controller'=>'users', 'action' => 'activate',  $this->User->id.'-'.md5($user['User']['password']));
+        $activation_link = array('controller'=>'users', 'action' => 'activate','admin'=>false, $this->User->id.'-'.md5($user['User']['password']));
                 
         App::uses('CakeEmail','Network/Email');
-        $user = $this->request->data;
         $email = new CakeEmail('default');
         $email->to($user['User']['email'])
                 ->subject('Bienvenue sur Polytech Abroad !')
