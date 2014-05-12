@@ -5,7 +5,6 @@ class DashboardsController extends AppController {
         
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(); // Ce que tout le monde peut faire
     }
     
     public function admin_index() {

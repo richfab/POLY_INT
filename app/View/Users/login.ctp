@@ -1,4 +1,3 @@
-<?= $this->Session->flash('auth'); ?>
 <h2>Se connecter</h2>
     <?php echo $this->Form->create('User', array(
         'inputDefaults' => array(

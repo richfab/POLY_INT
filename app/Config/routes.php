@@ -29,6 +29,9 @@
  * ...and connect the rest of 'Pages' controller's URLs.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
+        
+//        redirige la connexion admin vers la connexion user
+        Router::redirect('/admin/users/login', array('controller' => 'users', 'action' => 'login', 'admin' => false));
 
 /**
  * Load all plugin routes. See the CakePlugin documentation on
