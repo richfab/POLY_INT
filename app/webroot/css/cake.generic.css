@@ -109,16 +109,13 @@ p {
 	padding: 6px 10px;
 	text-align: right;
 }
-#header a, #footer a {
-	color: #fff;
-}
 
 /** containers **/
 div.form,
 div.index,
 div.view {
 	float:right;
-	width:76%;
+	width:83%;
 	border-left:1px solid #666;
 	padding:10px 2%;
 }
@@ -269,9 +266,7 @@ fieldset {
 	padding: 16px 10px;
 }
 fieldset legend {
-	color: #e32;
 	font-size: 160%;
-	font-weight: bold;
 }
 fieldset fieldset {
 	margin-top: 0;

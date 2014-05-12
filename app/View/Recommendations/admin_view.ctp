@@ -38,7 +38,6 @@
 	<ul>
 		<li><?php echo $this->Form->postLink(__('Delete Recommendation'), array('action' => 'delete', $recommendation['Recommendation']['id']), null, __('Are you sure you want to delete # %s?', $recommendation['Recommendation']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('List Recommendations'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Experiences'), array('controller' => 'experiences', 'action' => 'index')); ?> </li>
 		
 		
 	</ul>

@@ -29,7 +29,7 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
 	<?php
 		echo $this->Html->meta('icon');
 
-		echo $this->Html->css(array('cake.generic'));
+		echo $this->Html->css(array('cake.generic','bootstrap','admin'));
                 
                 //on inclut les fichiers js qui sont spécifiques a une vue
 		if(isset($jsIncludes)){
@@ -64,9 +64,6 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
 			<?php echo $this->Session->flash(); ?>
                 
 			<?php echo $this->fetch('content'); ?>
-            </div>
-            <div id="footer">
-                Administration
             </div>
         </div>
     </body>

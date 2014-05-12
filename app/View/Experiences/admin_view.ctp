@@ -63,11 +63,5 @@
 	<ul>
 		<li><?php echo $this->Form->postLink(__('Delete Experience'), array('action' => 'delete', $experience['Experience']['id']), null, __('Are you sure you want to delete # %s?', $experience['Experience']['id'])); ?> </li>
 		<li><?php echo $this->Html->link(__('List Experiences'), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Cities'), array('controller' => 'cities', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New City'), array('controller' => 'cities', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Motives'), array('controller' => 'motives', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Motive'), array('controller' => 'motives', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
 	</ul>
 </div>

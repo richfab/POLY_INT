@@ -55,15 +55,3 @@
 	?>
 	</div>
 </div>
-<div class="actions">
-	<h3><?php echo __('Actions'); ?></h3>
-	<ul>
-		<li><?php echo $this->Html->link(__('List Cities'), array('controller' => 'cities', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New City'), array('controller' => 'cities', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Motives'), array('controller' => 'motives', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New Motive'), array('controller' => 'motives', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Users'), array('controller' => 'users', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New User'), array('controller' => 'users', 'action' => 'add')); ?> </li>
-                <li><?php echo $this->Html->link(__('List Recommendations'), array('controller' => 'recommendations', 'action' => 'index')); ?> </li>
-	</ul>
-</div>
