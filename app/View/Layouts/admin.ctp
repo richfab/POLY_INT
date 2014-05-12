@@ -49,12 +49,12 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
     <body>
         <div id="container">
             <div id="header">
-                    <?php echo $this->Html->link('Dashboard', array('controller' => 'dashboards', 'action' => 'index','admin'=>true)); ?>
-                    <?php echo $this->Html->link('Users', array('controller' => 'users', 'action' => 'index','admin'=>true)); ?>
-                    <?php echo $this->Html->link('Experiences', array('controller' => 'experiences', 'action' => 'index','admin'=>true)); ?>
-                    <?php echo $this->Html->link('Recommendations', array('controller' => 'recommendations', 'action' => 'index','admin'=>true)); ?>
-                    <?php echo $this->Html->link('Schools', array('controller' => 'schools', 'action' => 'index','admin'=>true)); ?>
-                    <?php echo $this->Html->link('Departments', array('controller' => 'departments', 'action' => 'index','admin'=>true)); ?>
+                    <?php echo $this->Html->link('<span class="glyphicon glyphicon-home"></span> Dashboard', array('controller' => 'dashboards', 'action' => 'index','admin'=>true),array('escape'=>false)); ?>
+                    <?php echo $this->Html->link('<span class="glyphicon glyphicon-user"></span> Users', array('controller' => 'users', 'action' => 'index','admin'=>true),array('escape'=>false)); ?>
+                    <?php echo $this->Html->link('<span class="glyphicon glyphicon-globe"></span> Experiences', array('controller' => 'experiences', 'action' => 'index','admin'=>true),array('escape'=>false)); ?>
+                    <?php echo $this->Html->link('<span class="glyphicon glyphicon-comment"></span> Recommendations', array('controller' => 'recommendations', 'action' => 'index','admin'=>true),array('escape'=>false)); ?>
+                    <?php echo $this->Html->link('<span class="glyphicon glyphicon-book"></span> Schools', array('controller' => 'schools', 'action' => 'index','admin'=>true),array('escape'=>false)); ?>
+                    <?php echo $this->Html->link('<span class="glyphicon glyphicon-bookmark"></span> Departments', array('controller' => 'departments', 'action' => 'index','admin'=>true),array('escape'=>false)); ?>
                     <?php echo $this->Html->link('Disconnect', array('controller' => 'users', 'action' => 'logout','admin'=>false),array('style' => 'float:right')); ?>
                     <a style="float: right"> | </a>
                     <?php echo $this->Html->link('User site',array('controller'=>'pages', 'action'=>'index','admin'=>false),array('style' => 'float:right')); ?>
