@@ -209,7 +209,7 @@ h2 > span.wut {
     border-bottom: none;
 }
 
-.row-experience:hover{
+.row-experience:hover, .row-experience:hover{
     cursor: pointer;
     background-color: #f4f4f4;
 }
@@ -222,6 +222,10 @@ h2 > span.wut {
 .well-experience-search:hover{
     cursor: pointer;
     border-color: #ABABAB;
+}
+
+.experience-list a:hover{
+  text-decoration: none;
 }
 
 .access {
