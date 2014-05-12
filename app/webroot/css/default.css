@@ -197,6 +197,10 @@ h2 > span.wut {
     border-bottom: 1px solid #e7e7e7;
 }
 
+#list-map div{
+    color: black;
+}
+
 .list-map-message{
     padding: 5px;
 }
@@ -333,9 +337,19 @@ h2 > span.wut {
     background-color: white;
 }
 
-.profile-info-search > p {
+.profile-info-search > div{
+    margin: 0 0 5px;
+    color: black;
+}
+
+.profile-info-search {
     margin: 0 0 5px;
     text-align: right;
+}
+
+.experience-info > div{
+    margin: 0 0 10px;
+    color: black;
 }
 
 #profile_info{

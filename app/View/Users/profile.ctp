@@ -6,8 +6,8 @@
  * and open the template in the editor.
  */
 ?>
-    
-    
+
+
 <div class="row" id="profile_info">
     <div class="col col-sm-10">
         <h1><?= $user['User']['firstname'];?> <?= $user['User']['lastname'];?>
@@ -40,7 +40,7 @@
     </div>
 </div>
 <h3 style="display: inline-block">Expériences</h3>
-    
+
     <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
 <div class="well">
     <p><?= $this->Html->link("Ajouter une expérience", array('controller' => 'experiences', 'action' => 'info')); ?></p>
@@ -48,10 +48,10 @@
     <?php endif; ?>
 <div id="wells-experience-profile">
     <?php foreach ($experiences as $experience): ?>
-    <div class="well well-experience" id="<?= $experience['Experience']['id'];?>">
-
+    <div class="well well-experience experience-info" id="<?= $experience['Experience']['id'];?>">
+        
             <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-
+                
                 <?= $this->Form->postLink('<span class="edit-delete-label">Supprimer</span>',
                     array('controller'=>'experiences', 'action' => 'delete', $experience['Experience']['id']),
                     array('confirm' => 'Es-tu sûr de vouloir supprimer cette expérience ?',
@@ -64,18 +64,18 @@
                             'class' => 'glyphicon glyphicon-pencil close edit-delete'
                         )); ?>
             <?php endif; ?>
-
+                
             <?php echo $this->element('experience_info',array('experience'=>$experience)); ?>
-
+                
             <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-
+                
         <div id="addRecommendation">
             <p>Partager un bon plan : 
                 <?php foreach ($recommendationtypes as $recommendationtype) :?>
                 <span class="glyphicon glyphicon-<?= $recommendationtype['Recommendationtype']['icon'];?> recommendationtype-icon recommendationtype-icon-selectable" recommendationtype_description="<?= $recommendationtype['Recommendationtype']['description'];?>" recommendationtype_id="<?= $recommendationtype['Recommendationtype']['id'];?>" data-toggle="tooltip" title="<?= $recommendationtype['Recommendationtype']['name']; ?>"></span>
                 <?php endforeach;?>
             </p>
-
+                
             <div class="addRecommendationForm">
                 <div class="form-group">
                     <textarea rows=6 placeholder="" experience_id="<?= $experience['Experience']['id']; ?>" recommendationtype_id="" class="RecommendationContent form-control"></textarea>
@@ -86,10 +86,10 @@
                 </div>
             </div>
         </div>
-
-
+            
+            
             <?php endif; ?>
-
+                
         <div class="panel-group" id="accordion">
             <div class="panel panel-default panel-recommendations">
                 <div class="panel-heading panel-heading-recommendations">
@@ -125,12 +125,12 @@
                 </div>
             </div>
         </div>
-
-
+            
+            
     </div>
     <?php endforeach; ?>
 </div>
-    
+
 <script type="text/javascript">
     
     $( function() {
@@ -157,13 +157,21 @@
         
         $('.recommendation-text').readmore();
         
-        
         //DEBUT jump to moins la hauteur de la navbar
         function offsetAnchor() {
+            //on recupere le scrolltop
+            var experienceTop = window.scrollY;
             //si on n'essaie pas de descendre jusqu'en bas du profile pour voir la derniere experience
             if($(document).height() > window.scrollY+$(window).height()){
-                window.scrollTo(window.scrollX, window.scrollY - 60);
+                experienceTop = experienceTop - 60;
             }
+            //on remonte jusqu'en haut
+            window.scrollTo(window.scrollX, 0);
+            //on redescend avec une animation a l'experience
+            window.setTimeout(function() {
+                $("html, body").animate({scrollTop:experienceTop},700, 'swing');
+            }, 300);
+            
         }
         $(window).on("hashchange", function () {
             offsetAnchor();
