@@ -29,4 +29,6 @@ dt, dd {
 
 div.index{
     width: 100%;
+    border-left: none;
+    padding: 0;
 }
