@@ -3,3 +3,5 @@ tmp/*
 app/tmp/*
 !empty
 /nbproject/*
+
+app/Config/database.php
