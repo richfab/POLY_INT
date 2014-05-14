@@ -7,12 +7,12 @@ App::uses('AppController', 'Controller');
 class PostsController extends AppController {
 
 	public $paginate = array(
-            'limit' => 1,
+            'limit' => 3,
             'order' => array('created' => 'DESC')
     );
 
 	public function index() {
-		$data = $this->paginate('Post');
-		$this->set('articles',$data);
+		$this->Paginator->settings = $this->paginate;
+		$this->set('articles', $this->Paginator->paginate());
 	}
 }

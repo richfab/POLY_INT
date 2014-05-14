@@ -430,6 +430,22 @@ class ExperiencesController extends AppController {
         }
         return false;
     }
+
+    // private function __send_remindExperience_email($user) {
+        
+    //     $experiences = $this->Experience->find('all');
+    //     foreach($experiences as $experience) {
+    //         if($experienceEnded) {
+    //             App::uses('CakeEmail','Network/Email');
+    //             $email = new CakeEmail('default');
+    //             $email->to($user['User']['email'])
+    //                     ->subject("Polytech Abroad | Alors, c'était comment ?")
+    //                     ->emailFormat('html')
+    //                     ->template('experience_ended')
+    //                     ->send();
+    //         }
+    //     }
+    // }
         
     /**
  * admin_index method
