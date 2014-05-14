@@ -69,7 +69,7 @@ class DATABASE_CONFIG {
 //		'password' => '3X233Hz7ts',
 //		'database' => 'fabienrichard',
 //		'prefix' => 'POLY_INT_',
-//		'encoding' => 'utf8',
+//		'encoding' => 'UTF8',
 //	);
 
 	public $default = array(
@@ -80,7 +80,7 @@ class DATABASE_CONFIG {
 		'password' => 'root',
 		'database' => 'fabienrichard',
 		'prefix' => 'POLY_INT_',
-		'encoding' => 'utf8',
+		'encoding' => 'UTF8',
                 'unix_socket' => '/Applications/MAMP/tmp/mysql/mysql.sock'
 	);
 }

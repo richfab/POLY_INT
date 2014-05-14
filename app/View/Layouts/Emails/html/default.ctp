@@ -23,7 +23,5 @@
     </head>
     <body>
 	<?php echo $this->fetch('content'); ?>
-            
-        <p>L'équipe de Polytech Abroad</p>
     </body>
 </html>
