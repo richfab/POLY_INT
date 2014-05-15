@@ -159,19 +159,21 @@
         
         //DEBUT jump to moins la hauteur de la navbar
         function offsetAnchor() {
-            //on recupere le scrolltop
-            var experienceTop = window.scrollY;
-            //si on n'essaie pas de descendre jusqu'en bas du profile pour voir la derniere experience
-            if($(document).height() > window.scrollY+$(window).height()){
-                experienceTop = experienceTop - 60;
+            //making sure that there is a valid anchor to offset from.
+            if($(location.hash).length !== 0) {
+                //on recupere le scrolltop
+                var experienceTop = window.scrollY;
+                //si on n'essaie pas de descendre jusqu'en bas du profile pour voir la derniere experience
+                if($(document).height() > window.scrollY+$(window).height()){
+                    experienceTop = experienceTop - 60;
+                }
+                //on remonte jusqu'en haut
+                window.scrollTo(window.scrollX, 0);
+                //on redescend avec une animation a l'experience
+                window.setTimeout(function() {
+                    $("html, body").animate({scrollTop:experienceTop},700, 'swing');
+                }, 300);
             }
-            //on remonte jusqu'en haut
-            window.scrollTo(window.scrollX, 0);
-            //on redescend avec une animation a l'experience
-            window.setTimeout(function() {
-                $("html, body").animate({scrollTop:experienceTop},700, 'swing');
-            }, 300);
-            
         }
         $(window).on("hashchange", function () {
             offsetAnchor();
