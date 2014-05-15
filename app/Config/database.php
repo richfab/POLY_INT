@@ -61,26 +61,26 @@
  */
 class DATABASE_CONFIG {
 
-//	public $default = array(
-//		'datasource' => 'Database/Mysql',
-//		'persistent' => false,
-//		'host' => 'mysql51-72.perso',
-//		'login' => 'fabienrichard',
-//		'password' => '3X233Hz7ts',
-//		'database' => 'fabienrichard',
-//		'prefix' => 'POLY_INT_',
-//		'encoding' => 'UTF8',
-//	);
-
 	public $default = array(
 		'datasource' => 'Database/Mysql',
 		'persistent' => false,
-		'host' => 'localhost',
-		'login' => 'root',
-		'password' => 'root',
+		'host' => 'mysql51-72.perso',
+		'login' => 'fabienrichard',
+		'password' => '3X233Hz7ts',
 		'database' => 'fabienrichard',
 		'prefix' => 'POLY_INT_',
 		'encoding' => 'UTF8',
-                'unix_socket' => '/Applications/MAMP/tmp/mysql/mysql.sock'
 	);
+
+//	public $default = array(
+//		'datasource' => 'Database/Mysql',
+//		'persistent' => false,
+//		'host' => 'localhost',
+//		'login' => 'root',
+//		'password' => 'root',
+//		'database' => 'fabienrichard',
+//		'prefix' => 'POLY_INT_',
+//		'encoding' => 'UTF8',
+//                'unix_socket' => '/Applications/MAMP/tmp/mysql/mysql.sock'
+//	);
 }
