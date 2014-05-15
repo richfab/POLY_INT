@@ -435,6 +435,7 @@ h2 > span.wut {
 
 .icon-linkedin-mini {
     background-image:url('../img/linkedin-mini.png');
+    background-repeat: no-repeat;
     display: inline-block;
     height: 24px;
     width: 24px;
@@ -442,6 +443,7 @@ h2 > span.wut {
 
 .icon-facebook-mini {
     background-image:url('../img/facebook-mini.png');
+    background-repeat: no-repeat;
     display: inline-block;
     height: 24px;
     width: 24px;
