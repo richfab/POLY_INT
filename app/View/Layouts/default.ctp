@@ -133,6 +133,7 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
                 <div class="container">
                     <p class="pull-left">
                         <a class="icon-facebook-mini" href="https://www.facebook.com/PolytechAbroad" target="_blank"></a>
+                        <a class="icon-twitter-mini" href="https://twitter.com/PolytechAbroad" target="_blank"></a>
                         <a class="icon-linkedin-mini" href="https://www.linkedin.com/groups?gid=6576008" target="_blank"></a>
                     </p>
                     <p class="pull-right">
