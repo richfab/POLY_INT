@@ -147,15 +147,20 @@ h2 > span.wut {
     height: 38px;
     width: 100%;
     /*end brings the footer at bottom*/
-    background-color: #202328;
+    border-top: 1px solid #C9C9C9;
+    background-color: #fff
 }
 
 #footer p {
     color: #56585f;
-    margin: 10px 0;
+    margin: 10px 0 0 0;
     font-variant: small-caps;
     font-weight: bold;
     font-size: 13px;
+}
+
+#footer p.pull-left {
+    margin: 7px 0 0 0;
 }
 
 #footer a {
@@ -424,4 +429,23 @@ h2 > span.wut {
 
 #UserEditForm .checkbox{
     margin-top: -15px;
+}
+
+/* Social Footer */
+
+.icon-linkedin-mini {
+    background-image:url('../img/linkedin-mini.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+}
+
+.icon-facebook-mini {
+    background-image:url('../img/facebook-mini.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    margin: 0 15px;
 }
