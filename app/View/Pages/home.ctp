@@ -45,5 +45,5 @@
 </div>
 
 <div class="access">
-    <h4>Échange aussi sur la <a href="https://www.linkedin.com/groups?gid=6576008" target="_blank"><span class="linkedin-name">communauté&nbsp;LinkedIn</span></a> de Polytech Abroad</h4>
+    <h4 id="linkedin-reco">Échange aussi sur la <a href="https://www.linkedin.com/groups?gid=6576008" target="_blank"><span class="linkedin-name">communauté&nbsp;LinkedIn</span></a> de Polytech Abroad</h4>
 </div>

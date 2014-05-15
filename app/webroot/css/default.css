@@ -245,6 +245,10 @@ h2 > span.wut {
     padding: 3px 20px 5px 20px;
 }
 
+#linkedin-reco{
+    color: #666;
+}
+
 .row-marketing{
     padding: 40px 30px;
 }
@@ -256,12 +260,6 @@ h2 > span.wut {
     -webkit-animation:spin 2s ease infinite;
     -moz-animation:spin 2s ease infinite;
     animation:spin 2s ease infinite;
-}
-/*TODO a supprimer lors de la réouverture des inscriptions*/
-#signup_plane.fly{
-    -webkit-animation:spin 2s ease 1;
-    -moz-animation:spin 2s ease 1;
-    animation:spin 2s ease 1;
 }
 @-moz-keyframes spin { 100% { 
            transform-origin:left top;
