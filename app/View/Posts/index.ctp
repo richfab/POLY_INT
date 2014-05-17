@@ -17,8 +17,21 @@
 
 
 			<ul class="pager">
-				<li><a href="#">Previous</a></li>
-				<li><a href="#">Next</a></li>
+				<li>
+
+<?php echo $this->Paginator->prev(
+  ' << ' . __('previous'),
+  array(),
+  null,
+  array('class' => 'prev disabled')
+);?>
+</li>
+				<li><?php echo $this->Paginator->next(
+  ' >> ' . __('next'),
+  array(),
+  null,
+  array('class' => 'next disabled')
+);?></li>
 			</ul>
 
 		</div><!-- /.blog-main -->
