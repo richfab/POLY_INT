@@ -9,6 +9,11 @@
 <p>
     <?php echo $this->Html->link('Changer mot de passe',$this->Html->url($link,true)); ?>
 </p>
+
 <p>
     ou copie ce lien dans la barre d'adresse de ton navigateur : <?= $this->Html->url($link,true);?>
+</p>
+
+<p>
+    A bientôt sur <?php echo $this->Html->link('Polytech Abroad', $this->Html->url(array('controller' => 'pages', 'action' => 'home'),true)); ?>
 </p>

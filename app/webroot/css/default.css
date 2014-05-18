@@ -20,7 +20,7 @@ h1, h2, h3 {
 
 #content{
     padding-top: 50px;
-    padding-bottom: 38px;
+    padding-bottom: 40px;
 }
 /*fin utile pour bring footer to bottom*/
 
@@ -144,7 +144,7 @@ h2 > span.wut {
     /*start brings the footer at bottom*/
     position: absolute;
     bottom: 0;
-    height: 38px;
+    height: 40px;
     width: 100%;
     /*end brings the footer at bottom*/
     border-top: 1px solid #C9C9C9;
@@ -245,6 +245,10 @@ h2 > span.wut {
     padding: 3px 20px 5px 20px;
 }
 
+#linkedin-reco{
+    color: #666;
+}
+
 .row-marketing{
     padding: 40px 30px;
 }
@@ -256,12 +260,6 @@ h2 > span.wut {
     -webkit-animation:spin 2s ease infinite;
     -moz-animation:spin 2s ease infinite;
     animation:spin 2s ease infinite;
-}
-/*TODO a supprimer lors de la réouverture des inscriptions*/
-#signup_plane.fly{
-    -webkit-animation:spin 2s ease 1;
-    -moz-animation:spin 2s ease 1;
-    animation:spin 2s ease 1;
 }
 @-moz-keyframes spin { 100% { 
            transform-origin:left top;
@@ -447,5 +445,14 @@ h2 > span.wut {
     display: inline-block;
     height: 24px;
     width: 24px;
-    margin: 0 15px;
+    margin: 0 15px 0 0;
+}
+
+.icon-twitter-mini {
+    background-image:url('../img/twitter-mini.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    margin: 0 15px 0 0;
 }

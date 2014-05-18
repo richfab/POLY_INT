@@ -41,7 +41,8 @@ class EmailConfig {
 
 	public $default = array(
 		'transport' => 'Mail',
-		'from' => 'contact@fabienrichard.fr',
+		'from' => array('hello@polytech-abroad.com' => 'Polytech Abroad'),
+                'sender' => 'contact@fabienrichard.fr',
 		'charset' => 'utf-8',
 		'headerCharset' => 'utf-8',
 	);

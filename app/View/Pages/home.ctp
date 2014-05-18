@@ -24,17 +24,17 @@
         <div class="col-md-3">
             <?= $this->Html->image('5.png', array('alt' => 'geolocalisation'));?>
             <h2>Geolocalisation</h2>
-            <p>Retrouve les étudiants de Polytech en stage ou semestre à l'étranger</p>
+            <p>Retrouve les étudiants de Polytech en stage, études ou voyage à l'étranger</p>
         </div>
         <div class="col-md-3">
             <?= $this->Html->image('8.png', array('alt' => 'temps'));?>
             <h2>Depuis 2013</h2>
-            <p>Remonte le temps et découvrez où sont partis les étudiants avant vous</p>
+            <p>Remonte le temps et découvre où sont partis les étudiants avant toi</p>
         </div>
         <div class="col-md-3">
             <?= $this->Html->image('14.png', array('alt' => 'retour experience'));?>
             <h2>Retour d'experience</h2>
-            <p>Consulte les avis des étudiants pour choisir la meilleure destination</p>
+            <p>Consulte et partage des bons plans sur des destinations du monde entier</p>
         </div>
         <div class="col-md-3">
             <?= $this->Html->image('11.png', array('alt' => 'social'));?>
@@ -45,5 +45,5 @@
 </div>
 
 <div class="access">
-    <h4>Échange aussi sur la <a href="https://www.linkedin.com/groups?gid=6576008" target="_blank"><span class="linkedin-name">communauté&nbsp;LinkedIn</span></a> de Polytech Abroad</h4>
+    <h4 id="linkedin-reco">Échange aussi sur la <a href="https://www.linkedin.com/groups?gid=6576008" target="_blank"><span class="linkedin-name">communauté&nbsp;LinkedIn</span></a> de Polytech Abroad</h4>
 </div>

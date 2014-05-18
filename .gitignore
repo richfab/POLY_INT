@@ -1,7 +1,8 @@
 .DS_Store
+.gitignore
 tmp/*
 app/tmp/*
 !empty
 /nbproject/*
-
+git-rev.txt
 app/Config/database.php

@@ -19,3 +19,10 @@ git remote -v : permet de voir les remote
 Se logger au réseau univ-nantes
 Dans le terminal exporter le proxy https : export https_proxy="https://cache.wifi.univ-nantes.fr:3128"
 Utiliser le repertoire https://github.com/...
+
+    RACCOURCIS
+$echo "alias raccourcis='commande'" >> ~/.bash_profile
+$source ~/.bash_profile
+
+$polyint -> cd /Applications/MAMP/htdocs/POLY_INT
+$git-ftp pour uploader sur le serveur ftp les changements
