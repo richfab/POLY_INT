@@ -257,7 +257,7 @@ class ExperiencesController extends AppController {
             $this->set('experiences', $this->Experience->find('all', array(
                         'conditions' => $conditions,
                         'recursive' => 1,
-                        'order' => 'CASE WHEN DATEDIFF(Experience.dateEnd, NOW()) < 0 THEN DATEDIFF(Experience.dateEnd, NOW()) DESC ELSE DATEDIFF(Experience.dateStart, NOW()) ASC END',
+                        'order' => '(CASE WHEN DATEDIFF(Experience.dateEnd, NOW()) < 0 THEN 1 ELSE 0 END),ABS(DATEDIFF(Experience.dateEnd, NOW())) ASC',
                         'limit' => $result_limit,
                         'offset' => $offset,
                         'fields' => array('*','DATEDIFF(Experience.dateEnd, Experience.dateStart)/30 monthDiff'))));
