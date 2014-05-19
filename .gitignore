@@ -6,4 +6,3 @@ app/tmp/*
 /nbproject/*
 git-rev.txt
 app/Config/database.php
-app/webroot/img/heights/*
