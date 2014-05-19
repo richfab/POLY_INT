@@ -34,7 +34,7 @@
             var barWidth = 50;
             
             var w = (barWidth+barPad)*data.length;
-            var h = 150;
+            var h = 250;
             
             var scale = d3.scale.linear()
                     .domain([0, d3.max(data, function(d) { return d.total; })]) //definition du domaine (input) 

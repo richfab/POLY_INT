@@ -31,3 +31,8 @@ ul, li, rect {
     overflow: hidden;
     max-height: 75px;
 }
+
+#gallery{
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

@@ -15,7 +15,7 @@ echo $this->element('heights_graph');?>
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Paper Plane Battle</h4>
+                <h4 class="modal-title" id="myModalLabel"><?php echo $this->Html->image('mini-logo.png', array('alt' => 'Logo','height'=>'24px')); ?> Paper Plane Battle</h4>
             </div>
             <div class="modal-body">
                     <?php
@@ -24,15 +24,16 @@ echo $this->element('heights_graph');?>
                                 'inputDefaults' => array(
                                         'div' => 'form-group',
                                         'label' => array(
-                                                'class' => 'col col-sm-5 control-label'
+                                                'class' => 'col col-sm-1 control-label'
                                         ),
-                                        'wrapInput' => 'col col-sm-7',
+                                        'wrapInput' => 'col col-sm-11',
                                         'class' => 'form-control'
                                 ),
-                                'class' => 'well form-horizontal'
+                                'class' => 'well form-horizontal',
+                                'type'=>'file'
                             ));
-                                echo $this->Form->input('photo_file',array('type'=>'file','label'=>'La photo (selfie autorisée)'));
-                                echo $this->Form->input('place',array('label'=>'Le monument et le lieu','rows' => 2));
+                                echo $this->Form->input('photo_file',array('type'=>'file','label'=>'<span class="glyphicon glyphicon-camera"></span>',"afterInput"=>"<span class='help-block'>Photo de toi avec l'avion en papier en haut du monument (selfie autorisée)</span>"));
+                                echo $this->Form->input('place',array('label'=>'<span class="glyphicon glyphicon-globe"></span>','rows' => 2,"afterInput"=>"<span class='help-block'>Détails sur le monument (nom, lieu et hauteur)</span>"));
                         }else{
                             echo $this->Html->link("Connecte-toi", array('controller'=>'users', 'action' => 'login'),array("style"=>"display:inline-block")).' ou '.$this->Html->link("inscris-toi", array('controller'=>'users', 'action' => 'signup'),array("style"=>"display:inline-block"))." pour participer";
                         }
