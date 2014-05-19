@@ -11,55 +11,9 @@
                         <div><?= $experience['Motive']['name'].' ('.round($experience[0]['monthDiff'],0).' mois)'.' - '.$experience['City']['name'];?>, <?= $experience['City']['country_id']; ?></div>
                         <div style="font-size: 12px">
                             <?php
-                                $today = date_create(date('Y-m-d'));
                                 $date_start = date_create($experience['Experience']['dateStart']);
                                 $date_end = date_create($experience['Experience']['dateEnd']);
-                                //en ce moment
-                                if($today >= $date_start && $today <= $date_end){
-                                    echo 'En ce moment';
-                                }
-                                //passée
-                                if($date_end < $today && $date_start < $today){
-                                    $interval = date_diff($date_end,$today);
-                                    //il y a quelques jours
-                                    if($interval->days <= 31){
-                                        $interval_nice = 'quelques jours';
-                                    }
-                                    //il y a 1 an
-                                    elseif ($interval->days >= 365 && $interval->days < 730) {
-                                        $interval_nice = $interval->format('%y an');
-                                    }
-                                    //il y a plus d'un an
-                                    elseif ($interval->days >= 730) {
-                                        $interval_nice = $interval->format('%y ans');
-                                    }
-                                    //il y a x mois
-                                    else{
-                                        $interval_nice = $interval->format('%m mois');
-                                    }
-                                    echo "Il y a ".$interval_nice;
-                                }
-                                //a venir
-                                if($date_start > $today && $date_end > $today){
-                                    $interval = date_diff($date_start,$today);
-                                    //il y a quelques jours
-                                    if($interval->days <= 31){
-                                        $interval_nice = 'quelques jours';
-                                    }
-                                    //il y a 1 an
-                                    elseif ($interval->days >= 365 && $interval->days < 730) {
-                                        $interval_nice = $interval->format('%y an');
-                                    }
-                                    //il y a plus d'un an
-                                    elseif ($interval->days >= 730) {
-                                        $interval_nice = $interval->format('%y ans');
-                                    }
-                                    //il y a x mois
-                                    else{
-                                        $interval_nice = $interval->format('%m mois');
-                                    }
-                                    echo 'Commence dans '.$interval_nice;
-                                }
+                                echo $this->element('friendly_date', array('date_start'=>$date_start, 'date_end'=>$date_end));
                             ?>
                         </div>
                     </div>

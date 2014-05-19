@@ -246,9 +246,6 @@ class ExperiencesController extends AppController {
         if($this->Auth->user('id')){
             //on transforme l'objet de parametres en conditions
             $conditions = $this->_filters_to_conditions($this->request->data);
-                
-            //on définit l'ordre de retour des resultats
-            $order = $this->_filters_to_order($this->request->data);
             
             //on definit la limite du nombre de resultats
             $offset = $this->request->data['offset'];
@@ -256,11 +253,11 @@ class ExperiencesController extends AppController {
             
             $this->set('result_limit',$result_limit);
             $this->set('offset',$offset);
-                
+            
             $this->set('experiences', $this->Experience->find('all', array(
                         'conditions' => $conditions,
                         'recursive' => 1,
-                        'order' => $order,
+                        'order' => '(CASE WHEN DATEDIFF(Experience.dateEnd, NOW()) < 0 THEN 1 ELSE 0 END),ABS(DATEDIFF(Experience.dateEnd, NOW())) ASC',
                         'limit' => $result_limit,
                         'offset' => $offset,
                         'fields' => array('*','DATEDIFF(Experience.dateEnd, Experience.dateStart)/30 monthDiff'))));
@@ -337,16 +334,6 @@ class ExperiencesController extends AppController {
         }
         return new CakeResponse(array('body'=> json_encode(array('errorMessage'=>"Vous n'êtes pas admin")),'status'=>500));
     }
-        
-    protected function _filters_to_order($request_data = null) {
-        //si on cherche a afficher les expériences à venir on classe les expérience de la plus petite date de début à la plus grande
-        if(!empty($request_data['date_min']) && empty($request_data['date_max'])){
-            return array('Experience.dateStart' => 'ASC');
-        }
-        //sinon on les classe de la date de début la plus grande a la plus petite
-        return array('Experience.dateStart' => 'DESC');
-    }
-        
         
     //fonction qui transforme l'objet de parametres en conditions pour le find
     protected function _filters_to_conditions($request_data = null){
