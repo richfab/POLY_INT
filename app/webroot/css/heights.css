@@ -16,7 +16,18 @@ and open the template in the editor.
     display: inline-block;
 }
 
-ul, li {
+ul, li, rect {
     list-style-type: none;
     cursor: pointer;
+}
+
+.modal-body form{
+    border: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+#links{
+    overflow: hidden;
+    max-height: 75px;
 }

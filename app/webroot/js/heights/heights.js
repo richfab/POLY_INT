@@ -23,14 +23,12 @@
                     //barChart init
                     init();
                     displayFirstWebsite();
+                    get_heights_gallery_all();
                 });
-                
             }
         });
         
         function init(){
-            
-            console.log(data);
             
             var barPad = 5;
             var barWidth = 50;
@@ -63,7 +61,8 @@
                     .data(data_alphabetical)
                     .enter()
                     .append("rect")
-                    .on("mouseover", changeWebsite);
+                    .on("mouseover", changeWebsite)
+                    .on("click", get_heights_gallery);
             
             //nom du site
             websiteLis
@@ -84,7 +83,8 @@
                     .attr("color", function(d, i) {
                         return d.school_color;
             })
-                    .on("mouseover", changeWebsite);
+                    .on("mouseover", changeWebsite)
+                    .on("click", get_heights_gallery);
             
             
             bars
@@ -92,7 +92,7 @@
                         return i * (w / data.length);
             })
                     .attr("fill",function(d,i){
-                    return unselectedColor;
+                        return d.school_color;
             })
                     .attr("color", function(d, i) {
                         return d.school_color;
@@ -126,12 +126,12 @@
             //on remet toutes les bars a l'opacité normale
             var bars = d3.selectAll(".bar.animationComplete");
             bars.transition().duration(300)
-                    .attr("fill", unselectedColor);
+                    .attr("stroke", "none");
             
             //on selectionne la bar correspondante
             var bar = d3.select(".bar.animationComplete[index='"+$(this).attr("index")+"']");
             bar.transition().duration(300)
-                    .attr("fill", $(this).attr("color"));
+                    .attr("stroke", "black");
             
             //on remet tous les noms des sites en normal
             $(".websiteLi span").removeClass("selected");
@@ -145,6 +145,37 @@
             
             $("#dataHeight").text(dataNumberToNice(websiteLi.attr("total")));
         };
+        
+        function get_heights_gallery_all(){
+            get_gallery({});
+        }
+        
+        function get_heights_gallery(){
+            var filter = {school_id : $(this).attr("index")};
+            get_gallery(filter);
+        }
+        
+        function get_gallery(filter){
+            
+            start_logo_fly();
+            
+            $.ajax({
+                type:"POST",
+                url : "get_heights_gallery",
+                data : filter,
+                dataType : 'html',
+                success : function(data) {
+                    $('#gallery').html(data);
+                    $('#blueimp-gallery').data('useBootstrapModal', false);
+                },
+                error : function(data) {
+                    //alert("Une erreur est survenue, veuillez réessayer dans quelques instants.");
+                },
+                complete : function(data) {
+                    stop_logo_fly();
+                }
+            });
+        }
         
         function displayFirstWebsite(){
             //on n'affiche pas l'arc et la bar en opacite max car la transition est encore en cours
@@ -161,9 +192,20 @@
             
             //on selectionne la bar correspondante
             var bar = d3.select(".bar[index='"+websiteLi.attr('index')+"']");
-            bar.attr("fill", bar.attr("color"));
+            bar.attr("stroke", "black");
             $("#dataHeight").text(dataNumberToNice(websiteLi.attr("total")));
         }
+        
+        if(!chartHasBeenShowed){
+            $("#bar-chart-limit:in-viewport").each(function() {
+                chartHasBeenShowed = true;
+                //barChart init
+                init();
+                displayFirstWebsite();
+                get_heights_gallery_all();
+            });
+        }
+        
     });
     
     function dataNumberToNice(number){
