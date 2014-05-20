@@ -445,5 +445,14 @@ h2 > span.wut {
     display: inline-block;
     height: 24px;
     width: 24px;
-    margin: 0 15px;
+    margin: 0 15px 0 0;
+}
+
+.icon-twitter-mini {
+    background-image:url('../img/twitter-mini.png');
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+    margin: 0 15px 0 0;
 }

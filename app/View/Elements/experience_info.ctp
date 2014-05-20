@@ -2,7 +2,8 @@
     <?php if($experience['Motive']['name'] !== 'Voyage'): ?>
         <strong><?= $experience['Experience']['establishment']; ?></strong> - 
     <?php endif; ?>
-<?= $experience['City']['name'];?>, <?= $countries[$experience['City']['country_id']];?></div>
+    <?= $experience['City']['name'];?>, <?= $countries[$experience['City']['country_id']];?>
+</div>
 <?php if($experience['Motive']['name'] !== 'Voyage'): ?>
     <?php if($experience['Experience']['description'] != ""): ?>
 <div><?= nl2br($experience['Experience']['description']);?></div>
@@ -14,7 +15,16 @@
         <?php endif; ?>
     <?php endif; ?>
 <?php endif; ?>
-<div>Du <?= $this->Time->format($experience['Experience']['dateStart'], '%e %B %Y');?> au <?= $this->Time->format($experience['Experience']['dateEnd'], '%e %B %Y')?></div>
+<div>
+    Du <?= $this->Time->format($experience['Experience']['dateStart'], '%e %B %Y');?> au <?= $this->Time->format($experience['Experience']['dateEnd'], '%e %B %Y')?>
+    <span class="small"> - 
+        <?php
+            $date_start = date_create($experience['Experience']['dateStart']);
+            $date_end = date_create($experience['Experience']['dateEnd']);
+            echo $this->element('friendly_date', array('date_start'=>$date_start, 'date_end'=>$date_end));
+        ?>
+    </span>
+</div>
 <?php if($experience['Experience']['comment'] != ""): ?>
     <div>"<?= nl2br($experience['Experience']['comment']);?>"</div>
 <?php else:?>
