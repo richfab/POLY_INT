@@ -9,7 +9,7 @@ html,body{
     font-size: 15px;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4, h5, h6 {
     font-weight: 200;
 }
 
@@ -279,12 +279,24 @@ h2 > span.wut {
     padding: 20px 0;
 }
 
+#edit_profile_button{
+    margin-top: 30px;
+}
+
 .contact-logo{
     height: 20px;
 }
 
 .contact-logo.disabled{
     opacity: 0.5;
+}
+
+.department_logo_profile{
+    height: 25px;
+}
+
+.department_logo_search{
+    height: 20px;
 }
 
 #block-temps {

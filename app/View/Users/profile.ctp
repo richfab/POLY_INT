@@ -22,15 +22,16 @@
                 <?= $this->Html->image('contact-linkedin.png',array('class' => 'contact-logo disabled', 'title' => 'Profil LinkedIn', 'data-toggle' => 'tooltip'));?>
             <?php endif;?>
         </h1>
-        <p class="help-block"><span class="glyphicon glyphicon-book"></span> Polytech <?= $user['School']['name'];?> &middot; <?= $user['Department']['name'];?></p>
-        <p>
-            
+        <h4>
+            <?= $this->Html->image('picto/'.$user['School']['id'].'.png',array('class' => 'department_logo_profile', 'title' => $user['Department']['name'], 'data-toggle' => 'tooltip'));?> Polytech <?= $user['School']['name'];?>
+        </h4>
+        <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+        <p id="edit_profile_button">
+            <?= $this->Html->link('<span class="edit-delete-label">Modifier</span>', array('action' => 'edit'),
+                array('escape' => false,
+                    'class' => 'glyphicon glyphicon-pencil edit-delete'
+                    )); ?>
         </p>
-<?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-        <p><?= $this->Html->link('<span class="edit-delete-label">Modifier</span>', array('action' => 'edit'),
-        array('escape' => false,
-            'class' => 'glyphicon glyphicon-pencil edit-delete'
-            )); ?></p>
     <?php endif; ?>
     </div>
     <div class="col col-sm-1">
@@ -152,6 +153,7 @@
         //pour les tooltips
         if (!Modernizr.touch) {
             $('.contact-logo').tooltip();
+            $('.department_logo').tooltip();
             $('.recommendationtype-icon').tooltip(); 
         }
         

@@ -6,10 +6,13 @@
                 <div class="col-sm-2 profile-info-search">
                     <div><?= $this->Html->image('avatar.png', array('alt' => 'avatar','class' => 'avatar','id' => 'avatar_search','width' => '60px','onload' => "this.style.backgroundColor='#".$school_colors[$experience['User']['school_id']]."'"));?></div>
                     <div><?= $experience['User']['firstname'].' '.$experience['User']['lastname'];?></div>
-                    <div>Polytech <?= $school_names[$experience['User']['school_id']];?></div>
-                    <div><?= $departments[$experience['User']['department_id']];?></div>
+                    <div>
+                        <span class="help-block">
+                            <?= $this->Html->image('picto/'.$experience['User']['department_id'].'.png',array('class' => 'department_logo_search', 'title' => $departments[$experience['User']['department_id']], 'data-toggle' => 'tooltip'));?> <small>Polytech <?= $school_names[$experience['User']['school_id']];?></small>
+                        </span>
+                    </div>
                 </div>
-                <div class="col-sm-9 experience-info">
+                <div class="col-sm-10 experience-info">
                 
                     <?php echo $this->element('experience_info',array('experience'=>$experience)); ?>
                 
@@ -32,3 +35,14 @@
 <?php else: ?>
         <p><?= $this->Html->link("Connecte-toi", array('controller'=>'users', 'action' => 'login')); ?> ou <?= $this->Html->link("inscris-toi", array('controller'=>'users', 'action' => 'signup')); ?> pour consulter les expériences</p>
 <?php endif; ?>
+
+<script type="text/javascript">
+    
+    $( function() {
+        //pour les tooltips
+        if (!Modernizr.touch) {
+            $('.department_logo_search').tooltip();
+        }
+    });
+    
+</script>
