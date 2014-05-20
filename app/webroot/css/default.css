@@ -48,6 +48,15 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+@media (min-width: 768px) {
+    .col-sm-2.profile-info-search {
+        width: 18.666666666666664%;
+    }
+    .col-sm-10.experience-info {
+        width: 81.33333333333334%;
+    }
+}
+
 #presentation {
     background-attachment: fixed;
     background: #323234 url(../img/background3.jpg) no-repeat;
@@ -230,7 +239,7 @@ h2 > span.wut {
 }
 
 .experience-list a:hover{
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .access {
@@ -262,17 +271,17 @@ h2 > span.wut {
     animation:spin 2s ease infinite;
 }
 @-moz-keyframes spin { 100% { 
-           transform-origin:left top;
-           -moz-transform: rotate(-360deg); } }
+                           transform-origin:left top;
+                           -moz-transform: rotate(-360deg); } }
 @-webkit-keyframes spin { 100% { 
-            transform-origin:left top;
-            -ms-transform-origin:left top; /* IE 9 */
-            -webkit-transform-origin:left top; /* Opera, Chrome, and Safari */
-           -webkit-transform: rotate(-360deg); } }
+                              transform-origin:left top;
+                              -ms-transform-origin:left top; /* IE 9 */
+                              -webkit-transform-origin:left top; /* Opera, Chrome, and Safari */
+                              -webkit-transform: rotate(-360deg); } }
 @keyframes spin { 100% { 
-           transform-origin:left top;
-           -webkit-transform: rotate(-360deg); 
-           transform:rotate(-360deg); } }
+                      transform-origin:left top;
+                      -webkit-transform: rotate(-360deg); 
+                      transform:rotate(-360deg); } }
 
 #profil {
     margin-top: 50px;
