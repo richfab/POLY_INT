@@ -257,10 +257,14 @@ class ExperiencesController extends AppController {
             $this->set('experiences', $this->Experience->find('all', array(
                         'conditions' => $conditions,
                         'recursive' => 1,
-                        'order' => '(CASE WHEN DATEDIFF(Experience.dateEnd, NOW()) < 0 THEN 1 ELSE 0 END),ABS(DATEDIFF(Experience.dateEnd, NOW())) ASC',
+                        //on ordonne par rapport a la date de fin pour les experiences passées, la date de début pour les expériences futures et celles qui se passent en ce moment
+                        'order' => 'ABS(DATEDIFF(dateSort, NOW())) ASC, ABS(DATEDIFF(Experience.dateStart, NOW())) ASC',
                         'limit' => $result_limit,
                         'offset' => $offset,
-                        'fields' => array('*','DATEDIFF(Experience.dateEnd, Experience.dateStart)/30 monthDiff'))));
+                        'fields' => array('*',
+                            //on trie d'abord les experiences qui se passent en ce moment, puis celle qui se passent après aujourd'hui et enfin celles qui se sont passées avant aujourdhui. (toujours de la plus proche d'aujourd'hui a la plus loin)
+                            'IF(Experience.dateEnd >= NOW() AND Experience.dateStart <= NOW(),NOW(),IF(DATEDIFF(Experience.dateEnd, NOW()) < 0,Experience.dateEnd,Experience.dateStart)) AS dateSort',
+                            'DATEDIFF(Experience.dateEnd, Experience.dateStart)/30 monthDiff'))));
             
             //recupere les pays
             $this->set('countries',$this->Experience->City->Country->find('list'));
