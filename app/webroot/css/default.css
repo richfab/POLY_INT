@@ -50,10 +50,10 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (min-width: 768px) {
     .col-sm-2.profile-info-search {
-        width: 18.666666666666664%;
+        width: 19.666666666666664%;
     }
     .col-sm-10.experience-info {
-        width: 81.33333333333334%;
+        width: 80.33333333333334%;
     }
 }
 
