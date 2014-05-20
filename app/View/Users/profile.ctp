@@ -23,7 +23,7 @@
             <?php endif;?>
         </h1>
         <h4>
-            <?= $this->Html->image('picto/'.$user['School']['id'].'.png',array('class' => 'department_logo_profile', 'title' => $user['Department']['name'], 'data-toggle' => 'tooltip'));?> Polytech <?= $user['School']['name'];?>
+            <?= $this->Html->image('picto/'.$user['School']['id'].'.png',array('class' => 'department_logo_profile', 'title' => $user['Department']['name'], 'data-toggle' => 'tooltip', 'data-placement' => 'bottom'));?> Polytech <?= $user['School']['name'];?>
         </h4>
         <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
         <p id="edit_profile_button">
@@ -153,7 +153,7 @@
         //pour les tooltips
         if (!Modernizr.touch) {
             $('.contact-logo').tooltip();
-            $('.department_logo').tooltip();
+            $('.department_logo_profile').tooltip();
             $('.recommendationtype-icon').tooltip(); 
         }
         

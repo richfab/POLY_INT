@@ -8,7 +8,7 @@
                     <div><?= $experience['User']['firstname'].' '.$experience['User']['lastname'];?></div>
                     <div>
                         <span class="help-block">
-                            <?= $this->Html->image('picto/'.$experience['User']['department_id'].'.png',array('class' => 'department_logo_search', 'title' => $departments[$experience['User']['department_id']], 'data-toggle' => 'tooltip'));?> <small>Polytech <?= $school_names[$experience['User']['school_id']];?></small>
+                            <?= $this->Html->image('picto/'.$experience['User']['department_id'].'.png',array('class' => 'department_logo_search', 'title' => $departments[$experience['User']['department_id']], 'data-toggle' => 'tooltip', 'data-placement' => 'bottom'));?> <small>Polytech <?= $school_names[$experience['User']['school_id']];?></small>
                         </span>
                     </div>
                 </div>
