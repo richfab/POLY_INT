@@ -115,7 +115,7 @@ class ExperiencesController extends AppController {
         
         //etape 1 : on teste si la ville de ce pays existe deja dans la base
         $city = $this->Experience->City->find('first', array(
-            'conditions' => array('City.name' => $city_input['City']['name']),
+            'conditions' => array('City.name' => $city_input['City']['name'], 'City.country_id' => $country_input['Country']['id']),
             'recursive' => 0
         ));
         //si on a trouvé une ville de ce nom
