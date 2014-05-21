@@ -18,5 +18,5 @@
 </p>
 
 <p>
-    A bientôt parmis nous sur <?php echo $this->Html->link('Polytech Abroad', $this->Html->url(array('controller' => 'pages', 'action' => 'home'),true)); ?>
+    A bientôt parmi nous sur <?php echo $this->Html->link('Polytech Abroad', $this->Html->url(array('controller' => 'pages', 'action' => 'home'),true)); ?>
 </p>
