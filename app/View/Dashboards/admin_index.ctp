@@ -24,12 +24,14 @@
 <p>
     Number of <?= $this->Html->link('experiences', array('controller' => 'experiences', 'action' => 'index'));?> : <?= $experiences_count;?>
 </p>
-<p>
-    &emsp;in <?= $cities_count;?> different <?= $this->Html->link('cities', array('controller' => 'cities', 'action' => 'index'));?>
-</p>
-<p>
-    &emsp;in <?= $countries_count;?> different <?= $this->Html->link('countries', array('controller' => 'countries', 'action' => 'index'));?>
-</p>
+<ul>
+    <li>
+        <?= $cities_count;?> different <?= $this->Html->link('cities', array('controller' => 'cities', 'action' => 'index'));?>
+    </li>
+    <li>
+        <?= $countries_count;?> different <?= $this->Html->link('countries', array('controller' => 'countries', 'action' => 'index'));?>
+    </li>
+</ul>
 <h2>Recommendations</h2>
 <p>
     Number of <?= $this->Html->link('recommendations', array('controller' => 'recommendations', 'action' => 'index'));?> : <?= $recommendations_count;?>
