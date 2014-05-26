@@ -1,9 +1,12 @@
-<div class="text-center" style="padding-top:10px;">
-    <h2 style="padding-bottom:10px;">Paper Plane Contest</h2>
+<div  style="padding-top:10px;">
+<h2 class="text-center" style="padding-bottom:10px;">Paper Plane Contest</h2>
+    <div class="col-sm-6 text-center">
+    
     <div id="graph_contest" class="well" style="padding-top:40px;"><?php echo $this->element('heights_graph');?>
     </div>
-    
-    <div id="gallery"></div>
+    </div>
+     <div class="col-sm-6">
+    <div id="gallery"></div></div>
 
 <button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
     Envoyer un avion
