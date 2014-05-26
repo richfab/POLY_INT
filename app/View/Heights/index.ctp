@@ -1,17 +1,15 @@
 <div class="" id="plane-contest"></div>
-<div  style="padding-top:10px;">
-
+<div>
     <div class="col-sm-12 text-center">
-    
-    <div id="graph_contest" class="" style="padding-top:40px;"><?php echo $this->element('heights_graph');?>
+        <div id="graph_contest" class="" style="padding-top:20px;"><?php echo $this->element('heights_graph');?></div>
     </div>
+    <div class="text-center" style="margin:10px 0">
+        <button class="btn btn-primary btn " data-toggle="modal" data-target="#myModal">Envoyer un avion</button>
     </div>
-     <div class="col-sm-12">
-    <div id="gallery"></div></div>
+    <div class="col-sm-12 container">
+        <div id="gallery"></div>
+    </div>
 
-<button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
-    Envoyer un avion
-</button>
 <!-- Button trigger modal -->
 
 </div>
