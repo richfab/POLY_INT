@@ -10,7 +10,7 @@
     <div class="col-sm-6" id="col_users" style="text-align: right;">
         <h2><span class="glyphicon glyphicon-user"></span> Users</h2>
         <p>
-            Number of active <?= $this->Html->link('users', array('controller' => 'users', 'action' => 'index', 'admin' => true));?> : <?= $users_count;?>
+            Number of active <?= $this->Html->link('users', array('controller' => 'users', 'action' => 'index'));?> : <?= $users_count;?>
         </p>
         <ul>
             <?php foreach ($schools as $school): ?>
@@ -20,25 +20,25 @@
             <?php endforeach;?>
         </ul>
         <p>
-            Number of <?= $this->Html->link('signup requests', array('controller' => 'users', 'action' => 'index', 'admin' => true));?> : <?= $signup_requests_count;?>
+            Number of <?= $this->Html->link('signup requests', array('controller' => 'users', 'action' => 'index'));?> : <?= $signup_requests_count;?>
         </p>
     </div>
     <div class="col-sm-6">
         <h2><span class="glyphicon glyphicon-globe"></span> Experiences</h2>
         <p>
-            Number of <?= $this->Html->link('experiences', array('controller' => 'experiences', 'action' => 'index', 'admin' => true));?> : <?= $experiences_count;?>
+            Number of <?= $this->Html->link('experiences', array('controller' => 'experiences', 'action' => 'index'));?> : <?= $experiences_count;?>
         </p>
         <ul>
             <li>
-                <?= $cities_count;?> different <?= $this->Html->link('cities', array('controller' => 'cities', 'action' => 'index', 'admin' => true));?>
+                <?= $cities_count;?> different <?= $this->Html->link('cities', array('controller' => 'cities', 'action' => 'index'));?>
             </li>
             <li>
-                <?= $countries_count;?> different <?= $this->Html->link('countries', array('controller' => 'countries', 'action' => 'index', 'admin' => true));?>
+                <?= $countries_count;?> different <?= $this->Html->link('countries', array('controller' => 'countries', 'action' => 'index'));?>
             </li>
         </ul>
         <h2><span class="glyphicon glyphicon-comment"></span> Recommendations</h2>
         <p>
-            Number of <?= $this->Html->link('recommendations', array('controller' => 'recommendations', 'action' => 'index', 'admin' => true));?> : <?= $recommendations_count;?>
+            Number of <?= $this->Html->link('recommendations', array('controller' => 'recommendations', 'action' => 'index'));?> : <?= $recommendations_count;?>
         </p>
         <ul>
             <?php foreach ($recommendationtypes as $recommendationtype): ?>

@@ -5,7 +5,13 @@ class DashboardsController extends AppController {
         
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(array('admin_index')); //ce que tout le monde a le droit de faire
+        $this->Auth->allow(array('index')); //ce que tout le monde a le droit de faire
+    }
+    
+    //vue qui permet de voir seulement les statistiques du site
+    public function index() {
+        //on charge la vue admin_index mais les actions ne seront pas autorisées si on n'est pas admin
+        $this->admin_index();
     }
     
     public function admin_index() {
@@ -42,6 +48,8 @@ class DashboardsController extends AppController {
         $this->set('recommendations_count',$recommendationsController->Recommendation->find('count'));
         //classés par type de recommandation
         $this->set('recommendationtypes',$recommendationsController->Recommendation->Recommendationtype->find('all'));
+        
+        $this->render('admin_index');
     }
 }
 ?>
