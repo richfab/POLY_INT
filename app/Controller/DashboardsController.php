@@ -5,6 +5,7 @@ class DashboardsController extends AppController {
         
     public function beforeFilter() {
         parent::beforeFilter();
+        $this->Auth->allow(array('admin_index')); //ce que tout le monde a le droit de faire
     }
     
     public function admin_index() {
@@ -15,6 +16,8 @@ class DashboardsController extends AppController {
         $this->set('users_count',$usersController->User->find('count',array(
             'conditions' => array('User.active' => 1, 'User.role' => 'user')
         )));
+        //classés par école
+        $this->set('schools',$usersController->User->School->find('all'));
         //nombre de demandes d'inscription
         $this->set('signup_requests_count',$usersController->User->find('count',array(
             'conditions' => array('User.email' => NULL)

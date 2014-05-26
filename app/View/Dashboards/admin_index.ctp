@@ -10,6 +10,13 @@
 <p>
     Number of active <?= $this->Html->link('users', array('controller' => 'users', 'action' => 'index'));?> : <?= $users_count;?>
 </p>
+<ul>
+    <?php foreach ($schools as $school): ?>
+        <li>
+            &emsp;<?= count($school['User']);?> in <?= $this->Html->link($school['School']['name'],array('controller' => 'schools', 'action' => 'view', $school['School']['id'], 'admin' => true));?>
+        </li>
+    <?php endforeach;?>
+</ul>
 <p>
     Number of <?= $this->Html->link('signup requests', array('controller' => 'users', 'action' => 'index'));?> : <?= $signup_requests_count;?>
 </p>
@@ -27,10 +34,10 @@
 <p>
     Number of <?= $this->Html->link('recommendations', array('controller' => 'recommendations', 'action' => 'index'));?> : <?= $recommendations_count;?>
 </p>
-<p>
+<ul>
     <?php foreach ($recommendationtypes as $recommendationtype): ?>
-        <p>
+        <li>
             &emsp;<?= count($recommendationtype['Recommendation']);?> in <?= $recommendationtype['Recommendationtype']['name'];?>
-        </p>
+        </li>
     <?php endforeach;?>
-</p>
+</ul>
