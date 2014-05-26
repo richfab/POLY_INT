@@ -467,5 +467,8 @@ h2 > span.wut {
 }
 
 #links a img {
-    padding: 10px;
+    margin: 8px;
+    padding: 2px;
+    background-color: white;
+    border: 1px solid #C9C9C9;
 }
