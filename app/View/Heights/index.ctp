@@ -18,6 +18,15 @@ echo $this->element('heights_graph');?>
                 <h4 class="modal-title" id="myModalLabel"><?php echo $this->Html->image('mini-logo.png', array('alt' => 'Logo','height'=>'24px')); ?> Paper Plane Battle</h4>
             </div>
             <div class="modal-body">
+                <div class="col col-sm-11 col-sm-offset-1 modal-instructions">
+                    1. Télécharge et imprime le patron en papier de ton école avec les instructions de pliage
+                </div>
+                <div class="col col-sm-11 col-sm-offset-1 modal-instructions">
+                    2. Monte en haut du plus grand monument de la ville
+                </div>
+                <div class="col col-sm-11 col-sm-offset-1 modal-instructions">
+                    3. Prends toi en photo et fais s'envoller l'avion !
+                </div>
                     <?php
                         if(AuthComponent::user('id')){
                             echo $this->Form->create('Height', array(

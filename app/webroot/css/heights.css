@@ -27,9 +27,12 @@ ul, li, rect {
     -webkit-box-shadow: none;
 }
 
+.modal-instructions{
+    margin-bottom: 15px;
+}
+
 #links{
-    overflow: hidden;
-    max-height: 75px;
+    
 }
 
 #gallery{
