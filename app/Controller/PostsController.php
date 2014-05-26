@@ -7,7 +7,7 @@ App::uses('AppController', 'Controller');
 class PostsController extends AppController {
 
 	public $paginate = array(
-            'limit' => 1,
+            'limit' => 2,
             'order' => array('created' => 'DESC')
     );
 
