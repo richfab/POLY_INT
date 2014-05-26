@@ -1,13 +1,13 @@
-<?php
-    
-echo $this->element('heights_graph');?>
+<div class="text-center">
+    <?php echo $this->element('heights_graph');?>
+    <div id="gallery"></div>
 
-<div id="gallery"></div>
 
 <!-- Button trigger modal -->
-<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+<button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
     Envoyer un avion
 </button>
+</div>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
