@@ -456,3 +456,16 @@ h2 > span.wut {
     width: 24px;
     margin: 0 15px 0 0;
 }
+
+#plane-contest {
+    background: url('../img/background-paperplane.png') no-repeat scroll center center #323234;
+    height: 130px;
+    overflow: visible;
+    z-index: 1000;
+    width: 100%;
+    border-bottom: 1px solid #C9C9C9;
+}
+
+#links a img {
+    padding: 10px;
+}

@@ -118,7 +118,7 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
             </div>
             
             <!--pas de marges si home ou explore-->
-            <?php if(($this->params['controller']=='pages' && $this->params['action']=='display' && $this->params['pass'][0]=='home')||($this->params['controller']=='experiences' && $this->params['action']=='explore')): ?>
+            <?php if(($this->params['controller']=='pages' &&$this->params['controller']=='pages' && $this->params['action']=='display' && $this->params['pass'][0]=='home')||($this->params['controller']=='experiences' && $this->params['action']=='explore')||($this->params['controller']=='heights' && $this->params['action']=='index')): ?>
                 <div id="content">
             <?php else: ?>
                 <div id="content" class="container">

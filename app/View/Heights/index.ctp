@@ -1,11 +1,12 @@
+<div class="" id="plane-contest"></div>
 <div  style="padding-top:10px;">
-<h2 class="text-center" style="padding-bottom:10px;">Paper Plane Contest</h2>
-    <div class="col-sm-6 text-center">
+
+    <div class="col-sm-12 text-center">
     
-    <div id="graph_contest" class="well" style="padding-top:40px;"><?php echo $this->element('heights_graph');?>
+    <div id="graph_contest" class="" style="padding-top:40px;"><?php echo $this->element('heights_graph');?>
     </div>
     </div>
-     <div class="col-sm-6">
+     <div class="col-sm-12">
     <div id="gallery"></div></div>
 
 <button class="btn btn-primary btn" data-toggle="modal" data-target="#myModal">
