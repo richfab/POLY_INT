@@ -1,6 +1,6 @@
 <div class="text-center" style="padding-top:10px;">
-    <h2>Paper Plane Contest</h2>
-    <div id="graph_contest" style="padding-top:40px;"><?php echo $this->element('heights_graph');?></div>
+    <h2 style="padding-bottom:10px;">Paper Plane Contest</h2>
+    <div id="graph_contest" class="well" style="padding-top:40px;"><?php echo $this->element('heights_graph');?></div>
     <div id="gallery"></div>
 
 
