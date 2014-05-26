@@ -7,7 +7,7 @@
  */
 ?>
 <div class="row">
-    <div class="col-sm-6" id="col_users" style="text-align: right;">
+    <div class="col-sm-6" style="text-align: right; padding-right: 50px;">
         <h2><span class="glyphicon glyphicon-user"></span> Users</h2>
         <p>
             Number of active <?= $this->Html->link('users', array('controller' => 'users', 'action' => 'index', 'admin' => true));?> : <?= $users_count;?>
@@ -23,7 +23,7 @@
             Number of <?= $this->Html->link('signup requests', array('controller' => 'users', 'action' => 'index', 'admin' => true));?> : <?= $signup_requests_count;?>
         </p>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-6" style="padding-left: 50px;">
         <h2><span class="glyphicon glyphicon-globe"></span> Experiences</h2>
         <p>
             Number of <?= $this->Html->link('experiences', array('controller' => 'experiences', 'action' => 'index', 'admin' => true));?> : <?= $experiences_count;?>
