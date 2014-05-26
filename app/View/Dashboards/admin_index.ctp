@@ -8,7 +8,7 @@
 ?>
 <div class="row">
     <div class="col-sm-6">
-        <h2>Users</h2>
+        <h2><span class="glyphicon glyphicon-user"></span> Users</h2>
         <p>
             Number of active <?= $this->Html->link('users', array('controller' => 'users', 'action' => 'index'));?> : <?= $users_count;?>
         </p>
@@ -24,7 +24,7 @@
         </p>
     </div>
     <div class="col-sm-6">
-        <h2>Experiences</h2>
+        <h2><span class="glyphicon glyphicon-globe"></span> Experiences</h2>
         <p>
             Number of <?= $this->Html->link('experiences', array('controller' => 'experiences', 'action' => 'index'));?> : <?= $experiences_count;?>
         </p>
@@ -36,7 +36,7 @@
                 <?= $countries_count;?> different <?= $this->Html->link('countries', array('controller' => 'countries', 'action' => 'index'));?>
             </li>
         </ul>
-        <h2>Recommendations</h2>
+        <h2><span class="glyphicon glyphicon-comment"></span> Recommendations</h2>
         <p>
             Number of <?= $this->Html->link('recommendations', array('controller' => 'recommendations', 'action' => 'index'));?> : <?= $recommendations_count;?>
         </p>
