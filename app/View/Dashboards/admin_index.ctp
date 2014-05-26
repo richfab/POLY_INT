@@ -7,14 +7,14 @@
  */
 ?>
 <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-6" id="col_users" style="text-align: right;">
         <h2><span class="glyphicon glyphicon-user"></span> Users</h2>
         <p>
             Number of active <?= $this->Html->link('users', array('controller' => 'users', 'action' => 'index'));?> : <?= $users_count;?>
         </p>
         <ul>
             <?php foreach ($schools as $school): ?>
-                <li>
+                <li style="list-style-type: none;">
                     &emsp;<?= count($school['User']);?> in <?= $this->Html->link($school['School']['name'],array('controller' => 'schools', 'action' => 'view', $school['School']['id'], 'admin' => true));?>
                 </li>
             <?php endforeach;?>
