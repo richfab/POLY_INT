@@ -87,7 +87,7 @@ class HeightsController extends AppController {
                         'class' => 'alert-danger'
                     ));
                 }
-                $this->redirect(array('controller' => 'heights', 'action' => 'contest'));
+                $this->redirect('/contest');
             }
         }
     }

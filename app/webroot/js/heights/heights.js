@@ -6,7 +6,7 @@
     var animationDuration = 1000;
     var delayDuration = 50;
     
-    d3.json("get_heights.json", function(error, data) {
+    d3.json("heights/get_heights.json", function(error, data) {
         data.forEach(function(d) {
             d.total = +d.total;
         });
@@ -161,7 +161,7 @@
             
             $.ajax({
                 type:"POST",
-                url : "get_heights_gallery",
+                url : "heights/get_heights_gallery",
                 data : filter,
                 dataType : 'html',
                 success : function(data) {
