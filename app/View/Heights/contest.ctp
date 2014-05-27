@@ -4,7 +4,7 @@
     <div id="cloud1"></div>  
 <div id="cloud2"></div>
     <div class="col-sm-12 text-center" style="margin-top:-100px;">
-        <div id="graph_contest" class="" style="padding-top:20px;"><?php echo $this->element('heights_graph');?></div>
+        <div id="graph_contest" style="padding-top:20px;min-height:380px;"><?php echo $this->element('heights_graph');?></div>
     </div>
         
     <div class="row">
@@ -14,7 +14,7 @@
             <div id="tree1"></div>
             <h2 id="how_to_participate">Comment participer ?</h2>
                     <?php if(AuthComponent::user('id')):?>
-            <p>1. <?= $this->Html->link('Télécharge','/paperplanes/paperplane_id='.AuthComponent::user('school_id').'.pdf') ;?> et imprime le patron en papier de l'avion de ton école avec les instructions de pliage.</p>
+            <p>1. <?= $this->Html->link('Télécharge','img/heights-paperplanes/PaperPlaneContest-'.AuthComponent::user('school_id').'.pdf') ;?> et imprime le patron en papier de l'avion de ton école avec les instructions de pliage.</p>
                     <?php else:?>
             <p>1. <?= $this->Html->link('Télécharge',array('controller' => 'users', 'action' => 'login')) ;?> et imprime le patron de l'avion en papier de ton école avec les instructions de pliage.</p>
                     <?php endif;?>

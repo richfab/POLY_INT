@@ -11,7 +11,7 @@
     <div class="data-container">
         
         <div id="bar-chart-container"><div class="chart" id="bar-chart" style="min-height:150px;"></div></div>
-        <div class="limit" id="bar-chart-limit" style="height:30px;"></div>
+        <div class="limit" id="bar-chart-limit" style="height:70px;"></div>
     </div>
         
 </div>

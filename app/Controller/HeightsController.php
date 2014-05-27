@@ -76,6 +76,16 @@ class HeightsController extends AppController {
                         'paddings' => false,
                     ));
                     
+                    //envoi un email a l'admin
+                    App::uses('CakeEmail','Network/Email');
+                    $email = new CakeEmail('default');
+                    $email->to('hello@polytech-abroad.com')
+                            ->subject('Nouvelle photo Paper Plane Contest')
+                            ->emailFormat('html')
+                            ->template('new_photo_contest')
+                            ->viewVars(array('img' => $file_name))
+                            ->send();
+                    
                     $this->Session->setFlash(__("Ton avion a bien été envoyé ! Nous calculons son altitude au plus vite."), 'alert', array(
                         'plugin' => 'BoostCake',
                         'class' => 'alert-success'
