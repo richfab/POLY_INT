@@ -16,19 +16,10 @@
         
 </div>
 
-<div id="websiteList">
+<div id="websiteList" style="min-width: 240px">
     
     <ul id="webisteUl">
         
     </ul>
-        
-</div>
-    
-<div id="data">
-    
-    <div class="data-container">
-        <span style="font-size: 3em;color: #CAC09C;" id="dataHeight"></span>
-        <span style="font-size: 2em;color: #CAC09C;" id="bar-chart-unit" class="data">m</span>
-    </div>
         
 </div>

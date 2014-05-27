@@ -19,6 +19,7 @@ and open the template in the editor.
 ul, li, rect {
     list-style-type: none;
     cursor: pointer;
+    margin-bottom: 7px;
 }
 
 .modal-body form{
@@ -31,11 +32,22 @@ ul, li, rect {
     margin-bottom: 15px;
 }
 
-#links{
-    
+#how_to_participate{
+    text-align: center;
+    font-size: 29px;
+    margin-top: 0px;
+    margin-bottom: 30px;
 }
 
-#gallery{
-    margin-top: 30px;
-    margin-bottom: 30px;
+#plane-contest {
+    background: url('../img/background-paperplane-fab.png') no-repeat scroll center center;
+    height: 144px;
+    width: 100%;
+}
+
+#links a img {
+    margin: 5.5px;
+    padding: 2px;
+    background-color: white;
+    border: 1px solid #C9C9C9;
 }
