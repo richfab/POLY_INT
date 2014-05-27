@@ -8,187 +8,6 @@
 class ImageTool {
 
 	/**
-	 * Place watermark on image
-	 *
-	 * Options:
-	 * - 'input' Input file (path or gd resource)
-	 * - 'output' Output path. If not specified, gd resource is returned
-	 * - 'watermark' Watermark file (path or gd resource)
-	 * - 'quality' Output image quality (JPG only). Value from 0 to 100
-	 * - 'compression' Output image compression (PNG only). Value from 0 to 9
-	 * - 'chmod' What permissions should be applied to destination image
-	 * - 'scale' If true, watermark will be scaled fullsize ('position' and 'repeat' won't be taken into account)
-	 * - 'strech' If true and scale also set to true, strech watermark to cover whole image
-	 * - 'repeat' Should watermark be repeated? This is ignored if 'scale' is set to true or 'position' is custom (array)
-	 * - 'position' Watermark position. Possible values: 'top-left', 'top-right', 'bottom-right', 'bottom-left', 'center' or [x, y]
-	 * - 'opacity' Watermark image's opacity (0-100). Default = 100
-	 * - 'afterCallbacks' Functions to be executed after this one
-	 *
-	 * @param array $options An array of options.
-	 * @return mixed boolean or GD resource if output was set to null
-	 */
-	public static function watermark($options = []) {
-		$options = array_merge([
-			'afterCallbacks' => null,
-			'scale' => false,
-			'strech' => false,
-			'repeat' => false,
-			'watermark' => null,
-			'output' => null,
-			'input' => null,
-			'position' => 'center',
-			'compression' => 9,
-			'quality' => 100,
-			'chmod' => null,
-			'opacity' => 100
-		], $options);
-
-		// if output path (directories) doesn't exist, try to make whole path
-		if (!self::createPath($options['output'])) {
-			return false;
-		}
-
-		$img = self::openImage($options['input']);
-		unset($options['input']);
-		if (empty($img)) {
-			return false;
-		}
-
-		$src_wm = self::openImage($options['watermark']);
-		unset($options['watermark']);
-		if (empty($src_wm)) {
-			return false;
-		}
-
-		// image size
-		$img_im_w = imagesx($img);
-		$img_im_h = imagesy($img);
-
-		// watermark size
-		$img_wm_w = imagesx($src_wm);
-		$img_wm_h = imagesy($src_wm);
-
-		if ($options['scale']) {
-			if ($options['strech']) {
-				$r = imagecopyresampled($img, $src_wm, 0, 0, 0, 0, $img_im_w, $img_im_h, $img_wm_w, $img_wm_h);
-			} else {
-				$x = 0;
-				$y = 0;
-				$w = $img_im_w;
-				$h = $img_im_h;
-
-				if (($img_im_w / $img_im_h) > ($img_wm_w / $img_wm_h)) {
-					$ratio = $img_im_h / $img_wm_h;
-					$w = $ratio * $img_wm_w;
-					$x = round(($img_im_w - $w) / 2);
-				} else {
-					$ratio = $img_im_w / $img_wm_w;
-					$h = $ratio * $img_wm_h;
-					$y = round(($img_im_h - $h) / 2);
-				}
-
-				$r = imagecopyresampled($img, $src_wm, $x, $y, 0, 0, $w, $h, $img_wm_w, $img_wm_h);
-			}
-		} else if ($options['repeat']) {
-			if (is_array($options['position'])) {
-				$options['position'] = 5;
-			}
-
-			switch ($options['position']) {
-				case 'top-left':
-					for ($y=0; $y<$img_im_h; $y+=$img_wm_h) {
-						for ($x=0; $x<$img_im_w; $x+=$img_wm_w) {
-							$r = self::imagecopymerge_alpha($img, $src_wm, $x, $y, 0, 0, $img_wm_w, $img_wm_h, $options['opacity']);
-						}
-					}
-				break;
-
-				case 'top-right':
-					for ($y=0; $y<$img_im_h; $y+=$img_wm_h) {
-						for ($x=$img_im_w; $x>-$img_wm_w; $x-=$img_wm_w) {
-							$r = self::imagecopymerge_alpha($img, $src_wm, $x, $y, 0, 0, $img_wm_w, $img_wm_h, $options['opacity']);
-						}
-					}
-				break;
-
-				case 'bottom-right':
-					for ($y=$img_im_h; $y>-$img_wm_h; $y-=$img_wm_h) {
-						for ($x=$img_im_w; $x>-$img_wm_w; $x-=$img_wm_w) {
-							$r = self::imagecopymerge_alpha($img, $src_wm, $x, $y, 0, 0, $img_wm_w, $img_wm_h, $options['opacity']);
-						}
-					}
-				break;
-
-				case 'bottom-left':
-					for ($y=$img_im_h; $y>-$img_wm_h; $y-=$img_wm_h) {
-						for ($x=0; $x<$img_im_w; $x+=$img_wm_w) {
-							$r = self::imagecopymerge_alpha($img, $src_wm, $x, $y, 0, 0, $img_wm_w, $img_wm_h, $options['opacity']);
-						}
-					}
-				break;
-
-				case 'center':
-				default:
-					$pos_x = -(($img_im_w%$img_wm_w)/2);
-					$pos_y = -(($img_im_h%$img_wm_h)/2);
-
-					for ($y=$pos_y; $y<$img_im_h; $y+=$img_wm_h) {
-						for ($x=$pos_x; $x<$img_im_w; $x+=$img_wm_w) {
-							$r = self::imagecopymerge_alpha($img, $src_wm, $x, $y, 0, 0, $img_wm_w, $img_wm_h, $options['opacity']);
-						}
-					}
-				break;
-			}
-		} else {
-			// custom location
-			if (is_array($options['position'])) {
-				list($pos_x, $pos_y) = $options['position'];
-			} else {
-				// predefined location
-				switch ($options['position']) {
-					case 'top-left':
-						$pos_x = 0;
-						$pos_y = 0;
-					break;
-
-					case 'top-right':
-						$pos_x = $img_im_w - $img_wm_w;
-						$pos_y = 0;
-					break;
-
-					case 'bottom-right':
-						$pos_x = $img_im_w - $img_wm_w;
-						$pos_y = $img_im_h - $img_wm_h;
-					break;
-
-					case 'bottom-left':
-						$pos_x = 0;
-						$pos_y = $img_im_h - $img_wm_h;
-					break;
-
-					case 'center':
-					default:
-						$pos_x = round(($img_im_w - $img_wm_w) / 2);
-						$pos_y = round(($img_im_h - $img_wm_h) / 2);
-					break;
-				}
-			}
-
-			$r = self::imagecopymerge_alpha($img, $src_wm, $pos_x, $pos_y, 0, 0, $img_wm_w, $img_wm_h, $options['opacity']);
-		}
-
-		if (!$r) {
-			return false;
-		}
-
-		if (!self::afterCallbacks($img, $options['afterCallbacks'])) {
-			return false;
-		}
-
-		return self::saveImage($img, $options);
-	}
-
-	/**
 	 * Resize image
 	 *
 	 * Options:
@@ -209,8 +28,8 @@ class ImageTool {
 	 * @param array $options An array of options
 	 * @return mixed boolean or GD resource if output was set to null
 	 */
-	public static function resize($options = []) {
-		$options = array_merge([
+	public static function resize($options = array()) {
+		$options = array_merge(array(
 			'afterCallbacks' => null,
 			'compression' => null,
 			'keepRatio' => false,
@@ -224,7 +43,7 @@ class ImageTool {
 			'width' => null,
 			'input' => null,
 			'crop' => true
-		], $options);
+		), $options);
 
 		// if output path (directories) doesn't exist, try to make whole path
 		if (!self::createPath($options['output'])) {
@@ -321,8 +140,8 @@ class ImageTool {
 		}
 
 		// transparency or white bg instead of black
-		if (in_array($input_extension, ['png', 'gif'])) {
-			if (in_array($output_extension, ['png', 'gif'])) {
+		if (in_array($input_extension, array('png', 'gif'))) {
+			if (in_array($output_extension, array('png', 'gif'))) {
 				imagealphablending($dst_im, false);
 				imagesavealpha($dst_im, true);
 				$transparent = imagecolorallocatealpha($dst_im, 255, 255, 255, 127);
@@ -350,11 +169,11 @@ class ImageTool {
 				}
 
 				if ($options['paddings'] === true) {
-					$rgb = [255, 255, 255];
+					$rgb = array(255, 255, 255);
 				} else {
 					$rgb = self::readColor($options['paddings']);
 					if (!$rgb) {
-						$rgb = [255, 255, 255];
+						$rgb = array(255, 255, 255);
 					}
 				}
 
@@ -377,168 +196,6 @@ class ImageTool {
 		return self::saveImage($dst_im, $options);
 	}
 
-	/**
-	 * Apply unsharp mask to image
-	 *
-	 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	 * Unsharp Mask for PHP - version 2.1.1
-	 * Unsharp mask algorithm by Torstein Hønsi 2003-07.
-	 * thoensi_at_netcom_dot_no.
-	 * Please leave this notice.
-	 * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-	 *
-	 * Options:
-	 * - 'input' Input file (path or gd resource)
-	 * - 'output' Output path. If not specified, gd resource is returned
-	 * - 'quality' Output image quality (JPG only). Value from 0 to 100
-	 * - 'compression' Output image compression (PNG only). Value from 0 to 9
-	 * - 'afterCallbacks' Functions to be executed after this one
-	 * - 'chmod' What permissions should be applied to destination image
-	 * - 'threshold'
-	 * - 'amount'
-	 * - 'radius'
-	 *
-	 * @param array $options An array of options.
-	 * @return mixed boolean or GD resource if output was set to null
-	 */
-	public static function unsharpMask($options = []) {
-		$options = array_merge([
-			'afterCallbacks' => null,
-			'compression' => null,
-			'quality' => null,
-			'threshold' => 3,
-			'amount' => 50,
-			'radius' => 0.5,
-			'output' => null,
-			'input' => null,
-			'chmod' => null
-		], $options);
-
-		$img = self::openImage($options['input']);
-		unset($options['input']);
-
-		if (!$img) {
-			return false;
-		}
-
-		// Attempt to calibrate the parameters to Photoshop:
-
-		if ($options['amount'] > 500) {
-			$options['amount'] = 500;
-		}
-
-		$options['amount'] = $options['amount'] * 0.016;
-
-		if ($options['radius'] > 50) {
-			$options['radius'] = 50;
-		}
-
-		$options['radius'] = $options['radius'] * 2;
-
-		if ($options['threshold'] > 255) {
-			$options['threshold'] = 255;
-		}
-
-		// Only integers make sense.
-		$options['radius'] = abs(round($options['radius']));
-
-		if ($options['radius'] == 0) {
-			return self::saveImage($img, $options);
-		}
-
-		$w = imagesx($img);
-		$h = imagesy($img);
-
-		$imgCanvas = imagecreatetruecolor($w, $h);
-		$imgBlur = imagecreatetruecolor($w, $h);
-
-		// PHP >= 5.1
-		if (function_exists('imageconvolution')) {
-			$matrix = [
-				[1, 2, 1],
-				[2, 4, 2],
-				[1, 2, 1]
-			];
-			imagecopy ($imgBlur, $img, 0, 0, 0, 0, $w, $h);
-			imageconvolution($imgBlur, $matrix, 16, 0);
-		} else {
-			// Move copies of the image around one pixel at the time and merge them with weight
-			// according to the matrix. The same matrix is simply repeated for higher radii.
-			for ($i = 0; $i < $options['radius']; $i++) {
-				imagecopy ($imgBlur, $img, 0, 0, 1, 0, $w - 1, $h); // left
-				imagecopymerge ($imgBlur, $img, 1, 0, 0, 0, $w, $h, 50); // right
-				imagecopymerge ($imgBlur, $img, 0, 0, 0, 0, $w, $h, 50); // center
-				imagecopy ($imgCanvas, $imgBlur, 0, 0, 0, 0, $w, $h);
-				imagecopymerge ($imgBlur, $imgCanvas, 0, 0, 0, 1, $w, $h - 1, 33.33333 ); // up
-				imagecopymerge ($imgBlur, $imgCanvas, 0, 1, 0, 0, $w, $h, 25); // down
-			}
-		}
-
-		if($options['threshold'] > 0) {
-			// Calculate the difference between the blurred pixels and the original
-			// and set the pixels
-			for ($x = 0; $x < $w-1; $x++) { // each row
-				for ($y = 0; $y < $h; $y++) { // each pixel
-					$rgbOrig = ImageColorAt($img, $x, $y);
-					$rOrig = (($rgbOrig >> 16) & 0xFF);
-					$gOrig = (($rgbOrig >> 8) & 0xFF);
-					$bOrig = ($rgbOrig & 0xFF);
-
-					$rgbBlur = ImageColorAt($imgBlur, $x, $y);
-
-					$rBlur = (($rgbBlur >> 16) & 0xFF);
-					$gBlur = (($rgbBlur >> 8) & 0xFF);
-					$bBlur = ($rgbBlur & 0xFF);
-
-					// When the masked pixels differ less from the original
-					// than the threshold specifies, they are set to their original value.
-					$rNew = (abs($rOrig - $rBlur) >= $options['threshold']) ? max(0, min(255, ($options['amount'] * ($rOrig - $rBlur)) + $rOrig)) : $rOrig;
-					$gNew = (abs($gOrig - $gBlur) >= $options['threshold']) ? max(0, min(255, ($options['amount'] * ($gOrig - $gBlur)) + $gOrig)) : $gOrig;
-					$bNew = (abs($bOrig - $bBlur) >= $options['threshold']) ? max(0, min(255, ($options['amount'] * ($bOrig - $bBlur)) + $bOrig)) : $bOrig;
-
-					if (($rOrig != $rNew) || ($gOrig != $gNew) || ($bOrig != $bNew)) {
-						$pixCol = ImageColorAllocate($img, $rNew, $gNew, $bNew);
-						ImageSetPixel($img, $x, $y, $pixCol);
-					}
-				}
-			}
-		} else {
-			for ($x = 0; $x < $w; $x++) { // each row
-				for ($y = 0; $y < $h; $y++) { // each pixel
-					$rgbOrig = ImageColorAt($img, $x, $y);
-					$rOrig = (($rgbOrig >> 16) & 0xFF);
-					$gOrig = (($rgbOrig >> 8) & 0xFF);
-					$bOrig = ($rgbOrig & 0xFF);
-
-					$rgbBlur = ImageColorAt($imgBlur, $x, $y);
-
-					$rBlur = (($rgbBlur >> 16) & 0xFF);
-					$gBlur = (($rgbBlur >> 8) & 0xFF);
-					$bBlur = ($rgbBlur & 0xFF);
-
-					$rNew = ($options['amount'] * ($rOrig - $rBlur)) + $rOrig;
-
-					if($rNew>255){$rNew=255;}
-					elseif($rNew<0){$rNew=0;}
-					$gNew = ($options['amount'] * ($gOrig - $gBlur)) + $gOrig;
-					if($gNew>255){$gNew=255;}
-					elseif($gNew<0){$gNew=0;}
-					$bNew = ($options['amount'] * ($bOrig - $bBlur)) + $bOrig;
-					if($bNew>255){$bNew=255;}
-					elseif($bNew<0){$bNew=0;}
-
-					$rgbNew = ($rNew << 16) + ($gNew <<8) + $bNew;
-					ImageSetPixel($img, $x, $y, $rgbNew);
-				}
-			}
-		}
-
-		if (!self::afterCallbacks($img, $options['afterCallbacks'])) {
-			return false;
-		}
-
-		return self::saveImage($img, $options);
-	}
 
 	/**
 	 * Get file extension
@@ -662,18 +319,18 @@ class ImageTool {
 	 * @param mixed $options An array of additional options
 	 * @return boolean
 	 */
-	public static function saveImage(&$im, $options = []) {
-		foreach (['compression', 'quality', 'chmod'] as $v) {
+	public static function saveImage(&$im, $options = array()) {
+		foreach (array('compression', 'quality', 'chmod') as $v) {
 			if (is_null($options[$v])) {
 				unset($options[$v]);
 			}
 		}
 
-		$options = array_merge([
+		$options = array_merge(array(
 			'compression' => 9,
 			'quality' => 100,
 			'output' => null
-		], $options);
+		), $options);
 
 		switch (self::getImageType($options['output'], true)) {
 			case 'jpg':
@@ -755,15 +412,15 @@ class ImageTool {
 	 * @param mixed $options An array of options
 	 * @return mixed boolean or GD resource if output was set to null
 	 */
-	public static function autorotate($options = []) {
-		$options = array_merge([
+	public static function autorotate($options = array()) {
+		$options = array_merge(array(
 			'afterCallbacks' => null,
 			'compression' => null,
 			'quality' => null,
 			'input' => null,
 			'output' => null,
 			'chmod' => null
-		], $options);
+		), $options);
 
 		$type = self::getImageType($options['input']);
 
@@ -792,33 +449,33 @@ class ImageTool {
 			break;
 
 			case 2: // horizontal flip
-				$dst_im = self::flip(['input' => $src_im, 'mode' => 'horizontal']);
+				$dst_im = self::flip(array('input' => $src_im, 'mode' => 'horizontal'));
 			break;
 
 			case 3: // 180 rotate left
-				$dst_im = self::rotate(['input' => $src_im, 'degrees' => 180]);
+				$dst_im = self::rotate(array('input' => $src_im, 'degrees' => 180));
 			break;
 
 			case 4: // vertical flip
-				$dst_im = self::flip(['input' => $src_im, 'mode' => 'vertical']);
+				$dst_im = self::flip(array('input' => $src_im, 'mode' => 'vertical'));
 			break;
 
 			case 5: // vertical flip + 90 rotate right
-				$dst_im = self::flip(['input' => $src_im, 'mode' => 'vertical']);
-				$dst_im = self::rotate(['input' => $src_im, 'degrees' => 90]);
+				$dst_im = self::flip(array('input' => $src_im, 'mode' => 'vertical'));
+				$dst_im = self::rotate(array('input' => $src_im, 'degrees' => 90));
 			break;
 
 			case 6: // 90 rotate right
-				$dst_im = self::rotate(['input' => $src_im, 'degrees' => 90]);
+				$dst_im = self::rotate(array('input' => $src_im, 'degrees' => 90));
 			break;
 
 			case 7: // horizontal flip + 90 rotate right
-				$dst_im = self::flip(['input' => $src_im, 'mode' => 'horizontal']);
-				$dst_im = self::rotate(['input' => $src_im, 'degrees' => 90]);
+				$dst_im = self::flip(array('input' => $src_im, 'mode' => 'horizontal'));
+				$dst_im = self::rotate(array('input' => $src_im, 'degrees' => 90));
 			break;
 
 			case 8: // 90 rotate left
-				$dst_im = self::rotate(['input' => $src_im, 'degrees' => 270]);
+				$dst_im = self::rotate(array('input' => $src_im, 'degrees' => 270));
 			break;
 
 			default:
@@ -852,8 +509,8 @@ class ImageTool {
 	 * @param mixed $options An array of options
 	 * @return mixed boolean or GD resource if output was set to null
 	 */
-	public static function rotate($options = []) {
-		$options = array_merge([
+	public static function rotate($options = array()) {
+		$options = array_merge(array(
 			'afterCallbacks' => null,
 			'compression' => null,
 			'quality' => null,
@@ -861,7 +518,7 @@ class ImageTool {
 			'output' => null,
 			'degrees' => 'horizontal',
 			'chmod' => null
-		], $options);
+		), $options);
 
 		$src_im = self::openImage($options['input']);
 		unset($options['input']);
@@ -946,8 +603,8 @@ class ImageTool {
 	 * @param mixed $options An array of options
 	 * @return mixed boolean or GD resource if output was set to null
 	 */
-	public static function flip($options = []) {
-		$options = array_merge([
+	public static function flip($options = array()) {
+		$options = array_merge(array(
 			'afterCallbacks' => null,
 			'compression' => null,
 			'quality' => null,
@@ -955,7 +612,7 @@ class ImageTool {
 			'output' => null,
 			'mode' => 'horizontal',
 			'chmod' => null
-		], $options);
+		), $options);
 
 		$src_im = self::openImage($options['input']);
 		unset($options['input']);
@@ -1005,109 +662,6 @@ class ImageTool {
 	}
 
 	/**
-	 * Get image's average color
-	 *
-	 * Options:
-	 * - 'input' Input file (path or gd resource)
-	 * - 'format' Output format (int, hex)
-	 *
-	 * @param array $options An array of options.
-	 * @returm mixed string|boolean
-	 */
-	public static function averageColor($options = []) {
-		$options = array_merge([
-			'input' => null,
-			'format' => 'int'
-		], $options);
-
-		$img = self::openImage($options['input']);
-		unset($options['input']);
-
-		if (!$img) {
-			return false;
-		}
-
-		$dst_im = imagecreatetruecolor(1, 1);
-
-		if (!$dst_im || !imagecopyresampled($dst_im, $img, 0, 0, 0, 0, 1, 1, imagesx($img), imagesy($img))) {
-			return false;
-		}
-
-		$color = imagecolorat($dst_im, 0, 0);
-
-		switch ($options['format']) {
-			case 'hex':
-				return str_pad(dechex($color), 6, '0', STR_PAD_LEFT);
-			break;
-
-			case 'int':
-				return $color;
-			break;
-		}
-
-		return false;
-	}
-
-	/**
-	 * Get image's dominating color
-	 *
-	 * Options:
-	 * - 'input' Input file (path or gd resource)
-	 * - 'format' Output format (int, hex)
-	 *
-	 * @param array $options An array of options.
-	 * @returm mixed string|boolean
-	 */
-	public static function dominatingColor($options = []) {
-		$options = array_merge([
-			'input' => null,
-			'format' => 'int'
-		], $options);
-
-		$img = self::openImage($options['input']);
-		unset($options['input']);
-
-		if (!$img) {
-			return false;
-		}
-
-		$dst_im = imagecreatetruecolor(100, 100);
-
-		if (!$dst_im || !imagecopyresampled($dst_im, $img, 0, 0, 0, 0, 100, 100, imagesx($img), imagesy($img))) {
-			return false;
-		}
-
-		$colors = [];
-
-		for ($y=0; $y<50; $y++) {
-			for ($x=0; $x<50; $x++) {
-				$color = imagecolorat($dst_im, $x, $y);
-				if (isset($colors[$color])) {
-					$colors[$color]++;
-				} else {
-					$colors[$color] = 1;
-				}
-			}
-		}
-
-		arsort($colors);
-
-		$color = array_shift(array_keys($colors));
-
-		switch ($options['format']) {
-			case 'hex':
-				return str_pad(dechex($color), 6, '0', STR_PAD_LEFT);
-			break;
-
-			case 'int':
-				return $color;
-			break;
-		}
-
-		return false;
-	}
-
-	/**
 	 * PNG ALPHA CHANNEL SUPPORT for imagecopymerge();
 	 * This is a f-ion like imagecopymerge but it handle alpha channel well!!!
 	 **/
@@ -1143,7 +697,7 @@ class ImageTool {
 	 * @return mixed boolean or GD resource if output was set to null
 	 */
 	public static function pixelate($options) {
-		$options = array_merge([
+		$options = array_merge(array(
 			'afterCallbacks' => null,
 			'compression' => null,
 			'quality' => null,
@@ -1151,7 +705,7 @@ class ImageTool {
 			'output' => null,
 			'input' => null,
 			'chmod' => null
-		], $options);
+		), $options);
 
 		$img = self::openImage($options['input']);
 		unset($options['input']);
@@ -1165,13 +719,13 @@ class ImageTool {
 
 		for($x=0; $x<$w; $x+=$options['blocksize']) {
 			for($y=0; $y<$h; $y+=$options['blocksize']) {
-				$colors = [
+				$colors = array(
 					'alpha' => 0,
 					'red' => 0,
 					'green' => 0,
 					'blue' => 0,
 					'total' => 0
-				];
+				);
 
 				for ($block_x = 0 ; $block_x < $options['blocksize'] ; $block_x++) {
 					for ($block_y = 0 ; $block_y < $options['blocksize'] ; $block_y++) {
@@ -1210,127 +764,6 @@ class ImageTool {
 		}
 
 		return self::saveImage($img, $options);
-	}
-
-	/**
-	 * Meshify image
-	 *
-	 * Options:
-	 * - 'input' Input file (path or gd resource)
-	 * - 'output' Output path. If not specified, gd resource is returned
-	 * - 'afterCallbacks' Functions to be executed after this one
-	 * - 'blocksize' Size between two filled pixels
-	 * - 'quality' Output image quality (JPG only). Value from 0 to 100
-	 * - 'compression' Output image compression (PNG only). Value from 0 to 9
-	 * - 'chmod' What permissions should be applied to destination image
-	 * - 'color' Mesh color (array of rgb values)
-	 *
-	 * @param mixed $options An array of options
-	 * @return mixed boolean or GD resource if output was set to null
-	 */
-	public static function meshify($options) {
-		$options = array_merge([
-			'afterCallbacks' => null,
-			'compression' => null,
-			'quality' => null,
-			'blocksize' => 2,
-			'output' => null,
-			'input' => null,
-			'chmod' => null,
-			'color' => [0, 0, 0]
-		], $options);
-
-		$src_im = self::openImage($options['input']);
-		unset($options['input']);
-
-		$w = imagesx($src_im);
-		$h = imagesy($src_im);
-
-		$rgb = self::readColor($options['color']);
-		if (!$rgb) {
-			$rgb = [0, 0, 0];
-		}
-
-		$color = imagecolorallocate($src_im, $rgb[0], $rgb[1], $rgb[2]);
-
-		for($x=0; $x<$w; $x+=$options['blocksize']) {
-			for($y=0; $y<$h; $y+=$options['blocksize']) {
-				imagesetpixel($src_im, $x, $y, $color);
-			}
-		}
-
-		if (!self::afterCallbacks($src_im, $options['afterCallbacks'])) {
-			return false;
-		}
-
-		return self::saveImage($src_im, $options);
-	}
-
-	/**
-	 * Make image black and white
-	 *
-	 * Options:
-	 * - 'input' Input file (path or gd resource)
-	 * - 'output' Output path. If not specified, gd resource is returned
-	 * - 'afterCallbacks' Functions to be executed after grayscaling
-	 * - 'quality' Output image quality (JPG only). Value from 0 to 100
-	 * - 'compression' Output image compression (PNG only). Value from 0 to 9
-	 * - 'chmod' What permissions should be applied to destination image
-	 *
-	 * @return mixed boolean or GD resource if output was set to null
-	 */
-	public static function grayscale($options) {
-		$options = array_merge([
-			'afterCallbacks' => null,
-			'compression' => null,
-			'quality' => null,
-			'output' => null,
-			'input' => null,
-			'chmod' => null
-		], $options);
-
-		$img = self::openImage($options['input']);
-		unset($options['input']);
-
-		if (!$img) {
-			return false;
-		}
-
-		$w = imagesx($img);
-		$h = imagesy($img);
-
-		$palette = [];
-
-		for ($c=0; $c<256; $c++) {
-			$palette[$c] = imagecolorallocate($img, $c, $c, $c);
-		}
-
-		for ($y=0; $y<$h; $y++) {
-			for ($x=0; $x<$w; $x++) {
-				$rgb = imagecolorat($img, $x, $y);
-
-				$r = ($rgb >> 16) & 0xFF;
-				$g = ($rgb >> 8) & 0xFF;
-				$b = $rgb & 0xFF;
-
-				$gs = self::yiq($r, $g, $b);
-
-				imagesetpixel($img, $x, $y, $palette[$gs]);
-			}
-		}
-
-		if (!self::afterCallbacks($img, $options['afterCallbacks'])) {
-			return false;
-		}
-
-		return self::saveImage($img, $options);
-	}
-
-	/**
-	 * Helper function to covert color to grayscale
-	 */
-	public static function yiq($r, $g, $b) {
-		return (($r*0.299)+($g*0.587)+($b*0.114));
 	}
 
 	/**
@@ -1378,28 +811,6 @@ class ImageTool {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Convert HEX color to RGB
-	 *
-	 * @param string $color HEX color (3 or 6 chars)
-	 * @return mixed
-	 */
-	public static function hex2rgb($color) {
-		if ($color[0] == '#') {
-			$color = substr($color, 1);
-		}
-
-		if (strlen($color) == 6) {
-			list($r, $g, $b) = [$color[0].$color[1], $color[2].$color[3], $color[4].$color[5]];
-		} else if (strlen($color) == 3) {
-			list($r, $g, $b) = [$color[0].$color[0], $color[1].$color[1], $color[2].$color[2]];
-		} else {
-			return false;
-		}
-
-		return [hexdec($r), hexdec($g), hexdec($b)];
 	}
 
 }
