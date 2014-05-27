@@ -15,10 +15,10 @@ class HeightsController extends AppController {
         
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(array('index','get_heights','get_heights_gallery')); //ce que tout le monde a le droit de faire
+        $this->Auth->allow(array('contest','get_heights','get_heights_gallery')); //ce que tout le monde a le droit de faire
     }
         
-    public function index(){
+    public function contest(){
         $this->set('jsIncludes',array('heights/d3.min','heights/jquery.viewport','heights/heights','logo_fly'));
         $this->set('cssIncludes',array('heights','bootstrap-image-gallery.min','blueimp-gallery.min'));
             
@@ -86,10 +86,10 @@ class HeightsController extends AppController {
                         'plugin' => 'BoostCake',
                         'class' => 'alert-danger'
                     ));
-                    return $this->redirect(array('action' => 'index'));
                 }
+                $this->redirect(array('controller' => 'heights', 'action' => 'contest'));
             }
-    	}
+        }
     }
         
     public function get_heights_gallery(){

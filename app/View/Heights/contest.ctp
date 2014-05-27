@@ -1,7 +1,7 @@
 <div class="container">
     
     <div class="" id="plane-contest"></div>
-    
+        
     <div class="col-sm-12 text-center">
         <div id="graph_contest" class="" style="padding-top:20px;"><?php echo $this->element('heights_graph');?></div>
     </div>
@@ -11,12 +11,12 @@
         <div class="well col-md-4">
             <h2 id="how_to_participate">Comment participer ?</h2>
                     <?php if(AuthComponent::user('id')):?>
-                <p>1. <?= $this->Html->link('Télécharge','/paperplanes/paperplane_id='.AuthComponent::user('school_id').'.pdf') ;?> et imprime le patron en papier de l'avion de ton école avec les instructions de pliage.</p>
+            <p>1. <?= $this->Html->link('Télécharge','/paperplanes/paperplane_id='.AuthComponent::user('school_id').'.pdf') ;?> et imprime le patron en papier de l'avion de ton école avec les instructions de pliage.</p>
                     <?php else:?>
-                <p>1. <?= $this->Html->link('Télécharge',array('controller' => 'users', 'action' => 'login')) ;?> et imprime le patron de l'avion en papier de ton école avec les instructions de pliage.</p>
+            <p>1. <?= $this->Html->link('Télécharge',array('controller' => 'users', 'action' => 'login')) ;?> et imprime le patron de l'avion en papier de ton école avec les instructions de pliage.</p>
                     <?php endif;?>
-                <p>2. Grimpe en haut du plus grand monument de la ville</p>
-                <p>3. Prends toi en photo et fais s'envoller l'avion !</p>
+            <p>2. Grimpe en haut du plus grand monument de la ville</p>
+            <p>3. Prends toi en photo et fais s'envoller l'avion !</p>
             <!-- Button trigger modal -->
             <div class="text-center" style="margin:10px 0">
                 <button class="btn btn-primary btn " data-toggle="modal" data-target="#myModal">Envoyer un avion</button>
@@ -71,6 +71,7 @@
     </div>
 </div>
 <!-- Fin de Modal -->
-    
-<script src="../js/jquery.blueimp-gallery.min.js"></script>
-<script src="../js/bootstrap-image-gallery.min.js"></script>
+
+<?php
+    echo $this->Html->script(array('jquery.blueimp-gallery.min.js')); // Inclut la librairie gallerie
+?>
