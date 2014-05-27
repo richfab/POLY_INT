@@ -45,8 +45,8 @@
 
 <div id="links">
     <?php foreach ($photos as $photo): ?>
-    <a href="img/heights-photos/<?php echo $photo['Height']['url']; ?>" author="<?php echo $photo['User']['firstname']; ?> <?php echo $photo['User']['lastname']; ?>" title="<?php echo $photo['Height']['city']; ?>, <?php echo $photo['Height']['country']; ?> - <?php echo $photo['Height']['place']; ?> ( <?php echo $photo['Height']['height']; ?> m)" data-gallery>
-        <img src="img/heights-photos/S_<?php echo $photo['Height']['url']; ?>" alt="">
+    <a href="/img/heights-photos/<?php echo $photo['Height']['url']; ?>" author="<?php echo $photo['User']['firstname']; ?> <?php echo $photo['User']['lastname']; ?>" title="<?php echo $photo['Height']['city']; ?>, <?php echo $photo['Height']['country']; ?> - <?php echo $photo['Height']['place']; ?> ( <?php echo $photo['Height']['height']; ?> m)" data-gallery>
+        <img src="/img/heights-photos/S_<?php echo $photo['Height']['url']; ?>" alt="">
     </a>
     <?php endforeach; ?>
     <?php if(empty($photos)): ?>
