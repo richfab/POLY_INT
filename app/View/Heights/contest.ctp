@@ -14,7 +14,7 @@
             <div id="tree1"></div>
             <h2 id="how_to_participate">Comment participer ?</h2>
                     <?php if(AuthComponent::user('id')):?>
-            <p>1. <?= $this->Html->link('Télécharge','img/heights-paperplanes/PaperPlaneContest-'.AuthComponent::user('school_id').'.pdf') ;?> et imprime le patron en papier de l'avion de ton école avec les instructions de pliage.</p>
+            <p>1. <?= $this->Html->link('Télécharge','/img/heights-paperplanes/PaperPlaneContest-'.AuthComponent::user('school_id').'.pdf') ;?> et imprime le patron en papier de l'avion de ton école avec les instructions de pliage.</p>
                     <?php else:?>
             <p>1. <?= $this->Html->link('Télécharge',array('controller' => 'users', 'action' => 'login')) ;?> et imprime le patron de l'avion en papier de ton école avec les instructions de pliage.</p>
                     <?php endif;?>
