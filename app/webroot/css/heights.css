@@ -40,9 +40,10 @@ ul, li, rect {
 }
 
 #plane-contest {
-    background: url('../img/background-paperplane-fab.png') no-repeat scroll center center;
+    background: url('../img/background-paperplane.png') no-repeat scroll center center;
     height: 144px;
     width: 100%;
+    border-bottom: 1px solid #C9C9C9;
 }
 
 #links a img {
@@ -50,4 +51,94 @@ ul, li, rect {
     padding: 2px;
     background-color: white;
     border: 1px solid #C9C9C9;
+}
+
+#cloud1 {
+    position:relative;
+    top: 250px;
+    left: -60px;
+    background: url('../img/cloud-tree.png') no-repeat -812px -51px; 
+    width: 54px; 
+    height: 36px;
+
+}
+
+#cloud2 {
+    position:relative;
+    top: 50px;
+    left: 900px;
+    background: url('../img/cloud-tree.png') no-repeat -543px -8px; 
+    width: 129px; 
+    height: 82px;
+
+}
+
+
+
+#tree2 {
+    top:-62px;
+    left: 8px;
+    position: absolute;
+    background: url('../img/cloud-tree.png') no-repeat -343px -861px;
+    width: 28px;
+    height: 71px;
+}
+#tree1 {
+    top:-32px;
+    left: 284px;
+    position: absolute;
+    background: url('../img/cloud-tree.png') no-repeat -595px -723px;
+    width: 28px;
+    height: 44px;
+}
+@keyframes "cloud-bounce" { 
+    0% { margin-top: 10px }
+    50% { margin-top: -15px }
+    100% { margin-top: 6px }
+}
+@-moz-keyframes cloud-bounce { 
+    0% { margin-top: 10px }
+    50% { margin-top: -15px }
+    100% { margin-top: 6px }
+}
+@-webkit-keyframes "cloud-bounce" { 
+    0% { margin-top: 10px }
+    50% { margin-top: -15px }
+    100% { margin-top: 6px }
+}
+@-ms-keyframes "cloud-bounce" { 
+    0% { margin-top: 10px }
+    50% { margin-top: -15px }
+    100% { margin-top: 6px }
+}
+@-o-keyframes "cloud-bounce" { 
+    0% { margin-top: 10px }
+    50% { margin-top: -15px }
+    100% { margin-top: 6px }
+}
+
+@keyframes "cloud-bounce2" { 
+    0% { margin-top: -10px }
+    50% { margin-top: 5px }
+    100% { margin-top: -15px }
+}
+@-moz-keyframes cloud-bounce2 { 
+    0% { margin-top: -10px }
+    50% { margin-top: 5px }
+    100% { margin-top: -15px }
+}
+@-webkit-keyframes "cloud-bounce2" { 
+    0% { margin-top: -10px }
+    50% { margin-top: 5px }
+    100% { margin-top: -15px }
+}
+@-ms-keyframes "cloud-bounce2" { 
+    0% { margin-top: -10px }
+    50% { margin-top: 5px }
+    100% { margin-top: -15px }
+}
+@-o-keyframes "cloud-bounce2" { 
+    0% { margin-top: -10px }
+    50% { margin-top: 5px }
+    100% { margin-top: -15px }
 }
