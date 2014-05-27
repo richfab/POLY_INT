@@ -43,7 +43,7 @@ class HeightsController extends AppController {
                     $this->Height->save($this->request->data);
                         
                     $file_name = $user_id . '-' . time() . '.' . $extension;
-                    move_uploaded_file($this->request->data['Height']['photo_file']['tmp_name'], IMAGES . 'heights' . DS . $file_name);
+                    move_uploaded_file($this->request->data['Height']['photo_file']['tmp_name'], IMAGES . 'heights-photos' . DS . $file_name);
                     $this->Height->saveField('url',$file_name);
                         
                     //redimensionnement de la photo
@@ -51,14 +51,14 @@ class HeightsController extends AppController {
                         
                     //on effectue la rotation de l'image a partir des données EXIF de la photo
                     $image = ImageTool::autorotate(array(
-                                'input' => IMAGES . 'heights' . DS . $file_name,
+                                'input' => IMAGES . 'heights-photos' . DS . $file_name,
                                 'output' => null
                             ));
                                 
                     //on réduit l'image pour la miniature
                     $status_S = ImageTool::resize(array(
                         'input' => $image,
-                        'output' => IMAGES . 'heights' . DS . 'S_' . $file_name,
+                        'output' => IMAGES . 'heights-photos' . DS . 'S_' . $file_name,
                         'width' => 75,
                         'height' => 75,
                         'crop' => true,
@@ -69,7 +69,7 @@ class HeightsController extends AppController {
                     //on reduit l'image pour l'affichage dans la galerie
                     $status_L = ImageTool::resize(array(
                         'input' => $image,
-                        'output' => IMAGES . 'heights' . DS . $file_name,
+                        'output' => IMAGES . 'heights-photos' . DS . $file_name,
                         'width' => 800,
                         'height' => 800,
                         'keepRatio' => true,
