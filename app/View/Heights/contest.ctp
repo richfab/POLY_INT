@@ -63,6 +63,7 @@
             <div class="modal-body">
                     <?php
                         if(AuthComponent::user('id')):?>
+                            <p>Cet avion comptera pour le score de <strong><?= $school_names[AuthComponent::user('school_id')] ;?></strong>.</p>
                             <?php
                             echo $this->Form->create('Height', array(
                                 'inputDefaults' => array(
