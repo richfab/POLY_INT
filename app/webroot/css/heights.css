@@ -19,7 +19,7 @@ and open the template in the editor.
 ul, li, rect {
     list-style-type: none;
     cursor: pointer;
-    margin-bottom: 7px;
+    margin-bottom: 4px;
 }
 
 .modal-body form{
@@ -32,9 +32,9 @@ ul, li, rect {
     margin-bottom: 15px;
 }
 
-#how_to_participate{
+#how_to_participate, #rules{
     text-align: center;
-    font-size: 29px;
+    font-size: 26px;
     margin-top: 0px;
     margin-bottom: 30px;
 }
