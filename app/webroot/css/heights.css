@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : fabienrichard
 */
 
+#heights_gallery_instructions{
+    margin-bottom: 50px;
+}
+
 .website.selected{
     font-weight: bold;
 }

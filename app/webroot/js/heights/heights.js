@@ -11,23 +11,6 @@
             d.total = +d.total;
         });
         
-        //variable pour ne lancer la transition du chart1 que une fois
-        var chartHasBeenShowed = false;
-        
-        $(window).bind("scroll", function(event) {
-            
-            if(!chartHasBeenShowed){
-                
-                $("#bar-chart-limit:in-viewport").each(function() {
-                    chartHasBeenShowed = true;
-                    //barChart init
-                    init();
-                    displayFirstWebsite();
-                    get_heights_gallery_all();
-                });
-            }
-        });
-        
         function init(){
             
             var barPad = 5;
@@ -195,16 +178,10 @@
             bar.attr("stroke", "black");
             $("#dataHeight").text(dataNumberToNice(websiteLi.attr("total")));
         }
-        
-        if(!chartHasBeenShowed){
-            $("#bar-chart-limit:in-viewport").each(function() {
-                chartHasBeenShowed = true;
-                //barChart init
-                init();
-                displayFirstWebsite();
-                get_heights_gallery_all();
-            });
-        }
+        //barChart init
+        init();
+        displayFirstWebsite();
+        get_heights_gallery_all();
         
     });
     
