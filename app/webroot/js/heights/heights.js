@@ -31,10 +31,10 @@
         function init(){
             
             var barPad = 5;
-            var barWidth = 50;
+            var barWidth = 45;
             
             var w = (barWidth+barPad)*data.length;
-            var h = 270;
+            var h = 290;
             
             var scale = d3.scale.linear()
                     .domain([0, d3.max(data, function(d) { return d.total; })]) //definition du domaine (input) 
