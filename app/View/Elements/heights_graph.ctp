@@ -9,7 +9,7 @@
     <div id="chart" class="col-sm-9">
         
         <div class="data-container">
-            <div id="cloud1" class="hidden-xs"></div> 
+            <div id="cloud1" class="hidden-xs hidden-sm"></div> 
             <div id="bar-chart-container"><div class="chart" id="bar-chart"></div></div>
             <div class="limit" id="bar-chart-limit" style="height:30px;"></div>
                 
@@ -18,7 +18,7 @@
     </div>
         
     <div id="websiteList" class="col-sm-3">
-        <div id="cloud2" class="hidden-xs"></div>
+        <div id="cloud2" class="hidden-xs hidden-sm hidden-md"></div>
         <div class="well well-sm">
             <ul id="webisteUl">
                 
