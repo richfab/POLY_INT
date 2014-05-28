@@ -33,7 +33,7 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
                     array('type' => 'icon')
                 );
                 
-                echo $this->Html->css(array('bootstrap','default'));
+                echo $this->Html->css(array('bootstrap','default','http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'));
                 echo $this->Html->script(array('jquery-1.11.0.min','bootstrap','modernizr.min')); // Inclut la librairie Jquery
                 
                 //on inclut les fichiers js qui sont spécifiques a une vue
@@ -84,6 +84,10 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
                             <li class="menu-separator"></li>
                             <li class="menu-item">
                                 <?= $this->Html->link('<span class="glyphicon glyphicon-search"></span> rechercher',array('controller'=>'experiences', 'action'=>'search'),array('style'=>'display:inline-block','escape'=>false));?>
+                            </li>
+                            <li class="menu-separator"></li>
+                            <li class="menu-item">
+                                <?= $this->Html->link('<i class="fa fa-trophy fa-lg"></i> contest','/contest',array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
                             <li class="menu-separator"></li>
                             <?php if(AuthComponent::user('id')): ?>

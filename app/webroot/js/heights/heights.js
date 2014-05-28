@@ -14,10 +14,12 @@
         function init(){
             
             var barPad = 5;
-            var barWidth = 45;
+            
+            var chartWidth = $('#chart').width();
+            var barWidth = (chartWidth-(barPad*12))/13;
             
             var w = (barWidth+barPad)*data.length;
-            var h = 290;
+            var h = 300;
             
             var scale = d3.scale.linear()
                     .domain([0, d3.max(data, function(d) { return d.total; })]) //definition du domaine (input) 

@@ -110,6 +110,7 @@ class HeightsController extends AppController {
         $conditions = array();
             
         $conditions['Height.verified'] = 1;
+        $conditions['Height.url !='] = NULL;
             
         if(!empty($this->request->data['school_id'])){
             $conditions['User.school_id'] = $this->request->data['school_id'];

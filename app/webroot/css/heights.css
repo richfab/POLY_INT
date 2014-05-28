@@ -16,14 +16,17 @@ and open the template in the editor.
     font-weight: bold;
 }
 
-#chart, #websiteList{
-    display: inline-block;
-}
-
 ul, li, rect {
     list-style-type: none;
     cursor: pointer;
     margin-bottom: 4px;
+    font-weight: 200;
+    font-size: 15px;
+    padding-left: 0;
+}
+
+#webisteUl{
+    min-height: 321px;
 }
 
 .modal-body form{
@@ -45,7 +48,7 @@ ul, li, rect {
 
 #plane-contest {
     background: url('../img/background-paperplane.png') no-repeat scroll center center;
-    height: 144px;
+    height: 137px;
     width: 100%;
     border-bottom: 1px solid #C9C9C9;
 }
@@ -58,23 +61,21 @@ ul, li, rect {
 }
 
 #cloud1 {
-    position:relative;
+    position: relative;
     top: 250px;
     left: -60px;
-    background: url('../img/cloud-tree.png') no-repeat -812px -51px; 
-    width: 54px; 
+    background: url('../img/cloud-tree.png') no-repeat -812px -51px;
+    width: 54px;
     height: 36px;
-
 }
 
 #cloud2 {
-    position:relative;
+    position: absolute;
     top: 50px;
-    left: 900px;
-    background: url('../img/cloud-tree.png') no-repeat -543px -8px; 
-    width: 129px; 
+    background: url('../img/cloud-tree.png') no-repeat -543px -8px;
+    width: 129px;
     height: 82px;
-
+    left: 210px;
 }
 
 
