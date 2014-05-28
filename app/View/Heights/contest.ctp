@@ -24,7 +24,7 @@
                             <?php else:?>
                 <p><strong>1.</strong> <?= $this->Html->link('Télécharge',array('controller' => 'users', 'action' => 'login')) ;?> et imprime le patron de l'avion en papier de ton école avec les instructions de pliage.</p>
                             <?php endif;?>
-                <p><strong>2.</strong> Grimpe en haut du plus grand monument de la ville.</p>
+                <p><strong>2.</strong> Grimpe en haut du plus grand monument de la ville ou prends la pose devant.</p>
                 <p><strong>3.</strong> Prends toi en photo et fais s'envoler l'avion !</p>
                 <!-- Button trigger modal -->
                 <div class="text-center" style="margin:10px 0">
