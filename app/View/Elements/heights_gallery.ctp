@@ -50,6 +50,6 @@
     </a>
     <?php endforeach; ?>
     <?php if(empty($photos)): ?>
-            <a>Aucune photo</a>
+        <p>Aucune photo</p>
     <?php endif; ?>
 </div>
