@@ -36,7 +36,7 @@
                 <div class="well">
                     <h2 id="rules">Les règles</h2>
                     <p>&middot; Les écoles sont les unes contre les autres.</p>
-                    <p>&middot; Le concours est du <strong>1er juin au 31 août</strong> 2014.</p>
+                    <p>&middot; Tu as du <strong>1er juin au 31 août</strong> 2014 pour faire gagner ton école.</p>
                     <p>&middot; Le score est calculé en fonction de la <strong>hauteur des monuments</strong> de chaque photo.</p>
                     <p>&middot; Il faut être <strong>à l’étranger</strong>.</p>
                     <p>&middot; Les montagnes et les statues, ça compte.</p>
