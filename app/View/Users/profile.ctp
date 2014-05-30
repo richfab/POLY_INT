@@ -37,7 +37,7 @@
         <h1>
 
             <?php if(isset($user['User']['avatar'])) {
-                    echo $this->Image->resize($user['User']['avatar'], 128,128);
+                    echo $this->Image->resize($user['User']['avatar'], 128,128,array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'",'id' => 'avatar_profile'));
                 } else {
                     echo $this->Html->image('avatar.png', array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'",'id' => 'avatar_profile'));
                 }?>
