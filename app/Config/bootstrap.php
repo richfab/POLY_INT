@@ -112,6 +112,8 @@ CakePlugin::load('Composer', array('bootstrap' => true));
 CakePlugin::load('BoostCake');
 //Plugin par grafikart d'upload d'image de media lié a un contenu.
 CakePlugin::load('Media');
+//Plugin par grafikart de redimensionnement d'image.
+CakePlugin::load('Image');
 
 // Définition de la locale pour toutes les fonctions php relatives à la de gestion du temps :
 setlocale(LC_TIME, 'fr_FR');

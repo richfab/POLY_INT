@@ -9,8 +9,13 @@
 		<div class="col-sm-8 blog-main">
 			<?php foreach ($posts as $post): ?>
 				<div class="blog-post">
-					<?= $this->Media->image($post['Post']['thumb'],500,200);?>
-					<?= $this->Html->image(isset($post['Post']['thumb']) ? $post['Post']['thumb'] : 'http://placehold.it/500x200'); ?>
+					<?php 
+						if(isset($post['Post']['thumb'])) {
+							echo $this->Image->resize($post['Post']['thumb'],500,200);
+						} else {
+							echo $this->Html->image('http://placehold.it/500x200');	
+						}
+					?>
 					<h2 class="blog-post-title"><?= $post['Post']['title']; ?></h2>
 					<p class="blog-post-meta"><?= $post['Post']['created']; ?>  by <a href="#">Mark</a></p>
 					<?= $post['Post']['body']; ?>
