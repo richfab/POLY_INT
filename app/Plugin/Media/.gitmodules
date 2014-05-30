@@ -1,0 +1,3 @@
+[submodule "Vendor/php-image-magician"]
+	path = Vendor/php-image-magician
+	url = https://github.com/Oberto/php-image-magician.git

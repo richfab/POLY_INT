@@ -1,0 +1,33 @@
+{
+  "name":"grafikart/cakephp-media",
+  "version": "1.0.0",
+  "description":"The main goal of this plugin is to give you the ability to create and associatie any kind of media with your content. This system use behaviour to associate medias with your content and a helper to manage the UI.",
+  "type":"cakephp-plugin",
+  "keywords":[
+    "cakephp",
+    "media",
+    "model",
+    "models",
+    "behaviour"
+  ],
+  "homepage":"http://grafikart.github.io/CakePHP-Media/",
+  "license":"MIT",
+  "authors":[
+    {
+      "name": "Jonathan Boyer",
+      "email": "contact@grafikart.fr",
+      "homepage": "http://jonathan-boyer.fr/",
+      "role": "Maintainer"
+    }
+  ],
+  "support":{
+    "source":"https://github.com/Grafikart/CakePHP-Media",
+    "issues":"https://github.com/Grafikart/CakePHP-Media/issues"
+  },
+  "require":{
+    "composer/installers":"*"
+  },
+  "extra": {
+    "installer-name": "Media"
+  }
+}

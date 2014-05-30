@@ -7,32 +7,17 @@
 	<div class="row">
 
 		<div class="col-sm-8 blog-main">
-			<?php foreach ($articles as $article): ?>
+			<?php foreach ($posts as $post): ?>
 				<div class="blog-post">
-					<h2 class="blog-post-title"><?= $article['Post']['title']; ?></h2>
-					<p class="blog-post-meta"><?= $article['Post']['created']; ?>  by <a href="#">Mark</a></p>
-					<?= $article['Post']['body']; ?>
+					<?= $this->Media->image($post['Post']['thumb'],500,200);?>
+					<?= $this->Html->image(isset($post['Post']['thumb']) ? $post['Post']['thumb'] : 'http://placehold.it/500x200'); ?>
+					<h2 class="blog-post-title"><?= $post['Post']['title']; ?></h2>
+					<p class="blog-post-meta"><?= $post['Post']['created']; ?>  by <a href="#">Mark</a></p>
+					<?= $post['Post']['body']; ?>
 				</div><!-- /.blog-post -->
 			<?php endforeach; ?>
 
 
-			<ul class="pager">
-				<li>
-
-<?php echo $this->Paginator->prev(
-  ' << ' . __('previous'),
-  array(),
-  null,
-  array('class' => 'prev disabled')
-);?>
-</li>
-				<li><?php echo $this->Paginator->next(
-  ' >> ' . __('next'),
-  array(),
-  null,
-  array('class' => 'next disabled')
-);?></li>
-			</ul>
 
 		</div><!-- /.blog-main -->
 
@@ -45,25 +30,6 @@
 				<h4>Archives</h4>
 				<ol class="list-unstyled">
 					<li><a href="#">January 2014</a></li>
-					<li><a href="#">December 2013</a></li>
-					<li><a href="#">November 2013</a></li>
-					<li><a href="#">October 2013</a></li>
-					<li><a href="#">September 2013</a></li>
-					<li><a href="#">August 2013</a></li>
-					<li><a href="#">July 2013</a></li>
-					<li><a href="#">June 2013</a></li>
-					<li><a href="#">May 2013</a></li>
-					<li><a href="#">April 2013</a></li>
-					<li><a href="#">March 2013</a></li>
-					<li><a href="#">February 2013</a></li>
-				</ol>
-			</div>
-			<div class="sidebar-module">
-				<h4>Elsewhere</h4>
-				<ol class="list-unstyled">
-					<li><a href="#">GitHub</a></li>
-					<li><a href="#">Twitter</a></li>
-					<li><a href="#">Facebook</a></li>
 				</ol>
 			</div>
 		</div><!-- /.blog-sidebar -->

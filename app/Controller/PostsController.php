@@ -6,13 +6,25 @@ App::uses('AppController', 'Controller');
  */
 class PostsController extends AppController {
 
-	public $paginate = array(
-            'limit' => 1,
-            'order' => array('created' => 'DESC')
-    );
+	public $actsAs = array('Containable');
+
 
 	public function index() {
-		$this->Paginator->settings = $this->paginate;
-		$this->set('articles', $this->Paginator->paginate());
+		$posts = $this->Post->find('all', array(
+			'fields' => array('Post.id', 'Post.title', 'Post.body','Post.created' ,'Thumb.file'),
+			'contain' => array('Thumb')
+			)
+		);
+		$this->set(compact('posts'));
 	}
+
+	public function view($id) {
+		$post = $this->Post->findById($id);
+		if(empty($post)) {
+			throw new NotFoundException();
+		}
+		$this->set(compact('post'));
+
+	}
+
 }

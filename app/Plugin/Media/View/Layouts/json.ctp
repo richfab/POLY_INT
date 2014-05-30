@@ -1,0 +1,1 @@
+<?php echo json_encode(array('content' => $content_for_layout)); ?>

@@ -64,6 +64,7 @@ class AppController extends Controller {
             'Html' => array('className' => 'BoostCake.BoostCakeHtml'),
             'Form' => array('className' => 'BoostCake.BoostCakeForm'),
             'Paginator' => array('className' => 'BoostCake.BoostCakePaginator'),
+            'Media.Media'
     );
 
     public function beforeFilter() {
@@ -97,5 +98,10 @@ class AppController extends Controller {
     public function beforeRender() {
         $this->set('refer',$this->referer);
     }
+
+    public function canUploadMedias($model, $id){
+        return true;
+    }
+
 
 }
