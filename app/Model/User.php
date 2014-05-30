@@ -4,6 +4,14 @@ App::uses('AuthComponent', 'Controller/Component');
 class User extends AppModel {
     
     public $displayField = 'email';
+
+    public $actsAs = array(
+        'Upload.Upload' => array(
+            'fields' => array(
+                'avatar' => 'img/avatars/:id1000/:id'
+            )
+        )
+    );
         
     public $belongsTo = array(
 		'School' => array(

@@ -2,7 +2,7 @@
 App::uses('AppController', 'Controller');
 
 class UsersController extends AppController {
-    
+    public $helpers = array('Image.Image');
     /* Set pagination options */
     public $paginate = array(
             'limit' => 20,

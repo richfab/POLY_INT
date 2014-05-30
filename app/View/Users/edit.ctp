@@ -10,11 +10,13 @@
                 'wrapInput' => 'col col-sm-6',
                 'class' => 'form-control'
         ),
-        'class' => 'well form-horizontal'
+        'class' => 'well form-horizontal',
+        'type' => 'file'
     ));
     echo $this->Form->input('firstname', array('placeholder' => 'Prénom','label' => 'Prénom *'));
     echo $this->Form->input('lastname', array('placeholder' => 'Nom','label' => 'Nom *'));
     echo $this->Form->input('School.id');
+    echo $this->Form->input('avatar_file', array('label' => 'Avatar', 'type' => 'file'));
     echo $this->Form->input('school_id', array('placeholder' => 'Polytech','label' => 'Polytech *'));
     echo $this->Form->input('Department.id');
     echo $this->Form->input('department_id', array('placeholder' => 'Spécialité','label' => 'Spécialité *'));

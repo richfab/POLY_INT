@@ -35,7 +35,12 @@
     </div>
     <div class="col col-sm-1">
         <h1>
-            <?= $this->Html->image('avatar.png', array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'",'id' => 'avatar_profile'));?>
+
+            <?php if(isset($user['User']['avatar'])) {
+                    echo $this->Image->resize($user['User']['avatar'], 128,128);
+                } else {
+                    echo $this->Html->image('avatar.png', array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'",'id' => 'avatar_profile'));
+                }?>
         </h1>
     </div>
 </div>
