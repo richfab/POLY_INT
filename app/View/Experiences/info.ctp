@@ -17,9 +17,11 @@
     //si c'est une modification d'expérience, on renseigne le lieu
     if(!empty($this->data)){
         $input_value = $this->data['City']['name'].', '.$countries[$this->data['City']['country_id']];
+        $country_id = $this->data['City']['country_id'];
     }
     else{
         $input_value = '';
+        $country_id = '';
     }?>
 <div id="ExperienceInputDiv">
         <?php echo $this->Form->input('input',array('label'=>'Ville *', 'value'=>$input_value, 'location-types'=>'(cities)','afterInput'=>'<span class="help-block">De préférence une grande ville pour une meilleure visibilité</span>'));?>
@@ -31,7 +33,7 @@
     echo $this->Form->input('City.name',array('label'=>'city_name','type'=>'hidden'));
     echo $this->Form->input('City.lat', array('label'=>'latitude','type'=>'hidden'));
     echo $this->Form->input('City.lon', array('label'=>'longitude','type'=>'hidden'));
-    echo $this->Form->input('City.Country.id', array('label'=>'id','type'=>'hidden'));
+    echo $this->Form->input('City.Country.id', array('label'=>'id','type'=>'hidden','value'=>$country_id));
     echo $this->Form->input('City.Country.name', array('label'=>'country_name','type'=>'hidden'));
     echo $this->Form->input('comment',array('label'=>'Avis','type'=>'textarea','placeholder'=>"Avis sur l'expérience"));
     echo $this->Form->input('Typenotification.id');
