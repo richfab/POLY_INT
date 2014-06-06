@@ -39,6 +39,7 @@
                     <p>&middot; Tu as du <strong>1er juin au 31 août</strong> 2014 pour faire gagner ton école.</p>
                     <p>&middot; Le score est calculé en fonction de la <strong>hauteur des monuments</strong> de chaque photo.</p>
                     <p>&middot; Il faut être <strong>à l’étranger</strong>.</p>
+                    <p>&middot; L'<strong>avion en papier</strong> doit être visible sur la photo.</p>
                     <p>&middot; Les montagnes et les statues, ça compte.</p>
                     <p>&middot; L’école gagnante sera élue <strong>l’école la plus internationale</strong> du réseau Polytech.</p>
                 </div>
