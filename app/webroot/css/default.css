@@ -276,23 +276,47 @@ h2 > span.wut {
     padding: 12px 10px;
 }
 
-#brand_logo.fly{
-    -webkit-animation:spin 2s ease infinite;
-    -moz-animation:spin 2s ease infinite;
-    animation:spin 2s ease infinite;
+@-webkit-keyframes blink {
+    0% {
+        opacity:1;
+    }
+    75% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
 }
-@-moz-keyframes spin { 100% { 
-                           transform-origin:left top;
-                           -moz-transform: rotate(-360deg); } }
-@-webkit-keyframes spin { 100% { 
-                              transform-origin:left top;
-                              -ms-transform-origin:left top; /* IE 9 */
-                              -webkit-transform-origin:left top; /* Opera, Chrome, and Safari */
-                              -webkit-transform: rotate(-360deg); } }
-@keyframes spin { 100% { 
-                      transform-origin:left top;
-                      -webkit-transform: rotate(-360deg); 
-                      transform:rotate(-360deg); } }
+@-moz-keyframes blink {
+    0% {
+        opacity:1;
+    }
+    75% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+#brand_logo.fly {
+-webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    
+    -webkit-animation-direction: normal;
+    -webkit-animation-duration: 1.5s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: blink;
+    -webkit-animation-timing-function: ease-in-out;
+    
+-moz-animation-direction: normal;
+    -moz-animation-duration: 1.5s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-name: blink;
+    -moz-animation-timing-function: ease-in-out;    
+}
 
 #profil {
     margin-top: 50px;
