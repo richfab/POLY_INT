@@ -107,7 +107,6 @@ class HeightsController extends AppController {
         
     public function get_heights_gallery(){
         
-    //TODO 
 //        $this->request->onlyAllow('ajax');
     
         $conditions = array();
@@ -122,12 +121,14 @@ class HeightsController extends AppController {
         $this->set('photos', $this->Height->find('all', array(
                     'conditions' => $conditions,
                     'order' => array('Height.created' => 'DESC'))));
+        $this->set('school_colors',$this->Height->User->School->find('list',array(
+                                                            'fields' => array('School.color'))));
                         
         $this->render('/Elements/heights_gallery');
     }
         
     public function get_heights(){
-        //TODO 
+        
 //        $this->request->onlyAllow('ajax');
     
         $this->set('heights', $this->Height->find('all', array(
