@@ -3,7 +3,7 @@ App::uses('AppController', 'Controller');
     
 class ExperiencesController extends AppController {
     
-    //pour l'extension json
+    //request handler for json
     public $components = array("RequestHandler");
         
     /* Set pagination options */
@@ -12,14 +12,25 @@ class ExperiencesController extends AppController {
             'order' => array('dateEnd' => 'DESC'),
             'conditions' => array('User.active'=>'1')
     );
-        
+    
+    /**
+    * This method is called before the controller action. It is useful to define which actions are allowed publicly.
+    *
+    * @return void
+    */
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(array('explore','get_map_init','get_map','get_experiences','search')); //ce que tout le monde a le droit de faire
+        $this->Auth->allow(array('explore','get_map_init','get_map','get_experiences','search')); //actions that anyone is allowed to call
     }
-        
+    
+    /**
+    * This method allows user to edit or add an experience
+    * 
+    * @param string $experience_id
+    * @throws NotFoundException 
+    * @return void
+    */
     public function info($experience_id = null){
-    	App::uses('AuthComponent', 'Controller/Component');
             
         if($experience_id != null){
             $this->Experience->id = $experience_id;
@@ -28,15 +39,15 @@ class ExperiencesController extends AppController {
             }
         }
             
-        //selectionne les motifs par ordre alphabetique
+        //sets motives by alphabetical order
         $this->set('motives', $this->Experience->Motive->find('list', array(
                         'order' => array('Motive.name' => 'ASC'))));
                             
-        //selectionne les motifs par ordre alphabetique
+        //set notification types by alphabetical order
         $this->set('typenotifications', $this->Experience->Typenotification->find('list', array(
                         'order' => array('Typenotification.id' => 'DESC'))));
                             
-        //on inclut le script google maps pour l'autocomplete des lieux
+        //includes google maps script for place autocomplete
     	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete'));
             
         $user_id = $this->Auth->user('id');
@@ -44,32 +55,24 @@ class ExperiencesController extends AppController {
             
         if ($this->request->is('post') || $this->request->is('put')) {
             
-            //si c'est une modification d'experience, on decremente l'ancienne ville
+            //decrements experience number for this place if user is editing experience
             if($experience_id != null){
                 $experience = $this->Experience->findById($experience_id);
                 $this->_upload_experienceNumber($experience['Experience']['city_id'],-1);
             }
                 
-            //on renseigne l'id de la ville de l'experience
+            //sets experience city id
             $city_id = $this->_createCityAndCountryIfNeeded($this->request->data, $this->request->data['City']);
             $this->request->data['Experience']['city_id'] = $city_id;
                 
-            //si c'est une modification d'experience on renseigne l'id
+            //sets experience id if user is editing experience
             if($experience_id != null){
                 $this->request->data['Experience']['id'] = $experience_id;
             }
-            
-            //l'utilisateur essaie d'ajouter une expérience en France
-            if($this->request->data['City']['Country']['id'] === 'FR'){
-                $this->Session->setFlash(__("Désolé, les expériences en France ne sont pas affichées sur Polytech Abroad"), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-danger'
-                ));
-                return $this->redirect($this->referer());
-            }
         	
             $this->Experience->create();
-                
+            
+            //saves experience and increments experience number for this place
             if ($this->Experience->save($this->request->data) && $this->_upload_experienceNumber($city_id,1)) {
                 
                 $experience_id = $this->Experience->id;
@@ -88,74 +91,112 @@ class ExperiencesController extends AppController {
         }
         else{
             $this->request->data = $this->Experience->find('first', array('conditions' => array('Experience.id' => $experience_id), 'recursive' => 1));
-            //recupere les pays
+            //sets countries
             $this->set('countries',$this->Experience->City->Country->find('list'));
         }
     }
-        
+    
+    /**
+    * This method allows user to explore experience map
+    * 
+    * @return void
+    */
     public function explore(){
-        //on inclut les scripts pour la recuperation des experiences
+        //includes scripts to get experiences
     	$this->set('jsIncludes',array('get_experiences','logo_fly','jvector','jquery-jvectormap.min','jquery-jvectormap-world-mill-en','jquery.dropdown'));
-        //on inclut les style pour la carte
+        //includes styles for map and filters
         $this->set('cssIncludes',array('jvectormap','map','filter'));
             
-        //selectionne les motifs par ordre alphabetique
+        //sets motives, schools and departments by alphbetical order
+        $this->__set_motives_schools_and_departments();
+    }
+    
+    /**
+    * This method allows user to search experiences
+    * 
+    * @return void
+    */
+    public function search(){
+        //includes google maps script for place autocomplete and to get experiences
+    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','get_experiences','logo_fly','jquery.dropdown'));
+        //includes styles for filters
+        $this->set('cssIncludes',array('filter'));
+            
+        //sets motives, schools and departments by alphbetical order
+        $this->__set_motives_schools_and_departments();
+    }
+    
+    /**
+    * This private method sets motives, schools and departments by alphbetical order to populate select inputs
+    * 
+    * @return void
+    */
+    private function __set_motives_schools_and_departments() {
+        //sets motives, schools and departments by alphabetical order
         $this->set('motives', $this->Experience->Motive->find('list', array(
                         'order' => array('Motive.name' => 'ASC'))));
-        //selectionne les ecoles par ordre alphabetique
+        //sets schools by alphabetical order
         $this->set('schools', $this->Experience->User->School->find('list', array(
                         'order' => array('School.name' => 'ASC'))));
-        //selectionne les departements par ordre alphabetique
+        //sets departements by alphabetical order
         $this->set('departments', $this->Experience->User->Department->find('list', array(
                         'order' => array('Department.name' => 'ASC'))));
     }
-        
-    //cette fonction retourne l'id de la ville, qu'elle ait été créée ou non
+    
+    /**
+    * This protected method returns city id after creating city and/or country if necessary
+    * 
+    * @param string $city_input,$country_input
+    * @return string city id
+    */
     protected function _createCityAndCountryIfNeeded($city_input = null, $country_input = null){
         
-        //etape 1 : on teste si la ville de ce pays existe deja dans la base
+        //step 1 : test whether the city already exists for this country
         $city = $this->Experience->City->find('first', array(
             'conditions' => array('City.name' => $city_input['City']['name'], 'City.country_id' => $country_input['Country']['id']),
             'recursive' => 0
         ));
-        //si on a trouvé une ville de ce nom
+        //if a city was found, set the country
         if(!empty($city)){
             $country = $this->Experience->City->Country->findById($city['City']['country_id']);
         }
             
-        //si la ville de ce pays n'existe pas dans la bdd
+        //if the city does not exist
         if(empty($country)){
             
-            //etape 2 : on teste si le pays entré existe deja dans la bdd
+            //step 2 : test whether the country already exists
             $country = $this->Experience->City->Country->findById($country_input['Country']['id']);
                 
-            //si le pays n'existe pas dans la bdd, on le creer
+            //if country does not exist, it is created
             if(empty($country)){
                 $this->request->data['Country'] = $country_input['Country'];
                 $this->Experience->City->Country->create();
                 $country = $this->Experience->City->Country->save($this->request->data);
             }
                 
-            //puis on creer la ville
+            //finally, create the city
             $this->request->data['City'] = $city_input['City'];
             $this->request->data['City']['country_id'] = $country['Country']['id'];
             $this->Experience->City->create();
             $city = $this->Experience->City->save($this->request->data);
         }
-            
         return $city['City']['id'];
     }
         
+    /**
+    * This method allows user to delete an experience
+    * 
+    * @param string $experience_id
+    * @throws NotFoundException
+    */
     public function delete($experience_id = null) {
         $this->request->onlyAllow('post');
             
         $experience = $this->Experience->findById($experience_id);
             
-        //on verifie que l'experience est bien celle de l'utilisateur connecté
-        App::uses('AuthComponent', 'Controller/Component');
+        //checks that experience belongs to current user
         $user_id = $this->Auth->user('id');
         if($experience['Experience']['user_id'] != $user_id){
-            //l'utilisateur essaie de modifier une experience qui n'est pas la sienne
             return $this->redirect(array('controller'=>'users', 'action' => 'login'));
         }
             
@@ -177,8 +218,14 @@ class ExperiencesController extends AppController {
         ));
         return $this->redirect($this->referer());
     }
-        
-    public function delete_experience($experience_id = null) {
+    
+    /**
+    * This method deletes an experience and decrements number of experiences in this place
+    * 
+    * @param string $experience_id
+    * @return boolean
+    */
+    public function delete_experience($experience_id) {
         
         $experience = $this->Experience->findById($experience_id);
             
@@ -192,62 +239,60 @@ class ExperiencesController extends AppController {
         }
         return false;
     }
-        
+    
+    /**
+    * This method gets experiences to color the map for map initialization
+    * 
+    * @return void
+    */
     public function get_map_init(){
-//        $this->request->onlyAllow('ajax');
+        $this->request->onlyAllow('ajax');
         $this->set('countries', $this->Experience->City->Country->find('all',array(
             'conditions' => array('Country.experienceNumber >' => 0)
         )));
     }
-        
+    
+    /**
+    * This method gets experiences to color the map
+    * 
+    * @return void
+    */
     public function get_map(){
         
         $this->request->onlyAllow('ajax');
             
-        //on transforme l'objet de parametres en conditions
+        //converts filter parameters into conditions
         $conditions = $this->_filters_to_conditions($this->request->data);
             
-         //on recupere le nombre d'experiences par ville
+        //sets number of experience per city
         $this->set('cities', $this->Experience->find('all', array(
                     'conditions' => $conditions,
                     'fields' => array('City.id','City.name','City.lat','City.lon','(COUNT(*)) as experienceNumber'),
                     'group' => 'Experience.city_id')));
                         
-        //on recupere le nombre d'experiences par pays
+        //sets number of experience per country
         $this->set('countries', $this->Experience->find('all', array(
                     'conditions' => $conditions,
                     'fields' => array('City.country_id','(COUNT(*)) as experienceNumber'),
                     'group' => 'City.country_id')));
     }
-        
-    public function search(){
-        //on inclut les scripts pour la recuperation des experiences et google maps pour l'autocomplete des lieux
-    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','get_experiences','logo_fly','jquery.dropdown'));
-        //on inclut les style pour les filtres
-        $this->set('cssIncludes',array('filter'));
-            
-        //selectionne les motifs par ordre alphabetique
-        $this->set('motives', $this->Experience->Motive->find('list', array(
-                        'order' => array('Motive.name' => 'ASC'))));
-        //selectionne les ecoles par ordre alphabetique
-        $this->set('schools', $this->Experience->User->School->find('list', array(
-                        'order' => array('School.name' => 'ASC'))));
-        //selectionne les departements par ordre alphabetique
-        $this->set('departments', $this->Experience->User->Department->find('list', array(
-                        'order' => array('Department.name' => 'ASC'))));
-    }
-        
+    
+    /**
+    * This method gets experiences
+    * 
+    * @return void
+    */
     public function get_experiences(){
         
         $this->request->onlyAllow('ajax');
         App::uses('AuthComponent', 'Controller/Component');
-            
-         //on recupere les experiences si l'utilisateur est connecté
+        
+        //gets experiences only of user is logged in
         if($this->Auth->user('id')){
-            //on transforme l'objet de parametres en conditions
+            //converts filter parameters into conditions
             $conditions = $this->_filters_to_conditions($this->request->data);
             
-            //on definit la limite du nombre de resultats
+            //defines number of results and offset
             $offset = $this->request->data['offset'];
             $result_limit = 20;
             
@@ -257,7 +302,7 @@ class ExperiencesController extends AppController {
             $this->set('experiences', $this->Experience->find('all', array(
                         'conditions' => $conditions,
                         'recursive' => 1,
-                        //on ordonne par rapport a la date dateSort calculée par "fields"
+                        //order is given by dateSort (calculated in "fields")
                         'order' => 'dateSort ASC',
                         'limit' => $result_limit,
                         'offset' => $offset,
@@ -266,25 +311,34 @@ class ExperiencesController extends AppController {
                             'IF(DATEDIFF(Experience.dateEnd, NOW()) < 0,DATE_ADD("2200-01-01",INTERVAL ABS(DATEDIFF(Experience.dateEnd,NOW())) DAY),Experience.dateStart) AS dateSort',
                             'DATEDIFF(Experience.dateEnd, Experience.dateStart)/30 monthDiff'))));
             
-            //recupere les pays
+            //sets countries
             $this->set('countries',$this->Experience->City->Country->find('list'));
-            //recupere les departements
+            //sets departments
             $this->set('departments',$this->Experience->User->Department->find('list'));
-            //recupere les ecoles
+            //sets schools
             $this->set('school_names',$this->Experience->User->School->find('list'));
             $this->set('school_colors',$this->Experience->User->School->find('list',array(
                                                                 'fields' => array('School.color'))));
         }
+        //renders the view requested in view_to_render parameter
         $this->render('/Experiences/'.$this->request->data['view_to_render']);
     }
     
-    //fonction utile a l'ajout d'experience a partir d'une base de donnees comme celle de echarlemagne par exemple
+    /**
+    * Fonction utile a l'ajout d'experiences a partir d'une base de donnees comme celle de echarlemagne par exemple
+    * 
+    * @return void
+    */
     public function echarlemagne(){
         //on inclut les scripts pour la recuperation des experiences et google maps pour l'autocomplete des lieux
     	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','add_experiences'));
     }
     
-    //fonction utile a l'ajout d'experience a partir d'une base de donnees comme celle de echarlemagne par exemple
+    /**
+    * Fonction utile a l'ajout d'experiences a partir d'une base de donnees comme celle de echarlemagne par exemple
+    * 
+    * @return void
+    */
     public function add_experience_ajax(){
         
         $this->request->onlyAllow('ajax');
@@ -339,11 +393,16 @@ class ExperiencesController extends AppController {
         return new CakeResponse(array('body'=> json_encode(array('errorMessage'=>"Vous n'êtes pas admin")),'status'=>500));
     }
         
-    //fonction qui transforme l'objet de parametres en conditions pour le find
+    /**
+    * This protected method converts filter parameters into conditions
+    * 
+    * @param string $request_data
+    * @return array
+    */
     protected function _filters_to_conditions($request_data = null){
         
         $conditions = array();
-        //on ne recupere que les experiences dont l'etudiant a été validé
+        //user has to have an active account
         $conditions['User.active'] = 1;
             
         if(empty($request_data)){
@@ -362,15 +421,17 @@ class ExperiencesController extends AppController {
         if(!empty($request_data['key_word'])){
             $conditions['Experience.description LIKE'] = '%'.$request_data['key_word'].'%';
         }
-        //maintenant
+        //now
         if(!empty($request_data['date_min']) && !empty($request_data['date_max']) && ($request_data['date_min'] === $request_data['date_max'])){
             $conditions['AND'] = array('Experience.dateEnd >=' => $request_data['date_min'],
                 'Experience.dateStart <=' => $request_data['date_max']);
         }
         else{
+            //futur
             if(!empty($request_data['date_min'])){
                 $conditions['Experience.dateStart >='] = $request_data['date_min'];
             }
+            //past
             if(!empty($request_data['date_max'])){
                 $conditions['Experience.dateStart <='] = $request_data['date_max'];
             }
@@ -385,13 +446,13 @@ class ExperiencesController extends AppController {
             $conditions['City.country_id'] = $request_data['country_id'];
         }
         if(!empty($request_data['user_name'])){
-            //on separe le nom du prenom
+            //extracts first and last names
             $names = explode(' ',$request_data['user_name']);
             if(count($names) > 1){
                 $conditions['AND']['User.firstname LIKE'] = '%'.$names[0].'%';
                 $conditions['AND']['User.lastname LIKE'] = '%'.$names[1].'%';
             }
-            //si un seul mot a été entré (nom ou prenom)
+            //if only last or first name was entered
             else{
                 $conditions['OR'] = array('User.firstname LIKE' => '%'.$request_data['user_name'].'%',
                     'User.lastname LIKE' => '%'.$request_data['user_name'].'%');
@@ -399,7 +460,13 @@ class ExperiencesController extends AppController {
         }
         return $conditions;
     }
-        
+    
+    /**
+    * This protected method uploads the number of experiences for a given city
+    * 
+    * @param string $city_id,$increment_by
+    * @return boolean
+    */
     protected function _upload_experienceNumber($city_id = null, $increment_by = null){
         
         if($city_id != null && $increment_by != null){
@@ -408,12 +475,12 @@ class ExperiencesController extends AppController {
                 'recursive' => 0
             ));
                 
-            //upload du nombre d'experience de la ville
+            //uploads experience number of the city
             $count = $city['City']['experienceNumber'];
             $this->Experience->City->id = $city_id;
                 
             if($this->Experience->City->saveField('experienceNumber',$count+$increment_by)){
-                //upload du nombre d'experiences du pays de la ville
+                //uploads experience number of the country in which the city is located
                 $count = $city['Country']['experienceNumber'];
                 $this->Experience->City->Country->id = $city['Country']['id'];
                 return $this->Experience->City->Country->saveField('experienceNumber',$count+$increment_by);

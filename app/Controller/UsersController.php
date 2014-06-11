@@ -1,6 +1,6 @@
 <?php
 App::uses('AppController', 'Controller');
-
+    
 class UsersController extends AppController {
     
     /* Set pagination options */
@@ -10,21 +10,32 @@ class UsersController extends AppController {
             'conditions' => array('User.role' => 'user','User.active' => '1')
     );
         
+    /**
+    * This method is called before the controller action. It is useful to define which actions are allowed publicly.
+    *
+    * @return void
+    */
     public function beforeFilter() {
         parent::beforeFilter();
         $this->Auth->allow('signup','signup_request','activate','forgotten_password'); // Letting users signup themselves and retrieve password
     }
-	
+        
+    /**
+    * This method allows anyone to login
+    *
+    * @return void
+    */
     public function login() {
         if ($this->request->is('post')) {
             if ($this->Auth->login()) {
                 if($this->Auth->user('role')==='admin'){
                     return $this->redirect(array('controller' => 'dashboards', 'action' => 'index','admin'=>true));
                 }
-                //si le user a activé son compte
+                //if user has activated his account then redirect to requested URL
                 if($this->Auth->user('active')){
                     return $this->redirect($this->Auth->redirectUrl());
                 }
+                //else log user out
                 else{
                     $this->Session->setFlash(__("Tu dois d'abord activer ton compte à l'aide du lien d'activation qui t'a été envoyé par email (cela peut prendre un peu de temps)"), 'alert', array(
                         'plugin' => 'BoostCake',
@@ -40,27 +51,38 @@ class UsersController extends AppController {
             ));
         }
     }
-    
+        
+    /**
+    * This method allows users to logout
+    *
+    * @return void
+    */
     public function logout() {
         return $this->redirect($this->Auth->logout());
     }
-    
-    //cette fonction permet a un administrateur d'accepter une demande d'inscription faite avec un email non étudiant
-    public function admin_accept_request($id = null) {
+        
+    /**
+    * This admin method allows administrator to accept a signup request done with a non verified email
+    * 
+    * @throws NotFoundException
+    * @param string $id
+    * @return void
+    */
+    public function admin_accept_request($id) {
         
         $this->User->create();
         $this->User->id = $id;
-
+            
         $user = $this->User->findById($id);
         $user['User']['email'] = $user['User']['email_at_signup'];
-
+            
         if (!$this->User->exists()) {
                 throw new NotFoundException(__('Invalid user'));
         }
         $this->request->onlyAllow('post', 'accept_request');
-        
+            
         if($this->User->saveField('email',$user['User']['email'])){
-                //on envoie l'email d'activation
+                //sends activation email to user
                 $this->__send_activation_email($user);
                 $this->Session->setFlash(__('The user has been accepted. An activation email has been sent to the user.'));
         } else {
@@ -68,17 +90,20 @@ class UsersController extends AppController {
         }
         return $this->redirect(array('action' => 'index'));
     }
-	
+        
+    /**
+    * This method allows anyone to signup with a verified email
+    * 
+    * @return void
+    */
     public function signup() {
-        //selectionne les ecoles par ordre alphabetique
-        $this->set('schools', $this->User->School->find('list', array(
-                        'order' => array('School.name' => 'ASC'))));
-        //selectionne les departements par ordre alphabetique
-        $this->set('departments', $this->User->Department->find('list', array(
-                        'order' => array('Department.name' => 'ASC'))));
-                            
+        
+        //sets schools and departments by alphbetical order to populate select inputs
+        $this->__set_schools_and_departments();
+            
         if ($this->request->is('post')) {
             
+            //checks that password and confirmation password are identical
             if (!($this->data['User']['password'] === $this->data['User']['password_confirm'])) {
                 $this->Session->setFlash(__("Les mots de passe ne correspondent pas"), 'alert', array(
                     'plugin' => 'BoostCake',
@@ -86,10 +111,12 @@ class UsersController extends AppController {
                 ));              
                 return;
             }
-            
-            //TODO générer a partir de la BDD
+                
+            //TODO generate from database
+            //list of verified emails
             $regexp_emails = "/@(etu.univ-nantes.fr|univ-nantes.fr|polytech-lille.net|etud.univ-montp2.fr|etu.univ-tours.fr|etu.univ-orleans.fr|polytech.upmc.fr|u-psud.fr|etudiant.univ-bpclermont.fr|etu.univ-lyon1.fr|etu.univ-savoie.fr|polytech.unice.fr|etu.univ-amu.fr|e.ujf-grenoble.fr)/";
-            
+                
+            //checks that email belongs to list of verified emails
             if (!preg_match($regexp_emails,$this->data['User']['email'])){
                 $this->Session->setFlash(__("Ton adresse étudiante est nécessaire pour l'inscription. Tu pourras la changer dans ton profil une fois inscrit."), 'alert', array(
                     'plugin' => 'BoostCake',
@@ -99,19 +126,17 @@ class UsersController extends AppController {
             }
                 
             $this->User->create();
-            //on force le role a être user
+            //user role is 'user'
             $this->request->data['User']['role'] = 'user';
-            //on sauvegarde l'email utilisé a l'inscription
+            //stores email at signup to keep track of student email
             $this->request->data['User']['email_at_signup'] = $this->request->data['User']['email'];
                 
             if ($this->User->save($this->request->data)) {
                 
-                //TODO a factoriser pour la methode d'acceptation d'une demande d'inscription
+                //sends activation email
                 $user = $this->User->findByEmail($this->request->data['User']['email']);
-                
-                //on envoie l'email d'activation
                 $this->__send_activation_email($user);
-                                
+                    
                 $this->Session->setFlash(__("Ton inscription a bien été prise en compte. Un email d'activation sera bientôt envoyé à ".$user['User']['email']), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
@@ -124,30 +149,17 @@ class UsersController extends AppController {
              ));
         }
     }
-    
-    //envoie un email d'activation a l'utilisateur passé en paramêtre
-    private function __send_activation_email($user) {
         
-        $activation_link = array('controller'=>'users', 'action' => 'activate','admin'=>false, $this->User->id.'-'.md5($user['User']['password']));
-                
-        App::uses('CakeEmail','Network/Email');
-        $email = new CakeEmail('default');
-        $email->to($user['User']['email'])
-                ->subject('Bienvenue sur Polytech Abroad !')
-                ->emailFormat('html')
-                ->template('signup')
-                ->viewVars(array('firstname' => $user['User']['firstname'],'activation_link' => $activation_link))
-                ->send();
-    }
-    
+    /**
+    * This method allows anyone to send a signup request with a non verified email
+    * 
+    * @return void
+    */
     public function signup_request() {
-        //selectionne les ecoles par ordre alphabetique
-        $this->set('schools', $this->User->School->find('list', array(
-                        'order' => array('School.name' => 'ASC'))));
-        //selectionne les departements par ordre alphabetique
-        $this->set('departments', $this->User->Department->find('list', array(
-                        'order' => array('Department.name' => 'ASC'))));
-                            
+        
+        //sets schools and departments by alphbetical order to populate select inputs
+        $this->__set_schools_and_departments();
+            
         if ($this->request->is('post')) {
             
             if (!($this->data['User']['password'] === $this->data['User']['password_confirm'])) {
@@ -173,7 +185,7 @@ class UsersController extends AppController {
                         ->template('signup_request')
                         ->viewVars(array('firstname' => $user['User']['firstname']))
                         ->send();
-                                
+                            
                 $this->Session->setFlash(__("Ta demande d'inscription a bien été prise en compte. Un email de confirmation sera bientôt envoyé à ".$user['User']['email_at_signup']), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
@@ -186,9 +198,34 @@ class UsersController extends AppController {
              ));
         }
     }
-    
-    //fonction qui permet a partir d'un lien, d'activer son compte
-    public function activate($token = null){
+        
+    /**
+    * This private method sends an activation email to a user
+    *
+    * @param string $user
+    * @return void
+    */
+    private function __send_activation_email($user) {
+        
+        $activation_link = array('controller'=>'users', 'action' => 'activate','admin'=>false, $this->User->id.'-'.md5($user['User']['password']));
+            
+        App::uses('CakeEmail','Network/Email');
+        $email = new CakeEmail('default');
+        $email->to($user['User']['email'])
+                ->subject('Bienvenue sur Polytech Abroad !')
+                ->emailFormat('html')
+                ->template('signup')
+                ->viewVars(array('firstname' => $user['User']['firstname'],'activation_link' => $activation_link))
+                ->send();
+    }
+        
+    /**
+    * This method allows user to activate his account with a token sent in activation email
+    *
+    * @param string $token
+    * @return void
+    */
+    public function activate($token){
         $token = explode('-', $token);
         $user = $this->User->find('first', array(
             'conditions' => array('User.id' => $token[0], 'MD5(User.password)' => $token[1], 'active' => 0)
@@ -210,27 +247,31 @@ class UsersController extends AppController {
              ));
             return $this->redirect(array('controller'=>'users','action' => 'login'));
         }
-        
+            
     }
-    
-    //fonction qui permet de recuperer son nouveau mot de passe a partir du lien recu par email ou qui permet de saisir son email en cas de mot de passe oublié
+        
+    /**
+    * This method allows user to reinitialize his password from the link sent by email or to request reinitialization link
+    *
+    * @return void
+    */
     public function forgotten_password(){
         
+        //user cliked reinitialization link in email
         if(!empty($this->request->params['named']['token'])){
             
             $token = $this->request->params['named']['token'];
             $token = explode('-',$token);
-            
-            $user = $this->User->find('first',array('conditions'=> array('User.id'=>$token[0],'MD5(User.password)'=>$token[1])));
-            
-            if($user){
-                App::uses('AuthComponent', 'Controller/Component');
-
-                $this->User->id = $user['User']['id'];
                 
+            $user = $this->User->find('first',array('conditions'=> array('User.id'=>$token[0],'MD5(User.password)'=>$token[1])));
+                
+            if($user){
+                
+                $this->User->id = $user['User']['id'];
+                    
                 $password = substr(md5(uniqid(rand(),true)),0,8);
                 $this->User->saveField('password',$password);
-                
+                    
                 $this->Session->setFlash(__("Voici ton nouveau mot de passe : $password. Il est conseillé de le changer dans les paramêtres de ton profil"), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
@@ -243,7 +284,8 @@ class UsersController extends AppController {
                 ));
             }
         }
-
+            
+        //user requests reinitialization link
         if($this->request->is('post')) {
             $user = $this->User->findByEmail($this->request->data['User']['email']);
             if(!$user){
@@ -254,9 +296,9 @@ class UsersController extends AppController {
             }
             else{
                 App::uses('CakeEmail','Network/Email');
-                
+                    
                 $link = array('controller'=>'users','action'=>'forgotten_password','token'=>$user['User']['id'].'-'.md5($user['User']['password']));
-                
+                    
                 $email = new CakeEmail('default');
                 $email->to($user['User']['email'])
                         ->subject('Réinitialisation mot de passe')
@@ -264,7 +306,7 @@ class UsersController extends AppController {
                         ->template('forgotten_password')
                         ->viewVars(array('firstname'=>$user['User']['firstname'],'link'=>$link))
                         ->send();
-                
+                            
                 $this->Session->setFlash(__("Un email avec un lien pour réinitialiser le mot de passe vient d'être envoyé à ".$user['User']['email']), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
@@ -272,21 +314,22 @@ class UsersController extends AppController {
             }
         }
     }
-    
-    //page qui peut etre appelée a partir de la page profil et qui permet de changer son mot de passe
+        
+    /**
+    * This method allows user to change his password
+    *
+    * @throws NotFoundException
+    * @return void
+    */
     public function change_password() {
-    	App::uses('AuthComponent', 'Controller/Component');
-		
-        if($this->Auth->loggedIn()){
-            $id = $this->Auth->user('id');
-            $this->User->id = $id;
-        }
-        else{
-            return $this->redirect(array('action' => 'login'));
-        }
+        
+        $id = $this->Auth->user('id');
+        $this->User->id = $id;
+            
         if (!$this->User->exists()) {
             throw new NotFoundException(__("Cet utilisateur n'existe pas"));
         }
+            
         if ($this->request->is('post') || $this->request->is('put')) {
             if (!($this->data['User']['password'] === $this->data['User']['password_confirm'])) {
                 $this->Session->setFlash(__("Les mots de passe ne correspondent pas"), 'alert', array(
@@ -295,10 +338,10 @@ class UsersController extends AppController {
                 ));
                 return;
             }
-            //on verifie que l'ancien mot de passe correspond
+            //checks that old password is correct
             $user = $this->User->findById($id);
             if(AuthComponent::password($this->request->data['User']['old_password']) === $user['User']['password']){
-            
+                
                 if ($this->User->save($this->request->data)) {
                     $this->Session->setFlash(__("Les modifications ont bien été enregistrées"), 'alert', array(
                         'plugin' => 'BoostCake',
@@ -323,61 +366,25 @@ class UsersController extends AppController {
             unset($this->request->data['User']['password']);
         }
     }
-    
-    //inscription par linkedin
-    public function in_signup() {
-        //selectionne les ecoles par ordre alphabetique
-        $this->set('schools', $this->User->School->find('list', array(
-                        'order' => array('School.name' => 'ASC'))));
-        //selectionne les departements par ordre alphabetique
-        $this->set('departments', $this->User->Department->find('list', array(
-                        'order' => array('Department.name' => 'ASC'))));
-                            
-        if ($this->request->is('post')) {
-            
-            if (!($this->data['User']['password'] === $this->data['User']['password_confirm'])) {
-                $this->Session->setFlash(__("Les mots de passe ne correspondent pas"), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-danger'
-                ));              
-                return;
-            }
-                
-            $this->User->create();
-                
-            if ($this->User->save($this->request->data)) {
-                $this->Session->setFlash(__("Ton inscription a bien été prise en compte"), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-success'
-                ));
-                return $this->redirect(array('controller'=>'users','action' => 'login'));
-            }
-            $this->Session->setFlash(__("Erreur lors de l'inscription"), 'alert', array(
-                 'plugin' => 'BoostCake',
-                 'class' => 'alert-danger'
-             ));
-        }
-    }
         
+    /**
+    * This method displays user profile (current user if user_id is null)
+    *
+    * @throws NotFoundException 
+    * @param string $user_id
+    * @return void
+    */
     public function profile($user_id = null) {
-    	App::uses('AuthComponent', 'Controller/Component');
         
-        //on inclut les scripts pour l'envoi des recommandations en ajax
+        //includes scripts to send ajax recommendations and to display "read more" button on long posts
     	$this->set('jsIncludes',array('recommendations','readmore'));
             
-        if($this->Auth->loggedIn()){
-            
-            //si l'utilisateur veut voir son propre profile
-            if($user_id==null){
-                $user_id = $this->Auth->user('id');
-            }
-           //si l'utilisateur cherche a voir le profile de quelqu'un d'autre
-            $this->User->id = $user_id;
-                
+        //user wants to see his own profile
+        if($user_id==null){
+            $user_id = $this->Auth->user('id');
         }
-        else{
-            return $this->redirect(array('controller'=>'users', 'action' => 'login'));
-        }
+        //user wants to see someone else profile
+        $this->User->id = $user_id;
             
         if (!$this->User->exists()) {
             throw new NotFoundException(__("Cet utilisateur n'existe pas"));
@@ -389,32 +396,28 @@ class UsersController extends AppController {
             'order' => array('dateEnd' => 'DESC'),
             'recursive' => 1
         )));
-        //recupere les recommendationtypes
+        //gets recommendationtypes
         $this->set('recommendationtypes',$this->User->Experience->Recommendation->Recommendationtype->find('all'));
-        //recupere les recommendationtypes par liste
+        //gets recommendationtypes by list
         $this->set('recommendationtypes_list',$this->User->Experience->Recommendation->Recommendationtype->find('list',array(
             'fields' => array('Recommendationtype.icon')
         )));
     }
         
+    /**
+    * This method allows user to edit his own information
+    *
+    * @throws NotFoundException 
+    * @return void
+    */
     public function edit() {
-    	App::uses('AuthComponent', 'Controller/Component');
+        
+        $user_id = $this->Auth->user('id');
+        $this->User->id = $user_id;
             
-        if($this->Auth->loggedIn()){
-            $user_id = $this->Auth->user('id');
-            $this->User->id = $user_id;
-        }
-        else{
-            return $this->redirect(array('action' => 'login'));
-        }
+        //sets schools and departments by alphbetical order to populate select inputs
+        $this->__set_schools_and_departments();
             
-        //selectionne les ecoles par ordre alphabetique
-        $this->set('schools', $this->User->School->find('list', array(
-                        'order' => array('School.name' => 'ASC'))));
-        //selectionne les departements par ordre alphabetique
-        $this->set('departments', $this->User->Department->find('list', array(
-                        'order' => array('Department.name' => 'ASC'))));
-                            
         if (!$this->User->exists()) {
             throw new NotFoundException(__("Cet utilisateur n'existe pas"));
         }
@@ -436,10 +439,29 @@ class UsersController extends AppController {
         }
     }
         
+    /**
+    * This private method sets schools and departments by alphbetical order to populate select inputs
+    * 
+    * @return void
+    */
+    private function __set_schools_and_departments() {
+        //selects schools by alphabetical order
+        $this->set('schools', $this->User->School->find('list', array(
+                        'order' => array('School.name' => 'ASC'))));
+        //selects departments by alphabetical order
+        $this->set('departments', $this->User->Department->find('list', array(
+                        'order' => array('Department.name' => 'ASC'))));
+    }
+        
+    /**
+    * This method allows user to delete his account
+    *
+    * @throws NotFoundException 
+    * @return void
+    */
     public function delete(){
         $this->request->onlyAllow('post');
             
-        App::uses('AuthComponent', 'Controller/Component');
         $user_id = $this->Auth->user('id');
             
         $user = $this->User->findById($user_id);
@@ -469,116 +491,115 @@ class UsersController extends AppController {
         ));
         return $this->redirect($this->referer());
     }
-    
-    
+        
+        
     //admin methods//
+    
     /**
- 
- * admin_index method
- *
- * @return void
- */
-	public function admin_index() {
-                $this->Paginator->settings = $this->paginate;
-		$this->User->recursive = 0;
-                $this->set('user_requests', $this->User->find('all',array(
-                    'conditions' => array('email' => NULL)
-                )));
-		$this->set('users', $this->Paginator->paginate());
-	}
+    * This admin method displays all active users present in the database
+    *
+    * @return void
+    */
+    public function admin_index() {
+        $this->Paginator->settings = $this->paginate;
+        $this->User->recursive = 0;
+        $this->set('user_requests', $this->User->find('all',array(
+            'conditions' => array('email' => NULL)
+        )));
+        $this->set('users', $this->Paginator->paginate());
+    }
 
-/**
- * admin_view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function admin_view($id = null) {
-		if (!$this->User->exists($id)) {
-			throw new NotFoundException(__('Invalid user'));
-		}
-		$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
-		$this->set('user', $this->User->find('first', $options));
-	}
+    /**
+     * This admin method displays the information of a user
+     *
+     * @throws NotFoundException
+     * @param string $id
+     * @return void
+     */
+    public function admin_view($id = null) {
+        if (!$this->User->exists($id)) {
+            throw new NotFoundException(__('Invalid user'));
+        }
+        $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
+        $this->set('user', $this->User->find('first', $options));
+    }
 
-/**
- * admin_add method
- *
- * @return void
- */
-	public function admin_add() {
-		if ($this->request->is('post')) {
-			$this->User->create();
-			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
-			}
-		}
-		$schools = $this->User->School->find('list');
-		$departments = $this->User->Department->find('list');
-		$this->set(compact('schools', 'departments'));
-	}
+    /**
+     * This admin method loads the form view and adds a user to the database upon submit
+     *
+     * @return void
+     */
+    public function admin_add() {
+        if ($this->request->is('post')) {
+            $this->User->create();
+            if ($this->User->save($this->request->data)) {
+                $this->Session->setFlash(__('The user has been saved.'));
+                return $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+            }
+        }
+        $schools = $this->User->School->find('list');
+        $departments = $this->User->Department->find('list');
+        $this->set(compact('schools', 'departments'));
+    }
 
-/**
- * admin_edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function admin_edit($id = null) {
-		if (!$this->User->exists($id)) {
-			throw new NotFoundException(__('Invalid user'));
-		}
-		if ($this->request->is(array('post', 'put'))) {
-			if ($this->User->save($this->request->data)) {
-				$this->Session->setFlash(__('The user has been saved.'));
-				return $this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The user could not be saved. Please, try again.'));
-			}
-		} else {
-			$options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
-			$this->request->data = $this->User->find('first', $options);
-		}
-		$schools = $this->User->School->find('list');
-		$departments = $this->User->Department->find('list');
-		$this->set(compact('schools', 'departments'));
-	}
+    /**
+     * This admin method loads the form view of a user and updates his information in the database upon submit
+     *
+     * @throws NotFoundException
+     * @param string $id
+     * @return void
+     */
+    public function admin_edit($id = null) {
+        if (!$this->User->exists($id)) {
+            throw new NotFoundException(__('Invalid user'));
+        }
+        if ($this->request->is(array('post', 'put'))) {
+            if ($this->User->save($this->request->data)) {
+                $this->Session->setFlash(__('The user has been saved.'));
+                return $this->redirect(array('action' => 'index'));
+            } else {
+                $this->Session->setFlash(__('The user could not be saved. Please, try again.'));
+            }
+        } else {
+            $options = array('conditions' => array('User.' . $this->User->primaryKey => $id));
+            $this->request->data = $this->User->find('first', $options);
+        }
+        $schools = $this->User->School->find('list');
+        $departments = $this->User->Department->find('list');
+        $this->set(compact('schools', 'departments'));
+    }
 
-/**
- * admin_delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
-	public function admin_delete($id = null) {
-		$this->User->id = $id;
-                
-                $user = $this->User->findById($id);
-                $experiences = $user['Experience'];
+    /**
+     * This admin method removes a user from the database and all his related experiences
+     *
+     * @throws NotFoundException
+     * @param string $id
+     * @return void
+     */
+    public function admin_delete($id = null) {
+        $this->User->id = $id;
 
-                App::import('Controller', 'Experiences');
-                $experiencesController = new ExperiencesController;
+        $user = $this->User->findById($id);
+        $experiences = $user['Experience'];
 
-                foreach($experiences as $experience){
-                    $experiencesController->delete_experience($experience['id']);
-                }
-                
-		if (!$this->User->exists()) {
-			throw new NotFoundException(__('Invalid user'));
-		}
-		$this->request->onlyAllow('post', 'delete');
-		if ($this->User->delete()) {
-			$this->Session->setFlash(__('The user has been deleted.'));
-		} else {
-			$this->Session->setFlash(__('The user could not be deleted. Please, try again.'));
-		}
-		return $this->redirect(array('action' => 'index'));
-	}
+        App::import('Controller', 'Experiences');
+        $experiencesController = new ExperiencesController;
+
+        foreach($experiences as $experience){
+            $experiencesController->delete_experience($experience['id']);
+        }
+
+        if (!$this->User->exists()) {
+            throw new NotFoundException(__('Invalid user'));
+        }
+        $this->request->onlyAllow('post', 'delete');
+        if ($this->User->delete()) {
+            $this->Session->setFlash(__('The user has been deleted.'));
+        } else {
+            $this->Session->setFlash(__('The user could not be deleted. Please, try again.'));
+        }
+        return $this->redirect(array('action' => 'index'));
+    }
 }
-?>
