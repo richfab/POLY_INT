@@ -46,7 +46,7 @@
 <div id="links">
     <?php foreach ($photos as $photo): ?>
     <a href="img/heights-photos/<?php echo $photo['Height']['url']; ?>" author="<?php echo $photo['User']['firstname']; ?> <?php echo $photo['User']['lastname']; ?>" title="<?php echo $photo['Height']['city']; ?>, <?php echo $photo['Height']['country']; ?> - <?php echo $photo['Height']['place']; ?> ( <?php echo $photo['Height']['height']; ?> m)" data-gallery>
-        <img style="background-color: #<?php echo $school_colors[$photo['User']['school_id']];?>" src="img/heights-photos/S_<?php echo $photo['Height']['url']; ?>" alt="">
+        <img onmouseover="changeWebsite(<?php echo $photo['User']['school_id'];?>)" style="background-color: #<?php echo $school_colors[$photo['User']['school_id']];?>" src="img/heights-photos/S_<?php echo $photo['Height']['url']; ?>" alt="">
     </a>
     <?php endforeach; ?>
     <?php if(empty($photos)): ?>
