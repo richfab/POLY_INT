@@ -60,6 +60,10 @@ ul, li, rect {
     border: 1px solid #C9C9C9;
 }
 
+a:hover {
+    text-decoration: none;
+}
+
 #cloud1 {
     position: relative;
     top: 250px;
