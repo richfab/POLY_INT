@@ -110,6 +110,8 @@ CakeLog::config('error', array(
 CakePlugin::load('Composer', array('bootstrap' => true));
 //Pour adapter cakephp à boostrap
 CakePlugin::load('BoostCake');
+//Pour generer la doc
+CakePlugin::load('ApiGenerator');
 
 // Définition de la locale pour toutes les fonctions php relatives à la de gestion du temps :
 setlocale(LC_TIME, 'fr_FR');
