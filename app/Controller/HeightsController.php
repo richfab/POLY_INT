@@ -12,12 +12,22 @@ class HeightsController extends AppController {
             'order' => array('dateEnd' => 'DESC'),
             'conditions' => array('User.active'=>'1')
     );
-        
+    
+    /**
+    * This method is called before the controller action. It is useful to define which actions are allowed publicly.
+    *
+    * @return void
+    */
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(array('contest','get_heights','get_heights_gallery')); //ce que tout le monde a le droit de faire
+        $this->Auth->allow(array('contest','get_heights','get_heights_gallery')); //actions that anyone is allowed to call
     }
-        
+    
+    /**
+    * This method allows anyone to see the contest gallery and graph
+    *
+    * @return void
+    */
     public function contest(){
         $this->set('jsIncludes',array('heights/d3.min','heights/jquery.viewport','heights/heights','logo_fly'));
         $this->set('cssIncludes',array('heights','bootstrap-image-gallery.min','blueimp-gallery.min'));
@@ -104,10 +114,13 @@ class HeightsController extends AppController {
             }
         }
     }
-        
+    
+    /**
+    * This method gets the data and renders the contest gallery
+    *
+    * @return void
+    */
     public function get_heights_gallery(){
-        
-//        $this->request->onlyAllow('ajax');
     
         $conditions = array();
             
@@ -126,10 +139,13 @@ class HeightsController extends AppController {
                         
         $this->render('/Elements/heights_gallery');
     }
-        
+    
+    /**
+    * This method gets the data and renders the contest graph
+    *
+    * @return void
+    */
     public function get_heights(){
-        
-//        $this->request->onlyAllow('ajax');
     
         $this->set('heights', $this->Height->find('all', array(
                     'conditions' => array('Height.verified' => 1),
