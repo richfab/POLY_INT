@@ -1,10 +1,18 @@
 <?php
-App::uses('AppController', 'Controller');
 /**
  * Departments Controller
  *
  * @property Department $Department
  * @property PaginatorComponent $Paginator
+ */
+App::uses('AppController', 'Controller');
+
+/**
+ * Departments Controller
+ *
+ * This class defines all actions relative to Departments
+ *
+ * @package		app.Controller
  */
 class DepartmentsController extends AppController {
 

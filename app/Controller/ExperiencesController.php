@@ -1,12 +1,33 @@
 <?php
+/**
+ * Experiences Controller
+ *
+ * @property Experience $Experience
+ * @property PaginatorComponent $Paginator
+ */
 App::uses('AppController', 'Controller');
-    
+
+/**
+ * Experiences Controller
+ *
+ * This class defines all actions relative to Experiences
+ *
+ * @package		app.Controller
+ */
 class ExperiencesController extends AppController {
     
-    //request handler for json
+    /**
+    * Components to handle json requests
+    *
+    * @var array
+    */
     public $components = array("RequestHandler");
         
-    /* Set pagination options */
+    /**
+    * Pagination options
+    *
+    * @var array
+    */
     public $paginate = array(
             'limit' => 20,
             'order' => array('dateEnd' => 'DESC'),
@@ -146,7 +167,8 @@ class ExperiencesController extends AppController {
     /**
     * This protected method returns city id after creating city and/or country if necessary
     * 
-    * @param string $city_input,$country_input
+    * @param array $city_input
+    * @param array $country_input
     * @return string city id
     */
     protected function _createCityAndCountryIfNeeded($city_input = null, $country_input = null){
@@ -358,7 +380,7 @@ class ExperiencesController extends AppController {
                 $user['User']['lastname'] = $this->request->data['lastname'];
                 $user['User']['school_id'] = $this->request->data['school_id'];
                 $user['User']['department_id'] = $this->request->data['department_id'];
-                $user['User']['active'] = "1"; //TODO active = 0
+                $user['User']['active'] = "1";
                 $user = $this->Experience->User->save($user);
             }
                 
@@ -464,7 +486,8 @@ class ExperiencesController extends AppController {
     /**
     * This protected method uploads the number of experiences for a given city
     * 
-    * @param string $city_id,$increment_by
+    * @param string $city_id
+    * @param int $increment_by
     * @return boolean
     */
     protected function _upload_experienceNumber($city_id = null, $increment_by = null){

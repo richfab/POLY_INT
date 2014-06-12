@@ -1,16 +1,33 @@
 <?php
+/**
+ * Recommendations Controller
+ *
+ * @property Recommendation $Recommendation
+ * @property PaginatorComponent $Paginator
+ */
 App::uses('AppController', 'Controller');
-    
+
+/**
+ * Recommendations Controller
+ *
+ * This class defines all actions relative to Recommendations
+ *
+ * @package		app.Controller
+ */
 class RecommendationsController extends AppController {
     
     /**
- * Components
- *
- * @var array
- */
+    * Components
+    *
+    * @var array
+    */
     public $components = array('RequestHandler','Paginator', 'Session');
 
-    /* Set pagination options */
+    /**
+    * Pagination options
+    *
+    * @var array
+    */
     public $paginate = array(
             'limit' => 20,
             'order' => array('created' => 'DESC')
@@ -55,6 +72,7 @@ class RecommendationsController extends AppController {
     /**
     * This method allows user to delete a recommendation
     *
+    * @param string $id
     * @return void
     */
     public function delete($id = null) {

@@ -1,10 +1,18 @@
 <?php
-App::uses('AppController', 'Controller');
 /**
  * Schools Controller
  *
  * @property School $School
  * @property PaginatorComponent $Paginator
+ */
+App::uses('AppController', 'Controller');
+
+/**
+ * Schools Controller
+ *
+ * This class defines all actions relative to Schools
+ *
+ * @package		app.Controller
  */
 class SchoolsController extends AppController {
 

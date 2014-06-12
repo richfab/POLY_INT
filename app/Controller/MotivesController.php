@@ -1,10 +1,18 @@
 <?php
-App::uses('AppController', 'Controller');
 /**
  * Motives Controller
  *
  * @property Motive $Motive
  * @property PaginatorComponent $Paginator
+ */
+App::uses('AppController', 'Controller');
+
+/**
+ * Motives Controller
+ *
+ * This class defines all actions relative to Motives
+ *
+ * @package		app.Controller
  */
 class MotivesController extends AppController {
 

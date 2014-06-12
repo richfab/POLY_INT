@@ -1,12 +1,33 @@
 <?php
+/**
+ * Heights Controller
+ *
+ * @property Height $Height
+ * @property PaginatorComponent $Paginator
+ */
 App::uses('AppController', 'Controller');
-    
+
+/**
+ * Heights Controller
+ *
+ * This class defines all actions relative to the height contest
+ *
+ * @package		app.Controller
+ */
 class HeightsController extends AppController {
     
-    //pour l'extension json
+    /**
+    * Component for json extension
+    *
+    * @var array
+    */
     public $components = array("RequestHandler");
         
-    /* Set pagination options */
+    /**
+    * Pagination options
+    *
+    * @var array
+    */
     public $paginate = array(
             'limit' => 20,
             'order' => array('dateEnd' => 'DESC'),

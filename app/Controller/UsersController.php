@@ -1,9 +1,26 @@
 <?php
+/**
+ * Users Controller
+ *
+ * @property User $User
+ * @property PaginatorComponent $Paginator
+ */
 App::uses('AppController', 'Controller');
-    
+
+/**
+ * Users Controller
+ *
+ * This class defines all actions relative to Users
+ *
+ * @package		app.Controller
+ */
 class UsersController extends AppController {
     
-    /* Set pagination options */
+    /**
+    * Pagination options
+    *
+    * @var array
+    */
     public $paginate = array(
             'limit' => 20,
             'order' => array('created' => 'DESC'),

@@ -1,10 +1,18 @@
 <?php
-App::uses('AppController', 'Controller');
 /**
  * Countries Controller
  *
  * @property Country $Country
  * @property PaginatorComponent $Paginator
+ */
+App::uses('AppController', 'Controller');
+
+/**
+ * Countries Controller
+ *
+ * This class defines all actions relative to Countries
+ *
+ * @package		app.Controller
  */
 class CountriesController extends AppController {
 

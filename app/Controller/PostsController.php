@@ -1,18 +1,38 @@
 <?php
-App::uses('AppController', 'Controller');
 /**
  * Posts Controller
  *
+ * @property Post $Post
+ * @property PaginatorComponent $Paginator
+ */
+App::uses('AppController', 'Controller');
+
+/**
+ * Posts Controller
+ *
+ * This class defines all actions relative to Posts
+ *
+ * @package		app.Controller
  */
 class PostsController extends AppController {
-
-	public $paginate = array(
-            'limit' => 2,
-            'order' => array('created' => 'DESC')
+    
+    /**
+    * Pagination options
+    *
+    * @var array
+    */
+    public $paginate = array(
+        'limit' => 2,
+        'order' => array('created' => 'DESC')
     );
 
-	public function index() {
-		$this->Paginator->settings = $this->paginate;
-		$this->set('articles', $this->Paginator->paginate());
-	}
+    /**
+    * This method allows user to see posts
+    *
+    * @return void
+    */
+    public function index() {
+            $this->Paginator->settings = $this->paginate;
+            $this->set('articles', $this->Paginator->paginate());
+    }
 }

@@ -1,6 +1,19 @@
 <?php
+/**
+ * Dashboards Controller
+ *
+ * @property Dashboard $Dashboard
+ * @property PaginatorComponent $Paginator
+ */
 App::uses('AppController', 'Controller');
 
+/**
+ * Dashboards Controller
+ *
+ * This class defines all actions relative to Dashboards
+ *
+ * @package		app.Controller
+ */
 class DashboardsController extends AppController {
     
     /**
