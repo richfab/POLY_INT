@@ -400,6 +400,11 @@ class UsersController extends AppController {
         if($user_id==null){
             $user_id = $this->Auth->user('id');
         }
+        //user wants to see his own profile (clicked his own experience on map or search)
+        else if($user_id == $this->Auth->user('id')){
+            return $this->redirect(array('action' => 'profile'));
+        }
+        
         //user wants to see someone else profile
         $this->User->id = $user_id;
             
