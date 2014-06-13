@@ -141,6 +141,7 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
                         <a class="icon-linkedin-mini" href="https://www.linkedin.com/groups?gid=6576008" target="_blank"></a>
                     </p>
                     <p class="pull-right">
+                        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a> | 
                         <?= $this->Html->link('mentions légales',
                                 array('controller' => 'pages', 'action' => 'legal'));?> | 
                         <?= $this->Html->link('a propos',
