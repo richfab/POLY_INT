@@ -120,7 +120,7 @@
                         </div>
                             <?php endforeach;?>
                             <?php if (!$experience['Recommendation']) :?>
-                        <p>Aucun bon plan</p>
+                        <p>Aucun bon plan :(</p>
                             <?php endif;?>
                     </div>
                 </div>
