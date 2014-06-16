@@ -15,7 +15,7 @@
     echo $this->Form->input('dateStart',array('label'=>'Du *','dateFormat' => 'DMY','wrapInput'=>'col col-sm-6','style'=>'width:initial;display:inline-block'));
     echo $this->Form->input('dateEnd',array('label'=>'Au *','dateFormat' => 'DMY','wrapInput'=>'col col-sm-6','style'=>'width:initial;display:inline-block'));
     //si c'est une modification d'expérience, on renseigne le lieu
-    if(!empty($this->data)){
+    if(!empty($this->data)&&!empty($countries)){
         $input_value = $this->data['City']['name'].', '.$countries[$this->data['City']['country_id']];
         $country_id = $this->data['City']['country_id'];
     }
