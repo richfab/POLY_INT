@@ -1,11 +1,9 @@
 <div id="search-filters">
-    <div id="controller">
-        <div class="control-map row" id="filter-search">
+    
             
             <?php echo $this->element('filter_selects'); ?>
             
-        </div>
-    </div>
+        
     <div class="row" id="filter-search-inputs">
         <div class="col-sm-3" id="ExperienceInputDiv">
             <input type="text" id="ExperienceInput" location-types="(regions)" name="input" class="form-control">

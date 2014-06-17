@@ -238,10 +238,9 @@ h2 > span.wut {
     background-color: #f4f4f4;
 }
 
-#filter-button-modal{
-    position: absolute;
-    top: 80px;
-    left: 35px;
+.filter-button{
+    width: 100%;
+    text-align: right;
 }
 
 #list-search, #recommendation-list{

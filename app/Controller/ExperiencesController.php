@@ -141,7 +141,7 @@ class ExperiencesController extends AppController {
         //includes google maps script for place autocomplete and to get experiences
     	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','get_experiences','logo_fly','jquery.dropdown'));
         //includes styles for filters
-        $this->set('cssIncludes',array('filter'));
+//        $this->set('cssIncludes',array('filter'));
             
         //sets motives, schools and departments by alphbetical order
         $this->__set_motives_schools_and_departments();
