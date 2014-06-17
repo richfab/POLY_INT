@@ -238,18 +238,6 @@ h2 > span.wut {
     background-color: #f4f4f4;
 }
 
-.avatar-map{
-    vertical-align: bottom;
-}
-
-.row-experience-avatar, .row-experience-info{
-    display: inline-block;
-}
-
-.row-experience-info{
-    padding-left: 10px;
-}
-
 #filter-button-modal{
     position: absolute;
     top: 80px;
