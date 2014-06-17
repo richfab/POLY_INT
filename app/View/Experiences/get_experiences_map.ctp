@@ -1,12 +1,12 @@
 <?php if(AuthComponent::user('id')) : ?>
     <?php foreach ($experiences as $experience): ?>
         <li>
-            <div class="row row-experience">
-                <div class="col-xs-2">
-                    <?= $this->Html->link($this->Html->image('avatar.png', array('alt' => 'avatar','class' => 'avatar','height' => '60px','onload' => "this.style.backgroundColor='#".$school_colors[$experience['User']['school_id']]."'")),array('controller'=>'users', 'action' => 'profile', $experience['User']['id']),array('escape' => false));?>
+            <div class="row-experience">
+                <div class="row-experience-avatar">
+                    <?= $this->Html->link($this->Html->image('avatar.png', array('alt' => 'avatar','class' => 'avatar-map','height' => '60px','onload' => "this.style.backgroundColor='#".$school_colors[$experience['User']['school_id']]."'")),array('controller'=>'users', 'action' => 'profile', $experience['User']['id']),array('escape' => false));?>
                 </div>
                 <a href="<?= $this->Html->url(array('controller'=>'users', 'action' => 'profile', $experience['User']['id'],'#' => $experience['Experience']['id']),true);?>">
-                    <div class="col-xs-10">
+                    <div class="row-experience-info">
                         <div style="color: #428bca;"><?= $experience['User']['firstname'].' '.$experience['User']['lastname'];?></div>
                         <div><?= $experience['Motive']['name'].' ('.round($experience[0]['monthDiff'],0).' mois)'.' - '.$experience['City']['name'];?>, <?= $experience['City']['country_id']; ?></div>
                         <div style="font-size: 12px">

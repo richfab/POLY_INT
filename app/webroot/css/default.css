@@ -213,15 +213,15 @@ h2 > span.wut {
     overflow-x: hidden;
 }
 
-#list-map p {
+#list-map p, #list-map-modal p {
     margin: 0;
 }
 
-#list-map li {
+#list-map li, #list-map-modal li {
     border-bottom: 1px solid #e7e7e7;
 }
 
-#list-map div{
+#list-map div, #list-map-modal div{
     color: black;
 }
 
@@ -233,9 +233,27 @@ h2 > span.wut {
     border-bottom: none;
 }
 
-.row-experience:hover, .row-experience:hover{
+#list-map .row-experience:hover, #list-search .row-experience:hover {
     cursor: pointer;
     background-color: #f4f4f4;
+}
+
+.avatar-map{
+    vertical-align: bottom;
+}
+
+.row-experience-avatar, .row-experience-info{
+    display: inline-block;
+}
+
+.row-experience-info{
+    padding-left: 10px;
+}
+
+#filter-button-modal{
+    position: absolute;
+    top: 80px;
+    left: 35px;
 }
 
 #list-search, #recommendation-list{
@@ -453,7 +471,6 @@ h2 > span.wut {
 
 .recommendationtype-icon:hover{
     border-color: #e74c3c;
-    
 }
 
 .panel-recommendations{

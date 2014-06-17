@@ -80,7 +80,7 @@ function get_experiences(_view_to_render, _filter){
         dataType : 'html',
         success : function(data) {
             $('.experience-list').append(data);
-            $('#list-map').slideDown(300);
+            open_list_experiences();
         },
         error : function(data) {
             //alert("Une erreur est survenue, veuillez réessayer dans quelques instants.");
@@ -88,13 +88,23 @@ function get_experiences(_view_to_render, _filter){
         complete : function(data) {
             // on cache le loader
             stop_logo_fly();
-            $('.loader-list').remove();
             
             //incremente le offset pour le 'plus' de la liste des resultats
             $('input[name=offset]').val($('input[name=offset]').val()*1+20);
         }
     });
     console.log(filter);
+}
+
+//ouvre la liste des experiences ou un modal selon la taille de l'écran
+function open_list_experiences(){
+    if ($(window).width() < 768) {
+        // do something for small screens
+        $('#list-map-modal').modal('show');
+    }
+    else{
+        $('#list-map').slideDown(300);
+    }
 }
 
 //réinitialise le offset, vide la liste des experiences et lance la recherche d'experiences
