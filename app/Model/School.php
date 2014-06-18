@@ -31,10 +31,7 @@ class School extends AppModel {
     );
         
     public function beforeSave($options = array()) {
-    	//majuscules au nom
-        if (isset($this->data[$this->alias]['name'])) {
-            $this->data[$this->alias]['name'] = ucwords(strtolower($this->data[$this->alias]['name']));
-        }
+    	
         return true;
     }
 }

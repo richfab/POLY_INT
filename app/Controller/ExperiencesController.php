@@ -126,7 +126,7 @@ class ExperiencesController extends AppController {
         //includes scripts to get experiences
     	$this->set('jsIncludes',array('get_experiences','logo_fly','jvector','jquery-jvectormap.min','jquery-jvectormap-world-mill-en','jquery.dropdown'));
         //includes styles for map and filters
-        $this->set('cssIncludes',array('jvectormap','map','filter'));
+        $this->set('cssIncludes',array('jvectormap','map'));
             
         //sets motives, schools and departments by alphbetical order
         $this->__set_motives_schools_and_departments();

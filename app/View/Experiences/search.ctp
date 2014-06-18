@@ -1,8 +1,6 @@
 <div id="search-filters">
     
-            
-            <?php echo $this->element('filter_selects'); ?>
-            
+    <?php echo $this->element('filter_selects'); ?>        
         
     <div class="row" id="filter-search-inputs">
         <div class="col-sm-3" id="ExperienceInputDiv">
