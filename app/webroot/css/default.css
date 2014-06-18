@@ -241,6 +241,12 @@ h2 > span.wut {
 .filter-button{
     width: 100%;
     text-align: right;
+    color: #A09A9A;
+}
+
+.filter-button:hover, .filter-button:focus, .filter-button:active, .filter-button.active, .open .dropdown-toggle.filter-button {
+    color: #A09A9A;
+    background-color: white;
 }
 
 #list-search, #recommendation-list{
@@ -304,7 +310,7 @@ h2 > span.wut {
     }
 }
 #brand_logo.fly {
--webkit-transition: all 1s ease-in-out;
+    -webkit-transition: all 1s ease-in-out;
     -moz-transition: all 1s ease-in-out;
     -o-transition: all 1s ease-in-out;
     -ms-transition: all 1s ease-in-out;
@@ -316,7 +322,7 @@ h2 > span.wut {
     -webkit-animation-name: blink;
     -webkit-animation-timing-function: ease-in-out;
     
--moz-animation-direction: normal;
+    -moz-animation-direction: normal;
     -moz-animation-duration: 1.5s;
     -moz-animation-iteration-count: infinite;
     -moz-animation-name: blink;
