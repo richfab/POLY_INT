@@ -38,7 +38,7 @@
         });
         
         //au click d'une option on referme la liste
-        $(".dropdown-li").click(function(){
+        $(".dropdown").click(function(){
             $('#list-map').slideUp(100);
         });
         
