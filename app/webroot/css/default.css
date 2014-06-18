@@ -340,6 +340,10 @@ h2 > span.wut {
     border-color: #ABABAB;
 }
 
+.experience-list{
+    font-weight: 300;
+}
+
 .experience-list a:hover{
     text-decoration: none;
 }
