@@ -328,6 +328,7 @@ h2 > span.wut {
 .filter-button:hover, .filter-button:focus, .filter-button:active, .filter-button.active, .open .dropdown-toggle.filter-button {
     color: #A09A9A;
     background-color: white;
+    border: 1px solid #cccccc;
 }
 
 #list-search, #recommendation-list{
