@@ -76,6 +76,15 @@ class ExperiencesController extends AppController {
             
         if ($this->request->is('post') || $this->request->is('put')) {
             
+            //checks that dateEnd is after dateStart
+            if ($this->data['Experience']['dateEnd'] < $this->data['Experience']['dateStart']) {
+                $this->Session->setFlash(__("La date de fin doit être après la date de début"), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-danger'
+                ));              
+                return;
+            }
+            
             //decrements experience number for this place if user is editing experience
             if($experience_id != null){
                 $experience = $this->Experience->findById($experience_id);
