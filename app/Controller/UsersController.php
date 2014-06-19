@@ -554,6 +554,7 @@ class UsersController extends AppController {
     public function admin_add() {
         if ($this->request->is('post')) {
             $this->User->create();
+            $this->request->data['User']['active'] = '1';
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__('The user has been saved.'));
                 return $this->redirect(array('action' => 'index'));
