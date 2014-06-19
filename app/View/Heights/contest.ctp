@@ -40,6 +40,7 @@
                     <p>&middot; Le score est calculé en fonction de la <strong>hauteur des monuments</strong> de chaque photo.</p>
                     <p>&middot; Il faut être <strong>à l’étranger</strong>.</p>
                     <p>&middot; L'<strong>avion en papier</strong> doit être visible sur la photo.</p>
+                    <p>&middot; Les <strong>montagnes</strong> ne comptent pas dans les scores.</p>
                     <p>&middot; L’école gagnante sera élue <strong>l’école la plus internationale</strong> du réseau Polytech.</p>
                 </div>
             </div>
