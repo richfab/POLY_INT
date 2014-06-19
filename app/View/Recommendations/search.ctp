@@ -1,5 +1,5 @@
 <?php
-
+    
 /* 
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,21 +16,25 @@
         <!--utile pour le nombre de resultats a afficher-->
         <input type="hidden" name="offset" id="offset" value="0">
         <div class="col-sm-5" id="Recommendationtypes">
+            <div class="row">
             <?php foreach ($recommendationtypes as $recommendationtype) : ?>
-                <span class="glyphicon glyphicon-<?= $recommendationtype['Recommendationtype']['icon'];?> recommendationtype-icon selected" recommendationtype_id="<?= $recommendationtype['Recommendationtype']['id'];?>" data-toggle="tooltip" title="<?= $recommendationtype['Recommendationtype']['name']; ?>"></span>
+                <div class="col-xs-2">
+                    <span class="glyphicon glyphicon-<?= $recommendationtype['Recommendationtype']['icon'];?> recommendationtype-icon selected" recommendationtype_id="<?= $recommendationtype['Recommendationtype']['id'];?>" data-toggle="tooltip" title="<?= $recommendationtype['Recommendationtype']['name']; ?>"></span>
+                </div>
             <?php endforeach;?>
+            </div>
         </div>
         <div class="col-sm-2">
             <button class="btn btn-blue form-control" onclick="new_search();"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
         </div>
     </div>
 </div>
-    
+
 <div id="recommendation-list">
     
 </div>
-
-
+    
+    
 <script type="text/javascript">
     
     $( function() {
@@ -39,7 +43,7 @@
         $( '.recommendationtype-icon' ).each(function() {
             $(this).on('click',function(){
                 //si toutes les catgeories sont déjà cochées, on ne coche que celle qui a été cliquée
-                if($( '#Recommendationtypes > .recommendationtype-icon' ).size() === $( '#Recommendationtypes > .selected' ).size()){
+                if($( '#Recommendationtypes .recommendationtype-icon' ).size() === $( '#Recommendationtypes .selected' ).size()){
                     $( '.recommendationtype-icon' ).removeClass('selected');
                     $(this).addClass('selected');
                 }
@@ -51,7 +55,7 @@
         
         //on lance la recherche au chargement
         get_recommendations();
-
+        
         //fonction qui valide la soumission du formulaire lors de l'appui sur la touche entrée
         function pressEnter(evt) {
             var evt = (evt) ? evt : ((event) ? event : null);

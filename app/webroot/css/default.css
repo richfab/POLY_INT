@@ -523,10 +523,7 @@ h2 > span.wut {
 
 #Recommendationtypes{
     text-align: center;
-}
-
-#Recommendationtypes .recommendationtype-icon{
-    margin-left: 20px;
+    padding: 0px 30px;
 }
 
 .recommendationtype-icon{
