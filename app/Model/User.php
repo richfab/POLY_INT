@@ -4,7 +4,7 @@ App::uses('AuthComponent', 'Controller/Component');
 class User extends AppModel {
     
     public $displayField = 'email';
-
+        
     public $actsAs = array(
         'Upload.Upload' => array(
             'fields' => array(
@@ -68,6 +68,9 @@ class User extends AppModel {
                 'rule'    => 'isUnique',
                 'message' => 'Cet email est déjà utilisé'
             )
+        ),
+        'avatar_file' => array(
+            'rule' => array('fileExtension', array('jpg','png','jpeg'))
         ),
         'linkedin' => array(
             'adress' => array(

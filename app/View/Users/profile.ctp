@@ -6,8 +6,8 @@
  * and open the template in the editor.
  */
 ?>
-
-
+    
+    
 <div class="row" id="profile_info">
     <div class="col col-sm-10">
         <h1><?= $user['User']['firstname'];?> <?= $user['User']['lastname'];?>
@@ -26,7 +26,7 @@
         <p>
             
         </p>
-<?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+    <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
         <p><?= $this->Html->link('<span class="edit-delete-label">Modifier</span>', array('action' => 'edit'),
         array('escape' => false,
             'class' => 'glyphicon glyphicon-pencil edit-delete'
@@ -34,18 +34,24 @@
     <?php endif; ?>
     </div>
     <div class="col col-sm-1">
-        <h1>
-
-            <?php if(isset($user['User']['avatar'])) {
-                    echo $this->Image->resize($user['User']['avatar'], 128,128,array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'",'id' => 'avatar_profile'));
-                } else {
-                    echo $this->Html->image('avatar.png', array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'",'id' => 'avatar_profile'));
-                }?>
+        <!--si c'est mon profile-->
+        <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+            <h1 data-toggle="modal" data-target="#upload_profilepic_modal" title="Changer ma photo" id="custom_avatar">
+        <?php else:?>
+            <h1>
+        <?php endif;?>
+        <!--si j'ai un avatar custom-->
+        <?php if(!empty($user['User']['avatar'])) {
+                echo $this->Image->resize($user['User']['avatar'], 128,128,array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'", 'id' => 'avatar_profile'));
+            } else {
+                echo $this->Html->image('avatar.png', array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'",'id' => 'avatar_profile'));
+            }
+        ?>
         </h1>
     </div>
 </div>
 <h3 style="display: inline-block">Expériences</h3>
-
+    
     <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
 <div class="well">
     <p><?= $this->Html->link("Ajouter une expérience", array('controller' => 'experiences', 'action' => 'info')); ?></p>
@@ -135,7 +141,31 @@
     </div>
     <?php endforeach; ?>
 </div>
-
+    
+<!-- Modal -->
+<div class="modal fade" id="upload_profilepic_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Modifier ma photo de profil</h4>
+            </div>
+            <div class="modal-body">
+                <?php
+                    echo $this->Form->create('User', array('type'=>'file'));
+                    echo $this->Form->input('avatar_file', array('label' => false, 'type' => 'file'));
+                ?>
+                <p class="help-block">Au format jpg, png ou jpeg.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-orange" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fin de Modal -->
+    
 <script type="text/javascript">
     
     $( function() {

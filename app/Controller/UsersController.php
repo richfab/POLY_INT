@@ -382,6 +382,23 @@ class UsersController extends AppController {
         if (!$this->User->exists()) {
             throw new NotFoundException(__("Cet utilisateur n'existe pas"));
         }
+        
+        //modification photo de profil
+        if ($this->request->is('post') || $this->request->is('put')) {
+            $this->User->id = $this->Auth->user('id');
+            if ($this->User->save($this->request->data)) {
+                $this->Session->setFlash(__("Les modifications ont bien été enregistrées"), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-success'
+                ));
+            } else {
+                $this->Session->setFlash(__("Erreur lors de l'enregistrement"), 'alert', array(
+                    'plugin' => 'BoostCake',
+                    'class' => 'alert-danger'
+                ));
+            }
+        }
+        
         $this->set('user',$this->User->read(null, $user_id));
         $this->set('countries',$this->User->Experience->City->Country->find('list'));
         $this->set('experiences',$this->User->Experience->find('all', array(

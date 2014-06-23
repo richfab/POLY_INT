@@ -3,6 +3,8 @@ App::uses('AppController', 'Controller');
     
 class ExperiencesController extends AppController {
     
+    public $helpers = array('Image.Image');
+    
     //pour l'extension json
     public $components = array("RequestHandler");
         
