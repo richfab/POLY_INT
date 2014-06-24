@@ -358,12 +358,19 @@ class UsersController extends AppController {
              ));
         }
     }
+    
+    //this method get the profile picture of connected user and loads the crop tool
+    public function get_profilepic_for_crop(){
+        $this->render('uploaded_profilepic','ajax');
+    }
         
     public function profile($user_id = null) {
+        
     	App::uses('AuthComponent', 'Controller/Component');
         
         //on inclut les scripts pour l'envoi des recommandations en ajax
-    	$this->set('jsIncludes',array('recommendations','readmore'));
+    	$this->set('jsIncludes',array('recommendations','readmore','jquery.Jcrop'));
+        $this->set('cssIncludes',array('jquery.Jcrop'));
             
         if($this->Auth->loggedIn()){
             
@@ -385,7 +392,23 @@ class UsersController extends AppController {
         
         //modification photo de profil
         if ($this->request->is('post') || $this->request->is('put')) {
+            
             $this->User->id = $this->Auth->user('id');
+            
+            //cropping
+            $targ_w = $targ_h = 150;
+            $jpeg_quality = 90;
+
+            $src = WWW_ROOT . $this->Auth->user('avatar');
+            $img_r = imagecreatefromjpeg($src);
+            $dst_r = ImageCreateTrueColor( $targ_w, $targ_h );
+            
+//            debug($_POST['x'].' '.$_POST['y'].' '.$_POST['w'].' '.$_POST['h']);die();
+
+            imagecopyresampled($dst_r,$img_r,0,0,$_POST['x'],$_POST['y'],$targ_w,$targ_h,$_POST['w'],$_POST['h']);
+
+            imagejpeg($dst_r, $src, $jpeg_quality);
+            
             if ($this->User->save($this->request->data)) {
                 $this->Session->setFlash(__("Les modifications ont bien été enregistrées"), 'alert', array(
                     'plugin' => 'BoostCake',

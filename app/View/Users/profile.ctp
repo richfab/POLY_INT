@@ -36,18 +36,21 @@
     <div class="col col-sm-1">
         <!--si c'est mon profile-->
         <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-            <h1 data-toggle="modal" data-target="#upload_profilepic_modal" title="Changer ma photo" id="custom_avatar">
+        <h1 data-toggle="modal" data-target="#upload_profilepic_modal" title="Changer ma photo" id="custom_avatar">
         <?php else:?>
             <h1>
         <?php endif;?>
-        <!--si j'ai un avatar custom-->
+                <!--si j'ai un avatar custom-->
         <?php if(!empty($user['User']['avatar'])) {
                 echo $this->Image->resize($user['User']['avatar'], 128,128,array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'", 'id' => 'avatar_profile'));
             } else {
                 echo $this->Html->image('avatar.png', array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'",'id' => 'avatar_profile'));
             }
         ?>
-        </h1>
+            </h1>
+            <button class="btn btn-primary btn-xs" data-toggle="modal" data-target="#crop_profilepic_modal">
+                Editer la miniature
+            </button>
     </div>
 </div>
 <h3 style="display: inline-block">Expériences</h3>
@@ -160,10 +163,56 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-orange" data-dismiss="modal">Fermer</button>
                 <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <?php
+                    echo $this->Form->end();
+                ?>
             </div>
         </div>
     </div>
 </div>
+<!-- Fin de Modal -->
+    
+<!-- Modal -->
+<div class="modal fade" id="crop_profilepic_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Modifier ma photo de profil</h4>
+            </div>
+            <div class="modal-body">
+                <!-- This is the form that our event handler fills -->
+                <?php echo $this->Form->create('User');?>
+                    <input type="hidden" id="x" name="x" />
+                    <input type="hidden" id="y" name="y" />
+                    <input type="hidden" id="w" name="w" />
+                    <input type="hidden" id="h" name="h" />
+                    
+                <div id="imageCrop_div"></div>
+                    
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-orange" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <?php
+                    echo $this->Form->end();
+                ?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php
+$this->Js->get('#crop_profilepic_modal')->event(
+    'shown.bs.modal',
+    $this->Js->request(
+        array('action' => 'get_profilepic_for_crop'),
+        array(
+            'update' => '#imageCrop_div',
+            'async' => true,
+        )
+    )
+);
+ echo $this->Js->writeBuffer(); ?>
 <!-- Fin de Modal -->
     
 <script type="text/javascript">
