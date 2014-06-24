@@ -516,6 +516,15 @@ h2 > span.wut {
     margin-bottom: 50px;
 }
 
+#custom_avatar #avatar_profile:hover{
+    cursor: pointer;
+    filter: brightness(75%);
+    -webkit-filter: brightness(75%);
+    -moz-filter: brightness(75%);
+    -o-filter: brightness(75%);
+    -ms-filter: brightness(75%);
+}
+
 #avatar_profile, #avatar_search{
     border-radius: 100%;
     padding: 1px;

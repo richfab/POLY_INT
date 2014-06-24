@@ -3,7 +3,11 @@
         <li>
             <div class="row row-experience">
                 <div class="col-sm-2 col-xs-3" style="max-width: 74px;">
-                    <?= $this->Html->link($this->Html->image('avatar.png', array('alt' => 'avatar','class' => 'avatar','height' => '60px','onload' => "this.style.backgroundColor='#".$school_colors[$experience['User']['school_id']]."'")),array('controller'=>'users', 'action' => 'profile', $experience['User']['id']),array('escape' => false));?>
+                    <?php if(!empty($experience['User']['avatar'])) {
+                        echo $this->Image->resize($experience['User']['avatar'],61,61,array('alt' => 'avatar','class' => 'avatar','height' => '60px','onload' => "this.style.backgroundColor='#".$school_colors[$experience['User']['school_id']]."'"));
+                    } else {
+                        echo $this->Html->link($this->Html->image('avatar.png', array('alt' => 'avatar','class' => 'avatar','height' => '61px','onload' => "this.style.backgroundColor='#".$school_colors[$experience['User']['school_id']]."'")),array('controller'=>'users', 'action' => 'profile', $experience['User']['id']),array('escape' => false));
+                    }?>
                 </div>
                 <a href="<?= $this->Html->url(array('controller'=>'users', 'action' => 'profile', $experience['User']['id'],'#' => $experience['Experience']['id']),true);?>">
                     <div class="col-sm-10 col-xs-9">

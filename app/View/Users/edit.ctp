@@ -10,7 +10,8 @@
                 'wrapInput' => 'col col-sm-6',
                 'class' => 'form-control'
         ),
-        'class' => 'well form-horizontal'
+        'class' => 'well form-horizontal',
+        'type' => 'file'
     ));
     echo $this->Form->input('firstname', array('placeholder' => 'Prénom','label' => 'Prénom *'));
     echo $this->Form->input('lastname', array('placeholder' => 'Nom','label' => 'Nom *'));

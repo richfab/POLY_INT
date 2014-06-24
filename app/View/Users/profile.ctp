@@ -35,8 +35,19 @@
     <?php endif; ?>
     </div>
     <div class="col col-sm-1">
-        <h1>
-            <?= $this->Html->image('avatar.png', array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'",'id' => 'avatar_profile'));?>
+        <!--si c'est mon profile-->
+        <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+            <h1 data-toggle="modal" data-target="#upload_profilepic_modal" title="Changer ma photo" id="custom_avatar">
+        <?php else:?>
+            <h1>
+        <?php endif;?>
+        <!--si j'ai un avatar custom-->
+        <?php if(!empty($user['User']['avatar'])) {
+                echo $this->Image->resize($user['User']['avatar'], 128,128,array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'", 'id' => 'avatar_profile'));
+            } else {
+                echo $this->Html->image('avatar.png', array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'",'id' => 'avatar_profile'));
+            }
+        ?>
         </h1>
     </div>
 </div>
@@ -131,6 +142,30 @@
     </div>
     <?php endforeach; ?>
 </div>
+
+<!-- Modal -->
+<div class="modal fade" id="upload_profilepic_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Modifier ma photo de profil</h4>
+            </div>
+            <div class="modal-body">
+                <?php
+                    echo $this->Form->create('User', array('type'=>'file'));
+                    echo $this->Form->input('avatar_file', array('label' => false, 'type' => 'file'));
+                ?>
+                <p class="help-block">Au format jpg, png ou jpeg.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-orange" data-dismiss="modal">Fermer</button>
+                <button type="submit" class="btn btn-primary">Enregistrer</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Fin de Modal -->
 
 <script type="text/javascript">
     
