@@ -14,6 +14,7 @@ class UploadBehavior extends ModelBehavior{
     * :m      => month
     * :uid    => user id (Auth.User.id)
     * :md5    => random MD5
+    * :time    => time
     **/
     private $defaultOptions = array(
         'fields' => array()
@@ -95,7 +96,9 @@ class UploadBehavior extends ModelBehavior{
             ':y'       => date('Y'),
             ':m'       => date('m'),
             ':uid'     => CakeSession::read('Auth.User.id'),
-            ':md5'     => md5(rand() . uniqid() . time())
+            ':md5'     => md5(rand() . uniqid() . time()),
+            ':time'     => time()
+            
         );
         $path = strtr($path, $replace) . '.' . $extension;
         return $path;

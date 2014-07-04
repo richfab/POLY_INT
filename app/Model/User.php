@@ -8,7 +8,7 @@ class User extends AppModel {
     public $actsAs = array(
         'Upload.Upload' => array(
             'fields' => array(
-                'avatar' => 'img/avatars/:id1000/:id'
+                'avatar' => 'img/avatars/:id1000/:id-:time'
             )
         )
     );
