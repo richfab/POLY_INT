@@ -84,6 +84,15 @@ class UsersController extends AppController {
     public function logout() {
         return $this->redirect($this->Auth->logout());
     }
+    
+    /**
+    * This temp method allows users to import fb album
+    *
+    * @return void
+    */
+    public function fb_album(){
+        
+    }
         
     /**
     * This admin method allows administrator to accept a signup request done with a non verified email
