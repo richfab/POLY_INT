@@ -410,16 +410,21 @@ class UsersController extends AppController {
     public function profile($user_id = null) {
         
         //includes scripts to send ajax recommendations and to display "read more" button on long posts
-    	$this->set('jsIncludes',array('recommendations','readmore'));
-            
+        $jsIncludes = array('recommendations','readmore','get_photo_gallery');
+        
         //user wants to see his own profile
         if($user_id==null){
             $user_id = $this->Auth->user('id');
+            //include fb script if user's profile
+            array_push($jsIncludes,'fb_album');
         }
         //user wants to see his own profile (clicked his own experience on map or search)
         else if($user_id == $this->Auth->user('id')){
             return $this->redirect(array('action' => 'profile'));
         }
+    	
+        $this->set('jsIncludes',$jsIncludes);
+        $this->set('cssIncludes',array('blueimp-gallery'));
         
         //user wants to see someone else profile
         $this->User->id = $user_id;

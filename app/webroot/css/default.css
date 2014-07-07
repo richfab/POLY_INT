@@ -424,6 +424,24 @@ h2 > span.wut {
     margin-top: 30px;
 }
 
+.fb_album_el{
+    padding: 10px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.fb_album_el h4{
+    color:#428bca;
+}
+
+.fb_album_el:hover{
+    background-color: #f4f4f4;
+}
+
+#fbalbum_progress{
+    margin: 10px;
+}
+
 .contact-logo{
     height: 20px;
 }
@@ -558,16 +576,17 @@ h2 > span.wut {
     border-color: #e74c3c;
 }
 
-.panel-recommendations{
+.panel-recommendations, .panel-photos{
     border: none;
+    box-shadow: none;
 }
 
-.panel-title-recommendations{
+.panel-title-recommendations, .panel-title-photos{
     font-size: 14px;
     color: #e74c3c;
 }
 
-.panel-heading-recommendations{
+.panel-heading-recommendations, .panel-heading-photos{
     background-color: transparent!important;
 }
 

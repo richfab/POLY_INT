@@ -51,7 +51,7 @@ class HeightsController extends AppController {
     */
     public function contest(){
         $this->set('jsIncludes',array('heights/d3.min','heights/jquery.viewport','heights/heights','logo_fly'));
-        $this->set('cssIncludes',array('heights','bootstrap-image-gallery.min','blueimp-gallery.min'));
+        $this->set('cssIncludes',array('heights','blueimp-gallery'));
         
         //recupere les ecoles
         $this->set('school_names',$this->Height->User->School->find('list'));

@@ -6,8 +6,8 @@
  * and open the template in the editor.
  */
 ?>
-
-
+    
+    
 <div class="row" id="profile_info">
     <div class="col col-sm-10">
         <h1><?= $user['User']['firstname'];?> <?= $user['User']['lastname'];?>
@@ -37,22 +37,22 @@
     <div class="col col-sm-1">
         <!--si c'est mon profile-->
         <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-            <h1 data-toggle="modal" data-target="#upload_profilepic_modal" title="Changer ma photo" id="custom_avatar">
+        <h1 data-toggle="modal" data-target="#upload_profilepic_modal" title="Changer ma photo" id="custom_avatar">
         <?php else:?>
             <h1>
         <?php endif;?>
-        <!--si j'ai un avatar custom-->
+                <!--si j'ai un avatar custom-->
         <?php if(!empty($user['User']['avatar'])) {
                 echo $this->Image->resize($user['User']['avatar'], 128,128,array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'", 'id' => 'avatar_profile'));
             } else {
                 echo $this->Html->image('avatar.png', array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'",'id' => 'avatar_profile'));
             }
         ?>
-        </h1>
+            </h1>
     </div>
 </div>
 <h3 style="display: inline-block">Expériences</h3>
-
+    
     <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
 <div class="well">
     <p><?= $this->Html->link("Ajouter une expérience", array('controller' => 'experiences', 'action' => 'info')); ?></p>
@@ -63,7 +63,7 @@
     <div class="well well-experience experience-info" id="<?= $experience['Experience']['id'];?>">
         
             <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-                
+        
                 <?= $this->Form->postLink('<span class="edit-delete-label">Supprimer</span>',
                     array('controller'=>'experiences', 'action' => 'delete', $experience['Experience']['id']),
                     array('confirm' => 'Es-tu sûr de vouloir supprimer cette expérience ?',
@@ -76,18 +76,18 @@
                             'class' => 'glyphicon glyphicon-pencil close edit-delete'
                         )); ?>
             <?php endif; ?>
-                
+        
             <?php echo $this->element('experience_info',array('experience'=>$experience)); ?>
-                
+        
             <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-                
+        
         <div id="addRecommendation">
             <p>Partager un bon plan : 
                 <?php foreach ($recommendationtypes as $recommendationtype) :?>
                 <span class="glyphicon glyphicon-<?= $recommendationtype['Recommendationtype']['icon'];?> recommendationtype-icon recommendationtype-icon-selectable" recommendationtype_description="<?= $recommendationtype['Recommendationtype']['description'];?>" recommendationtype_id="<?= $recommendationtype['Recommendationtype']['id'];?>" data-toggle="tooltip" title="<?= $recommendationtype['Recommendationtype']['name']; ?>"></span>
                 <?php endforeach;?>
             </p>
-                
+            
             <div class="addRecommendationForm">
                 <div class="form-group">
                     <textarea rows=6 placeholder="" experience_id="<?= $experience['Experience']['id']; ?>" recommendationtype_id="" class="RecommendationContent form-control"></textarea>
@@ -98,11 +98,11 @@
                 </div>
             </div>
         </div>
-            
-            
+        
+        
             <?php endif; ?>
-                
-        <div class="panel-group" id="accordion">
+        
+        <div class="panel-group">
             <div class="panel panel-default panel-recommendations">
                 <div class="panel-heading panel-heading-recommendations">
                     <h5 class="panel-title panel-title-recommendations">
@@ -131,19 +131,42 @@
                         </div>
                             <?php endforeach;?>
                             <?php if (!$experience['Recommendation']) :?>
-                        <p>Aucun bon plan :(</p>
+                        <p>Aucun bon plan</p>
                             <?php endif;?>
                     </div>
                 </div>
             </div>
         </div>
-            
-            
+        
+        <div class="panel-group">
+            <div class="panel panel-default panel-photos">
+                <div class="panel-heading panel-heading-photos">
+                    <h5 class="panel-title panel-title-photos">
+                        <span style="width:20px" class="glyphicon glyphicon-picture"></span> Photos 
+                            <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+                                <?php if($experience['Experience']['fbalbum_id'] !== NULL) : ?>
+                                    <button class="btn btn-xs btn-blue pull-right" onclick="update_fb_album(<?php echo $experience['Experience']['id']; ?>, '<?php echo $experience['Experience']['fbalbum_id']; ?>')">Mettre à jour l'album</button>
+                                <?php else :?>
+                                    <button class="btn btn-xs btn-blue pull-right" onclick="import_fb_album(<?php echo $experience['Experience']['id']; ?>)">Importer un album Facebook</button>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                    </h5>
+                </div>
+                <div class="panel-collapse">
+                    <div class="panel-body photo_gallery" experience_id="<?= $experience['Experience']['id']; ?>">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
     </div>
     <?php endforeach; ?>
 </div>
-
-<!-- Modal -->
+    
+<?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+    
+<!-- Modal profile pic-->
 <div class="modal fade" id="upload_profilepic_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -165,11 +188,46 @@
         </div>
     </div>
 </div>
-<!-- Fin de Modal -->
+<!-- End of Modal profile pic -->
+    
+<!-- Modal fb album -->
+<div class="modal fade" id="import_fbalbum_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Importer un album Facebook</h4>
+            </div>
+            <div class="modal-body">
+                <div id="loading_fb_album_list">
+                    <p>Chargement des albums Facebook...</p>
+                </div>
+                <div id="fb_album_list">
+                    
+                </div>
+                <div id="fbalbum_progress" class="progress" style="visibility: hidden">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;">
+                        0%
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End of Modal fb album -->
+    
+<?php endif; ?>
 
+<?php
+    echo $this->Html->script(array('jquery.blueimp-gallery.min.js')); // Inclut la librairie gallerie
+?>
+    
 <script type="text/javascript">
     
     $( function() {
+        
+        //pour le chargement des galleries
+        get_galleries('<?php echo $this->Html->url(array('controller' => 'photos', 'action' => 'get_photo_gallery'),true); ?>');
         
         //pour le changement d'etat des boutons de categorie de recommendation
         $( '.recommendationtype-icon-selectable' ).each(function() {

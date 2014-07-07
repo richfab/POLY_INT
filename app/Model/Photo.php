@@ -26,8 +26,8 @@ class Photo extends AppModel {
     public $validate = array(
         'caption' => array(
             'maxLength' => array(
-                'rule'    => array('maxLength', '255'),
-                'message' => 'La description doit comporter 255 caractères au maximum',
+                'rule'    => array('maxLength', '10000'),
+                'message' => 'La description doit comporter 10000 caractères au maximum',
                 'allowEmpty' => true
             )
         ),
