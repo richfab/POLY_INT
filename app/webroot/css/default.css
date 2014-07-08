@@ -615,4 +615,5 @@ h2 > span.wut {
 
 .news {
     padding: 0 0 1em 45px;
+    border-bottom: 1px solid #567FDA;
 }
