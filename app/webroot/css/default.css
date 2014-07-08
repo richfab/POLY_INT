@@ -1,7 +1,10 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
+
 /*debut utile pour bring footer to bottom*/
 html,body{
     height: 100%;
-    background-color: #f4f4f4;
+    background-color: #f7f7f7;
+    font-family: "Open Sans",sans-serif;
 }
 
 .well{
@@ -11,6 +14,10 @@ html,body{
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 200;
+}
+
+b {
+    font-weight: 700;
 }
 
 #container{
@@ -613,7 +620,25 @@ h2 > span.wut {
 
 /* Activity Feed | activities/feed.ctp */
 
+.activity-feed {
+    background-color: #FFF;
+}
+
+.page-title {
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    text-align: center;
+}
 .news {
-    padding: 0 0 1em 45px;
-    border-bottom: 1px solid #567FDA;
+    padding: 10px 50px;
+}
+.activity {
+    padding: 1em 0 1em 45px;
+    border-bottom: 1px solid #F1F1F1;
+}
+
+.date {
+    color: #BBB;
+    font-size: 12px;
 }
