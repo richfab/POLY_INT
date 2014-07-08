@@ -610,3 +610,9 @@ h2 > span.wut {
     width: 24px;
     margin: 0 15px 0 0;
 }
+
+/* Activity Feed | activities/feed.ctp */
+
+.news {
+    padding: 0 0 1em 45px;
+}
