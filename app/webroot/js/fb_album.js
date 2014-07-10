@@ -27,27 +27,29 @@ window.fbAsyncInit = function() {
 //this function prompts user to login on fb and opens fb album upload modal
 function import_fb_album(experience_id){
     
-    FB.login(function(){
+    FB.login(function(response){
         
-        //once logged in, open fb album upload modal
-        $('#import_fbalbum_modal').modal('show');
-        
-        //get albums
-        FB.api("/me/albums",'get',{limit:100},
-        function (response) {
-            console.log(response);
-            //create the list of user's fb albums
-            if (response && !response.error) {
-                for(var i in response.data){
-                    var album = response.data[i];
-                    var date = new Date(album.updated_time);
-                    var updated_date = date.toLocaleDateString();
-                    $('#loading_fb_album_list').hide();
-                    $('#fb_album_list').append('<div class="row fb_album_el" onclick="get_fb_photos(\'' + album.id + '\',' + album.count + ', $(this),' + experience_id + ')"><div class="col-xs-12"><h4>' + album.name + ' (<span class="upload_progress"></span>' + album.count +')</h4><p><small>Modifié le ' + updated_date + '</small></p></div></div>');
+        if (response.authResponse) {
+            //once logged in, open fb album upload modal
+            $('#import_fbalbum_modal').modal('show');
+
+            //get albums
+            FB.api("/me/albums",'get',{limit:100},
+                function (response) {
+                    console.log(response);
+                    //create the list of user's fb albums
+                    if (response && !response.error) {
+                        for(var i in response.data){
+                            var album = response.data[i];
+                            var date = new Date(album.updated_time);
+                            var updated_date = date.toLocaleDateString();
+                            $('#loading_fb_album_list').hide();
+                            $('#fb_album_list').append('<div class="row fb_album_el" onclick="get_fb_photos(\'' + album.id + '\',' + album.count + ', $(this),' + experience_id + ')"><div class="col-xs-12"><h4>' + album.name + ' (<span class="upload_progress"></span>' + album.count +')</h4><p><small>Modifié le ' + updated_date + '</small></p></div></div>');
+                        }
+                    }
                 }
-            }
+            );
         }
-                );
         
     }, {scope: 'user_photos'});
 }
