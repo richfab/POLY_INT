@@ -138,7 +138,7 @@
             </div>
         </div>
         
-        <?php if(AuthComponent::user('firstname') == 'Facebook') : ?>
+        <?php if($user['User']['firstname'] == 'Facebook') : ?>
         <div class="panel-group">
             <div class="panel panel-default panel-photos">
                 <div class="panel-heading panel-heading-photos">
