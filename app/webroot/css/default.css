@@ -442,6 +442,46 @@ h2 > span.wut {
     margin: 10px;
 }
 
+.photo_el{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    outline: solid #dddddd 1px;
+    outline-offset: 1px;
+}
+
+.photo_el_wrap{
+    display: inline-block;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.photo_el_wrap:hover .close{
+    opacity: 0.6;
+    text-decoration: none;
+}
+
+.photo_el_wrap .close {
+    margin-left: 82px;
+    text-shadow: initial;
+    color: white;
+    opacity: 0;
+    position: absolute;
+    background-color: black;
+    padding: 0px 3px 2px 3px;
+    border-bottom-left-radius: 2px;
+    font-weight: 100;
+    font-size: 20px;
+}
+
+.photo_el_wrap .close:hover{
+    opacity: 0.8;
+    text-decoration: none;
+}
+
 .contact-logo{
     height: 20px;
 }

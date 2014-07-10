@@ -410,7 +410,7 @@ class UsersController extends AppController {
     public function profile($user_id = null) {
         
         //includes scripts to send ajax recommendations and to display "read more" button on long posts
-        $jsIncludes = array('recommendations','readmore','get_photo_gallery');
+        $jsIncludes = array('recommendations','readmore','photo_gallery');
         
         //user wants to see his own profile
         if($user_id==null){

@@ -15,7 +15,7 @@ window.fbAsyncInit = function() {
     });
     
 };
-            
+
 (function(d, s, id){
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) {return;}
@@ -31,24 +31,24 @@ function import_fb_album(experience_id){
         
         //once logged in, open fb album upload modal
         $('#import_fbalbum_modal').modal('show');
-
+        
         //get albums
         FB.api("/me/albums",'get',{limit:100},
-            function (response) {
-                console.log(response);
-                //create the list of user's fb albums
-                if (response && !response.error) {
-                    for(var i in response.data){
-                        var album = response.data[i];
-                        var date = new Date(album.updated_time);
-                        var updated_date = date.toLocaleDateString();
-                        $('#loading_fb_album_list').hide();
-                        $('#fb_album_list').append('<div class="row fb_album_el" onclick="get_fb_photos(\'' + album.id + '\',' + album.count + ', $(this),' + experience_id + ')"><div class="col-xs-12"><h4>' + album.name + ' (<span class="upload_progress"></span>' + album.count +')</h4><p><small>Modifié le ' + updated_date + '</small></p></div></div>');
-                    }
+        function (response) {
+            console.log(response);
+            //create the list of user's fb albums
+            if (response && !response.error) {
+                for(var i in response.data){
+                    var album = response.data[i];
+                    var date = new Date(album.updated_time);
+                    var updated_date = date.toLocaleDateString();
+                    $('#loading_fb_album_list').hide();
+                    $('#fb_album_list').append('<div class="row fb_album_el" onclick="get_fb_photos(\'' + album.id + '\',' + album.count + ', $(this),' + experience_id + ')"><div class="col-xs-12"><h4>' + album.name + ' (<span class="upload_progress"></span>' + album.count +')</h4><p><small>Modifié le ' + updated_date + '</small></p></div></div>');
                 }
             }
-        );
-
+        }
+                );
+        
     }, {scope: 'user_photos'});
 }
 
@@ -58,24 +58,24 @@ function update_fb_album(experience_id, fbalbum_id){
     FB.login(function(){
         
         $('#import_fbalbum_modal').modal('show');
-
+        
         //get albums
         FB.api("/"+fbalbum_id,'get',{limit:100},
-            function (response) {
-                console.log(response);
-                if (response && !response.error) {
-                    var album = response;
-                    var date = new Date(album.updated_time);
-                    var updated_date = date.toLocaleDateString();
-                    $('#loading_fb_album_list').hide();
-                    $('#fb_album_list').append('<div class="row fb_album_el"><div class="col-xs-12"><h4>' + album.name + ' (<span class="upload_progress"></span>' + album.count +')</h4><p><small>Modifié le ' + updated_date + '</small></p></div></div>');
-                    var fb_album_el = $('.fb_album_el');
-                    //starts photo upload
-                    get_fb_photos(album.id, album.count, fb_album_el, experience_id);
-                }
+        function (response) {
+            console.log(response);
+            if (response && !response.error) {
+                var album = response;
+                var date = new Date(album.updated_time);
+                var updated_date = date.toLocaleDateString();
+                $('#loading_fb_album_list').hide();
+                $('#fb_album_list').append('<div class="row fb_album_el"><div class="col-xs-12"><h4>' + album.name + ' (<span class="upload_progress"></span>' + album.count +')</h4><p><small>Modifié le ' + updated_date + '</small></p></div></div>');
+                var fb_album_el = $('.fb_album_el');
+                //starts photo upload
+                get_fb_photos(album.id, album.count, fb_album_el, experience_id);
             }
-        );
-
+        }
+                );
+        
     }, {scope: 'user_photos'});
 }
 
@@ -93,19 +93,19 @@ function get_fb_photos(album_id, album_count, fb_album_el, experience_id){
     update_bar_progress(0,album_count);
     
     FB.api("/" + album_id + "/photos",'get',{limit:100},
-        function(response){
-            handle_response_photos(response, experience_id, album_id);
-        }
-    );
+    function(response){
+        handle_response_photos(response, experience_id, album_id);
+    }
+            );
 }
 
 //this function uses facebook cursor to load more photos
 function get_more_fb_photos(cursor, experience_id, album_id){
     FB.api(cursor,'get',{limit:100},
-        function(response){
-            handle_response_photos(response, experience_id, album_id);
-        }
-    );
+    function(response){
+        handle_response_photos(response, experience_id, album_id);
+    }
+            );
 }
 
 //this function goes through the photos and calls itself is cursor is found in paging
@@ -131,6 +131,7 @@ function handle_photo(photo, experience_id, album_id){
         data : {
             fb_id : photo.id,
             source : photo.source,
+            picture : photo.picture,
             caption : photo.name,
             fbalbum_id : album_id,
             experience_id : experience_id
@@ -148,6 +149,8 @@ function handle_photo(photo, experience_id, album_id){
                 reset_fbalbum_upload_modal();
                 //reloads all galleries
                 get_galleries('../photos/get_photo_gallery');
+                //reloads all fbalbum import buttons
+                get_fbalbum_import_buttons();
             }
         },
         error : function(data) {
@@ -174,4 +177,29 @@ function reset_fbalbum_upload_modal(){
     $('#fbalbum_progress').css('visibility','hidden');
     update_bar_progress(0,1);
     $('#loading_fb_album_list').show();
+}
+
+function get_fbalbum_import_buttons(){
+    //pour le chargement des fbalbum_import_buttons
+    $( '.fbalbum_import_button' ).each(function() {
+        get_fbalbum_import_button($(this));
+    });
+}
+
+function get_fbalbum_import_button(fbalbum_import_button_el){
+    
+    var experience_id = fbalbum_import_button_el.attr('experience_id');
+    
+    $.ajax({
+        type:"GET",
+        url : "../photos/get_fbalbum_import_button/"+experience_id,
+        dataType : 'html',
+        success : function(data) {
+            fbalbum_import_button_el.html(data);
+        },
+        error : function(data) {
+        },
+        complete : function(data) {
+        }
+    });
 }

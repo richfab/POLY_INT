@@ -143,13 +143,7 @@
                 <div class="panel-heading panel-heading-photos">
                     <h5 class="panel-title panel-title-photos">
                         <span style="width:20px" class="glyphicon glyphicon-picture"></span> Photos 
-                            <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-                                <?php if($experience['Experience']['fbalbum_id'] !== NULL) : ?>
-                                    <button class="btn btn-xs btn-blue pull-right" onclick="update_fb_album(<?php echo $experience['Experience']['id']; ?>, '<?php echo $experience['Experience']['fbalbum_id']; ?>')">Mettre à jour l'album</button>
-                                <?php else :?>
-                                    <button class="btn btn-xs btn-blue pull-right" onclick="import_fb_album(<?php echo $experience['Experience']['id']; ?>)">Importer un album Facebook</button>
-                                <?php endif; ?>
-                            <?php endif; ?>
+                            <?php echo $this->element('fbalbum_import_button', array('experience' => $experience)); ?>
                     </h5>
                 </div>
                 <div class="panel-collapse">
