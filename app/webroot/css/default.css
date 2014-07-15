@@ -1,10 +1,11 @@
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,700,500);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,700,500);
 
 /*debut utile pour bring footer to bottom*/
 html,body{
     height: 100%;
     background-color: #f7f7f7;
-    font-family: "Open Sans",sans-serif;
+    font-family: 'Open Sans', 'Trebuchet MS', arial, sans-serif;
+    font-size: 13px;
 }
 
 .well{
@@ -618,7 +619,34 @@ h2 > span.wut {
     margin: 0 15px 0 0;
 }
 
+
 /* Activity Feed | activities/feed.ctp */
+.icons-list {
+    padding: 0;
+    margin: 0 0 10px;
+    list-style: none;
+}
+
+.icons-list > li {
+    position: relative;
+    padding-left: 2.2em;
+    margin-bottom: 1em;
+    line-height: 1.65em;
+}
+
+.icons-list > li > .li-icon {
+    position: absolute;
+    top: .25em;
+    left: 0;
+    width: 1em;
+    font-size: 1.25em;
+    text-align: center;
+}
+.activity-thumbnail {
+    padding: 2px;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+}
 
 .activity-feed {
     background-color: #FFF;
@@ -635,16 +663,24 @@ h2 > span.wut {
     border: 1px solid #E5E5E5;
 }
 .activity {
-    font-size: 300;
-    padding: 1em 0 1em 60px;
-    border-bottom: 1px dashed #E5E5E5;
-    color: #777;
+    position: relative;
+    padding: 0;
+    margin: 0;
+    padding-top: 22px;
+    padding-bottom: 35px;
+    padding-left: 40px;
+    margin-left: 20px;
+    border-left: 2px solid #DDD;
 }
 
 .activity a {
-    color: black;
-    font-weight: 700;
+    color: #428bca;
+    font-weight: 500;
     letter-spacing: 0.05em;
+}
+
+.activity-content {
+    padding-left: 25px;
 }
 
 .activity-photo {
@@ -666,6 +702,31 @@ h2 > span.wut {
     border-top: 1px dashed #c0392b;
 }
 
+.activity-subject {
+    margin-bottom: 1em;
+}
+
+.activity-actions {
+    padding: 10px 10px;
+    margin-top: 2em;
+    border-top: 1px dotted #ccc;
+}
+
+.activity-actions a {
+    color: #999;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.activity-actions a:hover {
+    text-decoration: none;
+    color: #428bca;
+}
+
+.activity-actions .pull-left {
+    margin: 0 15px 0 0;
+}
+
 .activity-post {
 
 }
@@ -674,10 +735,12 @@ h2 > span.wut {
     
 }
 
-.profil-picture {
+.activity-profil-picture {
     position: absolute;
-    margin-left: -50px;
+    margin-left: -58px;
     margin-top: -5px;
+    border: 3px solid #FFF;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.35);
 }
 
 .pa-activity {
