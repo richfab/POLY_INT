@@ -46,14 +46,14 @@
     <?php foreach ($photos as $photo): ?>
     <div class="photo_el_wrap">
         <button type="button" class="close" onclick="delete_photo($(this).parents('.photo_gallery'),<?php echo $photo['Photo']['id']; ?>)">&times;</button>
-        <a href="<?php echo $photo['Photo']['source']; ?>" title="<?php echo $photo['Photo']['caption']; ?>" data-gallery="gallery#<?php echo $photo['Photo']['experience_id']; ?>">
+        <a href="<?php echo $photo['Photo']['image']; ?>" title="<?php echo $photo['Photo']['caption']; ?>" data-gallery="gallery#<?php echo $photo['Photo']['experience_id']; ?>">
             <div class="photo_el" style="background-image: url(<?php echo $photo['Photo']['picture']; ?>)"></div>
         </a>
     </div>
     <?php endforeach; ?>
     
     <?php foreach ($hidden_photos as $hidden_photo): ?>
-        <a href="<?php echo $hidden_photo['Photo']['source']; ?>" title="<?php echo $hidden_photo['Photo']['caption']; ?>" data-gallery="gallery#<?php echo $hidden_photo['Photo']['experience_id']; ?>"></a>
+        <a href="<?php echo $hidden_photo['Photo']['image']; ?>" title="<?php echo $hidden_photo['Photo']['caption']; ?>" data-gallery="gallery#<?php echo $hidden_photo['Photo']['experience_id']; ?>"></a>
     <?php endforeach; ?>
     
     <?php if(empty($photos)): ?>

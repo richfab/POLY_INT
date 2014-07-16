@@ -20,9 +20,12 @@ function get_gallery(photo_gallery_el, get_photo_gallery_url, limit){
         limit = '';
     }
     
+    //si la largeur de l'ecran est inferieure a 768px (considéré comme un mobile)
+    var size = ($(window).width() < 768) ? 'S' : 'M';
+    
     $.ajax({
         type:"GET",
-        url : get_photo_gallery_url+'/'+experience_id+'/'+limit,
+        url : get_photo_gallery_url+'/'+experience_id+'/'+size+'/'+limit,
         dataType : 'html',
         success : function(data) {
             photo_gallery_el.html(data);

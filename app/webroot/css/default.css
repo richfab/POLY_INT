@@ -442,6 +442,12 @@ h2 > span.wut {
     margin: 10px;
 }
 
+@media (min-width: 768px) {
+    .fbalbum_import_button{
+        float: right;
+    }
+}
+
 .photo_el{
     display: inline-block;
     width: 100px;

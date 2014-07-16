@@ -46,7 +46,9 @@ class PhotosController extends AppController {
         $fbalbum_id = $this->request->data['fbalbum_id'];
         $experience_id = $this->request->data['experience_id'];
         $source = $this->request->data['source'];
+        $source_s = $this->request->data['source_s'];
         $picture = $this->request->data['picture'];
+        $fb_created = $this->request->data['fb_created'];
             
             
         //checks that experience number belongs to user
@@ -66,10 +68,12 @@ class PhotosController extends AppController {
         $photo = array();
         $photo['Photo']['fb_id'] = $fb_id;
         $photo['Photo']['source'] = $source;
+        $photo['Photo']['source_s'] = $source_s;
         $photo['Photo']['picture'] = $picture;
         if(!empty($this->request->data['caption'])){
             $photo['Photo']['caption'] = $this->request->data['caption'];
         }
+        $photo['Photo']['fb_created'] = $fb_created;
         $photo['Photo']['experience_id'] = $experience_id;
             
         //saves photo info and experience fbalbum id
@@ -89,17 +93,27 @@ class PhotosController extends AppController {
     *
     * @return void
     */
-    public function get_photo_gallery($experience_id, $limit = NULL){
+    public function get_photo_gallery($experience_id, $size, $limit = NULL){
         
         $this->request->onlyAllow('ajax');
             
         $conditions = array();
         $conditions['Photo.experience_id'] = $experience_id;
+        
+        if($size == 'M'){
+            $fields = array('*', 'source AS image');
+        }
+        elseif ($size == 'S'){
+            $fields = array('*', 'source_s AS image');
+        }
+        
+        $order = array('Photo.fb_created' => 'DESC');
             
         $photos = $this->Photo->find('all', array(
                     'conditions' => $conditions,
                     'limit' => $limit,
-                    'order' => array('Photo.created' => 'DESC')));
+                    'fields' => $fields,
+                    'order' => $order));
                         
         //hidden photos are the photos after the limit which users want to see when browsing the album
         $hidden_photos = array();
@@ -110,7 +124,8 @@ class PhotosController extends AppController {
                         'conditions' => $conditions,
                         'offset' => $limit,
                         'limit' => 1000,
-                        'order' => array('Photo.created' => 'DESC')));
+                        'fields' => $fields,
+                        'order' => $order));
         }
             
         $this->set(array('photos' => $photos, 'hidden_photos' => $hidden_photos));

@@ -127,25 +127,31 @@ function handle_response_photos(response, experience_id, album_id){
 //this function uploads a photo and progress
 function handle_photo(photo, experience_id, album_id){
     
+    //par défaut la source de l'image adaptée mobile est la source de l'image
+    photo.source_s = photo.source;
+    
     //definition de la hauteur ideale de la photo
     var ideal_height = 700;
+    var ideal_height_mobile = 500;
+        
+    //difference minimum entre la hauteur ideale et la hauteur courrante
+    var min_difference = Math.abs( photo.height - ideal_height );
+    var min_difference_mobile = Math.abs( photo.height - ideal_height_mobile );
     
-    //si la photo source est trop petite, on en cherche une plus grande
-    if(photo.height < ideal_height){
+    for(var i in photo.images){
+
+        var image = photo.images[i];
+
+        //si la photo est proche plus de la taille ideale
+        if( (Math.abs(image.height - ideal_height) < min_difference) ){
+            min_difference = Math.abs(image.height - ideal_height);
+            photo.source = image.source;
+        }
         
-        //difference minimum entre la hauteur ideale et la hauteur courrante
-        var min_difference = 99999;
-        
-        //si une image de taille moyenne (650 <= height <= 1200) existe, on l'enregistre
-        for(var i in photo.images){
-        
-            var image = photo.images[i];
-            
-            //si la photo est plus grande que la taille ideale et qu'elle est proche de la taille ideale
-            if( (image.height >= ideal_height) && (image.height - ideal_height < min_difference) ){
-                min_difference = image.height - ideal_height;
-                photo.source = image.source;
-            }
+        //si la photo est plus proche de la taille ideale mobile
+        if( (Math.abs(image.height - ideal_height_mobile) < min_difference_mobile) ){
+            min_difference_mobile = Math.abs(image.height - ideal_height_mobile);
+            photo.source_s = image.source;
         }
         
     }
@@ -156,8 +162,10 @@ function handle_photo(photo, experience_id, album_id){
         data : {
             fb_id : photo.id,
             source : photo.source,
+            source_s : photo.source_s,
             picture : photo.picture,
             caption : photo.name,
+            fb_created : photo.created_time,
             fbalbum_id : album_id,
             experience_id : experience_id
         },
