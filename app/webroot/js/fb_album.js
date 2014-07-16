@@ -127,6 +127,29 @@ function handle_response_photos(response, experience_id, album_id){
 //this function uploads a photo and progress
 function handle_photo(photo, experience_id, album_id){
     
+    //definition de la hauteur ideale de la photo
+    var ideal_height = 700;
+    
+    //si la photo source est trop petite, on en cherche une plus grande
+    if(photo.height < ideal_height){
+        
+        //difference minimum entre la hauteur ideale et la hauteur courrante
+        var min_difference = 99999;
+        
+        //si une image de taille moyenne (650 <= height <= 1200) existe, on l'enregistre
+        for(var i in photo.images){
+        
+            var image = photo.images[i];
+            
+            //si la photo est plus grande que la taille ideale et qu'elle est proche de la taille ideale
+            if( (image.height >= ideal_height) && (image.height - ideal_height < min_difference) ){
+                min_difference = image.height - ideal_height;
+                photo.source = image.source;
+            }
+        }
+        
+    }
+    
     $.ajax({
         type:"PUT",
         url : '../photos/add_fb_photo',
