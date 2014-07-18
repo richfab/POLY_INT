@@ -45,7 +45,9 @@
 <div id="links">
     <?php foreach ($photos as $photo): ?>
     <div class="photo_el_wrap">
-        <button type="button" class="close" onclick="delete_photo($(this).parents('.photo_gallery'),<?php echo $photo['Photo']['id']; ?>)">&times;</button>
+        <?php if($photo['Experience']['user_id'] == AuthComponent::user('id')) : ?>
+            <button type="button" class="close" onclick="delete_photo($(this).parents('.photo_gallery'),<?php echo $photo['Photo']['id']; ?>)">&times;</button>
+        <?php endif;?>
         <a href="<?php echo $photo['Photo']['image']; ?>" title="<?php echo $photo['Photo']['caption']; ?>" data-gallery="gallery#<?php echo $photo['Photo']['experience_id']; ?>">
             <div class="photo_el" style="background-image: url(<?php echo $photo['Photo']['picture']; ?>)"></div>
         </a>
