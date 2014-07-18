@@ -20,7 +20,7 @@
     <?php if(key($activity) == 'Photo'): ?>
         
         <p>
-            <span class="glyphicon glyphicon-picture"></span> <?= $activity['Experience']['User']['firstname']; ?> <?= $activity['Experience']['User']['lastname']; ?> a ajouté des photos à <?= $activity['Experience']['City']['name']; ?>, <?= $activity['Experience']['City']['country_id']; ?> (<?= $activity['Experience']['created']; ?>)
+            <span class="glyphicon glyphicon-picture"></span> <?= $activity['Experience']['User']['firstname']; ?> <?= $activity['Experience']['User']['lastname']; ?> a ajouté des photos à <?= $activity['Experience']['City']['name']; ?>, <?= $activity['Experience']['City']['country_id']; ?> (<?= $activity['Photo']['created']; ?>)
         </p>
         
     <?php endif;?>
@@ -29,6 +29,8 @@
 
         <p>
             <span class="glyphicon glyphicon-comment"></span> <?= $activity['Experience']['User']['firstname']; ?> <?= $activity['Experience']['User']['lastname']; ?> a ajouté un bon plan à <?= $activity['Experience']['City']['name']; ?>, <?= $activity['Experience']['City']['country_id']; ?> (<?= $activity['Experience']['created']; ?>)
+            <br/>
+            <?= $activity['Recommendation']['content']; ?>
         </p>
 
     <?php endif;?>
