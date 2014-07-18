@@ -14,6 +14,8 @@
         <p>
             <span class="glyphicon glyphicon-globe"></span> <?= $activity['User']['firstname']; ?> <?= $activity['User']['lastname']; ?> a ajouté une expérience à <?= $activity['City']['name']; ?>, <?= $activity['City']['country_id']; ?> (<?= $activity['Experience']['created']; ?>)
         </p>
+        
+        <?php echo $this->element('experience_info',array('experience'=>$activity)); ?>
 
     <?php endif;?>
         
@@ -51,6 +53,10 @@
     </p>
 
 <?php endforeach; ?>
+    
+<p style="text-align: center">
+    <a style="cursor: pointer" onclick='get_activities(<?php echo json_encode($activities_user_ids); ?>);$(this).remove();'>plus</a>
+</p>
 
 <?php
     echo $this->Html->script(array('jquery.blueimp-gallery.min.js')); // Inclut la librairie gallerie

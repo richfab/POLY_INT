@@ -24,6 +24,18 @@ class ActivitiesController extends AppController {
     public function beforeFilter() {
         parent::beforeFilter();
     }
+    
+    /**
+    * This method allows user to view activities
+    *
+    * @return void
+    */
+    public function index(){
+        
+    	$this->set('jsIncludes',array('photo_gallery','get_activities','readmore','logo_fly'));
+        $this->set('cssIncludes',array('blueimp-gallery'));
+        
+    }
         
     /**
     * This method gets activities
@@ -32,11 +44,7 @@ class ActivitiesController extends AppController {
     */
     public function get_activities(){
         
-//        $this->request->onlyAllow('ajax');
-        
-        //includes scripts
-        $this->set('jsIncludes',array('photo_gallery'));
-        $this->set('cssIncludes',array('blueimp-gallery'));
+        $this->request->onlyAllow('ajax');
         
         //tableau des activités
         $activities = array();
@@ -51,7 +59,10 @@ class ActivitiesController extends AppController {
             'limit' => 5,
             'order' => 'MAX(Photo.created) DESC',
             'fields' => array('Experience.user_id'),
-            'group' => 'Experience.user_id'
+            'group' => 'Experience.user_id',
+            'conditions' => array(
+                "NOT" => array("Experience.user_id" => $activities_user_ids)
+            )
         ));
         
         foreach ($photos_users as $photos_user){
@@ -132,7 +143,14 @@ class ActivitiesController extends AppController {
         shuffle($activities);
             
         //sets last activities
-        $this->set(array('activities' => $activities));
+        $this->set(array('activities' => $activities, 'activities_user_ids' => $activities_user_ids));
+        
+        //recuperation des dernieres recpmmendations postees
+        App::import('Controller', 'Countries');
+        $countriesController = new CountriesController;
+        $this->set('countries',$countriesController->Country->find('list'));
+        
+        $this->layout = 'ajax';
     }
         
 }
