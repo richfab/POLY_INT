@@ -22,6 +22,9 @@
         <p>
             <span class="glyphicon glyphicon-picture"></span> <?= $activity['Experience']['User']['firstname']; ?> <?= $activity['Experience']['User']['lastname']; ?> a ajouté des photos à <?= $activity['Experience']['City']['name']; ?>, <?= $activity['Experience']['City']['country_id']; ?> (<?= $activity['Photo']['created']; ?>)
         </p>
+        <div class="panel-body photo_gallery" experience_id="<?= $activity['Experience']['id']; ?>">
+                        
+        </div>
         
     <?php endif;?>
         
@@ -48,3 +51,19 @@
     </p>
 
 <?php endforeach; ?>
+
+<?php
+    echo $this->Html->script(array('jquery.blueimp-gallery.min.js')); // Inclut la librairie gallerie
+?>
+
+<script type="text/javascript">
+
+$( function() {
+
+    //pour le chargement des galleries
+    get_galleries('<?php echo $this->Html->url(array('controller' => 'photos', 'action' => 'get_photo_gallery'),true); ?>');
+
+
+});
+    
+</script>

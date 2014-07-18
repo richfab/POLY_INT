@@ -34,6 +34,10 @@ class ActivitiesController extends AppController {
         
 //        $this->request->onlyAllow('ajax');
         
+        //includes scripts
+        $this->set('jsIncludes',array('photo_gallery'));
+        $this->set('cssIncludes',array('blueimp-gallery'));
+        
         //tableau des activités
         $activities = array();
         //tableau des user_ids des utilisateurs ayant déjà une activité récente
