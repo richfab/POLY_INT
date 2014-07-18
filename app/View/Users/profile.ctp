@@ -144,7 +144,9 @@
                 <div class="panel-heading panel-heading-photos">
                     <h5 class="panel-title panel-title-photos">
                         <span style="width:20px" class="glyphicon glyphicon-picture"></span> Photos 
-                            <?php echo $this->element('fbalbum_import_button', array('experience' => $experience)); ?>
+                            <?php if($experience['Experience']['user_id'] == AuthComponent::user('id')) : ?>
+                                <?php echo $this->element('fbalbum_import_button', array('experience' => $experience)); ?>
+                            <?php endif; ?>
                     </h5>
                 </div>
                 <div class="panel-collapse">
