@@ -80,7 +80,7 @@ function get_experiences(_view_to_render, _filter){
         dataType : 'html',
         success : function(data) {
             $('.experience-list').append(data);
-            $('#list-map').slideDown(300);
+            open_list_experiences();
         },
         error : function(data) {
             //alert("Une erreur est survenue, veuillez réessayer dans quelques instants.");
@@ -88,13 +88,23 @@ function get_experiences(_view_to_render, _filter){
         complete : function(data) {
             // on cache le loader
             stop_logo_fly();
-            $('.loader-list').remove();
             
             //incremente le offset pour le 'plus' de la liste des resultats
             $('input[name=offset]').val($('input[name=offset]').val()*1+20);
         }
     });
     console.log(filter);
+}
+
+//ouvre la liste des experiences ou un modal selon la taille de l'écran
+function open_list_experiences(){
+    if ($(window).width() < 768) {
+        // do something for small screens
+        $('#list-map-modal').modal('show');
+    }
+    else{
+        $('#list-map').slideDown(300);
+    }
 }
 
 //réinitialise le offset, vide la liste des experiences et lance la recherche d'experiences
@@ -117,14 +127,14 @@ function get_filter_params(){
     
     var filter = {};
     
-    if($('input[name=department_id]').val() !== '-1'){
-        var deparment_id = $.parseJSON('{"department_id":"'+$('input[name=department_id]').val()+'"}');
+    if($('#department_id').attr('value') !== '0'){
+        var deparment_id = $.parseJSON('{"department_id":"'+$('#department_id').attr('value')+'"}');
     }
-    if($('input[name=motive_id]').val() !== '-1'){
-        var motive_id = $.parseJSON('{"motive_id":"'+$('input[name=motive_id]').val()+'"}');
+    if($('#motive_id').attr('value') !== '0'){
+        var motive_id = $.parseJSON('{"motive_id":"'+$('#motive_id').attr('value')+'"}');
     }   
-    if($('input[name=school_id]').val() !== '-1'){
-        var school_id = $.parseJSON('{"school_id":"'+$('input[name=school_id]').val()+'"}');
+    if($('#school_id').attr('value') !== '0'){
+        var school_id = $.parseJSON('{"school_id":"'+$('#school_id').attr('value')+'"}');
     }
     if($('input[name=key_word]').length !== 0 && $('input[name=key_word]').val() !== ''){
         var key_word = $.parseJSON('{"key_word":"'+$('input[name=key_word]').val()+'"}');
@@ -138,11 +148,11 @@ function get_filter_params(){
     if($('input[name=user_name]').length !== 0 && $('input[name=user_name]').val() !== ''){
         var user_name = $.parseJSON('{"user_name":"'+$('input[name=user_name]').val()+'"}');
     }
-    if($('input[name=date_min]').length !== 0 && $('input[name=date_min]').val() !== ''){
-        var date_min = $.parseJSON('{"date_min":"'+$('input[name=date_min]').val()+'"}');
+    if($('#period_id').attr('date-min').length !== 0 && $('#period_id').attr('date-min') !== ''){
+        var date_min = $.parseJSON('{"date_min":"'+$('#period_id').attr('date-min')+'"}');
     }
-    if($('input[name=date_max]').length !== 0 && $('input[name=date_max]').val() !== ''){
-        var date_max = $.parseJSON('{"date_max":"'+$('input[name=date_max]').val()+'"}');
+    if($('#period_id').attr('date-max').length !== 0 && $('#period_id').attr('date-max') !== ''){
+        var date_max = $.parseJSON('{"date_max":"'+$('#period_id').attr('date-max')+'"}');
     }
     if($('input[name=offset]').length !== 0){
         var offset = $.parseJSON('{"offset":"'+$('input[name=offset]').val()+'"}');

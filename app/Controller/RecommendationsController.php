@@ -1,38 +1,65 @@
 <?php
+/**
+ * Recommendations Controller
+ *
+ * @property Recommendation $Recommendation
+ * @property PaginatorComponent $Paginator
+ */
 App::uses('AppController', 'Controller');
-    
+
+/**
+ * Recommendations Controller
+ *
+ * This class defines all actions relative to Recommendations
+ *
+ * @package		app.Controller
+ */
 class RecommendationsController extends AppController {
     
     /**
- * Components
- *
- * @var array
- */
+    * Components
+    *
+    * @var array
+    */
     public $components = array('RequestHandler','Paginator', 'Session');
 
-    /* Set pagination options */
+    /**
+    * Pagination options
+    *
+    * @var array
+    */
     public $paginate = array(
             'limit' => 20,
             'order' => array('created' => 'DESC')
     );
         
+    /**
+    * This method is called before the controller action. It is useful to define which actions are allowed publicly.
+    *
+    * @return void
+    */
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(array('search','get_recommendations')); //ce que tout le monde a le droit de faire
+        $this->Auth->allow(array('search','get_recommendations')); //actions that anyone is allowed to call
     }
         
+    /**
+    * This method allows user to add a recommendation
+    *
+    * @return void
+    */
     public function add_recommendation(){
         
         $this->request->onlyAllow('ajax');
                 
-        //ajout de la recommandation
+        //creates recommandation from request data
         $this->Recommendation->create();
         $recommendation = array();
         $recommendation['Recommendation']['content'] = $this->request->data['content'];
         $recommendation['Recommendation']['experience_id'] = $this->request->data['experience_id'];
         $recommendation['Recommendation']['recommendationtype_id'] = $this->request->data['recommendationtype_id'];
         
-        //on ajoute la recommandation
+        //saves recommendation
         if($this->Recommendation->save($recommendation)){
             return new CakeResponse(array('body'=> json_encode(array('errorMessage'=>0)),'status'=>200));
         }
@@ -42,6 +69,12 @@ class RecommendationsController extends AppController {
         
     }
     
+    /**
+    * This method allows user to delete a recommendation
+    *
+    * @param string $id
+    * @return void
+    */
     public function delete($id = null) {
         $this->Recommendation->id = $id;
         if (!$this->Recommendation->exists()) {
@@ -62,25 +95,35 @@ class RecommendationsController extends AppController {
         return $this->redirect($this->referer());
     }
     
+    /**
+    * This method allows user to search recommendations
+    *
+    * @return void
+    */
     public function search(){
-        //on inclut les scripts pour la recuperation des experiences et google maps pour l'autocomplete des lieux
+        //includes google maps script for place autocomplete and to get recommendation
     	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','get_recommendations','readmore','logo_fly'));
         
-        //recupere les recommendationtypes
+        //sets recommendation types
         $this->set('recommendationtypes',$this->Recommendation->Recommendationtype->find('all'));
     }
     
+    /**
+    * This method gets recommendations
+    *
+    * @return void
+    */
     public function get_recommendations(){
         
         $this->request->onlyAllow('ajax');
         App::uses('AuthComponent', 'Controller/Component');
             
-         //on recupere les experiences si l'utilisateur est connecté
+         //gets recommendations only of user is logged in
         if($this->Auth->user('id')){
-            //on transforme l'objet de parametres en conditions
+            //converts filter parameters into conditions
             $conditions = $this->_filters_to_conditions($this->request->data);
             
-            //on definit la limite du nombre de resultats
+            //defines number of results and offset
             $offset = $this->request->data['offset'];
             $result_limit = 20;
             
@@ -94,9 +137,9 @@ class RecommendationsController extends AppController {
                         'limit' => $result_limit,
                         'offset' => $offset)));
             
-            //recupere les pays
+            //sets countries
             $this->set('countries',$this->Recommendation->Experience->City->Country->find('list'));
-            //recupere les recommendationtypes (icones et names
+            //sets recommendationtypes (icons et names)
             $this->set('recommendationtype_names',$this->Recommendation->Recommendationtype->find('list'));
             $this->set('recommendationtype_icons',$this->Recommendation->Recommendationtype->find('list',array(
                 'fields' => array('Recommendationtype.icon')
@@ -106,7 +149,12 @@ class RecommendationsController extends AppController {
         $this->render('/Recommendations/get_recommendations');
     }
     
-    //fonction qui transforme l'objet de parametres en conditions pour le find
+    /**
+    * This protected method converts filter parameters into conditions
+    * 
+    * @param string $request_data
+    * @return array
+    */
     protected function _filters_to_conditions($request_data = null){
         
         $conditions = array();
@@ -114,9 +162,11 @@ class RecommendationsController extends AppController {
         if(empty($request_data)){
             return $conditions;
         }
+        //if recommendationtype was selected
         if(!empty($request_data['recommendationtypes'])){
             $conditions['Recommendation.recommendationtype_id'] = $request_data['recommendationtypes'];
         }
+        //if country was selected in autocomplete
         if(!empty($request_data['country_id'])){
             
             $city_ids = $this->Recommendation->Experience->City->find('list',array(
@@ -126,6 +176,7 @@ class RecommendationsController extends AppController {
             
             $conditions['Experience.city_id'] = $city_ids;
         }
+        //if city was selected in autocomplete
         if(!empty($request_data['city_name'])){
             
             $city_ids = $this->Recommendation->Experience->City->find('list',array(

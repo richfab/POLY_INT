@@ -9,7 +9,7 @@ html,body{
     font-size: 15px;
 }
 
-h1, h2, h3 {
+h1, h2, h3, h4, h5, h6 {
     font-weight: 200;
 }
 
@@ -48,6 +48,15 @@ h1, h2, h3 {
     }
 }
 
+@media (min-width: 768px) {
+    .col-sm-2.profile-info-search {
+        width: 19.666666666666664%;
+    }
+    .col-sm-10.experience-info {
+        width: 80.33333333333334%;
+    }
+}
+
 #presentation {
     background-attachment: fixed;
     background: #323234 url(../img/background3.jpg) no-repeat;
@@ -65,6 +74,16 @@ h1, h2, h3 {
     color: white;
     border-radius: 5px;
     line-height: 3;
+}
+
+#polytech_description{
+    font-weight: 200;
+    font-size: 18px;
+    letter-spacing: 0.05em;
+    line-height: 2;
+    text-align: center;
+    margin-bottom: 50px;
+    color: #666;
 }
 
 button.btn-blue, input.btn-blue, a.btn-blue {
@@ -182,6 +201,87 @@ h2 > span.wut {
     font-style: italic;
 }
 
+#filter-map {
+    position: absolute;
+    z-index: 10;
+    top: 70px;
+    left: 30px;
+}
+
+#filter-map button{
+    font-weight: 300;
+    padding: 4px 8px;
+    border-radius: 0px;
+    border-right: 0px;
+}
+
+#filter-map .dropdown-wrap:last-child button{
+    border-right: 1px solid #cccccc;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+#filter-map .dropdown-wrap:first-child button{
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+#filter-map .dropdown-wrap:nth-child(1){
+    width: 125px;
+}
+#filter-map .dropdown-wrap:nth-child(2){
+    width: 90px;
+}
+#filter-map .dropdown-wrap:nth-child(3){
+    width: 100px;
+}
+#filter-map .dropdown-wrap:nth-child(4){
+    width: 110px;
+}
+
+#filter-map .dropdown-wrap{
+    padding-right: 0px;
+    padding-left: 0px;
+}
+#filter-map .row{
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+@media (max-width: 768px) {
+    #filter-map {
+        top: 50px;
+        left: 0px;
+        width: 100%;
+    }
+    
+    #filter-map .dropdown-wrap {
+        display: inline-block;
+    }
+    
+    #filter-map .dropdown-wrap:nth-child(1){
+        width: 28%;
+    }
+    #filter-map .dropdown-wrap:nth-child(2){
+        width: 18%;
+    }
+    #filter-map .dropdown-wrap:nth-child(3){
+        width: 23%;
+    }
+    #filter-map .dropdown-wrap:nth-child(4){
+        width: 28%;
+    }
+}
+
+.filter-button.selected span{
+    color: #e74c3c;
+}
+
+.dropdown-menu > li > a:hover {
+    background-color: #e74c3c;
+    color: white;
+}
+
 #list-map {
     position: absolute;
     width: 417px;
@@ -194,15 +294,15 @@ h2 > span.wut {
     overflow-x: hidden;
 }
 
-#list-map p {
+#list-map p, #list-map-modal p {
     margin: 0;
 }
 
-#list-map li {
+#list-map li, #list-map-modal li {
     border-bottom: 1px solid #e7e7e7;
 }
 
-#list-map div{
+#list-map div, #list-map-modal div{
     color: black;
 }
 
@@ -214,9 +314,21 @@ h2 > span.wut {
     border-bottom: none;
 }
 
-.row-experience:hover, .row-experience:hover{
+#list-map .row-experience:hover, #list-search .row-experience:hover {
     cursor: pointer;
     background-color: #f4f4f4;
+}
+
+.filter-button{
+    width: 100%;
+    text-align: right;
+    color: #A09A9A;
+}
+
+.filter-button:hover, .filter-button:focus, .filter-button:active, .filter-button.active, .open .dropdown-toggle.filter-button {
+    color: #A09A9A;
+    background-color: white;
+    border: 1px solid #cccccc;
 }
 
 #list-search, #recommendation-list{
@@ -229,8 +341,12 @@ h2 > span.wut {
     border-color: #ABABAB;
 }
 
+.experience-list{
+    font-weight: 300;
+}
+
 .experience-list a:hover{
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .access {
@@ -247,36 +363,129 @@ h2 > span.wut {
 
 #linkedin-reco{
     color: #666;
+    font-weight: 500;
 }
 
 .row-marketing{
-    padding: 40px 30px;
+    padding: 40px 30px 0px 30px;
 }
 .navbar-brand {
     padding: 12px 10px;
 }
 
-#brand_logo.fly{
-    -webkit-animation:spin 2s ease infinite;
-    -moz-animation:spin 2s ease infinite;
-    animation:spin 2s ease infinite;
+@-webkit-keyframes blink {
+    0% {
+        opacity:1;
+    }
+    75% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
 }
-@-moz-keyframes spin { 100% { 
-           transform-origin:left top;
-           -moz-transform: rotate(-360deg); } }
-@-webkit-keyframes spin { 100% { 
-            transform-origin:left top;
-            -ms-transform-origin:left top; /* IE 9 */
-            -webkit-transform-origin:left top; /* Opera, Chrome, and Safari */
-           -webkit-transform: rotate(-360deg); } }
-@keyframes spin { 100% { 
-           transform-origin:left top;
-           -webkit-transform: rotate(-360deg); 
-           transform:rotate(-360deg); } }
+@-moz-keyframes blink {
+    0% {
+        opacity:1;
+    }
+    75% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
+}
+#brand_logo.fly {
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    -ms-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    
+    -webkit-animation-direction: normal;
+    -webkit-animation-duration: 1.5s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: blink;
+    -webkit-animation-timing-function: ease-in-out;
+    
+    -moz-animation-direction: normal;
+    -moz-animation-duration: 1.5s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-name: blink;
+    -moz-animation-timing-function: ease-in-out;    
+}
 
 #profil {
     margin-top: 50px;
     padding: 20px 0;
+}
+
+#edit_profile_button{
+    margin-top: 30px;
+}
+
+.fb_album_el{
+    padding: 10px;
+    cursor: pointer;
+    background-color: white;
+}
+
+.fb_album_el h4{
+    color:#428bca;
+}
+
+.fb_album_el:hover{
+    background-color: #f4f4f4;
+}
+
+#fbalbum_progress{
+    margin: 10px;
+}
+
+@media (min-width: 768px) {
+    .fbalbum_import_button{
+        float: right;
+    }
+}
+
+.photo_el{
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    outline: solid #dddddd 1px;
+    outline-offset: 1px;
+}
+
+.photo_el_wrap{
+    display: inline-block;
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.photo_el_wrap:hover .close{
+    opacity: 0.6;
+    text-decoration: none;
+}
+
+.photo_el_wrap .close {
+    margin-left: 82px;
+    text-shadow: initial;
+    color: white;
+    opacity: 0;
+    position: absolute;
+    background-color: black;
+    padding: 0px 3px 2px 3px;
+    border-bottom-left-radius: 2px;
+    font-weight: 100;
+    font-size: 20px;
+}
+
+.photo_el_wrap .close:hover{
+    opacity: 0.8;
+    text-decoration: none;
 }
 
 .contact-logo{
@@ -285,6 +494,14 @@ h2 > span.wut {
 
 .contact-logo.disabled{
     opacity: 0.5;
+}
+
+.department_logo_profile{
+    height: 25px;
+}
+
+.department_logo_search{
+    height: 20px;
 }
 
 #block-temps {
@@ -331,11 +548,7 @@ h2 > span.wut {
     margin-bottom: 30px;
 }
 
-#filter-search-inputs input{
-    color: #e74c3c;
-}
-
-#filter-search-inputs > div{
+#filter-search-inputs > div, #search-filters .dropdown-wrap{
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -367,6 +580,15 @@ h2 > span.wut {
     margin-bottom: 50px;
 }
 
+#custom_avatar #avatar_profile:hover{
+    cursor: pointer;
+    filter: brightness(75%);
+    -webkit-filter: brightness(75%);
+    -moz-filter: brightness(75%);
+    -o-filter: brightness(75%);
+    -ms-filter: brightness(75%);
+}
+
 #avatar_profile, #avatar_search{
     border-radius: 100%;
     padding: 1px;
@@ -374,10 +596,7 @@ h2 > span.wut {
 
 #Recommendationtypes{
     text-align: center;
-}
-
-#Recommendationtypes .recommendationtype-icon{
-    margin-left: 20px;
+    padding: 0px 30px;
 }
 
 .recommendationtype-icon{
@@ -401,19 +620,19 @@ h2 > span.wut {
 
 .recommendationtype-icon:hover{
     border-color: #e74c3c;
-    
 }
 
-.panel-recommendations{
+.panel-recommendations, .panel-photos{
     border: none;
+    box-shadow: none;
 }
 
-.panel-title-recommendations{
+.panel-title-recommendations, .panel-title-photos{
     font-size: 14px;
     color: #e74c3c;
 }
 
-.panel-heading-recommendations{
+.panel-heading-recommendations, .panel-heading-photos{
     background-color: transparent!important;
 }
 

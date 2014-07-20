@@ -1,0 +1,154 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19 mai 2014, 00:54:58
+    Author     : fabienrichard
+*/
+
+#heights_gallery_instructions{
+    margin-bottom: 50px;
+}
+
+.website.selected{
+    font-weight: bold;
+}
+
+ul, li, rect {
+    list-style-type: none;
+    cursor: pointer;
+    margin-bottom: 4px;
+    font-weight: 200;
+    font-size: 14px;
+    padding-left: 0;
+    line-height: 21px;
+}
+
+#webisteUl{
+    min-height: 321px;
+}
+
+.modal-body form{
+    border: none;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
+
+.modal-instructions{
+    margin-bottom: 15px;
+}
+
+#how_to_participate, #rules{
+    text-align: center;
+    font-size: 26px;
+    margin-top: 0px;
+    margin-bottom: 30px;
+}
+
+#plane-contest {
+    background: url('../img/background-paperplane.png') no-repeat scroll center center;
+    height: 137px;
+    width: 100%;
+    border-bottom: 1px solid #C9C9C9;
+}
+
+#links a img {
+    margin: 5.5px;
+    padding: 2px;
+    background-color: white;
+    border: 1px solid #C9C9C9;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+#cloud1 {
+    position: relative;
+    top: 250px;
+    left: -60px;
+    background: url('../img/cloud-tree.png') no-repeat -812px -51px;
+    width: 54px;
+    height: 36px;
+}
+
+#cloud2 {
+    position: absolute;
+    top: 50px;
+    background: url('../img/cloud-tree.png') no-repeat -543px -8px;
+    width: 129px;
+    height: 82px;
+    left: 210px;
+}
+
+
+
+#tree2 {
+    top:-62px;
+    left: 8px;
+    position: absolute;
+    background: url('../img/cloud-tree.png') no-repeat -343px -861px;
+    width: 28px;
+    height: 71px;
+}
+#tree1 {
+    top:-32px;
+    left: 284px;
+    position: absolute;
+    background: url('../img/cloud-tree.png') no-repeat -595px -723px;
+    width: 28px;
+    height: 44px;
+}
+@keyframes "cloud-bounce" { 
+    0% { margin-top: 10px }
+    50% { margin-top: -15px }
+    100% { margin-top: 6px }
+}
+@-moz-keyframes cloud-bounce { 
+    0% { margin-top: 10px }
+    50% { margin-top: -15px }
+    100% { margin-top: 6px }
+}
+@-webkit-keyframes "cloud-bounce" { 
+    0% { margin-top: 10px }
+    50% { margin-top: -15px }
+    100% { margin-top: 6px }
+}
+@-ms-keyframes "cloud-bounce" { 
+    0% { margin-top: 10px }
+    50% { margin-top: -15px }
+    100% { margin-top: 6px }
+}
+@-o-keyframes "cloud-bounce" { 
+    0% { margin-top: 10px }
+    50% { margin-top: -15px }
+    100% { margin-top: 6px }
+}
+
+@keyframes "cloud-bounce2" { 
+    0% { margin-top: -10px }
+    50% { margin-top: 5px }
+    100% { margin-top: -15px }
+}
+@-moz-keyframes cloud-bounce2 { 
+    0% { margin-top: -10px }
+    50% { margin-top: 5px }
+    100% { margin-top: -15px }
+}
+@-webkit-keyframes "cloud-bounce2" { 
+    0% { margin-top: -10px }
+    50% { margin-top: 5px }
+    100% { margin-top: -15px }
+}
+@-ms-keyframes "cloud-bounce2" { 
+    0% { margin-top: -10px }
+    50% { margin-top: 5px }
+    100% { margin-top: -15px }
+}
+@-o-keyframes "cloud-bounce2" { 
+    0% { margin-top: -10px }
+    50% { margin-top: 5px }
+    100% { margin-top: -15px }
+}

@@ -66,6 +66,12 @@ class Experience extends AppModel {
                 'allowEmpty' => false
             )
         ),
+        'city_id' => array(
+            'required' => array(
+                'rule'    => 'notEmpty',
+                'allowEmpty' => false
+            )
+        ),
         'establishment' => array(
             'maxLength' => array(
                 'rule'    => array('maxLength', '140'),

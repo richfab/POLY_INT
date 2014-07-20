@@ -110,6 +110,10 @@ CakeLog::config('error', array(
 CakePlugin::load('Composer', array('bootstrap' => true));
 //Pour adapter cakephp à boostrap
 CakePlugin::load('BoostCake');
+//Plugin d'upload par Grafikart
+ CakePlugin::load('Upload');
+ //Plugin de resize d'image
+ CakePlugin::load('Image'); 
 
 // Définition de la locale pour toutes les fonctions php relatives à la de gestion du temps :
 setlocale(LC_TIME, 'fr_FR');

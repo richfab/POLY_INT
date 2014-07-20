@@ -1,11 +1,7 @@
 <div id="search-filters">
-    <div id="controller">
-        <div class="control-map row" id="filter-search">
-            
-            <?php echo $this->element('filter_selects'); ?>
-            
-        </div>
-    </div>
+    
+    <?php echo $this->element('filter_selects'); ?>        
+        
     <div class="row" id="filter-search-inputs">
         <div class="col-sm-3" id="ExperienceInputDiv">
             <input type="text" id="ExperienceInput" location-types="(regions)" name="input" class="form-control">
@@ -18,7 +14,7 @@
         <div class="col-sm-3">    
             <input type="text" name="user_name" class="form-control" placeholder="Nom ou prénom">
         </div>
-        <div class="col-sm-2">
+        <div class="col-sm-3">
             <button id="validatePlaceButton" class="btn btn-blue form-control" onclick="new_search('get_experiences_search');"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
         </div>
         <input type="hidden" name="date_min" id="date_min">

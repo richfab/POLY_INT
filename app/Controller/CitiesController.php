@@ -1,44 +1,56 @@
 <?php
-App::uses('AppController', 'Controller');
 /**
  * Cities Controller
  *
  * @property City $City
  * @property PaginatorComponent $Paginator
  */
-class CitiesController extends AppController {
+App::uses('AppController', 'Controller');
 
 /**
- * Components
+ * Cities Controller
  *
- * @var array
+ * This class defines all actions relative to Cities
+ *
+ * @package		app.Controller
  */
+class CitiesController extends AppController {
+
+        /**
+         * Components
+         *
+         * @var array
+         */
 	public $components = array('Paginator');
         
-        /* Set pagination options */
+        /**
+        * Pagination options
+        *
+        * @var array
+        */
         public $paginate = array(
                 'limit' => 20,
                 'order' => array('lastname' => 'ASC'),
                 'conditions' => array('User.role' => 'user','User.active' => '1')
         );
 
-/**
- * admin_index method
- *
- * @return void
- */
+        /**
+         * admin_index method
+         *
+         * @return void
+         */
 	public function admin_index() {
 		$this->City->recursive = 0;
 		$this->set('cities', $this->Paginator->paginate());
 	}
 
-/**
- * admin_view method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
+        /**
+         * admin_view method
+         *
+         * @throws NotFoundException
+         * @param string $id
+         * @return void
+         */
 	public function admin_view($id = null) {
                 $this->City->recursive = 2;
 		if (!$this->City->exists($id)) {
@@ -48,11 +60,11 @@ class CitiesController extends AppController {
 		$this->set('city', $this->City->find('first', $options));
 	}
 
-/**
- * admin_add method
- *
- * @return void
- */
+        /**
+         * admin_add method
+         *
+         * @return void
+         */
 	public function admin_add() {
 		if ($this->request->is('post')) {
 			$this->City->create();
@@ -67,13 +79,13 @@ class CitiesController extends AppController {
 		$this->set(compact('countries'));
 	}
 
-/**
- * admin_edit method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
+        /**
+         * admin_edit method
+         *
+         * @throws NotFoundException
+         * @param string $id
+         * @return void
+         */
 	public function admin_edit($id = null) {
 		if (!$this->City->exists($id)) {
 			throw new NotFoundException(__('Invalid city'));
@@ -93,13 +105,13 @@ class CitiesController extends AppController {
 		$this->set(compact('countries'));
 	}
 
-/**
- * admin_delete method
- *
- * @throws NotFoundException
- * @param string $id
- * @return void
- */
+        /**
+         * admin_delete method
+         *
+         * @throws NotFoundException
+         * @param string $id
+         * @return void
+         */
 	public function admin_delete($id = null) {
 		$this->City->id = $id;
 		if (!$this->City->exists()) {

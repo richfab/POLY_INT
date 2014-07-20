@@ -32,32 +32,42 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-
-	public $components = array(
-            'Paginator',
-            'Session',
-            'Auth' => array(
-                'loginRedirect' => '/',
-                'logoutRedirect' => '/',
-                'authorize' => array('Controller'),
-                'authenticate' => array(
-                    'Form' => array(
-                        'fields' => array(
-                            'username' => 'email', 'password' => 'password'
-                        )
-                    )
-                ),
-                'flash' => array(
-                    'element' => 'alert',
-                    'key' => 'auth',
-                    'params' => array(
-                            'plugin' => 'BoostCake',
-                            'class' => 'alert-error'
+    
+    /**
+    * This variable defines the components that can be used everywhere in the app
+    *
+    * @return void
+    */
+    public $components = array(
+        'Paginator',
+        'Session',
+        'Auth' => array(
+            'loginRedirect' => '/',
+            'logoutRedirect' => '/',
+            'authorize' => array('Controller'),
+            'authenticate' => array(
+                'Form' => array(
+                    'fields' => array(
+                        'username' => 'email', 'password' => 'password'
                     )
                 )
+            ),
+            'flash' => array(
+                'element' => 'alert',
+                'key' => 'auth',
+                'params' => array(
+                        'plugin' => 'BoostCake',
+                        'class' => 'alert-error'
+                )
             )
-        );
-        
+        )
+    );
+    
+    /**
+    * This variable defines which helpers to use
+    *
+    * @return void
+    */
     public $helpers = array(
             'Js' => array('Jquery'),
             'Session',
@@ -65,10 +75,15 @@ class AppController extends Controller {
             'Form' => array('className' => 'BoostCake.BoostCakeForm'),
             'Paginator' => array('className' => 'BoostCake.BoostCakePaginator'),
     );
-
+    
+    /**
+    * This method is called before the controller action. It is useful to define which actions are allowed publicly.
+    *
+    * @return void
+    */
     public function beforeFilter() {
     
-    	//on autorise les utilisateurs non loggés a voir les pages statiques
+    	//authorizes anyone to see static pages
     	$this->Auth->allow(array('display'));
     	
     	if(isset($this->request->params['prefix']) && $this->request->params['prefix'] == 'admin'){
@@ -78,8 +93,15 @@ class AppController extends Controller {
         }
     }
     
+    /**
+    * This method determines whether a user is allowed to call action
+    * 
+    * @param string $user
+    * @return void
+    */
     public function isAuthorized($user = null) {
-    	// Chacun des utilisateurs enregistrés peut accéder aux fonctions publiques
+    	
+        //any logged in user can access public actions
         if (empty($this->request->params['admin'])) {
             return true;
         }
@@ -93,7 +115,11 @@ class AppController extends Controller {
         return false;
     }
 
-    //pour les boutons retour
+    /**
+    * This method enables previous page calls
+    *
+    * @return void
+    */
     public function beforeRender() {
         $this->set('refer',$this->referer);
     }

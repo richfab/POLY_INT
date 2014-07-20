@@ -1,0 +1,8 @@
+To generate phpDoc from code comments :
+
+1. go to root
+2. type the following command :
+
+    $phpDocumentor/bin/phpdoc -d ./app/Controller/ -t ./docs/api
+    
+API documemtation is now up to date

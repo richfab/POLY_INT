@@ -47,3 +47,8 @@
 <div class="access">
     <h4 id="linkedin-reco">Échange aussi sur la <a href="https://www.linkedin.com/groups?gid=6576008" target="_blank"><span class="linkedin-name">communauté&nbsp;LinkedIn</span></a> de Polytech Abroad</h4>
 </div>
+
+<div class="container" id="polytech_description">
+    <p>Le réseau Polytech mène une politique active d’ouverture vers l’international : mobilité étudiante, internationalisation des formations, réseau de partenaires à l’étranger... Chaque élève doit effectuer un ou plusieurs séjours à l’étranger au cours de sa scolarité. Ce séjour peut correspondre à un stage, à un semestre externalisé ou à la préparation d’un double diplôme dans une université partenaire. L’objectif est de former des ingénieurs avertis des contextes professionnels multi-culturels. Le réseau Polytech entretient de multiples accords de coopération avec des universités, instituts et établissements à l’étranger.</p>
+    <p>Plus d'informations : <a href="http://www.polytech-reseau.org/" target="_blank">www.polytech-reseau.org</a></p>
+</div>
