@@ -1,13 +1,17 @@
 //recuperer les activites dans la base de donnees pour l'affichage de la liste
-function get_activities(activities_user_ids){
+function get_activities(offset){
     
     start_logo_fly();
+    
+    if(!offset){
+        offset = 0;
+    }
     
     $.ajax({
         type:"POST",
         url : 'activities/get_activities',
         data : {
-            activities_user_ids: activities_user_ids
+            offset: offset
         },
         dataType : 'html',
         success : function(data) {

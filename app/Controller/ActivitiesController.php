@@ -32,7 +32,7 @@ class ActivitiesController extends AppController {
     */
     public function index(){
         
-    	$this->set('jsIncludes',array('photo_gallery','get_activities','readmore','logo_fly'));
+    	$this->set('jsIncludes',array('photo_gallery','get_activities','jquery.timeago','readmore','logo_fly'));
         $this->set('cssIncludes',array('blueimp-gallery'));
         
     }
@@ -46,104 +46,116 @@ class ActivitiesController extends AppController {
         
         $this->request->onlyAllow('ajax');
         
+        $offset = $this->request->data['offset'];
+        
         //tableau des activités
         $activities = array();
-        //tableau des user_ids des utilisateurs ayant déjà une activité récente
-        $activities_user_ids = array();
         
         //recuperation des dernieres photos postees
         App::import('Controller', 'Photos');
         $photosController = new PhotosController;
+        
+        //nombre de photos a recuperer
+        $photo_limit = 8;
             
         $photos_users = $photosController->Photo->find('all', array(
-            'limit' => 5,
+            'limit' => $photo_limit,
+            'offset' => $photo_limit * $offset,
             'order' => 'MAX(Photo.created) DESC',
             'fields' => array('Experience.user_id'),
-            'group' => 'Experience.user_id',
-            'conditions' => array(
-                "NOT" => array("Experience.user_id" => $activities_user_ids)
-            )
+            'group' => 'Experience.user_id'
         ));
         
         foreach ($photos_users as $photos_user){
-            array_push($activities, $photosController->Photo->find('first', array(
+            $photo = $photosController->Photo->find('first', array(
                 'order' => 'Photo.created DESC',
                 'conditions' => array('user_id' => $photos_user['Experience']['user_id']),
                 'recursive' => 2
-            )));
-            
-            array_push($activities_user_ids, $photos_user['Experience']['user_id']);
+            ));
+            $photo['Activity']['created'] = $photo['Photo']['created'];
+            array_push($activities, $photo);
         }
         
-        //recuperation des dernieres recpmmendations postees
+        //recuperation des dernieres recommendations postees
         App::import('Controller', 'Recommendations');
         $recommendationsController = new RecommendationsController;
+        
+        //nombre de recommendations a recuperer
+        $recommendation_limit = 7;
             
         $recommendations_users = $recommendationsController->Recommendation->find('all', array(
-            'limit' => 5,
+            'limit' => $recommendation_limit,
+            'offset' => $recommendation_limit * $offset,
             'order' => 'MAX(Recommendation.created) DESC',
             'fields' => array('Experience.user_id'),
-            'group' => 'Experience.user_id',
-            'conditions' => array(
-                "NOT" => array("Experience.user_id" => $activities_user_ids)
-            )
+            'group' => 'Experience.user_id'
         ));
         
         foreach ($recommendations_users as $recommendations_user){
-            array_push($activities, $recommendationsController->Recommendation->find('first', array(
+            $recommendation = $recommendationsController->Recommendation->find('first', array(
                 'order' => 'Recommendation.created DESC',
                 'conditions' => array('user_id' => $recommendations_user['Experience']['user_id']),
                 'recursive' => 2
-            )));
-            
-            array_push($activities_user_ids, $recommendations_user['Experience']['user_id']);
+            ));
+            $recommendation['Activity']['created'] = $recommendation['Recommendation']['created'];
+            array_push($activities, $recommendation);
         }
     
         //recuperation des dernieres experiences postees
         App::import('Controller', 'Experiences');
         $experiencesController = new ExperiencesController;
+        
+        //nombre de recommendations a recuperer
+        $experience_limit = 6;
             
         $experiences_users = $experiencesController->Experience->find('all', array(
-            'limit' => 3,
+            'limit' => $experience_limit,
+            'offset' => $experience_limit * $offset,
             'order' => 'MAX(Experience.created) DESC',
             'fields' => array('Experience.user_id'),
             'group' => 'Experience.user_id',
-            'conditions' => array(
-                "NOT" => array("Experience.user_id" => $activities_user_ids)
-            ),
             'recursive' => 0
         ));
         
         foreach ($experiences_users as $experiences_user){
-            array_push($activities, $experiencesController->Experience->find('first', array(
+            $experience = $experiencesController->Experience->find('first', array(
                 'order' => 'Experience.created DESC',
                 'conditions' => array('user_id' => $experiences_user['Experience']['user_id']),
                 'recursive' => 0
-            )));
-            
-            array_push($activities_user_ids, $experiences_user['Experience']['user_id']);
+            ));
+            $experience['Activity']['created'] = $experience['Experience']['created'];
+            array_push($activities, $experience);
         }
         
         //recuperation des dernieres utilisateurs inscrits
         App::import('Controller', 'Users');
         $usersController = new UsersController;
+        
+        //nombre de recommendations a recuperer
+        $user_limit = 4;
             
         $users = $usersController->User->find('all', array(
-            'limit' => 2,
+            'limit' => $user_limit,
+            'offset' => $user_limit * $offset,
             'order' => 'User.created DESC',
-            'conditions' => array('User.active' => 1, "NOT" => array("User.id" => $activities_user_ids)),
             'recursive' => 0
         ));
         
         foreach ($users as $user){
+            $user['Activity']['created'] = $user['User']['created'];
             array_push($activities,$user);
         }
         
-        //melange aléatoire des activités
-        shuffle($activities);
+        //tri des activités par date de création
+        $sort_by_date = array();
+        foreach ($activities as $activity => $row)
+        {
+            $sort_by_date[$activity] = $row['Activity']['created'];
+        }
+        array_multisort($sort_by_date, SORT_DESC, $activities);
             
         //sets last activities
-        $this->set(array('activities' => $activities, 'activities_user_ids' => $activities_user_ids));
+        $this->set(array('activities' => $activities, 'offset' => $offset+1));
         
         //recuperation des dernieres recpmmendations postees
         App::import('Controller', 'Countries');

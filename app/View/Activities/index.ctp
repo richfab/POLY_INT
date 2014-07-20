@@ -8,7 +8,7 @@
 
 ?>
 
-Tempête d'actualités
+<h1>Tempête d'actualités</h1>
 
 <div id="activities">
     
@@ -19,7 +19,7 @@ Tempête d'actualités
     
     $( function() {
         
-        //on lance la récupération des actualités
+        //on lance la récupération des actualités avec un offset de 1
         get_activities();
         
     });
