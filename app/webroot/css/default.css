@@ -241,7 +241,7 @@ h2 > span.wut {
     height: 40px;
     width: 100%;
     /*end brings the footer at bottom*/
-    border-top: 1px solid #C9C9C9;
+    border-top: 1px solid #E7E7E7;
     background-color: #fff
 }
 
@@ -789,7 +789,9 @@ h2 > span.wut {
     text-align: center;
 }
 .news {
-    padding: 20px 20px;
+    padding: 0px 28px;
+    margin-top: 10px;
+    margin-bottom: 20px;
     border: 1px solid #E5E5E5;
 }
 .activity {
@@ -800,7 +802,7 @@ h2 > span.wut {
     padding-bottom: 35px;
     padding-left: 40px;
     margin-left: 20px;
-    border-left: 2px solid #DDD;
+    border-left: 1px solid #E7E7E7;
 }
 
 .activity a {
