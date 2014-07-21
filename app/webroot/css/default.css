@@ -67,8 +67,6 @@ b {
     -moz-transition: width 0.5s ease;
     -o-transition: width 0.5s ease;
     transition: width 0.5s ease;
-
-
 }
 
 .navbar-brand:hover{
@@ -95,8 +93,6 @@ b {
     opacity: 1;
 
 }
-
-
 
 .navbar > .container .navbar-brand {
 margin-left: 0px;
