@@ -121,6 +121,7 @@ class ActivitiesController extends AppController {
             ));
             $recommendation['Activity']['type'] = 'recommendation';
             $recommendation['Activity']['created'] = $recommendation['Recommendation']['created'];
+            $recommendation['Activity']['people_around'] = $usersController->get_people_around($recommendation['Experience']['city_id']);
             array_push($activities, $recommendation);
         }
         
@@ -155,6 +156,7 @@ class ActivitiesController extends AppController {
             ));
             $experience['Activity']['type'] = 'experience';
             $experience['Activity']['created'] = $experience['Experience']['created'];
+            $experience['Activity']['people_around'] = $usersController->get_people_around($experience['Experience']['city_id']);
             array_push($activities, $experience);
         }
         

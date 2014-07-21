@@ -22,7 +22,7 @@
                  <?php echo $this->element('experience_info',array('experience'=>$activity)); ?>
             </div>
             <div class="activity-actions">
-                <a href="#" class="pull-left"><i class="fa fa-users"></i> 10</a> 
+                <a href="#" class="pull-left"><i class="fa fa-users"></i> <?php echo count($activity['Activity']['people_around']); ?></a> 
 
                 <a href="#" class="pull-right"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time></a>
             </div>
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div class="activity-actions">
-                <a href="#" class="pull-left"><i class="fa fa-users"></i> 10 </a> 
+                <a href="#" class="pull-left"><i class="fa fa-users"></i> <?php echo count($activity['Activity']['people_around']); ?></a> 
 
                 <a href="#" class="pull-right"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time></a>
             </div>
@@ -70,7 +70,7 @@
                 </ul>
             </div>
             <div class="activity-actions">
-                <a href="#" class="pull-left"><i class="fa fa-users"></i> 10</a> 
+                <a href="#" class="pull-left"><i class="fa fa-users"></i> <?php echo count($activity['Activity']['people_around']); ?></a> 
 
                 <a href="#" class="pull-right"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time></a>
             </div>
