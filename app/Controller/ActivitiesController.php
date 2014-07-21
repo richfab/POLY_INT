@@ -102,6 +102,13 @@ class ActivitiesController extends AppController {
             $recommendation['Activity']['created'] = $recommendation['Recommendation']['created'];
             array_push($activities, $recommendation);
         }
+        
+        //recuperation des recommendationtypes
+        //sets recommendationtypes (icons et names)
+        $this->set('recommendationtype_names',$recommendationsController->Recommendation->Recommendationtype->find('list'));
+        $this->set('recommendationtype_icons',$recommendationsController->Recommendation->Recommendationtype->find('list',array(
+            'fields' => array('Recommendationtype.icon')
+        )));
     
         //recuperation des dernieres experiences postees
         App::import('Controller', 'Experiences');
@@ -161,7 +168,7 @@ class ActivitiesController extends AppController {
         //sets last activities
         $this->set(array('activities' => $activities, 'offset' => $offset+1));
         
-        //recuperation des dernieres recpmmendations postees
+        //recuperation des dernieres recommendations postees
         App::import('Controller', 'Countries');
         $countriesController = new CountriesController;
         $this->set('countries',$countriesController->Country->find('list'));
