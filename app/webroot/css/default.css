@@ -7,13 +7,14 @@ html,body{
     font-size: 13px;
 }
 
-.well{
+.well, .activity-feed{
     font-weight: 300;
     font-size: 14px;
 }
 
 .fa {
     line-height: 2!important;
+    font-size: 15px;
 }
 
 .no-padding {

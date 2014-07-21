@@ -21,11 +21,11 @@ function get_activities(offset){
             stop_logo_fly();
             
             //pour les tooltips
-//            if (!Modernizr.touch) {
-//                $('.recommendationtype-icon').tooltip(); 
-//            }
+            if (!Modernizr.touch) {
+                $('.recommendationtype-icon').tooltip(); 
+            }
             //pour le readmore
-//            $('.recommendation-text').readmore();
+            $('.recommendation-text').readmore();
         }
     });
 }
