@@ -114,7 +114,7 @@
                             <?php foreach ($experience['Recommendation'] as $recommendation):?>
                         <div class="row">
                             <div class="col-sm-1" style="text-align:right;">
-                                <p><span class="glyphicon glyphicon-<?= $recommendationtypes_list[$recommendation['recommendationtype_id']];?> recommendationtype-icon selected"></span></p>
+                                <p><?php echo $this->element('recommendation_icon',array('recommendationtype_icon'=>$recommendationtype_icons[$recommendation['recommendationtype_id']],'recommendationtype_name'=>$recommendationtype_names[$recommendation['recommendationtype_id']])); ?></p>
                             </div>
                             <div class="col-sm-11">
                                     <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>

@@ -458,8 +458,9 @@ class UsersController extends AppController {
         )));
         //gets recommendationtypes
         $this->set('recommendationtypes',$this->User->Experience->Recommendation->Recommendationtype->find('all'));
-        //gets recommendationtypes by list
-        $this->set('recommendationtypes_list',$this->User->Experience->Recommendation->Recommendationtype->find('list',array(
+        //sets recommendationtypes (icons et names)
+        $this->set('recommendationtype_names',$this->User->Experience->Recommendation->Recommendationtype->find('list'));
+        $this->set('recommendationtype_icons',$this->User->Experience->Recommendation->Recommendationtype->find('list',array(
             'fields' => array('Recommendationtype.icon')
         )));
     }

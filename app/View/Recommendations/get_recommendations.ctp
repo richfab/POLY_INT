@@ -3,7 +3,7 @@
     <div class="well">
         <div class="row">
             <div class="col-sm-2 profile-info-search">
-                <p><span class="glyphicon glyphicon-<?= $recommendationtype_icons[$recommendation['Recommendation']['recommendationtype_id']]; ?> recommendationtype-icon selected" data-toggle="tooltip" title="<?= $recommendationtype_names[$recommendation['Recommendation']['recommendationtype_id']]; ?>"></span></p>
+                <p><?php echo $this->element('recommendation_icon',array('recommendationtype_icon'=>$recommendationtype_icons[$recommendation['Recommendation']['recommendationtype_id']],'recommendationtype_name'=>$recommendationtype_names[$recommendation['Recommendation']['recommendationtype_id']])); ?></p>
                 <p><?= $recommendation['Experience']['City']['name'];?>, <?= $countries[$recommendation['Experience']['City']['country_id']];?></p>
             </div>
             <div class="col-sm-9">

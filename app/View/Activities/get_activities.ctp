@@ -64,6 +64,7 @@
             <div class="activity-content">
                 <ul class="icons-list">
                     <li>
+                        <?php echo $this->element('recommendation_icon',array('recommendationtype_icon'=>$activity['Recommendationtype']['icon'],'recommendationtype_name'=>$activity['Recommendationtype']['name'])); ?>
                         <?php echo $this->element('recommendation_text',array('recommendation'=>$activity['Recommendation'])); ?>
                     </li>
                 </ul>
@@ -83,10 +84,9 @@
             </div>
             <div class="activity-subject">
                 <span class="glyphicon glyphicon-user"></span> <?= $activity['User']['firstname']; ?> <?= $activity['User']['lastname']; ?> a rejoint la communauté Polytech Abroad
-                <a href="#" class="pull-right"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time></a>
             </div>
             <div class="activity-actions">
-                
+                <a href="#" class="pull-right"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time></a>
             </div>
         </div>
     <?php endif;?>
