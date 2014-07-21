@@ -64,7 +64,7 @@
             <div class="activity-content">
                 <ul class="icons-list">
                     <li>
-                        <?php echo $this->element('recommendation_icon',array('recommendationtype_icon'=>$activity['Recommendationtype']['icon'],'recommendationtype_name'=>$activity['Recommendationtype']['name'])); ?>
+                        <i class="li-icon"><?php echo $this->element('recommendation_icon',array('recommendationtype_icon'=>$activity['Recommendationtype']['icon'],'recommendationtype_name'=>$activity['Recommendationtype']['name'])); ?></i>
                         <?php echo $this->element('recommendation_text',array('recommendation'=>$activity['Recommendation'])); ?>
                     </li>
                 </ul>
