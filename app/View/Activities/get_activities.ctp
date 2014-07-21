@@ -16,7 +16,10 @@
                 <?= $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));?>
             </div>
             <div class="activity-subject">
-                <span class="glyphicon glyphicon-globe"></span> <?= $activity['User']['firstname']; ?> <?= $activity['User']['lastname']; ?> a ajouté une expérience à <?= $activity['City']['name']; ?>, <?= $activity['City']['country_id']; ?>
+                <span class="glyphicon glyphicon-globe"></span> <?= $activity['User']['firstname']; ?> <?= $activity['User']['lastname']; ?> a ajouté une expérience
+            </div>
+            <div class="activity-content">
+                 <?php echo $this->element('experience_info',array('experience'=>$activity)); ?>
             </div>
             <div class="activity-actions">
                 <a href="#" class="pull-left"><i class="fa fa-users"></i> 10</a> 
@@ -34,7 +37,7 @@
                 <?= $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));?>
             </div>
             <div class="activity-subject">
-                <p><span class="glyphicon glyphicon-picture"></span> <?= $activity['Experience']['User']['firstname']; ?> <?= $activity['Experience']['User']['lastname']; ?> a ajouté des photos à <?= $activity['Experience']['City']['name']; ?>, <?= $activity['Experience']['City']['country_id']; ?></p>
+                <p><span class="glyphicon glyphicon-picture"></span> <?= $activity['Experience']['User']['firstname']; ?> <?= $activity['Experience']['User']['lastname']; ?> a ajouté des photos à <?= $activity['Experience']['City']['name']; ?>, <?= $countries[$activity['Experience']['City']['country_id']];?></p>
             </div>
             <div class="activity-content">
                  <div class="photo_gallery" experience_id="<?= $activity['Experience']['id']; ?>">
@@ -56,7 +59,7 @@
                 <?= $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));?>
             </div>
             <div class="activity-subject">
-                <span class="glyphicon glyphicon-comment"></span> <?= $activity['Experience']['User']['firstname']; ?> <?= $activity['Experience']['User']['lastname']; ?> a ajouté un bon plan à <?= $activity['Experience']['City']['name']; ?>, <?= $activity['Experience']['City']['country_id']; ?>
+                <span class="glyphicon glyphicon-comment"></span> <?= $activity['Experience']['User']['firstname']; ?> <?= $activity['Experience']['User']['lastname']; ?> a ajouté un bon plan à <?= $activity['Experience']['City']['name']; ?>, <?= $countries[$activity['Experience']['City']['country_id']];?>
             </div>
             <div class="activity-content">
                 <ul class="icons-list">
@@ -80,11 +83,10 @@
             </div>
             <div class="activity-subject">
                 <span class="glyphicon glyphicon-user"></span> <?= $activity['User']['firstname']; ?> <?= $activity['User']['lastname']; ?> a rejoint la communauté Polytech Abroad
+                <a href="#" class="pull-right"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time></a>
             </div>
             <div class="activity-actions">
-                <a href="#" class="pull-left"><i class="fa fa-users"></i> 10</a> 
-
-                <a href="#" class="pull-right"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time></a>
+                
             </div>
         </div>
     <?php endif;?>
