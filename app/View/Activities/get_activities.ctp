@@ -13,7 +13,13 @@
     <?php if($activity['Activity']['type'] == 'experience'): ?>
         <div class="activity activity-post">
             <div class="activity-profil-picture">
-                <?= $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));?>
+                <?php 
+                    if(!empty($activity['Experience']['User']['avatar'])) {
+                            echo $this->Image->resize($activity['Experience']['User']['avatar'],30,30,array('alt' => 'avatar','height' => '30px','onload' => "this.style.backgroundColor='#FFF'"));
+                    } else {
+                        echo $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));
+                    }
+                ?>
             </div>
             <div class="activity-subject">
                 <span class="glyphicon glyphicon-globe"></span> <?= $activity['User']['firstname']; ?> <?= $activity['User']['lastname']; ?> a ajouté une expérience
@@ -34,7 +40,13 @@
         
         <div class="activity activity-photo">
             <div class="activity-profil-picture">
-                <?= $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));?>
+                <?php 
+                    if(!empty($activity['Experience']['User']['avatar'])) {
+                            echo $this->Image->resize($activity['Experience']['User']['avatar'],30,30,array('alt' => 'avatar','height' => '30px','onload' => "this.style.backgroundColor='#FFF'"));
+                    } else {
+                        echo $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));
+                    }
+                ?>
             </div>
             <div class="activity-subject">
                 <p><span class="glyphicon glyphicon-picture"></span> <?= $activity['Experience']['User']['firstname']; ?> <?= $activity['Experience']['User']['lastname']; ?> a ajouté des photos à <?= $activity['Experience']['City']['name']; ?>, <?= $countries[$activity['Experience']['City']['country_id']];?></p>
@@ -56,7 +68,13 @@
     <?php if($activity['Activity']['type'] == 'recommendation'): ?>
         <div class="activity activity-recommendation">
             <div class="activity-profil-picture">
-                <?= $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));?>
+                <?php 
+                    if(!empty($activity['Experience']['User']['avatar'])) {
+                            echo $this->Image->resize($activity['Experience']['User']['avatar'],30,30,array('alt' => 'avatar','height' => '30px','onload' => "this.style.backgroundColor='#FFF'"));
+                    } else {
+                        echo $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));
+                    }
+                ?>
             </div>
             <div class="activity-subject">
                 <span class="glyphicon glyphicon-comment"></span> <?= $activity['Experience']['User']['firstname']; ?> <?= $activity['Experience']['User']['lastname']; ?> a ajouté un bon plan à <?= $activity['Experience']['City']['name']; ?>, <?= $countries[$activity['Experience']['City']['country_id']];?>
@@ -80,7 +98,13 @@
     <?php if($activity['Activity']['type'] == 'user'): ?>
         <div class="activity activity-post">
             <div class="activity-profil-picture">
-                <?= $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));?>
+                <?php 
+                    if(!empty($activity['Experience']['User']['avatar'])) {
+                            echo $this->Image->resize($activity['Experience']['User']['avatar'],30,30,array('alt' => 'avatar','height' => '30px','onload' => "this.style.backgroundColor='#FFF'"));
+                    } else {
+                        echo $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));
+                    }
+                ?>
             </div>
             <div class="activity-subject">
                 <span class="glyphicon glyphicon-user"></span> <?= $activity['User']['firstname']; ?> <?= $activity['User']['lastname']; ?> a rejoint la communauté Polytech Abroad

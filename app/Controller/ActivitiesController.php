@@ -17,6 +17,13 @@ App::uses('AppController', 'Controller');
 class ActivitiesController extends AppController {
     
     /**
+    * Helper to handle image resize
+    *
+    * @var array
+    */
+    public $helpers = array('Image.Image');
+
+    /**
     * This method is called before the controller action. It is useful to define which actions are allowed publicly.
     *
     * @return void
