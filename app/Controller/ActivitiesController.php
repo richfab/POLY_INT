@@ -89,7 +89,7 @@ class ActivitiesController extends AppController {
         $photos_users = $photosController->Photo->find('all', array(
             'limit' => $photo_limit,
             'offset' => $photo_limit * $offset,
-            'order' => 'MAX(Photo.created) DESC',
+            'order' => 'MAX(Photo.fb_created) DESC',
             'fields' => array('Experience.user_id'),
             'group' => 'Experience.user_id'
         ));
