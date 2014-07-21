@@ -72,7 +72,7 @@ margin-left: 0px;
     }
     
     .menu-item:hover{
-        border-bottom: 2px solid black;
+        border-bottom: 5px solid #e7e7e7;
     }
     
     .menu-separator{
