@@ -44,12 +44,32 @@ class ActivitiesController extends AppController {
     */
     public function get_activities(){
         
-        $this->request->onlyAllow('ajax');
+//        $this->request->onlyAllow('ajax');
         
         $offset = $this->request->data['offset'];
         
         //tableau des activités
         $activities = array();
+        
+        //recuperation des dernieres utilisateurs inscrits
+        App::import('Controller', 'Users');
+        $usersController = new UsersController;
+        
+        //nombre de recommendations a recuperer
+        $user_limit = 4;
+            
+        $users = $usersController->User->find('all', array(
+            'limit' => $user_limit,
+            'offset' => $user_limit * $offset,
+            'order' => 'User.created DESC',
+            'recursive' => 0
+        ));
+        
+        foreach ($users as $user){
+            $user['Activity']['type'] = 'user';
+            $user['Activity']['created'] = $user['User']['created'];
+            array_push($activities,$user);
+        }
         
         //recuperation des dernieres photos postees
         App::import('Controller', 'Photos');
@@ -74,6 +94,7 @@ class ActivitiesController extends AppController {
             ));
             $photo['Activity']['type'] = 'photo';
             $photo['Activity']['created'] = $photo['Photo']['created'];
+            $photo['Activity']['people_around'] = $usersController->get_people_around($photo['Experience']['city_id']);
             array_push($activities, $photo);
         }
         
@@ -135,26 +156,6 @@ class ActivitiesController extends AppController {
             $experience['Activity']['type'] = 'experience';
             $experience['Activity']['created'] = $experience['Experience']['created'];
             array_push($activities, $experience);
-        }
-        
-        //recuperation des dernieres utilisateurs inscrits
-        App::import('Controller', 'Users');
-        $usersController = new UsersController;
-        
-        //nombre de recommendations a recuperer
-        $user_limit = 4;
-            
-        $users = $usersController->User->find('all', array(
-            'limit' => $user_limit,
-            'offset' => $user_limit * $offset,
-            'order' => 'User.created DESC',
-            'recursive' => 0
-        ));
-        
-        foreach ($users as $user){
-            $user['Activity']['type'] = 'user';
-            $user['Activity']['created'] = $user['User']['created'];
-            array_push($activities,$user);
         }
         
         //tri des activités par date de création

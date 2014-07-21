@@ -513,6 +513,27 @@ class UsersController extends AppController {
         $this->set('departments', $this->User->Department->find('list', array(
                         'order' => array('Department.name' => 'ASC'))));
     }
+    
+    public function get_people_around($city_id){
+        
+        $conditions['AND'] = array('Experience.dateEnd >=' => date('Y-m-d'),
+                'Experience.dateStart <=' => date('Y-m-d'));
+        
+        $conditions['Experience.city_id'] = $city_id;
+        
+        $experiences = $this->User->Experience->find('all',array(
+            'conditions' => $conditions,
+            'recursive' => 0,
+            'group' => 'Experience.user_id'
+        ));
+        
+        $users = array();
+        foreach ($experiences as $experience) {
+            array_push($users, $experience['User']);
+        }
+        
+        return $users;
+    }
         
     /**
     * This method allows user to delete his account
