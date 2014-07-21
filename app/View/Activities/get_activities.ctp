@@ -37,7 +37,8 @@
                 <p><span class="glyphicon glyphicon-picture"></span> <?= $activity['Experience']['User']['firstname']; ?> <?= $activity['Experience']['User']['lastname']; ?> a ajouté des photos à <?= $activity['Experience']['City']['name']; ?>, <?= $activity['Experience']['City']['country_id']; ?></p>
             </div>
             <div class="activity-content">
-                <div class="panel-body photo_gallery" experience_id="<?= $activity['Experience']['id']; ?>">
+                 <div class="photo_gallery" experience_id="<?= $activity['Experience']['id']; ?>">
+                        
                 </div>
             </div>
             <div class="activity-actions">
