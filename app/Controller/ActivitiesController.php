@@ -96,7 +96,7 @@ class ActivitiesController extends AppController {
         
         foreach ($photos_users as $photos_user){
             $photo = $photosController->Photo->find('first', array(
-                'order' => 'Photo.created DESC',
+                'order' => 'Photo.fb_created DESC',
                 'conditions' => array('user_id' => $photos_user['Experience']['user_id']),
                 'recursive' => 2
             ));
