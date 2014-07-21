@@ -26,8 +26,38 @@ b {
 }
 
 #content{
-    padding-top: 50px;
+    padding-top: 40px;
     padding-bottom: 40px;
+}
+
+/* NavBar v1.1 | 21/07/2014 */
+
+.navbar {
+    height: 40px;
+    min-height: 40px;
+}
+
+.navbar-nav > li {
+    float: left;
+    margin-top: 4px;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: #777777;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+}
+
+.navbar-brand {
+    padding: 8px 10px;
+    border-right: 1px solid #e7e7e7;
+    border-left: 1px solid #e7e7e7;
+}
+
+.navbar > .container .navbar-brand {
+margin-left: 0px;
 }
 /*fin utile pour bring footer to bottom*/
 
@@ -375,9 +405,6 @@ h2 > span.wut {
 
 .row-marketing{
     padding: 40px 30px 0px 30px;
-}
-.navbar-brand {
-    padding: 12px 10px;
 }
 
 @-webkit-keyframes blink {

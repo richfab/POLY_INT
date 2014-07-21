@@ -71,23 +71,23 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li class="menu-item">
-                                <?= $this->Html->link('<span class="glyphicon glyphicon-home"></span> accueil',array('controller'=>'pages', 'action'=>'index'),array('style'=>'display:inline-block','escape'=>false));?>
+                                <?= $this->Html->link('Accueil',array('controller'=>'pages', 'action'=>'index'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
                             <li class="menu-separator"></li>
                             <li class="menu-item">
-                                <?= $this->Html->link('<span class="glyphicon glyphicon-globe"></span> explorer',array('controller'=>'experiences', 'action'=>'explore'),array('style'=>'display:inline-block','escape'=>false));?>
+                                <?= $this->Html->link('Explorer',array('controller'=>'experiences', 'action'=>'explore'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
                             <li class="menu-separator"></li>
                             <li class="menu-item">
-                                <?= $this->Html->link('<span class="glyphicon glyphicon-comment"></span> partager',array('controller'=>'recommendations', 'action'=>'search'),array('style'=>'display:inline-block','escape'=>false));?>
+                                <?= $this->Html->link('Partager',array('controller'=>'recommendations', 'action'=>'search'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
                             <li class="menu-separator"></li>
                             <li class="menu-item">
-                                <?= $this->Html->link('<span class="glyphicon glyphicon-search"></span> rechercher',array('controller'=>'experiences', 'action'=>'search'),array('style'=>'display:inline-block','escape'=>false));?>
+                                <?= $this->Html->link('Rechercher',array('controller'=>'experiences', 'action'=>'search'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
                             <li class="menu-separator"></li>
                             <li class="menu-item">
-                                <?= $this->Html->link('<i class="fa fa-trophy fa-lg"></i> contest','/contest',array('style'=>'display:inline-block','escape'=>false));?>
+                                <?= $this->Html->link('Contest','/contest',array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
                             <li class="menu-separator"></li>
                             <?php if(AuthComponent::user('id')): ?>
