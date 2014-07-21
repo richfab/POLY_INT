@@ -22,7 +22,7 @@
                 ?>
             </div>
             <div class="activity-subject">
-                <span class="glyphicon glyphicon-globe"></span> <?= $activity['User']['firstname']; ?> <?= $activity['User']['lastname']; ?> a ajouté une expérience
+                <span class="glyphicon glyphicon-globe"></span> <?= $this->Html->link($activity['User']['firstname'].' '.$activity['User']['lastname'],array('controller'=>'users', 'action' => 'profile', $activity['User']['id']));?> a ajouté une expérience
             </div>
             <div class="activity-content">
                  <?php echo $this->element('experience_info',array('experience'=>$activity)); ?>
@@ -49,7 +49,7 @@
                 ?>
             </div>
             <div class="activity-subject">
-                <p><span class="glyphicon glyphicon-picture"></span> <?= $activity['Experience']['User']['firstname']; ?> <?= $activity['Experience']['User']['lastname']; ?> a ajouté des photos à <?= $activity['Experience']['City']['name']; ?>, <?= $countries[$activity['Experience']['City']['country_id']];?></p>
+                <p><span class="glyphicon glyphicon-picture"></span> <?= $this->Html->link($activity['Experience']['User']['firstname'].' '.$activity['Experience']['User']['lastname'],array('controller'=>'users', 'action' => 'profile', $activity['Experience']['User']['id']));?> a ajouté des photos à <?= $activity['Experience']['City']['name']; ?>, <?= $countries[$activity['Experience']['City']['country_id']];?></p>
             </div>
             <div class="activity-content">
                  <div class="photo_gallery" experience_id="<?= $activity['Experience']['id']; ?>">
@@ -77,7 +77,7 @@
                 ?>
             </div>
             <div class="activity-subject">
-                <span class="glyphicon glyphicon-comment"></span> <?= $activity['Experience']['User']['firstname']; ?> <?= $activity['Experience']['User']['lastname']; ?> a ajouté un bon plan à <?= $activity['Experience']['City']['name']; ?>, <?= $countries[$activity['Experience']['City']['country_id']];?>
+                <span class="glyphicon glyphicon-comment"></span> <?= $this->Html->link($activity['Experience']['User']['firstname'].' '.$activity['Experience']['User']['lastname'],array('controller'=>'users', 'action' => 'profile', $activity['Experience']['User']['id']));?> a ajouté un bon plan à <?= $activity['Experience']['City']['name']; ?>, <?= $countries[$activity['Experience']['City']['country_id']];?>
             </div>
             <div class="activity-content">
                 <ul class="icons-list">
@@ -107,7 +107,7 @@
                 ?>
             </div>
             <div class="activity-subject">
-                <span class="glyphicon glyphicon-user"></span> <?= $activity['User']['firstname']; ?> <?= $activity['User']['lastname']; ?> a rejoint la communauté Polytech Abroad
+                <span class="glyphicon glyphicon-user"></span> <?= $this->Html->link($activity['User']['firstname'].' '.$activity['User']['lastname'],array('controller'=>'users', 'action' => 'profile', $activity['User']['id']));?> a rejoint la communauté Polytech Abroad
             </div>
             <div class="activity-actions">
                 <a href="#" class="pull-right"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time></a>
