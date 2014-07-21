@@ -17,6 +17,10 @@ html,body{
     font-size: 15px;
 }
 
+i{
+    font-style: normal;
+}
+
 .no-padding {
     padding: 0!important;
 }

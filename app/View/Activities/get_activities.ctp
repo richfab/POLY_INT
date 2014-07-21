@@ -27,12 +27,6 @@
             <div class="activity-content">
                  <?php echo $this->element('experience_info',array('experience'=>$activity)); ?>
             </div>
-            <div class="activity-actions">
-                <a href="#" class="pull-left"><i class="fa fa-users"></i> <?php echo count($activity['Activity']['people_around']); ?></a> 
-
-                <a href="#" class="pull-right"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time></a>
-            </div>
-        </div>
 
     <?php endif;?>
         
@@ -56,12 +50,6 @@
                         
                 </div>
             </div>
-            <div class="activity-actions">
-                <a href="#" class="pull-left"><i class="fa fa-users"></i> <?php echo count($activity['Activity']['people_around']); ?></a> 
-
-                <a href="#" class="pull-right"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time></a>
-            </div>
-        </div>
         
     <?php endif;?>
         
@@ -87,12 +75,6 @@
                     </li>
                 </ul>
             </div>
-            <div class="activity-actions">
-                <a href="#" class="pull-left"><i class="fa fa-users"></i> <?php echo count($activity['Activity']['people_around']); ?></a> 
-
-                <a href="#" class="pull-right"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time></a>
-            </div>
-        </div>
     <?php endif;?>
         
     <?php if($activity['Activity']['type'] == 'user'): ?>
@@ -109,11 +91,17 @@
             <div class="activity-subject">
                 <span class="glyphicon glyphicon-user"></span> <?= $this->Html->link($activity['User']['firstname'].' '.$activity['User']['lastname'],array('controller'=>'users', 'action' => 'profile', $activity['User']['id']));?> a rejoint la communauté Polytech Abroad
             </div>
+    <?php endif;?>
+            
             <div class="activity-actions">
+                
+                <?php if(in_array($activity['Activity']['type'], array('photo','recommendation','experience')) && count($activity['Activity']['people_around']) > 1):?>
+                    <a class="pull-left people-around" data-toggle="tooltip" title="<?php foreach ($activity['Activity']['people_around'] as $user) { echo $user['firstname'].' '.$user['lastname'].'<br/>';} ?>"><i class="fa fa-users"></i> <?php echo count($activity['Activity']['people_around']); ?> personnes dans cette ville</a> 
+                <?php endif; ?>
+
                 <a href="#" class="pull-right"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time></a>
             </div>
         </div>
-    <?php endif;?>
 
 <?php endforeach; ?>
 
