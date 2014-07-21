@@ -531,6 +531,11 @@ h2 > span.wut {
     outline-offset: 1px;
 }
 
+.activity-content .photo_el{
+    width: 90px;
+    height: 90px;
+}
+
 .photo_el_wrap{
     display: inline-block;
     margin-left: 2px;
@@ -696,16 +701,16 @@ h2 > span.wut {
     border-color: #e74c3c;
 }
 
-.panel-recommendations{
+.panel-recommendations, .panel-photos{
     border: none;
 }
 
-.panel-title-recommendations{
+.panel-title-recommendations, .panel-title-photos{
     font-size: 14px;
     color: #e74c3c;
 }
 
-.panel-heading-recommendations{
+.panel-heading-recommendations, .panel-heading-photos{
     background-color: transparent!important;
 }
 
