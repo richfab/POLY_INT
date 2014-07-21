@@ -64,9 +64,9 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
                             <span class="icon-bar"></span>
                         </button>
                         <?= $this->Html->link(
-                                $this->Html->image('mini-logo.png', array('alt' => 'Logo','height'=>'24px')),
+                                $this->Html->image('mini-logo.png', array('alt' => 'Logo','height'=>'24px')). ' ' . $this->Html->tag('span','Polytech-Abroad'),
                                 array('controller'=>'pages', 'action'=>'index'),
-                                array('id' => 'brand_logo','class'=>'navbar-brand text-hide','escape' => false));?>
+                                array('id' => 'brand_logo','class'=>'navbar-brand','escape' => false));?>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
