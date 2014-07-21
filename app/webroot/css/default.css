@@ -857,3 +857,7 @@ h2 > span.wut {
     color: #BBB;
     font-size: 12px;
 }
+
+.recommendation-text {
+    padding-top: 7px;
+}
