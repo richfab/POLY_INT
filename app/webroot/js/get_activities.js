@@ -23,7 +23,7 @@ function get_activities(offset){
             //pour les tooltips
             if (!Modernizr.touch) {
                 $('.recommendationtype-icon').tooltip(); 
-                $('.people-around').tooltip({html: true}); 
+                $('.people-around').tooltip({html: true, placement: 'right'}); 
             }
             //pour le readmore
             $('.recommendation-text').readmore();

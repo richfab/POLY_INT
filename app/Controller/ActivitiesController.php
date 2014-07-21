@@ -75,6 +75,7 @@ class ActivitiesController extends AppController {
         foreach ($users as $user){
             $user['Activity']['type'] = 'user';
             $user['Activity']['created'] = $user['User']['created'];
+            $user['Activity']['User'] = $user['User'];
             array_push($activities,$user);
         }
         
@@ -102,6 +103,7 @@ class ActivitiesController extends AppController {
             $photo['Activity']['type'] = 'photo';
             $photo['Activity']['created'] = $photo['Photo']['created'];
             $photo['Activity']['people_around'] = $usersController->get_people_around($photo['Experience']['city_id']);
+            $photo['Activity']['User'] = $photo['Experience']['User'];
             array_push($activities, $photo);
         }
         
@@ -129,6 +131,7 @@ class ActivitiesController extends AppController {
             $recommendation['Activity']['type'] = 'recommendation';
             $recommendation['Activity']['created'] = $recommendation['Recommendation']['created'];
             $recommendation['Activity']['people_around'] = $usersController->get_people_around($recommendation['Experience']['city_id']);
+            $recommendation['Activity']['User'] = $recommendation['Experience']['User'];
             array_push($activities, $recommendation);
         }
         
@@ -164,6 +167,7 @@ class ActivitiesController extends AppController {
             $experience['Activity']['type'] = 'experience';
             $experience['Activity']['created'] = $experience['Experience']['created'];
             $experience['Activity']['people_around'] = $usersController->get_people_around($experience['Experience']['city_id']);
+            $experience['Activity']['User'] = $experience['User'];
             array_push($activities, $experience);
         }
         
@@ -178,10 +182,13 @@ class ActivitiesController extends AppController {
         //sets last activities
         $this->set(array('activities' => $activities, 'offset' => $offset+1));
         
-        //recuperation des dernieres recommendations postees
         App::import('Controller', 'Countries');
         $countriesController = new CountriesController;
         $this->set('countries',$countriesController->Country->find('list'));
+        
+        //recuperation des coleurs des ecoles
+        $this->set('school_colors',$usersController->User->School->find('list',array(
+                                                                'fields' => array('School.color'))));
         
         $this->layout = 'ajax';
     }
