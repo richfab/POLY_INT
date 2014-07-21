@@ -1,7 +1,10 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,700,500);
+
 /*debut utile pour bring footer to bottom*/
 html,body{
     height: 100%;
-    background-color: #f4f4f4;
+    background-color: #f7f7f7;
+    font-size: 13px;
 }
 
 .well{
@@ -11,6 +14,10 @@ html,body{
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 200;
+}
+
+b {
+    font-weight: 700;
 }
 
 #container{
@@ -424,70 +431,6 @@ h2 > span.wut {
     margin-top: 30px;
 }
 
-.fb_album_el{
-    padding: 10px;
-    cursor: pointer;
-    background-color: white;
-}
-
-.fb_album_el h4{
-    color:#428bca;
-}
-
-.fb_album_el:hover{
-    background-color: #f4f4f4;
-}
-
-#fbalbum_progress{
-    margin: 10px;
-}
-
-@media (min-width: 768px) {
-    .fbalbum_import_button{
-        float: right;
-    }
-}
-
-.photo_el{
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-size: cover;
-    outline: solid #dddddd 1px;
-    outline-offset: 1px;
-}
-
-.photo_el_wrap{
-    display: inline-block;
-    margin-left: 2px;
-    margin-right: 2px;
-}
-
-.photo_el_wrap:hover .close{
-    opacity: 0.6;
-    text-decoration: none;
-}
-
-.photo_el_wrap .close {
-    margin-left: 82px;
-    text-shadow: initial;
-    color: white;
-    opacity: 0;
-    position: absolute;
-    background-color: black;
-    padding: 0px 3px 2px 3px;
-    border-bottom-left-radius: 2px;
-    font-weight: 100;
-    font-size: 20px;
-}
-
-.photo_el_wrap .close:hover{
-    opacity: 0.8;
-    text-decoration: none;
-}
-
 .contact-logo{
     height: 20px;
 }
@@ -622,17 +565,16 @@ h2 > span.wut {
     border-color: #e74c3c;
 }
 
-.panel-recommendations, .panel-photos{
+.panel-recommendations{
     border: none;
-    box-shadow: none;
 }
 
-.panel-title-recommendations, .panel-title-photos{
+.panel-title-recommendations{
     font-size: 14px;
     color: #e74c3c;
 }
 
-.panel-heading-recommendations, .panel-heading-photos{
+.panel-heading-recommendations{
     background-color: transparent!important;
 }
 
@@ -674,4 +616,144 @@ h2 > span.wut {
     height: 24px;
     width: 24px;
     margin: 0 15px 0 0;
+}
+
+
+/* Activity Feed | activities/feed.ctp */
+.icons-list {
+    padding: 0;
+    margin: 0 0 10px;
+    list-style: none;
+}
+
+.icons-list > li {
+    position: relative;
+    padding-left: 2.2em;
+    margin-bottom: 1em;
+    line-height: 1.65em;
+}
+
+.icons-list > li > .li-icon {
+    position: absolute;
+    top: .25em;
+    left: 0;
+    width: 1em;
+    font-size: 1.25em;
+    text-align: center;
+}
+.activity-thumbnail {
+    padding: 2px;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+}
+
+.activity-feed {
+    background-color: #FFF;
+}
+
+.page-title {
+    -webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    text-align: center;
+}
+.news {
+    padding: 20px 20px;
+    border: 1px solid #E5E5E5;
+}
+.activity {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    padding-top: 22px;
+    padding-bottom: 35px;
+    padding-left: 40px;
+    margin-left: 20px;
+    border-left: 2px solid #DDD;
+}
+
+.activity a {
+    color: #428bca;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+}
+
+.activity-content {
+    padding-left: 25px;
+}
+
+.activity-photo {
+
+}
+
+.activity-recommendation {
+
+}
+
+.activity-experience {
+
+}
+
+.activity-default {
+    color: #c0392b;
+    font-weight: 400;
+    border-bottom: 1px dashed #c0392b;
+    border-top: 1px dashed #c0392b;
+}
+
+.activity-subject {
+    margin-bottom: 1em;
+}
+
+.activity-actions {
+    padding: 10px 10px;
+    margin-top: 2em;
+    border-top: 1px dotted #ccc;
+}
+
+.activity-actions a {
+    color: #999;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.activity-actions a:hover {
+    text-decoration: none;
+    color: #428bca;
+}
+
+.activity-actions .pull-left {
+    margin: 0 15px 0 0;
+}
+
+.activity-post {
+
+}
+
+.activity .content {
+    
+}
+
+.activity-profil-picture {
+    position: absolute;
+    margin-left: -58px;
+    margin-top: -5px;
+    border: 3px solid #FFF;
+    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.35);
+}
+
+.pa-activity {
+    color: #FFF;
+    background-color: #428bca;
+    font-size: 200;
+    padding: 1em 0 1em 60px;
+    background-image: url('../img/mini-logo-inverted.png');
+    background-repeat: no-repeat;
+    background-position: 15px 50%;
+    background-size: 30px 26px;
+}
+
+.date {
+    color: #BBB;
+    font-size: 12px;
 }

@@ -8,11 +8,14 @@
 
 ?>
 
-<h1>Tempête d'actualités</h1>
+<h2 class="page-title"><b>Tempête</b> d'actualités.</h2>
 
-<div id="activities">
-    
-    
+<div class="activity-feed">
+	<div class="news">
+		<div id="activities">
+		        
+		</div>
+	</div>
 </div>
 
 <script type="text/javascript">

@@ -7,57 +7,89 @@
  */
 ?>
 
+
 <?php foreach($activities as $activity):?>
     
     <?php if(key($activity) == 'Experience'): ?>
+        <div class="activity activity-post">
+            <div class="activity-profil-picture">
+                <?= $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));?>
+            </div>
+            <div class="activity-subject">
+                <span class="glyphicon glyphicon-globe"></span> <?= $activity['User']['firstname']; ?> <?= $activity['User']['lastname']; ?> a ajouté une expérience à <?= $activity['City']['name']; ?>, <?= $activity['City']['country_id']; ?>
+            </div>
+            <div class="activity-actions">
+                <a href="#" class="pull-left"><i class="fa fa-users"></i> 10</a> 
 
-        <p>
-            <span class="glyphicon glyphicon-globe"></span> <?= $activity['User']['firstname']; ?> <?= $activity['User']['lastname']; ?> a ajouté une expérience à <?= $activity['City']['name']; ?>, <?= $activity['City']['country_id']; ?>
-        </p>
-        
-        <?php echo $this->element('experience_info',array('experience'=>$activity)); ?>
+                <a href="#" class="pull-right"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time></a>
+            </div>
+        </div>
 
     <?php endif;?>
         
     <?php if(key($activity) == 'Photo'): ?>
         
-        <p>
-            <span class="glyphicon glyphicon-picture"></span> <?= $activity['Experience']['User']['firstname']; ?> <?= $activity['Experience']['User']['lastname']; ?> a ajouté des photos à <?= $activity['Experience']['City']['name']; ?>, <?= $activity['Experience']['City']['country_id']; ?>
-        </p>
-        <div class="panel-body photo_gallery" experience_id="<?= $activity['Experience']['id']; ?>">
-                        
+        <div class="activity activity-photo">
+            <div class="activity-profil-picture">
+                <?= $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));?>
+            </div>
+            <div class="activity-subject">
+                <p><span class="glyphicon glyphicon-picture"></span> <?= $activity['Experience']['User']['firstname']; ?> <?= $activity['Experience']['User']['lastname']; ?> a ajouté des photos à <?= $activity['Experience']['City']['name']; ?>, <?= $activity['Experience']['City']['country_id']; ?></p>
+            </div>
+            <div class="activity-content">
+                <div class="panel-body photo_gallery" experience_id="<?= $activity['Experience']['id']; ?>">
+                </div>
+            </div>
+            <div class="activity-actions">
+                <a href="#" class="pull-left"><i class="fa fa-users"></i> 10 </a> 
+
+                <a href="#" class="pull-right"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time></a>
+            </div>
         </div>
         
     <?php endif;?>
         
     <?php if(key($activity) == 'Recommendation'): ?>
+        <div class="activity activity-recommendation">
+            <div class="activity-profil-picture">
+                <?= $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));?>
+            </div>
+            <div class="activity-subject">
+                <span class="glyphicon glyphicon-comment"></span> <?= $activity['Experience']['User']['firstname']; ?> <?= $activity['Experience']['User']['lastname']; ?> a ajouté un bon plan à <?= $activity['Experience']['City']['name']; ?>, <?= $activity['Experience']['City']['country_id']; ?>
+            </div>
+            <div class="activity-content">
+                <ul class="icons-list">
+                    <li>
+                        <?php echo $this->element('recommendation_text',array('recommendation'=>$activity['Recommendation'])); ?>
+                    </li>
+                </ul>
+            </div>
+            <div class="activity-actions">
+                <a href="#" class="pull-left"><i class="fa fa-users"></i> 10</a> 
 
-        <p>
-            <span class="glyphicon glyphicon-comment"></span> <?= $activity['Experience']['User']['firstname']; ?> <?= $activity['Experience']['User']['lastname']; ?> a ajouté un bon plan à <?= $activity['Experience']['City']['name']; ?>, <?= $activity['Experience']['City']['country_id']; ?>
-            <br/>
-            <?php echo $this->element('recommendation_text',array('recommendation'=>$activity['Recommendation'])); ?>
-
-        </p>
-
+                <a href="#" class="pull-right"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time></a>
+            </div>
+        </div>
     <?php endif;?>
         
     <?php if(key($activity) == 'User'): ?>
+        <div class="activity activity-post">
+            <div class="activity-profil-picture">
+                <?= $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));?>
+            </div>
+            <div class="activity-subject">
+                <span class="glyphicon glyphicon-user"></span> <?= $activity['User']['firstname']; ?> <?= $activity['User']['lastname']; ?> a rejoint la communauté Polytech Abroad
+            </div>
+            <div class="activity-actions">
+                <a href="#" class="pull-left"><i class="fa fa-users"></i> 10</a> 
 
-    <p>
-        <span class="glyphicon glyphicon-user"></span> <?= $activity['User']['firstname']; ?> <?= $activity['User']['lastname']; ?> a rejoint la communauté Polytech Abroad
-    </p>
-
+                <a href="#" class="pull-right"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time></a>
+            </div>
+        </div>
     <?php endif;?>
-    
-    <p>
-        <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time>
-    </p>
-        
-    <p>
-        ---------------------------------------------------------------
-    </p>
 
 <?php endforeach; ?>
+
     
 <p style="text-align: center">
     <a style="cursor: pointer" onclick='get_activities(<?= $offset; ?>);$(this).remove();'>plus</a>
