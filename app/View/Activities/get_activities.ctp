@@ -10,7 +10,7 @@
 
 <?php foreach($activities as $activity):?>
     
-    <?php if(key($activity) == 'Experience'): ?>
+    <?php if($activity['Activity']['type'] == 'experience'): ?>
         <div class="activity activity-post">
             <div class="activity-profil-picture">
                 <?= $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));?>
@@ -27,7 +27,7 @@
 
     <?php endif;?>
         
-    <?php if(key($activity) == 'Photo'): ?>
+    <?php if($activity['Activity']['type'] == 'photo'): ?>
         
         <div class="activity activity-photo">
             <div class="activity-profil-picture">
@@ -50,7 +50,7 @@
         
     <?php endif;?>
         
-    <?php if(key($activity) == 'Recommendation'): ?>
+    <?php if($activity['Activity']['type'] == 'recommendation'): ?>
         <div class="activity activity-recommendation">
             <div class="activity-profil-picture">
                 <?= $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));?>
@@ -73,7 +73,7 @@
         </div>
     <?php endif;?>
         
-    <?php if(key($activity) == 'User'): ?>
+    <?php if($activity['Activity']['type'] == 'user'): ?>
         <div class="activity activity-post">
             <div class="activity-profil-picture">
                 <?= $this->Html->image('avatar.png', array('height'=> '30px', 'alt' => 'avatar','onload' => "this.style.backgroundColor='#FFF'"));?>

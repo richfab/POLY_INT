@@ -72,6 +72,7 @@ class ActivitiesController extends AppController {
                 'conditions' => array('user_id' => $photos_user['Experience']['user_id']),
                 'recursive' => 2
             ));
+            $photo['Activity']['type'] = 'photo';
             $photo['Activity']['created'] = $photo['Photo']['created'];
             array_push($activities, $photo);
         }
@@ -97,6 +98,7 @@ class ActivitiesController extends AppController {
                 'conditions' => array('user_id' => $recommendations_user['Experience']['user_id']),
                 'recursive' => 2
             ));
+            $recommendation['Activity']['type'] = 'recommendation';
             $recommendation['Activity']['created'] = $recommendation['Recommendation']['created'];
             array_push($activities, $recommendation);
         }
@@ -123,6 +125,7 @@ class ActivitiesController extends AppController {
                 'conditions' => array('user_id' => $experiences_user['Experience']['user_id']),
                 'recursive' => 0
             ));
+            $experience['Activity']['type'] = 'experience';
             $experience['Activity']['created'] = $experience['Experience']['created'];
             array_push($activities, $experience);
         }
@@ -142,6 +145,7 @@ class ActivitiesController extends AppController {
         ));
         
         foreach ($users as $user){
+            $user['Activity']['type'] = 'user';
             $user['Activity']['created'] = $user['User']['created'];
             array_push($activities,$user);
         }
