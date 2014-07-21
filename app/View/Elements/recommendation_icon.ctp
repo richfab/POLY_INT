@@ -7,4 +7,4 @@
  */
 
 ?>
-<span class="glyphicon glyphicon-<?= $recommendationtype_icon; ?> recommendationtype-icon selected" data-toggle="tooltip" title="<?= $recommendationtype_name; ?>"></span>
+<span class="fa fa-<?= $recommendationtype_icon; ?> recommendationtype-icon" data-toggle="tooltip" title="<?= $recommendationtype_name; ?>"></span>

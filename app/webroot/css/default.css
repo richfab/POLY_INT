@@ -12,6 +12,10 @@ html,body{
     font-size: 14px;
 }
 
+.fa {
+    line-height: 2!important;
+}
+
 .no-padding {
     padding: 0!important;
 }
@@ -724,7 +728,7 @@ h2 > span.wut {
 
 .icons-list > li {
     position: relative;
-    padding-left: 2.2em;
+    padding-left: 3em;
     margin-bottom: 1em;
     line-height: 1.65em;
 }
