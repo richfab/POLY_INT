@@ -56,6 +56,10 @@ class PagesController extends AppController {
 
 		if (!empty($path[0])) {
 			$page = $path[0];
+                        //if user is logged in and wants to see homepage, redirect to activity page
+                        if($page == 'home' && $this->Auth->login()){
+                            return $this->redirect(array('controller' => 'activities'));
+                        }
 		}
 		if (!empty($path[1])) {
 			$subpage = $path[1];
