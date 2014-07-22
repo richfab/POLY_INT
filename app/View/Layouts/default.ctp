@@ -55,7 +55,7 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
         
         <div id="container">
             
-            <div class="navbar navbar-default navbar-fixed-top" id="top-bar">
+            <div class="navbar navbar-default navbar-fixed-top" role="navigation" id="top-bar">
                 <div class="container">
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
