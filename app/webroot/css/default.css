@@ -572,7 +572,7 @@ h2 > span.wut {
 
 @media (max-width: 768px) {
     .activity-content .photo_el_wrap .close {
-        margin-left: 0px;
+        display: none;
     }
     
     .activity-content .photo_el{
