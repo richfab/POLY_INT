@@ -70,7 +70,7 @@
             <div class="activity-actions">
                 
                 <?php if(in_array($activity['Activity']['type'], array('photo','recommendation','experience')) && count($activity['Activity']['people_around']) > 1):?>
-                    <a class="pull-left people-around" data-toggle="tooltip" title="<?php foreach ($activity['Activity']['people_around'] as $user) { echo $user['firstname'].' '.$user['lastname'].'<br/>';} ?>"><i class="fa fa-users"></i> <?php echo count($activity['Activity']['people_around']); ?> personnes dans cette ville</a> 
+                    <a class="pull-left people-around hidden-xs" data-toggle="tooltip" title="<?php foreach ($activity['Activity']['people_around'] as $user) { echo $user['firstname'].' '.$user['lastname'].'<br/>';} ?>"><i class="fa fa-users"></i> <?php echo count($activity['Activity']['people_around']); ?> personnes dans cette ville</a> 
                 <?php endif; ?>
 
                 <a href="#" class="pull-right"><i class="fa fa-clock-o"></i> <time class="timeago" datetime="<?php echo $activity['Activity']['created']; ?>"><?php echo $activity['Activity']['created']; ?></time></a>
