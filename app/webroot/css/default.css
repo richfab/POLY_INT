@@ -96,11 +96,11 @@ b {
     height: 16px;
     font-size: 12px;
     opacity: 1;
-
+    
 }
 
 .navbar > .container .navbar-brand {
-margin-left: 0px;
+    margin-left: 0px;
 }
 /*fin utile pour bring footer to bottom*/
 
@@ -565,6 +565,21 @@ h2 > span.wut {
     font-size: 20px;
 }
 
+.activity-content .photo_el_wrap .close {
+    margin-left: 72px;
+}
+
+@media (max-width: 768px) {
+    .activity-content .photo_el_wrap .close {
+        margin-left: 0px;
+    }
+    
+    .activity-content .photo_el{
+        width: 40px;
+        height: 40px;
+    }
+}
+
 .contact-logo{
     height: 20px;
 }
@@ -637,7 +652,7 @@ h2 > span.wut {
 .profile-info-search > div{
     margin: 0 0 5px;
     color: black;
-
+    
 }
 
 .profile-info-search {
@@ -804,6 +819,7 @@ h2 > span.wut {
     margin-bottom: 20px;
     border: 1px solid #E5E5E5;
 }
+
 .activity {
     position: relative;
     padding: 0;
@@ -826,15 +842,25 @@ h2 > span.wut {
 }
 
 .activity-photo {
-
+    
 }
 
 .activity-recommendation {
-
+    
 }
 
 .activity-experience {
+    
+}
 
+@media (max-width: 768px) {
+    .news {
+        padding: 0px 10px;
+    }
+    
+    .activity-content{
+        padding-left: 0px;
+    }
 }
 
 .activity-default {
@@ -870,7 +896,7 @@ h2 > span.wut {
 }
 
 .activity-post {
-
+    
 }
 
 .activity .content {
