@@ -544,8 +544,7 @@ h2 > span.wut {
 
 .photo_el_wrap{
     display: inline-block;
-    margin-left: 2px;
-    margin-right: 2px;
+    margin: 2px;
 }
 
 .photo_el_wrap:hover .close{
