@@ -929,4 +929,5 @@ h2 > span.wut {
 
 .recommendation-text {
     padding-top: 7px;
+    overflow-x: hidden;
 }
