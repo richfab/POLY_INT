@@ -1,10 +1,5 @@
 ////////////*FONCTIONS DE RECUPERATION DES DONNEES*////////////
 
-//recupere les infos dans la base de donnees pour l'affichage de la carte au chargement de la page explore
-function get_map_init(){
-    fetch_map_values(createFilterFromCookies());
-}
-
 //recupere les infos dans la base de donnees pour l'affichage de la carte au changement de filtres
 function get_map(){
     var filter = get_filter_params();

@@ -79,11 +79,11 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
                             </li>
                             <li class="menu-separator"></li>
                             <li class="menu-item">
-                                <?= $this->Html->link('Partager',array('controller'=>'recommendations', 'action'=>'search'),array('style'=>'display:inline-block','escape'=>false));?>
+                                <?= $this->Html->link('Rechercher',array('controller'=>'experiences', 'action'=>'search'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
                             <li class="menu-separator"></li>
                             <li class="menu-item">
-                                <?= $this->Html->link('Rechercher',array('controller'=>'experiences', 'action'=>'search'),array('style'=>'display:inline-block','escape'=>false));?>
+                                <?= $this->Html->link('Partager',array('controller'=>'recommendations', 'action'=>'search'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
                             <li class="menu-separator"></li>
                             <li class="menu-item">

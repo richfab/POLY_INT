@@ -32,11 +32,9 @@
     
     $( function() {
         
-        $( document ).ready(function() {
-            init_map();
-            update_selects_from_filter(createFilterFromCookies());
-            get_map_init();
-        });
+        init_map();
+        update_selects_from_filter(createFilterFromCookies());
+        get_map();
         
         //au click sur une option on lance la recherche
         $(".dropdown-li").click(function() {
@@ -47,7 +45,6 @@
         $(".dropdown").click(function(){
             $('#list-map').slideUp(100);
         });
-        
     });
     
 </script>
