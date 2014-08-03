@@ -38,7 +38,8 @@
             });
         });
         //on lance la recherche au chargement
-        get_experiences('get_experiences_search');
+        update_selects_from_filter(createFilterFromCookies());
+        get_experiences('get_experiences_search', createFilterFromCookies());
 
         //fonction qui valide la soumission du formulaire lors de l'appui sur la touche entrée
         function pressEnter(evt) {

@@ -7,7 +7,7 @@
     <input type="hidden" name="date_min" id="date_min">
     <input type="hidden" name="date_max" id="date_max">
 </div>
-
+    
 <!-- experience lists and modals -->
 <div id="list-map" style="display:none">
     <ul class="list-unstyled experience-list"></ul>
@@ -27,10 +27,16 @@
     </div>
 </div>
 <!-- /experience lists and modals -->
-
+    
 <script type="text/javascript">
     
     $( function() {
+        
+        $( document ).ready(function() {
+            init_map();
+            update_selects_from_filter(createFilterFromCookies());
+            get_map_init();
+        });
         
         //au click sur une option on lance la recherche
         $(".dropdown-li").click(function() {

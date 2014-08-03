@@ -143,7 +143,7 @@ class ExperiencesController extends AppController {
     */
     public function explore(){
         //includes scripts to get experiences
-    	$this->set('jsIncludes',array('get_experiences','logo_fly','jvector','jquery-jvectormap.min','jquery-jvectormap-world-mill-en','jquery.dropdown'));
+    	$this->set('jsIncludes',array('get_experiences','logo_fly','jvector','jquery-jvectormap.min','jquery-jvectormap-world-mill-en','jquery.dropdown','cookies'));
         //includes styles for map and filters
         $this->set('cssIncludes',array('jvectormap','map'));
             
@@ -158,9 +158,7 @@ class ExperiencesController extends AppController {
     */
     public function search(){
         //includes google maps script for place autocomplete and to get experiences
-    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','get_experiences','logo_fly','jquery.dropdown'));
-        //includes styles for filters
-//        $this->set('cssIncludes',array('filter'));
+    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','get_experiences','logo_fly','jquery.dropdown','cookies'));
             
         //sets motives, schools and departments by alphbetical order
         $this->__set_motives_schools_and_departments();

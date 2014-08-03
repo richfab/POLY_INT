@@ -2,7 +2,7 @@
 
 //recupere les infos dans la base de donnees pour l'affichage de la carte au chargement de la page explore
 function get_map_init(){
-    fetch_map_values('{}');
+    fetch_map_values(createFilterFromCookies());
 }
 
 //recupere les infos dans la base de donnees pour l'affichage de la carte au changement de filtres
@@ -154,8 +154,25 @@ function get_filter_params(){
     if($('#period_id').attr('date-max').length !== 0 && $('#period_id').attr('date-max') !== ''){
         var date_max = $.parseJSON('{"date_max":"'+$('#period_id').attr('date-max')+'"}');
     }
+    if($('#period_id').attr('value') !== '0'){
+        var period_id = $.parseJSON('{"period_id":"'+$('#period_id').attr('value')+'"}');
+    }
     
-    $.extend(filter,deparment_id,motive_id,school_id,key_word,city_name,country_id,user_name,date_min,date_max);
+    $.extend(filter,deparment_id,motive_id,school_id,key_word,city_name,country_id,user_name,date_min,date_max,period_id);
+    
+    var filter_cookie = {};
+    filter_cookie["department_id"] = $('#department_id').attr('value');
+    filter_cookie["motive_id"] = $('#motive_id').attr('value');
+    filter_cookie["school_id"] = $('#school_id').attr('value');
+    filter_cookie["period_id"] = $('#period_id').attr('value');
+    createCookiesFromFilter(filter_cookie);
     
     return filter;
+}
+
+function update_selects_from_filter(filter){
+    $('#department_id > [value='+ filter.department_id +']').click();
+    $('#motive_id > [value='+ filter.motive_id +']').click();
+    $('#school_id > [value='+ filter.school_id +']').click();
+    $('#period_id > [value='+ filter.period_id +']').click();
 }

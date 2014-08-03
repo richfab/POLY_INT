@@ -2,11 +2,6 @@ var _data;
 var min_zoom_marker = 3;
 var selected_region = {};
 
-$( document ).ready(function() {
-    init_map();
-    get_map_init();
-});
-
 function init_map(){
     //si le navigateur est internet explorer
     if (navigator.appName == "msie"){
