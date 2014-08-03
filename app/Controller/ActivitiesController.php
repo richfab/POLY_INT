@@ -51,7 +51,7 @@ class ActivitiesController extends AppController {
     */
     public function get_activities(){
         
-//        $this->request->onlyAllow('ajax');
+        $this->request->onlyAllow('ajax');
         
         $offset = $this->request->data['offset'];
         
@@ -180,7 +180,9 @@ class ActivitiesController extends AppController {
         array_multisort($sort_by_date, SORT_DESC, $activities);
             
         //sets last activities
-        $this->set(array('activities' => $activities, 'offset' => $offset+1));
+        $this->set(array('activities' => $activities));
+        //sets offset
+        $this->set(array('offset' => $offset+1));
         
         App::import('Controller', 'Countries');
         $countriesController = new CountriesController;

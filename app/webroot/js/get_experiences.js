@@ -53,10 +53,14 @@ function fetch_map_values(filter){
 }
 
 //recuperer les experiences dans la base de donnees pour l'affichage de la liste
-function get_experiences(_view_to_render, _filter){
+function get_experiences(_view_to_render, _filter, offset){
     
-    //on recupere les params initiaux
+    if(!offset){
+        offset = 0;
+    }
+    
     var filter = get_filter_params();
+    filter.offset = offset;
     
     //si une region (ville ou pays) est selectionnee on raffraichit aussi la liste correspondante
     if(_view_to_render === 'get_experiences_map' && selected_region.type){
@@ -88,9 +92,6 @@ function get_experiences(_view_to_render, _filter){
         complete : function(data) {
             // on cache le loader
             stop_logo_fly();
-            
-            //incremente le offset pour le 'plus' de la liste des resultats
-            $('input[name=offset]').val($('input[name=offset]').val()*1+20);
         }
     });
     console.log(filter);
@@ -113,7 +114,6 @@ function new_search(view_to_render,filter){
     $('.experience-list').empty();
     
     //on remet le offset a 0
-    $('input[name=offset]').val(0);
     if(filter){
         filter.offset = "0";
     }
@@ -122,7 +122,7 @@ function new_search(view_to_render,filter){
     get_experiences(view_to_render,filter);
 }
 
-//recupre les parametres de filtres et le offset
+//recupere les parametres de filtres
 function get_filter_params(){
     
     var filter = {};
@@ -154,11 +154,8 @@ function get_filter_params(){
     if($('#period_id').attr('date-max').length !== 0 && $('#period_id').attr('date-max') !== ''){
         var date_max = $.parseJSON('{"date_max":"'+$('#period_id').attr('date-max')+'"}');
     }
-    if($('input[name=offset]').length !== 0){
-        var offset = $.parseJSON('{"offset":"'+$('input[name=offset]').val()+'"}');
-    }
     
-    $.extend(filter,deparment_id,motive_id,school_id,key_word,city_name,country_id,user_name,date_min,date_max,offset);
+    $.extend(filter,deparment_id,motive_id,school_id,key_word,city_name,country_id,user_name,date_min,date_max);
     
     return filter;
 }

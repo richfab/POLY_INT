@@ -60,8 +60,6 @@
         </div>
     </div>
 </div>
-<!--utile pour le nombre de resultats a afficher-->
-<input type="hidden" name="offset" id="offset" value="0">
     
 <script type="text/javascript">
     

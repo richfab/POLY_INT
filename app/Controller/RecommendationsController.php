@@ -137,6 +137,9 @@ class RecommendationsController extends AppController {
                         'limit' => $result_limit,
                         'offset' => $offset)));
             
+            //sets next offset
+            $this->set(array('next_offset' => $offset+$result_limit));
+            
             //sets countries
             $this->set('countries',$this->Recommendation->Experience->City->Country->find('list'));
             //sets recommendationtypes (icons et names)

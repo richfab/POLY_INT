@@ -31,7 +31,7 @@
         //si le nombre de resultats est egale a la limite de resultat on affiche un bouton plus
         if(count($experiences) == $result_limit): ?>
         <p style="text-align: center">
-            <a style="cursor: pointer" onclick="$(this).remove();get_experiences('get_experiences_search')">plus</a>
+            <a style="cursor: pointer" onclick="$(this).remove();get_experiences('get_experiences_search',null,<?= $next_offset; ?>)">plus</a>
         </p>
     <?php endif;?>
     <?php //si aucune expérience n'a été trouvée

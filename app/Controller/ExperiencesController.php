@@ -352,6 +352,9 @@ class ExperiencesController extends AppController {
                             'IF(DATEDIFF(Experience.dateEnd, NOW()) < 0,DATE_ADD("2200-01-01",INTERVAL ABS(DATEDIFF(Experience.dateEnd,NOW())) DAY),Experience.dateStart) AS dateSort',
                             'DATEDIFF(Experience.dateEnd, Experience.dateStart)/30 monthDiff'))));
             
+            //sets next offset
+            $this->set(array('next_offset' => $offset+$result_limit));
+            
             //sets countries
             $this->set('countries',$this->Experience->City->Country->find('list'));
             //sets departments

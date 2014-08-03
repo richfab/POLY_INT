@@ -1,9 +1,14 @@
 //recuperer les experiences dans la base de donnees pour l'affichage de la liste
-function get_recommendations(){
-    
-    var filter = get_filter_params();
+function get_recommendations(offset){
     
     start_logo_fly();
+    
+    if(!offset){
+        offset = 0;
+    }
+    
+    var filter = get_filter_params();
+    filter.offset = offset;
     
     $.ajax({
         type:"POST",
@@ -66,11 +71,8 @@ function get_filter_params(){
     if($('input[name=country_id]').length !== 0 && $('input[name=country_id]').val() !== ''){
         var country_id = $.parseJSON('{"country_id":"'+$('input[name=country_id]').val()+'"}');
     }
-    if($('input[name=offset]').length !== 0){
-        var offset = $.parseJSON('{"offset":"'+$('input[name=offset]').val()+'"}');
-    }
     
-    $.extend(filter,city_name,country_id,offset,recommendationtypes);
+    $.extend(filter,city_name,country_id,recommendationtypes);
     console.log(filter);
     return filter;
 }
