@@ -5,15 +5,15 @@
 .jvectormap-label {
     position: absolute;
     display: none;
-    border: solid 1px #CDCDCD;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    background: #292929;
-    color: white;
-    font-family: sans-serif, Verdana;
-    font-size: smaller;
-    padding: 3px;
+    max-width: 200px;
+    padding: 3px 8px;
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+    background-color: #000000;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 300;
 }
 
 .jvectormap-zoomin, .jvectormap-zoomout {
