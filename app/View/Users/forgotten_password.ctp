@@ -1,4 +1,4 @@
-<h2>Mot de passe oublié</h2>
+<h2><?= __('Mot de passe oublié');?></h2>
 <?php echo $this->Form->create('User', array(
         'inputDefaults' => array(
                 'div' => 'form-group',
@@ -10,14 +10,14 @@
         ),
         'class' => 'well form-horizontal'
     ));
-	echo $this->Form->input('email',array('label'=>"Email utilisé pour l'inscription"));?>
+	echo $this->Form->input('email',array('label'=>__("Email utilisé pour l'inscription")));?>
 
 <div class="form-group">
-            <?php echo $this->Form->submit('Envoyer', array(
+            <?php echo $this->Form->submit(__('Envoyer'), array(
                     'div' => 'col col-md-9 col-md-offset-3',
                     'class' => 'btn btn-orange'
             )); ?>
 </div>
-	<?php echo $this->Html->link('Retour à la connexion', array('controller'=>'users','action'=>'login'));
+	<?php echo $this->Html->link(__('Retour'), array('controller'=>'users','action'=>'login'));
         echo $this->Form->end();
 ?>

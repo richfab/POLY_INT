@@ -170,7 +170,7 @@ class UsersController extends AppController {
                 $user = $this->User->findByEmail($this->request->data['User']['email']);
                 $this->__send_activation_email($user);
                     
-                $this->Session->setFlash(__("Ton inscription a bien été prise en compte. Un email d'activation sera bientôt envoyé à ".$user['User']['email']), 'alert', array(
+                $this->Session->setFlash(__("Ton inscription a bien été prise en compte. Un email d'activation te sera bientôt envoyé"), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));
@@ -219,7 +219,7 @@ class UsersController extends AppController {
                         ->viewVars(array('firstname' => $user['User']['firstname']))
                         ->send();
                             
-                $this->Session->setFlash(__("Ta demande d'inscription a bien été prise en compte. Un email de confirmation sera bientôt envoyé à ".$user['User']['email_at_signup']), 'alert', array(
+                $this->Session->setFlash(__("Ta demande d'inscription a bien été prise en compte. Un email de confirmation te sera bientôt envoyé"), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));
@@ -340,7 +340,7 @@ class UsersController extends AppController {
                         ->viewVars(array('firstname'=>$user['User']['firstname'],'link'=>$link))
                         ->send();
                             
-                $this->Session->setFlash(__("Un email avec un lien pour réinitialiser le mot de passe vient d'être envoyé à ".$user['User']['email']), 'alert', array(
+                $this->Session->setFlash(__("Un email avec un lien pour réinitialiser ton mot de passe vient de t'être envoyé"), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));

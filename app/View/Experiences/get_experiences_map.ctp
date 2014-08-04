@@ -29,7 +29,7 @@
         //si le nombre de resultats est egale a la limite de resultat on affiche un bouton plus
         if(count($experiences) == $result_limit): ?>
         <p style="text-align: center">
-            <a style="cursor: pointer" onclick="$(this).remove();get_experiences('get_experiences_map',null,<?= $next_offset; ?>)">plus</a>
+            <a style="cursor: pointer" onclick="$(this).remove();get_experiences('get_experiences_map',null,<?= $next_offset; ?>)"><?= __('plus');?></a>
         </p>
     <?php endif;?>
     <?php 
@@ -44,7 +44,7 @@
 <?php else: ?>
         <li>
             <div class="list-map-message">
-                <?= $this->Html->link("Connecte-toi", array('controller'=>'users', 'action' => 'login'),array("style"=>"display:inline-block")); ?> ou <?= $this->Html->link("inscris-toi", array('controller'=>'users', 'action' => 'signup'),array("style"=>"display:inline-block")); ?> pour consulter les expériences
+                <?= $this->Html->link(__("Connecte-toi"), array('controller'=>'users', 'action' => 'login'),array("style"=>"display:inline-block")); ?> <?= __('ou');?> <?= $this->Html->link(__("inscris-toi"), array('controller'=>'users', 'action' => 'signup'),array("style"=>"display:inline-block")); ?> <?= __('pour consulter les expériences');?>
             </div>
         </li>
 <?php endif; ?>

@@ -9,13 +9,13 @@
         <input type="hidden" id="CityName" name="city_name"><input type="hidden" id="CityCountryId" name="country_id">
         <input type="hidden" id="CityLat"><input type="hidden" id="CityLon"><input type="hidden" id="CityCountryName">
         <div class="col-sm-3">    
-            <input type="text" name="key_word" class="form-control" placeholder="Mots clé">
+            <input type="text" name="key_word" class="form-control" placeholder="<?= __('Mots clé');?>">
         </div>
         <div class="col-sm-3">    
-            <input type="text" name="user_name" class="form-control" placeholder="Nom ou prénom">
+            <input type="text" name="user_name" class="form-control" placeholder="<?= __('Nom ou prénom');?>">
         </div>
         <div class="col-sm-3">
-            <button id="validatePlaceButton" class="btn btn-blue form-control" onclick="new_search('get_experiences_search');"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
+            <button id="validatePlaceButton" class="btn btn-blue form-control" onclick="new_search('get_experiences_search');"><span class="glyphicon glyphicon-search"></span> <?= __('Rechercher');?></button>
         </div>
         <input type="hidden" name="date_min" id="date_min">
         <input type="hidden" name="date_max" id="date_max">

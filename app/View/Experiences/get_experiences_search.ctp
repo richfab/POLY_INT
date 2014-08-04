@@ -31,7 +31,7 @@
         //si le nombre de resultats est egale a la limite de resultat on affiche un bouton plus
         if(count($experiences) == $result_limit): ?>
         <p style="text-align: center">
-            <a style="cursor: pointer" onclick="$(this).remove();get_experiences('get_experiences_search',null,<?= $next_offset; ?>)">plus</a>
+            <a style="cursor: pointer" onclick="$(this).remove();get_experiences('get_experiences_search',null,<?= $next_offset; ?>)"><?= __('plus');?></a>
         </p>
     <?php endif;?>
     <?php //si aucune expérience n'a été trouvée
@@ -39,7 +39,7 @@
             <p>Aucune expérience trouvée.</p>
     <?php endif; ?>
 <?php else: ?>
-        <p><?= $this->Html->link("Connecte-toi", array('controller'=>'users', 'action' => 'login')); ?> ou <?= $this->Html->link("inscris-toi", array('controller'=>'users', 'action' => 'signup')); ?> pour consulter les expériences</p>
+        <p><?= $this->Html->link(__("Connecte-toi"), array('controller'=>'users', 'action' => 'login')); ?> <?= __('ou');?> <?= $this->Html->link(__("inscris-toi"), array('controller'=>'users', 'action' => 'signup')); ?> <?= __('pour consulter les expériences');?></p>
 <?php endif; ?>
 
 <script type="text/javascript">

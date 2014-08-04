@@ -15,7 +15,7 @@
  * @since         CakePHP(tm) v 0.10.0.1076
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
-$title_description = "Polytech Abroad : L'unique passeport partagé entre tous les étudiants de Polytech";
+$title_description = __("Polytech Abroad : L'unique passeport partagé entre tous les étudiants de Polytech");
 ?>
 <!DOCTYPE html>
 <html>
@@ -71,47 +71,47 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav navbar-right">
                             <li class="menu-item">
-                                <?= $this->Html->link('Accueil',array('controller'=>'pages', 'action'=>'index'),array('style'=>'display:inline-block','escape'=>false));?>
+                                <?= $this->Html->link(__('Accueil'),array('controller'=>'pages', 'action'=>'index'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
                             <li class="menu-separator"></li>
                             <li class="menu-item">
-                                <?= $this->Html->link('Explorer',array('controller'=>'experiences', 'action'=>'explore'),array('style'=>'display:inline-block','escape'=>false));?>
+                                <?= $this->Html->link(__('Explorer'),array('controller'=>'experiences', 'action'=>'explore'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
                             <li class="menu-separator"></li>
                             <li class="menu-item">
-                                <?= $this->Html->link('Rechercher',array('controller'=>'experiences', 'action'=>'search'),array('style'=>'display:inline-block','escape'=>false));?>
+                                <?= $this->Html->link(__('Rechercher'),array('controller'=>'experiences', 'action'=>'search'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
                             <li class="menu-separator"></li>
                             <li class="menu-item">
-                                <?= $this->Html->link('Partager',array('controller'=>'recommendations', 'action'=>'search'),array('style'=>'display:inline-block','escape'=>false));?>
+                                <?= $this->Html->link(__('Partager'),array('controller'=>'recommendations', 'action'=>'search'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
                             <li class="menu-separator"></li>
                             <li class="menu-item">
-                                <?= $this->Html->link('Contest','/contest',array('style'=>'display:inline-block','escape'=>false));?>
+                                <?= $this->Html->link(__('Contest'),'/contest',array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
                             <li class="menu-separator"></li>
                             <?php if(AuthComponent::user('id')): ?>
                                 <li>
                                     <?= $this->Html->link(
-                                            'mon profil',
+                                            __('mon profil'),
                                             array('controller'=>'users', 'action'=>'profile'),
                                             array('class'=>'btn btn-default btn-blue'));?>
                                 </li>
                                 <li>
                                     <?= $this->Html->link(
-                                            'déconnexion',
+                                            __('déconnexion'),
                                             array('controller'=>'users', 'action'=>'logout'),
                                             array('class'=>'btn btn-default btn-orange'));?>
                                 </li>
                             <?php else:?>
                                 <li>
                                     <?= $this->Html->link(
-                                            'inscription',
+                                            __('inscription'),
                                             array('controller'=>'users', 'action'=>'signup'),
                                             array('class'=>'btn btn-default btn-blue'));?>
                                 <li>
                                     <?= $this->Html->link(
-                                            'connexion',
+                                            __('connexion'),
                                             array('controller'=>'users', 'action'=>'login'),
                                             array('class'=>'btn btn-default btn-orange'));?>
                                 </li>
@@ -141,9 +141,9 @@ $title_description = "Polytech Abroad : L'unique passeport partagé entre tous l
                         <a class="icon-linkedin-mini" href="https://www.linkedin.com/groups?gid=6576008" target="_blank"></a>
                     </p>
                     <p class="pull-right">
-                        <?= $this->Html->link('mentions légales',
+                        <?= $this->Html->link(__('mentions légales'),
                                 array('controller' => 'pages', 'action' => 'legal'));?> | 
-                        <?= $this->Html->link('a propos',
+                        <?= $this->Html->link(__('a propos'),
                                 array('controller' => 'pages', 'action' => 'about'));?>
                     </p>
                 </div>

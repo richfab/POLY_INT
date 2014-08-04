@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="col-sm-2">
-            <button class="btn btn-blue form-control" onclick="new_search();"><span class="glyphicon glyphicon-search"></span> Rechercher</button>
+            <button class="btn btn-blue form-control" onclick="new_search();"><span class="glyphicon glyphicon-search"></span> <?= __('Rechercher');?></button>
         </div>
     </div>
 </div>

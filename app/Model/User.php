@@ -70,7 +70,8 @@ class User extends AppModel {
             )
         ),
         'avatar_file' => array(
-            'rule' => array('fileExtension', array('jpg','png','jpeg'))
+            'rule' => array('fileExtension', array('jpg','png','jpeg')),
+            'message' => 'Le fichier doit être au format jpg, png ou jpeg'
         ),
         'linkedin' => array(
             'adress' => array(

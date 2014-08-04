@@ -19,7 +19,7 @@
             <?php if($user['User']['linkedin']):?>
             <a href="<?= $user['User']['linkedin'];?>" target="_blank"><?= $this->Html->image('contact-linkedin.png',array('class' => 'contact-logo', 'title' => 'Profil LinkedIn', 'data-toggle' => 'tooltip'));?></a>
             <?php else:?>
-                <?= $this->Html->image('contact-linkedin.png',array('class' => 'contact-logo disabled', 'title' => 'Profil LinkedIn', 'data-toggle' => 'tooltip'));?>
+                <?= $this->Html->image('contact-linkedin.png',array('class' => 'contact-logo disabled', 'title' => __('Profil LinkedIn'), 'data-toggle' => 'tooltip'));?>
             <?php endif;?>
         </h1>
         <h4>
@@ -27,7 +27,7 @@
         </h4>
         <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
         <p id="edit_profile_button">
-            <?= $this->Html->link('<span class="edit-delete-label">Modifier</span>', array('action' => 'edit'),
+            <?= $this->Html->link('<span class="edit-delete-label">'.__("Modifier").'</span>', array('action' => 'edit'),
                 array('escape' => false,
                     'class' => 'glyphicon glyphicon-pencil edit-delete'
                     )); ?>
@@ -37,7 +37,7 @@
     <div class="col col-sm-1">
         <!--si c'est mon profile-->
         <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-        <h1 data-toggle="modal" data-target="#upload_profilepic_modal" title="Changer ma photo" id="custom_avatar">
+        <h1 data-toggle="modal" data-target="#upload_profilepic_modal" title="<?= __('Changer ma photo');?>" id="custom_avatar">
         <?php else:?>
             <h1>
         <?php endif;?>
@@ -51,11 +51,11 @@
             </h1>
     </div>
 </div>
-<h3 style="display: inline-block">Expériences</h3>
+<h3 style="display: inline-block"><?= __('Expériences');?></h3>
     
     <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
 <div class="well">
-    <p><?= $this->Html->link("Ajouter une expérience", array('controller' => 'experiences', 'action' => 'info')); ?></p>
+    <p><?= $this->Html->link(__("Ajouter une expérience"), array('controller' => 'experiences', 'action' => 'info')); ?></p>
 </div>
     <?php endif; ?>
 <div id="wells-experience-profile">
@@ -64,14 +64,14 @@
         
             <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
         
-                <?= $this->Form->postLink('<span class="edit-delete-label">Supprimer</span>',
+                <?= $this->Form->postLink('<span class="edit-delete-label">'.__("Supprimer").'</span>',
                     array('controller'=>'experiences', 'action' => 'delete', $experience['Experience']['id']),
-                    array('confirm' => 'Es-tu sûr de vouloir supprimer cette expérience ?',
+                    array('confirm' => __('Es-tu sûr de vouloir supprimer cette expérience ?'),
                         'escape' => false,
                         'class' => 'glyphicon glyphicon-remove close edit-delete'
                     ));
                 ?>
-                <?= $this->Html->link('<span class="edit-delete-label">Modifier</span>', array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id']),
+                <?= $this->Html->link('<span class="edit-delete-label">'.__("Modifier").'</span>', array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id']),
                         array('escape' => false,
                             'class' => 'glyphicon glyphicon-pencil close edit-delete'
                         )); ?>
@@ -82,7 +82,7 @@
             <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
         
         <div id="addRecommendation">
-            <p>Partager un bon plan : 
+            <p><?= __("Partager un bon plan");?> : 
                 <?php foreach ($recommendationtypes as $recommendationtype) :?>
                 <span class="glyphicon glyphicon-<?= $recommendationtype['Recommendationtype']['icon'];?> recommendationtype-icon recommendationtype-icon-selectable" recommendationtype_description="<?= $recommendationtype['Recommendationtype']['description'];?>" recommendationtype_id="<?= $recommendationtype['Recommendationtype']['id'];?>" data-toggle="tooltip" title="<?= $recommendationtype['Recommendationtype']['name']; ?>"></span>
                 <?php endforeach;?>
@@ -106,7 +106,7 @@
             <div class="panel panel-default panel-recommendations">
                 <div class="panel-heading panel-heading-recommendations">
                     <h5 class="panel-title panel-title-recommendations">
-                        <span style="width:20px" class="glyphicon glyphicon-comment"></span> Bons plans
+                        <span style="width:20px" class="glyphicon glyphicon-comment"></span> <?= __("Bons plans");?>
                     </h5>
                 </div>
                 <div class="panel-collapse">
@@ -120,7 +120,7 @@
                                     <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
                                         <?= $this->Form->postLink('<span class="edit-delete-label"></span>',
                                             array('controller'=>'recommendations', 'action' => 'delete', $recommendation['id']),
-                                            array('confirm' => 'Es-tu sûr de vouloir supprimer ce bon plan ?',
+                                            array('confirm' => __('Es-tu sûr de vouloir supprimer ce bon plan ?'),
                                                 'escape' => false,
                                                 'class' => 'glyphicon glyphicon-remove close edit-delete'
                                             ));
@@ -131,7 +131,7 @@
                         </div>
                             <?php endforeach;?>
                             <?php if (!$experience['Recommendation']) :?>
-                        <p>Aucun bon plan</p>
+                        <p><?= __("Aucun bon plan");?></p>
                             <?php endif;?>
                     </div>
                 </div>
@@ -142,7 +142,7 @@
             <div class="panel panel-default panel-photos">
                 <div class="panel-heading panel-heading-photos">
                     <h5 class="panel-title panel-title-photos">
-                        <span style="width:20px" class="glyphicon glyphicon-picture"></span> Photos 
+                        <span style="width:20px" class="glyphicon glyphicon-picture"></span> <?= __("Photos");?> 
                             <?php if($experience['Experience']['user_id'] == AuthComponent::user('id')) : ?>
                                 <?php echo $this->element('fbalbum_import_button', array('experience' => $experience)); ?>
                             <?php endif; ?>
@@ -168,7 +168,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Modifier ma photo de profil</h4>
+                <h4 class="modal-title" id="myModalLabel"><?= __('Modifier ma photo de profil');?></h4>
             </div>
             <div class="modal-body">
                 <?php

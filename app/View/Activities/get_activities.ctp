@@ -81,7 +81,7 @@
 
     
 <p style="text-align: center">
-    <a style="cursor: pointer" onclick='get_activities(<?= $offset; ?>);$(this).remove();'>plus</a>
+    <a style="cursor: pointer" onclick='get_activities(<?= $offset; ?>);$(this).remove();'><?= __('plus');?></a>
 </p>
 
 <?php

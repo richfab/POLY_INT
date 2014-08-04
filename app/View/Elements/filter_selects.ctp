@@ -1,12 +1,19 @@
+<?php
+
+/* 
+ * Filter select element
+ */
+
+?>
 <div class="row">
     <div class="col-sm-3 dropdown-wrap">
         <div class="dropdown">
             <button class="btn btn-default dropdown-toggle filter-button" type="button" data-toggle="dropdown">
-                <span class="dropdown-title pull-left" option-title="Spécialité">Spécialité</span>
+                <span class="dropdown-title pull-left" option-title="<?= __('Spécialité');?>"><?= __('Spécialité');?></span>
                 <span class="glyphicon glyphicon-chevron-down small dropdown-chevron"></span>
             </button>
             <ul id="department_id" class="dropdown-menu" role="menu" value="0">
-                <li role="presentation" value="0" class="dropdown-li"><a role="menuitem" href="#">Toutes</a></li>
+                <li role="presentation" value="0" class="dropdown-li"><a role="menuitem" href="#"><?= __('Toutes');?></a></li>
         <?php foreach ($departments as $key => $department):?>
                 <li role="presentation" value="<?= $key; ?>" class="dropdown-li"><a role="menuitem" href="#"><?= $department; ?></a></li>
         <?php endforeach;?>
@@ -17,11 +24,11 @@
     <div class="col-sm-3 dropdown-wrap">
         <div class="dropdown">
             <button class="btn btn-default dropdown-toggle filter-button" type="button" data-toggle="dropdown">
-                <span class="dropdown-title pull-left" option-title="Motif">Motif</span>
+                <span class="dropdown-title pull-left" option-title="<?= __('Motif');?>"><?= __('Motif');?></span>
                 <span class="glyphicon glyphicon-chevron-down small dropdown-chevron"></span>
             </button>
             <ul id="motive_id" class="dropdown-menu" role="menu" value="0">
-                <li role="presentation" value="0" class="dropdown-li"><a role="menuitem" href="#">Tous</a></li>
+                <li role="presentation" value="0" class="dropdown-li"><a role="menuitem" href="#"><?= __('Tous');?></a></li>
         <?php foreach ($motives as $key => $motive):?>
                 <li role="presentation" value="<?= $key; ?>" class="dropdown-li"><a role="menuitem" href="#"><?= $motive; ?></a></li>
         <?php endforeach;?>
@@ -32,11 +39,11 @@
     <div class="col-sm-3 dropdown-wrap">
         <div class="dropdown">
             <button class="btn btn-default dropdown-toggle filter-button" type="button" data-toggle="dropdown">
-                <span class="dropdown-title pull-left" option-title="École">École</span>
+                <span class="dropdown-title pull-left" option-title="<?= __('École');?>"><?= __('École');?></span>
                 <span class="glyphicon glyphicon-chevron-down small dropdown-chevron"></span>
             </button>
             <ul id="school_id" class="dropdown-menu" role="menu" value="0">
-                <li role="presentation" value="0" class="dropdown-li"><a role="menuitem" href="#">Toutes</a></li>
+                <li role="presentation" value="0" class="dropdown-li"><a role="menuitem" href="#"><?= __('Toutes');?></a></li>
         <?php foreach ($schools as $key => $school):?>
                 <li role="presentation" value="<?= $key; ?>" class="dropdown-li"><a role="menuitem" href="#"><?= $school; ?></a></li>
         <?php endforeach;?>
@@ -47,15 +54,15 @@
     <div class="col-sm-3 dropdown-wrap">
         <div class="dropdown">
             <button class="btn btn-default dropdown-toggle filter-button" type="button" data-toggle="dropdown">
-                <span class="dropdown-title pull-left" option-title="Période">Période</span>
+                <span class="dropdown-title pull-left" option-title="<?= __('Période');?>"><?= __('Période');?></span>
                 <span class="glyphicon glyphicon-chevron-down small dropdown-chevron"></span>
             </button>
             <ul id="period_id" class="dropdown-menu pull-right" role="menu" date-min="" date-max="">
-                <li role="presentation" value="0" date-min="" date-max="" class="dropdown-li"><a role="menuitem" href="#">Toutes</a></li>
-                <li role="presentation" value="1" date-min="<?= date_sub(date_create('now'),date_interval_create_from_date_string('3 years'))->format('Y-m-d');?>" date-max="<?= date('Y-m-d');?>" class="dropdown-li"><a role="menuitem" href="#">Depuis <?= date('Y')-3;?></a></li>
-                <li role="presentation" value="2" date-min="<?= date_sub(date_create('now'),date_interval_create_from_date_string('1 year'))->format('Y-m-d');?>" date-max="<?= date('Y-m-d');?>" class="dropdown-li"><a role="menuitem" href="#">Depuis <?= date('Y')-1;?></a></li>
-                <li role="presentation" value="3" date-min="<?= date('Y-m-d');?>" date-max="<?= date('Y-m-d');?>" class="dropdown-li"><a role="menuitem" href="#">Maintenant</a></li>
-                <li role="presentation" value="4" date-min="<?= date('Y-m-d');?>" date-max="" class="dropdown-li"><a role="menuitem" href="#">A venir</a></li>
+                <li role="presentation" value="0" date-min="" date-max="" class="dropdown-li"><a role="menuitem" href="#"><?= __('Toutes');?></a></li>
+                <li role="presentation" value="1" date-min="<?= date_sub(date_create('now'),date_interval_create_from_date_string('3 years'))->format('Y-m-d');?>" date-max="<?= date('Y-m-d');?>" class="dropdown-li"><a role="menuitem" href="#"><?= __('Depuis');?> <?= date('Y')-3;?></a></li>
+                <li role="presentation" value="2" date-min="<?= date_sub(date_create('now'),date_interval_create_from_date_string('1 year'))->format('Y-m-d');?>" date-max="<?= date('Y-m-d');?>" class="dropdown-li"><a role="menuitem" href="#"><?= __('Depuis');?> <?= date('Y')-1;?></a></li>
+                <li role="presentation" value="3" date-min="<?= date('Y-m-d');?>" date-max="<?= date('Y-m-d');?>" class="dropdown-li"><a role="menuitem" href="#"><?= __('Maintenant');?></a></li>
+                <li role="presentation" value="4" date-min="<?= date('Y-m-d');?>" date-max="" class="dropdown-li"><a role="menuitem" href="#"><?= __('A venir');?></a></li>
             </ul>
         </div>
     </div>

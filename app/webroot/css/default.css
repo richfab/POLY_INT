@@ -414,6 +414,7 @@ h2 > span.wut {
 #list-search, #recommendation-list{
     margin-bottom: 30px;
     min-height: 200px;
+    font-weight: 300;
 }
 
 .well-experience-search:hover{

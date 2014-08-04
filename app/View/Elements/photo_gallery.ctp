@@ -65,8 +65,8 @@
 
 <p style="text-align: center">
     <?php if(count($hidden_photos) > 0) : ?>
-        <a style="cursor: pointer" onclick="get_gallery($(this).parents('.photo_gallery'),'<?php echo $this->Html->url(array('controller' => 'photos', 'action' => 'get_photo_gallery'),true); ?>');$(this).remove();">plus</a>
+        <a style="cursor: pointer" onclick="get_gallery($(this).parents('.photo_gallery'),'<?php echo $this->Html->url(array('controller' => 'photos', 'action' => 'get_photo_gallery'),true); ?>');$(this).remove();"><?= __('plus');?></a>
     <?php elseif(count($photos) > 8) : ?>
-        <a style="cursor: pointer" onclick="get_gallery($(this).parents('.photo_gallery'),'<?php echo $this->Html->url(array('controller' => 'photos', 'action' => 'get_photo_gallery'),true); ?>',8);$(this).remove();">moins</a>
+        <a style="cursor: pointer" onclick="get_gallery($(this).parents('.photo_gallery'),'<?php echo $this->Html->url(array('controller' => 'photos', 'action' => 'get_photo_gallery'),true); ?>',8);$(this).remove();"><?= __('moins');?></a>
     <?php endif; ?>
 </p>

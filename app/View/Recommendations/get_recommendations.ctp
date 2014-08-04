@@ -18,7 +18,7 @@
         //si le nombre de resultats est egale a la limite de resultat on affiche un bouton plus
         if(count($recommendations) == $result_limit): ?>
         <p style="text-align: center">
-            <a style="cursor: pointer" onclick="$(this).remove();get_recommendations(<?= $next_offset; ?>)">plus</a>
+            <a style="cursor: pointer" onclick="$(this).remove();get_recommendations(<?= $next_offset; ?>)"><?= __('plus');?></a>
         </p>
     <?php endif;?>
     <?php //si aucune recommendation n'a été trouvée
@@ -26,5 +26,5 @@
             <p>Aucune recommendation pour ces catégories.</p>
     <?php endif; ?>
 <?php else: ?>
-        <p><?= $this->Html->link("Connecte-toi", array('controller'=>'users', 'action' => 'login')); ?> ou <?= $this->Html->link("inscris-toi", array('controller'=>'users', 'action' => 'signup')); ?> pour consulter les bons plans</p>
+        <p><?= $this->Html->link(__("Connecte-toi"), array('controller'=>'users', 'action' => 'login')); ?> <?= __('ou');?> <?= $this->Html->link(__("inscris-toi"), array('controller'=>'users', 'action' => 'signup')); ?> <?= __('pour consulter les bons plans');?></p>
 <?php endif; ?>
