@@ -8,7 +8,7 @@
 
 ?>
 
-<h2 class="page-title"><b>Tempête</b> d'actualités.</h2>
+<h2 class="page-title"><?= __("<b>Tempête</b>");?> <?= __("d'actualités");?>.</h2>
 
 <div class="activity-feed">
 	<div class="news">

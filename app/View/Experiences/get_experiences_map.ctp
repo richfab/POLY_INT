@@ -12,12 +12,10 @@
                 <a href="<?= $this->Html->url(array('controller'=>'users', 'action' => 'profile', $experience['User']['id'],'#' => $experience['Experience']['id']),true);?>">
                     <div class="col-sm-10 col-xs-9">
                         <div style="color: #428bca;"><?= $experience['User']['firstname'].' '.$experience['User']['lastname'];?></div>
-                        <div><?= $experience['Motive']['name'].' ('.round($experience[0]['monthDiff'],0).' mois)'.' - '.$experience['City']['name'];?>, <?= $experience['City']['country_id']; ?></div>
+                        <div><?= __($experience['Motive']['name']).' - '.$experience['City']['name'];?>, <?= $experience['City']['country_id']; ?></div>
                         <div style="font-size: 12px">
                             <?php
-                                $date_start = date_create($experience['Experience']['dateStart']);
-                                $date_end = date_create($experience['Experience']['dateEnd']);
-                                echo $this->element('friendly_date', array('date_start'=>$date_start, 'date_end'=>$date_end));
+                                echo $this->element('friendly_date', array('date_start'=>$experience['Experience']['dateStart'], 'date_end'=>$experience['Experience']['dateEnd']));
                             ?>
                         </div>
                     </div>

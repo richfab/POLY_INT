@@ -1,4 +1,4 @@
-<div><?= $experience['Motive']['name'];?> à 
+<div><?= __($experience['Motive']['name']);?> <?= __('à');?> 
     <?php if($experience['Motive']['name'] !== 'Voyage'): ?>
         <strong><?= $experience['Experience']['establishment']; ?></strong> - 
     <?php endif; ?>
@@ -9,28 +9,25 @@
 <div><?= nl2br($experience['Experience']['description']);?></div>
     <?php else:?>
         <?php if($experience['Experience']['user_id'] == AuthComponent::user('id') && $this->params['action'] === 'profile') : ?>
-        <div><?= $this->Html->link("Ajouter une description", array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id'])); ?></div>
+        <div><?= $this->Html->link(__("Ajouter une description"), array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id'])); ?></div>
         <?php else: ?>
-            <div>Pas de description</div>
+            <div><?= __("Pas de description");?></div>
         <?php endif; ?>
     <?php endif; ?>
 <?php endif; ?>
 <div>
-    Du <?= $this->Time->format($experience['Experience']['dateStart'], '%e %B %Y');?> au <?= $this->Time->format($experience['Experience']['dateEnd'], '%e %B %Y')?>
-    <span class="small"> - 
-        <?php
-            $date_start = date_create($experience['Experience']['dateStart']);
-            $date_end = date_create($experience['Experience']['dateEnd']);
-            echo $this->element('friendly_date', array('date_start'=>$date_start, 'date_end'=>$date_end));
-        ?>
+    <?php
+        echo $this->element('friendly_date', array('date_start'=>$experience['Experience']['dateStart'], 'date_end'=>$experience['Experience']['dateEnd']));
+    ?>
+    <span class="small">
+        (<?= $this->Time->format($experience['Experience']['dateStart'], '%e %B %Y');?> - <?= $this->Time->format($experience['Experience']['dateEnd'], '%e %B %Y')?>)
     </span>
+    
 </div>
 <?php if($experience['Experience']['comment'] != ""): ?>
     <div>"<?= nl2br($experience['Experience']['comment']);?>"</div>
 <?php else:?>
     <?php if($experience['Experience']['user_id'] == AuthComponent::user('id') && $this->params['action'] === 'profile') : ?>
-    <div><?= $this->Html->link("Ajouter un avis", array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id'])); ?></div>
-    <?php else: ?>
-        <!--<div>Pas encore d'avis</div>-->
+        <div><?= $this->Html->link(__("Ajouter un avis"), array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id'])); ?></div>
     <?php endif; ?>
 <?php endif;?>

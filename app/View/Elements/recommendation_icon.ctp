@@ -7,4 +7,4 @@
  */
 
 ?>
-<span class="fa fa-<?= $recommendationtype_icon; ?> recommendationtype-icon" data-toggle="tooltip" title="<?= $recommendationtype_name; ?>"></span>
+<span class="fa fa-<?= $recommendationtype_icon; ?> recommendationtype-icon" data-toggle="tooltip" title="<?= __($recommendationtype_name); ?>"></span>

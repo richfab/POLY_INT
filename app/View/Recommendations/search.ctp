@@ -19,7 +19,7 @@
             <div class="row">
             <?php foreach ($recommendationtypes as $recommendationtype) : ?>
                 <div class="col-xs-2">
-                    <span class="glyphicon glyphicon-<?= $recommendationtype['Recommendationtype']['icon'];?> recommendationtype-icon selected" recommendationtype_id="<?= $recommendationtype['Recommendationtype']['id'];?>" data-toggle="tooltip" title="<?= $recommendationtype['Recommendationtype']['name']; ?>"></span>
+                    <span class="glyphicon glyphicon-<?= $recommendationtype['Recommendationtype']['icon'];?> recommendationtype-icon selected" recommendationtype_id="<?= $recommendationtype['Recommendationtype']['id'];?>" data-toggle="tooltip" title="<?= __($recommendationtype['Recommendationtype']['name']); ?>"></span>
                 </div>
             <?php endforeach;?>
             </div>
