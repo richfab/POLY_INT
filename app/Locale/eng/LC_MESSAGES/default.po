@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2014-08-04 21:00+0200\n"
-"PO-Revision-Date: 2014-08-04 21:00+0100\n"
+"POT-Creation-Date: 2014-08-04 21:06+0200\n"
+"PO-Revision-Date: 2014-08-04 21:25+0100\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: eng\n"
@@ -350,7 +350,7 @@ msgstr "posted an experience"
 
 #: View/Activities/get_activities.ctp:38
 msgid "a ajouté des photos à"
-msgstr "added photo in"
+msgstr "added photos in"
 
 #: View/Activities/get_activities.ctp:51
 msgid "a ajouté un bon plan à"
@@ -754,38 +754,26 @@ msgid "Voyage"
 msgstr "Travel"
 
 #: View/Elements/extra_trad.ctp:13
-msgid "Jamais"
-msgstr "Never"
-
-#: View/Elements/extra_trad.ctp:14
-msgid "Dans la même ville"
-msgstr "In the same city"
-
-#: View/Elements/extra_trad.ctp:15
-msgid "Dans le même pays"
-msgstr "In the same country"
-
-#: View/Elements/extra_trad.ctp:17
 msgid "Hébergement"
 msgstr "Housing"
 
-#: View/Elements/extra_trad.ctp:18
+#: View/Elements/extra_trad.ctp:14
 msgid "Transports"
 msgstr "Transportation"
 
-#: View/Elements/extra_trad.ctp:19
+#: View/Elements/extra_trad.ctp:15
 msgid "Nourriture"
 msgstr "Food"
 
-#: View/Elements/extra_trad.ctp:20
+#: View/Elements/extra_trad.ctp:16
 msgid "Bars et sorties"
 msgstr "Bars and activities"
 
-#: View/Elements/extra_trad.ctp:21
+#: View/Elements/extra_trad.ctp:17
 msgid "Culture"
 msgstr "Culture"
 
-#: View/Elements/extra_trad.ctp:22
+#: View/Elements/extra_trad.ctp:18
 msgid "Divers"
 msgstr "Other"
 
@@ -1275,7 +1263,7 @@ msgstr "Password"
 msgid "S'inscrire"
 msgstr "Sign up"
 
-#: View/Users/profile.ctp:22
+#: View/Users/profile.ctp:20;22
 msgid "Profil LinkedIn"
 msgstr "LinkedIn profile"
 
@@ -1451,6 +1439,15 @@ msgstr "Firstname should be 20 characters maximum"
 #: Model/User.php:validation for field lastname
 msgid "Le nom doit comporter 20 caractères au maximum"
 msgstr "Lastname should be 20 characters maximum"
+
+#~ msgid "Jamais"
+#~ msgstr "Never"
+
+#~ msgid "Dans la même ville"
+#~ msgstr "In the same city"
+
+#~ msgid "Dans le même pays"
+#~ msgstr "In the same country"
 
 #~ msgid "au"
 #~ msgstr "until"
