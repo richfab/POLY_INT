@@ -86,6 +86,10 @@ class AppController extends Controller {
         if ($this->Session->check('Config.language')) {
             Configure::write('Config.language', $this->Session->read('Config.language'));
         }
+        else {
+            //default language
+            Configure::write('Config.language','fra');
+        }
         
         // Définition de la locale pour toutes les fonctions php relatives à la de gestion du temps :
         if (Configure::read('Config.language') === 'fra') {
