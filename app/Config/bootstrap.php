@@ -115,5 +115,8 @@ CakePlugin::load('BoostCake');
  //Plugin de resize d'image
  CakePlugin::load('Image'); 
 
+ // Définition de la langue par défaut
+ Configure::write('Config.language','fra');
+ 
 // Définition de la locale pour toutes les fonctions php relatives à la de gestion du temps :
 setlocale(LC_TIME, 'fr_FR');
