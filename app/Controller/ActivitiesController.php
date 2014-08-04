@@ -39,7 +39,7 @@ class ActivitiesController extends AppController {
     */
     public function index(){
         
-    	$this->set('jsIncludes',array('photo_gallery','get_activities','jquery.timeago','readmore','logo_fly'));
+    	$this->set('jsIncludes',array('photo_gallery','get_activities','readmore','logo_fly'));
         $this->set('cssIncludes',array('blueimp-gallery'));
         
     }

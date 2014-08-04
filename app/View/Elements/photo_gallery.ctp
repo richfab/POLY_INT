@@ -59,7 +59,7 @@
     <?php endforeach; ?>
     
     <?php if(empty($photos)): ?>
-    <p>Aucune photo</p>
+    <p><?= __("Aucune photo");?></p>
     <?php endif; ?>
 </div>
 

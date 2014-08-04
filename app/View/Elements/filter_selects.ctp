@@ -30,7 +30,7 @@
             <ul id="motive_id" class="dropdown-menu" role="menu" value="0">
                 <li role="presentation" value="0" class="dropdown-li"><a role="menuitem" href="#"><?= __('Tous');?></a></li>
         <?php foreach ($motives as $key => $motive):?>
-                <li role="presentation" value="<?= $key; ?>" class="dropdown-li"><a role="menuitem" href="#"><?= $motive; ?></a></li>
+                <li role="presentation" value="<?= $key; ?>" class="dropdown-li"><a role="menuitem" href="#"><?= __($motive); ?></a></li>
         <?php endforeach;?>
             </ul>
         </div>

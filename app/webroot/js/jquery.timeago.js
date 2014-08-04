@@ -44,8 +44,8 @@
       localeTitle: false,
       cutoff: 0,
       strings: {
-        prefixAgo: "il y a",
-        prefixFromNow: "d'ici",
+        prefixAgo: "Il y a",
+        prefixFromNow: "Dans",
         seconds: "moins d'une minute",
         minute: "une minute",
         minutes: "%d minutes",

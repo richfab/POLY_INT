@@ -34,7 +34,12 @@ $title_description = __("Polytech Abroad : L'unique passeport partagé entre tou
                 );
                 
                 echo $this->Html->css(array('bootstrap','default','http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'));
-                echo $this->Html->script(array('jquery-1.11.0.min','bootstrap','modernizr.min')); // Inclut la librairie Jquery
+                echo $this->Html->script(array('jquery-1.11.0.min','bootstrap','modernizr.min','jquery.timeago')); // Inclut la librairie Jquery
+                
+                //ajoute la langue en pour timeago
+                if (Configure::read('Config.language') === 'eng') {
+                    echo $this->Html->script(array('jquery.timeago.en'));
+                }
                 
                 //on inclut les fichiers js qui sont spécifiques a une vue
 		if(isset($jsIncludes)){
@@ -145,7 +150,7 @@ $title_description = __("Polytech Abroad : L'unique passeport partagé entre tou
                                 array('controller' => 'pages', 'action' => 'legal'));?> &middot; 
                         <?= $this->Html->link(__('a propos'),
                                 array('controller' => 'pages', 'action' => 'about'));?> &middot; 
-                        <?= $this->Html->link(__('fr / en'),
+                        <?= $this->Html->link(__('english'),
                                 array('controller' => 'app', 'action' => 'switchLanguage'));?>
                     </p>
                 </div>

@@ -17,7 +17,7 @@
                 <?= $this->Html->image('contact-email.png',array('class' => 'contact-logo disabled', 'title' => 'Email', 'data-toggle' => 'tooltip'));?>
             <?php endif;?>
             <?php if($user['User']['linkedin']):?>
-            <a href="<?= $user['User']['linkedin'];?>" target="_blank"><?= $this->Html->image('contact-linkedin.png',array('class' => 'contact-logo', 'title' => 'Profil LinkedIn', 'data-toggle' => 'tooltip'));?></a>
+            <a href="<?= $user['User']['linkedin'];?>" target="_blank"><?= $this->Html->image('contact-linkedin.png',array('class' => 'contact-logo', 'title' => __('Profil LinkedIn'), 'data-toggle' => 'tooltip'));?></a>
             <?php else:?>
                 <?= $this->Html->image('contact-linkedin.png',array('class' => 'contact-logo disabled', 'title' => __('Profil LinkedIn'), 'data-toggle' => 'tooltip'));?>
             <?php endif;?>
@@ -84,7 +84,7 @@
         <div id="addRecommendation">
             <p><?= __("Partager un bon plan");?> : 
                 <?php foreach ($recommendationtypes as $recommendationtype) :?>
-                <span class="glyphicon glyphicon-<?= $recommendationtype['Recommendationtype']['icon'];?> recommendationtype-icon recommendationtype-icon-selectable" recommendationtype_description="<?= $recommendationtype['Recommendationtype']['description'];?>" recommendationtype_id="<?= $recommendationtype['Recommendationtype']['id'];?>" data-toggle="tooltip" title="<?= $recommendationtype['Recommendationtype']['name']; ?>"></span>
+                <span class="glyphicon glyphicon-<?= $recommendationtype['Recommendationtype']['icon'];?> recommendationtype-icon recommendationtype-icon-selectable" recommendationtype_description="<?= $recommendationtype['Recommendationtype']['description'];?>" recommendationtype_id="<?= $recommendationtype['Recommendationtype']['id'];?>" data-toggle="tooltip" title="<?= __($recommendationtype['Recommendationtype']['name']); ?>"></span>
                 <?php endforeach;?>
             </p>
             
