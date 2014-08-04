@@ -142,9 +142,11 @@ $title_description = __("Polytech Abroad : L'unique passeport partagé entre tou
                     </p>
                     <p class="pull-right">
                         <?= $this->Html->link(__('mentions légales'),
-                                array('controller' => 'pages', 'action' => 'legal'));?> | 
+                                array('controller' => 'pages', 'action' => 'legal'));?> &middot; 
                         <?= $this->Html->link(__('a propos'),
-                                array('controller' => 'pages', 'action' => 'about'));?>
+                                array('controller' => 'pages', 'action' => 'about'));?> &middot; 
+                        <?= $this->Html->link(__('fr / en'),
+                                array('controller' => 'app', 'action' => 'switchLanguage'));?>
                     </p>
                 </div>
             </div>

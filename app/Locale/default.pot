@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2014-08-04 16:51+0200\n"
+"POT-Creation-Date: 2014-08-04 17:29+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -327,12 +327,40 @@ msgstr ""
 msgid "Alert danger message testing..."
 msgstr ""
 
+#: View/Activities/get_activities.ctp:27
+msgid "a ajouté une expérience"
+msgstr ""
+
+#: View/Activities/get_activities.ctp:38
+msgid "a ajouté des photos à"
+msgstr ""
+
+#: View/Activities/get_activities.ctp:51
+msgid "a ajouté un bon plan à"
+msgstr ""
+
+#: View/Activities/get_activities.ctp:66
+msgid "a rejoint la communauté Polytech Abroad"
+msgstr ""
+
+#: View/Activities/get_activities.ctp:73
+msgid "personnes dans cette ville"
+msgstr ""
+
 #: View/Activities/get_activities.ctp:84
 #: View/Elements/photo_gallery.ctp:68
 #: View/Experiences/get_experiences_map.ctp:32
 #: View/Experiences/get_experiences_search.ctp:34
 #: View/Recommendations/get_recommendations.ctp:21
 msgid "plus"
+msgstr ""
+
+#: View/Activities/index.ctp:11
+msgid "<b>Tempête</b>"
+msgstr ""
+
+#: View/Activities/index.ctp:11
+msgid "d'actualités"
 msgstr ""
 
 #: View/Cities/admin_add.ctp:4
@@ -665,6 +693,7 @@ msgstr ""
 
 #: View/Cities/admin_view.ctp:67
 #: View/Experiences/admin_view.ctp:24
+#: View/Experiences/info.ctp:32
 #: View/Motives/admin_view.ctp:45
 #: View/Users/admin_view.ctp:63
 msgid "Description"
@@ -813,6 +842,7 @@ msgid "Toutes"
 msgstr ""
 
 #: View/Elements/filter_selects.ctp:27
+#: View/Experiences/info.ctp:30
 msgid "Motif"
 msgstr ""
 
@@ -912,6 +942,69 @@ msgstr ""
 #: View/Experiences/get_experiences_map.ctp:47
 #: View/Experiences/get_experiences_search.ctp:42
 msgid "pour consulter les expériences"
+msgstr ""
+
+#: View/Experiences/info.ctp:1
+msgid "Expérience"
+msgstr ""
+
+#: View/Experiences/info.ctp:15
+msgid "Du"
+msgstr ""
+
+#: View/Experiences/info.ctp:16
+msgid "Au"
+msgstr ""
+
+#: View/Experiences/info.ctp:27
+msgid "Ville"
+msgstr ""
+
+#: View/Experiences/info.ctp:27
+msgid "De préférence une grande ville pour une meilleure visibilité"
+msgstr ""
+
+#: View/Experiences/info.ctp:31
+msgid "Établissement"
+msgstr ""
+
+#: View/Experiences/info.ctp:31
+msgid "Nom de l'entreprise ou de l'université"
+msgstr ""
+
+#: View/Experiences/info.ctp:32
+msgid "Description de la mission"
+msgstr ""
+
+#: View/Experiences/info.ctp:38
+msgid "Avis"
+msgstr ""
+
+#: View/Experiences/info.ctp:38
+msgid "Avis sur l'expérience"
+msgstr ""
+
+#: View/Experiences/info.ctp:40
+msgid "Notifications"
+msgstr ""
+
+#: View/Experiences/info.ctp:40
+msgid "Fonctionnalité à venir"
+msgstr ""
+
+#: View/Experiences/info.ctp:40
+msgid "Recevoir un email si quelqu'un est au même en endroit en même temps"
+msgstr ""
+
+#: View/Experiences/info.ctp:43
+#: View/Users/edit.ctp:33
+#: View/Users/forgotten_password.ctp:21
+msgid "Retour"
+msgstr ""
+
+#: View/Experiences/info.ctp:46
+#: View/Users/edit.ctp:36
+msgid "Enregistrer"
 msgstr ""
 
 #: View/Experiences/search.ctp:12
@@ -1163,15 +1256,6 @@ msgstr ""
 msgid "Masquer mon email dans mon profil"
 msgstr ""
 
-#: View/Users/edit.ctp:33
-#: View/Users/forgotten_password.ctp:21
-msgid "Retour"
-msgstr ""
-
-#: View/Users/edit.ctp:36
-msgid "Enregistrer"
-msgstr ""
-
 #: View/Users/edit.ctp:44
 msgid "Changer mot de passe"
 msgstr ""
@@ -1211,6 +1295,10 @@ msgstr ""
 #: View/Users/login.ctp:25
 #: View/Users/signup.ctp:1;28
 msgid "S'inscrire"
+msgstr ""
+
+#: View/Users/profile.ctp:22
+msgid "Profil LinkedIn"
 msgstr ""
 
 #: View/Users/profile.ctp:30;74
@@ -1369,7 +1457,7 @@ msgid "Cet email est déjà utilisé"
 msgstr ""
 
 #: Model/User.php:validation for field avatar_file
-msgid "rule"
+msgid "Le fichier doit être au format jpg, png ou jpeg"
 msgstr ""
 
 #: Model/User.php:validation for field linkedin

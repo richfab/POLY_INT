@@ -117,6 +117,3 @@ CakePlugin::load('BoostCake');
 
 // Définition de la locale pour toutes les fonctions php relatives à la de gestion du temps :
 setlocale(LC_TIME, 'fr_FR');
-
-//definition de la langue
-//Configure::write('Config.language', 'eng');

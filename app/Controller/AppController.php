@@ -82,9 +82,13 @@ class AppController extends Controller {
     * @return void
     */
     public function beforeFilter() {
-    
+        
+        if ($this->Session->check('Config.language')) {
+            Configure::write('Config.language', $this->Session->read('Config.language'));
+        }
+        
     	//authorizes anyone to see static pages
-    	$this->Auth->allow(array('display'));
+    	$this->Auth->allow(array('display','switchLanguage'));
     	
     	if(isset($this->request->params['prefix']) && $this->request->params['prefix'] == 'admin'){
             if($this->Auth->user('role') == 'admin'){
@@ -122,6 +126,25 @@ class AppController extends Controller {
     */
     public function beforeRender() {
         $this->set('refer',$this->referer);
+    }
+    
+    /**
+    * This method switches between english and french
+    *
+    * @return void
+    */
+    public function switchLanguage(){
+        
+        if (Configure::read('Config.language') === 'fra') {
+            $this->Session->write('Config.language', 'eng');
+        }
+ 
+        else {
+            $this->Session->write('Config.language', 'fra');
+        }
+ 
+        //in order to redirect the user to the page from which it was called
+        return $this->redirect($this->referer());
     }
 
 }
