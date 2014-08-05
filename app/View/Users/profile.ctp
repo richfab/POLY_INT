@@ -33,22 +33,20 @@
                     )); ?>
         </p>
     <?php endif; ?>
-    </div>
-    <div class="col col-sm-1">
-        <!--si c'est mon profile-->
-        <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+    <!--si c'est mon profile-->
+    <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
         <h1 data-toggle="modal" data-target="#upload_profilepic_modal" title="<?= __('Changer ma photo');?>" id="custom_avatar">
-        <?php else:?>
-            <h1>
-        <?php endif;?>
-                <!--si j'ai un avatar custom-->
-        <?php if(!empty($user['User']['avatar'])) {
-                echo $this->Image->resize($user['User']['avatar'], 128,128,array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'", 'id' => 'avatar_profile'));
-            } else {
-                echo $this->Html->image('avatar.png', array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'",'id' => 'avatar_profile'));
-            }
-        ?>
-            </h1>
+    <?php else:?>
+        <h1>
+    <?php endif;?>
+    <!--si j'ai un avatar custom-->
+    <?php if(!empty($user['User']['avatar'])) {
+            echo $this->Image->resize($user['User']['avatar'], 128,128,array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'", 'id' => 'avatar_profile'));
+        } else {
+            echo $this->Html->image('avatar.png', array('alt' => 'avatar','onload' => "this.style.backgroundColor='#".$user['School']['color']."'",'id' => 'avatar_profile'));
+        }
+    ?>
+        </h1>
     </div>
 </div>
 <h3 style="display: inline-block"><?= __('Expériences');?></h3>
