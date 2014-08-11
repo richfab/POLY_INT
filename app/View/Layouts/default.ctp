@@ -74,7 +74,7 @@ $title_description = __("Polytech Abroad : L'unique passeport partagé entre tou
                                 array('id' => 'brand_logo','class'=>'navbar-brand','escape' => false));?>
                     </div>
                     <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav center">
+                        <ul class="nav navbar-nav navbar-right">
                             <li class="menu-item">
                                 <?= $this->Html->link(__('Accueil'),array('controller'=>'pages', 'action'=>'index'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>

@@ -1147,8 +1147,6 @@ canvas#dots-graph{
 
 body {
   font-family: 'Open Sans', sans-serif;
-
-  color: white;
   line-height: normal;
   font-smoothing: antialiased;
 }
@@ -1212,13 +1210,5 @@ body {
   transform: translateX(0);
 }
 
-@media (min-width: 768px){
-    .navbar-nav{
-        float:none;
-        margin: 0 auto;
-        display: table;
-        table-layout: fixed;
-    }
-}
 
 
