@@ -212,13 +212,10 @@ h2 > span.wut {
 #filter-map {
     position: absolute;
     z-index: 10;
-    top: 40px;
+    top: 70px;
+    left: 30px;
 }
 
-#filter-map ul {
-    margin: 0;
-
-}
 #filter-map button{
     font-weight: 300;
     padding: 4px 8px;
@@ -227,36 +224,27 @@ h2 > span.wut {
 }
 
 #filter-map .dropdown-wrap:last-child button{
-    border: none;
-    border-right: 1px solid #e7e7e7;
-    height: 33px;
+    border-right: 1px solid #cccccc;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 }
 
+#filter-map .dropdown-wrap:first-child button{
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
 
 #filter-map .dropdown-wrap:nth-child(1){
-    width: 100px;
+    width: 125px;
 }
 #filter-map .dropdown-wrap:nth-child(2){
-    width: 80px;
-}
-#filter-map .dropdown-wrap:nth-child(3){
     width: 90px;
 }
-#filter-map .dropdown-wrap:nth-child(4){
+#filter-map .dropdown-wrap:nth-child(3){
     width: 100px;
 }
-
-#filter-map .dropdown ul li {
-    float: none;
-}
-
-
-#filter-map .dropdown-menu {
-    border: 1px solid #E7E7E7;
-    border-radius: 0;
-    margin: 0 -1px 0;
-    -webkit-box-shadow: 0 3px 4px rgba(0, 0, 0, 0.175);
-    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.175);
+#filter-map .dropdown-wrap:nth-child(4){
+    width: 110px;
 }
 
 #filter-map .dropdown-wrap{
@@ -270,7 +258,7 @@ h2 > span.wut {
 
 @media (max-width: 768px) {
     #filter-map {
-        top: 40px;
+        top: 50px;
         left: 0px;
         width: 100%;
     }
@@ -304,13 +292,14 @@ h2 > span.wut {
 
 #list-map {
     position: absolute;
-    width: 401px;
+    width: 417px;
     background-color: #fff;
     z-index: 10;
-    top: 73px;
+    top: 100px;
+    left: 35px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3),0 4px 15px -5px rgba(0,0,0,0.0);
     max-height: 75%;
     overflow-x: hidden;
-    border: 1px solid #E7E7E7;
 }
 
 #list-map p, #list-map-modal p {
@@ -347,7 +336,7 @@ h2 > span.wut {
 .filter-button:hover, .filter-button:focus, .filter-button:active, .filter-button.active, .open .dropdown-toggle.filter-button {
     color: #A09A9A;
     background-color: white;
-    border: 1px solid #e7e7e7;
+    border: 1px solid #cccccc;
 }
 
 #list-search, #recommendation-list{
@@ -441,83 +430,7 @@ h2 > span.wut {
     margin-top: 30px;
 }
 
-.fb_album_el{
-    padding: 10px;
-    cursor: pointer;
-    background-color: white;
-}
 
-.fb_album_el h4{
-    color:#428bca;
-}
-
-.fb_album_el:hover{
-    background-color: #f4f4f4;
-}
-
-#fbalbum_progress{
-    margin: 10px;
-}
-
-@media (min-width: 768px) {
-    .fbalbum_import_button{
-        float: right;
-    }
-}
-
-.photo_el{
-    display: inline-block;
-    width: 100px;
-    height: 100px;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-size: cover;
-    outline: solid #dddddd 1px;
-    outline-offset: 1px;
-}
-
-.activity-content .photo_el{
-    width: 90px;
-    height: 90px;
-}
-
-.photo_el_wrap{
-    display: inline-block;
-    margin: 2px;
-}
-
-.photo_el_wrap:hover .close{
-    opacity: 0.6;
-    text-decoration: none;
-}
-
-.photo_el_wrap .close {
-    margin-left: 82px;
-    text-shadow: initial;
-    color: white;
-    opacity: 0;
-    position: absolute;
-    background-color: black;
-    padding: 0px 3px 2px 3px;
-    border-bottom-left-radius: 2px;
-    font-weight: 100;
-    font-size: 20px;
-}
-
-.activity-content .photo_el_wrap .close {
-    margin-left: 72px;
-}
-
-@media (max-width: 768px) {
-    .activity-content .photo_el_wrap .close {
-        display: none;
-    }
-    
-    .activity-content .photo_el{
-        width: 40px;
-        height: 40px;
-    }
-}
 
 .contact-logo{
     height: 20px;
@@ -582,10 +495,6 @@ h2 > span.wut {
 #filter-search-inputs > div, #search-filters .dropdown-wrap{
     margin-top: 10px;
     margin-bottom: 10px;
-}
-
-.well{
-    background-color: white;
 }
 
 .profile-info-search > div{
@@ -687,31 +596,7 @@ h2 > span.wut {
 
 /* Social Footer */
 
-.icon-linkedin-mini {
-    background-image:url('../img/linkedin-mini.png');
-    background-repeat: no-repeat;
-    display: inline-block;
-    height: 24px;
-    width: 24px;
-}
 
-.icon-facebook-mini {
-    background-image:url('../img/facebook-mini.png');
-    background-repeat: no-repeat;
-    display: inline-block;
-    height: 24px;
-    width: 24px;
-    margin: 0 15px 0 0;
-}
-
-.icon-twitter-mini {
-    background-image:url('../img/twitter-mini.png');
-    background-repeat: no-repeat;
-    display: inline-block;
-    height: 24px;
-    width: 24px;
-    margin: 0 15px 0 0;
-}
 
 
 
@@ -795,123 +680,7 @@ canvas#dots-graph{
     color:white;
 }
 
-/* Sign Up */
 
-/*form style */
-#signupForm{
-  width:500px;
-  margin:25px auto;
-  text-align:center;
-  position:relative;
-
-}
-#signupForm fieldset{
-  background:white;
-  border:0 none;
-  padding:20px 30px;
-  border: 1px solid #E7E7E7;
-  box-sizing:border-box;
-  width:80%;
-  margin:0 10%;
-  
-  /* stacking fieldsets above each other */
-  position:absolute;
-}
-/*Hide all except first fieldset*/
-#signupForm fieldset:not(:first-of-type){
-  display:none;
-}
-#signupForm input,#signupForm textarea{
-  padding:15px;
-  border:1px solid #ccc;
-  margin-bottom:10px;
-  width:100%;
-  box-sizing:border-box;
-  font-family:montserrat;
-  color:#2c3e50;
-  font-size:13px;
-  
-}
-/*buttons*/
-#signupForm .action-botton{
-  width:100px;
-  background:#27ae60;
-  color:white;
-  border:0 none;
-  border-radius:1px;
-  cursor:pointer;
-  padding:10px 5px;
-  margin:10px 5px;
-}
-#signupForm .action-botton:hover,#signupForm .action-botton:focus{
-  box-shadow:0 0 0 2px white,0 0 0 3px #27ae60;
-}
-/* headings*/
-.fs-title{
-  font-size:15px;
-  text-transform:uppercase;
-  color:#2c3e50;
-  margin-bottom:10px;
-}
-.fs-subtitle{
-  font-weight:normal;
-  font-size:13px;
-  color:#666;
-  margin-bottom:20px;
-}
-
-/*progressbar*/
-#progressbar{
-  overflow:hidden;
-  margin-bottom:30px;
-  /*CSS COUNTER */
-  counter-reset:step;
-  position:relative;
-}
-#progressbar li{
-  list-style-type:none;
-  color:#fff;
-  text-transform:uppercase;
-  font-size:9px;
-  width:33.33%;
-  float:left;
-  position:relative;
-}
-#progressbar li:before{
-  content:counter(step);
-  counter-increment:step;
-  width:20px;
-  line-height:20px;
-  color:#333;
-  font-size:10px;
-  display:block;
-  background:white;
-  border-radius:3px;
-  margin:0 auto 5px auto;
-  
-}
-/*progress bar connectors*/
-#progressbar li:after{
-  content:'';
-  width:100%;
-  height:2px;
-  background:white;
-  position:absolute;
-  left:-50%;
-  top:9px;
-  z-index:-1;
-}
-
-#progressbar li:first-child:after {
-    /*connector not needed before the first step*/
-    content: none; 
-}
-/*marking active/completed steps green*/
-/*the number of the */
-#progressbar li.active:before,#progressbar li.active:after{
-  background:#27ae60;
-  color:white;
-}
 
 
 
