@@ -23,6 +23,9 @@ class CountriesController extends AppController {
  */
 	public $components = array('Paginator');
 
+	public function story() {
+	}
+
 /**
  * admin_index method
  *

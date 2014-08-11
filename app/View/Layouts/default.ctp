@@ -33,8 +33,8 @@ $title_description = __("Polytech Abroad : L'unique passeport partagé entre tou
                     array('type' => 'icon')
                 );
                 
-                echo $this->Html->css(array('bootstrap','default','http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'));
-                echo $this->Html->script(array('jquery-1.11.0.min','bootstrap','modernizr.min','jquery.timeago')); // Inclut la librairie Jquery
+                echo $this->Html->css(array('reset', 'bootstrap','default','http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'));
+                echo $this->Html->script(array('jquery-1.11.0.min','bootstrap','modernizr.min','jquery.timeago','signup')); // Inclut la librairie Jquery
                 
                 //ajoute la langue en pour timeago
                 if (Configure::read('Config.language') === 'eng') {
@@ -74,7 +74,7 @@ $title_description = __("Polytech Abroad : L'unique passeport partagé entre tou
                                 array('id' => 'brand_logo','class'=>'navbar-brand','escape' => false));?>
                     </div>
                     <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav center">
                             <li class="menu-item">
                                 <?= $this->Html->link(__('Accueil'),array('controller'=>'pages', 'action'=>'index'),array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
@@ -127,7 +127,7 @@ $title_description = __("Polytech Abroad : L'unique passeport partagé entre tou
             </div>
             
             <!--pas de marges si home ou explore-->
-            <?php if(($this->params['controller']=='pages' &&$this->params['controller']=='pages' && $this->params['action']=='display' && $this->params['pass'][0]=='home')||($this->params['controller']=='experiences' && $this->params['action']=='explore')||($this->params['controller']=='heights' && $this->params['action']=='contest')): ?>
+            <?php if(($this->params['controller']=='pages' && $this->params['action']=='display' && $this->params['pass'][0]=='home')||($this->params['controller']=='experiences' && $this->params['action']=='explore')||($this->params['controller']=='heights' && $this->params['action']=='contest')||($this->params['controller']=='countries' && $this->params['action']=='story')): ?>
                 <div id="content">
             <?php else: ?>
                 <div id="content" class="container">

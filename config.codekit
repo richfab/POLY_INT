@@ -1362,6 +1362,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/app\/View\/Countries\/story.ctp": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/View\/Countries\/story.ctp",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/app\/View\/Dashboards\/admin_index.ctp": {
 		"fileType": 8192,
 		"ignore": 0,
@@ -2136,6 +2145,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/app\/webroot\/css\/reset.css": {
+		"fileType": 16,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/webroot\/css\/reset.css",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/app\/webroot\/img\/1.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -2838,6 +2856,17 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
+	"\/app\/webroot\/js\/dots-graph.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/webroot\/js\/dots-graph.js",
+		"outputAbbreviatedPath": "\/app\/webroot\/js\/min\/dots-graph-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/app\/webroot\/js\/fb_album.js": {
 		"fileType": 64,
 		"ignore": 0,
@@ -3047,6 +3076,17 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
+	"\/app\/webroot\/js\/min\/signup-min.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/app\/webroot\/js\/min\/signup-min.js",
+		"outputAbbreviatedPath": "\/app\/webroot\/js\/min\/min\/signup-min-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/app\/webroot\/js\/modernizr.min.js": {
 		"fileType": 64,
 		"ignore": 0,
@@ -3097,6 +3137,17 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/app\/webroot\/js\/recommendations.js",
 		"outputAbbreviatedPath": "\/app\/webroot\/js\/min\/recommendations-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/app\/webroot\/js\/signup.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 1,
+		"inputAbbreviatedPath": "\/app\/webroot\/js\/signup.js",
+		"outputAbbreviatedPath": "\/app\/webroot\/js\/min\/signup-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,

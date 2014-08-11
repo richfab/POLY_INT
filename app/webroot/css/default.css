@@ -1,5 +1,4 @@
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:300,400,700,500);
-
 /*debut utile pour bring footer to bottom*/
 html,body{
     height: 100%;
@@ -284,10 +283,13 @@ h2 > span.wut {
 #filter-map {
     position: absolute;
     z-index: 10;
-    top: 70px;
-    left: 30px;
+    top: 40px;
 }
 
+#filter-map ul {
+    margin: 0;
+
+}
 #filter-map button{
     font-weight: 300;
     padding: 4px 8px;
@@ -296,27 +298,36 @@ h2 > span.wut {
 }
 
 #filter-map .dropdown-wrap:last-child button{
-    border-right: 1px solid #cccccc;
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
+    border: none;
+    border-right: 1px solid #e7e7e7;
+    height: 33px;
 }
 
-#filter-map .dropdown-wrap:first-child button{
-    border-top-left-radius: 4px;
-    border-bottom-left-radius: 4px;
-}
 
 #filter-map .dropdown-wrap:nth-child(1){
-    width: 125px;
-}
-#filter-map .dropdown-wrap:nth-child(2){
-    width: 90px;
-}
-#filter-map .dropdown-wrap:nth-child(3){
     width: 100px;
 }
+#filter-map .dropdown-wrap:nth-child(2){
+    width: 80px;
+}
+#filter-map .dropdown-wrap:nth-child(3){
+    width: 90px;
+}
 #filter-map .dropdown-wrap:nth-child(4){
-    width: 110px;
+    width: 100px;
+}
+
+#filter-map .dropdown ul li {
+    float: none;
+}
+
+
+#filter-map .dropdown-menu {
+    border: 1px solid #E7E7E7;
+    border-radius: 0;
+    margin: 0 -1px 0;
+    -webkit-box-shadow: 0 3px 4px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 3px 4px rgba(0, 0, 0, 0.175);
 }
 
 #filter-map .dropdown-wrap{
@@ -330,7 +341,7 @@ h2 > span.wut {
 
 @media (max-width: 768px) {
     #filter-map {
-        top: 50px;
+        top: 40px;
         left: 0px;
         width: 100%;
     }
@@ -364,14 +375,13 @@ h2 > span.wut {
 
 #list-map {
     position: absolute;
-    width: 417px;
+    width: 401px;
     background-color: #fff;
     z-index: 10;
-    top: 100px;
-    left: 35px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3),0 4px 15px -5px rgba(0,0,0,0.0);
+    top: 73px;
     max-height: 75%;
     overflow-x: hidden;
+    border: 1px solid #E7E7E7;
 }
 
 #list-map p, #list-map-modal p {
@@ -408,7 +418,7 @@ h2 > span.wut {
 .filter-button:hover, .filter-button:focus, .filter-button:active, .filter-button.active, .open .dropdown-toggle.filter-button {
     color: #A09A9A;
     background-color: white;
-    border: 1px solid #cccccc;
+    border: 1px solid #e7e7e7;
 }
 
 #list-search, #recommendation-list{
@@ -931,3 +941,284 @@ h2 > span.wut {
     padding-top: 7px;
     overflow-x: hidden;
 }
+
+/* Circle Icon */
+.action-bar {
+  border-bottom: 1px solid #e7e7e7;
+  background-color: white;
+  height: 34px;
+}
+.action-bar li {
+  float: left;
+}
+
+.action-bar li:first-child {
+  border-left: 1px solid #e7e7e7;
+}
+
+.circle-icon {
+  width: 30px!important;
+  height: 30px;
+  text-align: center;
+  line-height: 28px;
+  border: 2px solid #B4BBC1;
+  border-radius: 100px;
+  font-size: 14px;
+  color: #B4BBC1;
+  cursor: pointer;
+  display: block;
+  float: left;
+}
+.circle-icon.small {
+  height: 25px;
+  width: 25px;
+  line-height: 23px;
+  font-size: 11px;
+}
+.circle-icon:hover {
+  color: #57636C;
+  border-color: #57636C;
+}
+.circle-icon.red {
+  color: #d23b3d;
+  border-color: #d23b3d;
+}
+.circle-icon.red:hover {
+  color: #791C1E;
+  border-color: #791C1E;
+}
+
+/* City story */
+
+
+canvas#dots-graph{
+    background-color: white;
+    height: 150px;
+    width: 100%;
+}
+#city-name h2 {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 70px;
+    z-index: 10;
+    color: black;
+}
+#city-timeline {
+    background-color: white;
+    border: 1px solid #E7E7E7;
+}
+
+#city-sidebar {
+    background-color: white;
+    border: 1px solid #E7E7E7;
+}
+
+#city-sidebar h3{
+    width: 100%;
+    background-color:red;
+    text-transform: uppercase;
+    color:white;
+}
+
+/* Sign Up */
+
+/*form style */
+#signupForm{
+  width:500px;
+  margin:25px auto;
+  text-align:center;
+  position:relative;
+
+}
+#signupForm fieldset{
+  background:white;
+  border:0 none;
+  padding:20px 30px;
+  border: 1px solid #E7E7E7;
+  box-sizing:border-box;
+  width:80%;
+  margin:0 10%;
+  
+  /* stacking fieldsets above each other */
+  position:absolute;
+}
+/*Hide all except first fieldset*/
+#signupForm fieldset:not(:first-of-type){
+  display:none;
+}
+#signupForm input,#signupForm textarea{
+  padding:15px;
+  border:1px solid #ccc;
+  margin-bottom:10px;
+  width:100%;
+  box-sizing:border-box;
+  font-family:montserrat;
+  color:#2c3e50;
+  font-size:13px;
+  
+}
+/*buttons*/
+#signupForm .action-botton{
+  width:100px;
+  background:#27ae60;
+  color:white;
+  border:0 none;
+  border-radius:1px;
+  cursor:pointer;
+  padding:10px 5px;
+  margin:10px 5px;
+}
+#signupForm .action-botton:hover,#signupForm .action-botton:focus{
+  box-shadow:0 0 0 2px white,0 0 0 3px #27ae60;
+}
+/* headings*/
+.fs-title{
+  font-size:15px;
+  text-transform:uppercase;
+  color:#2c3e50;
+  margin-bottom:10px;
+}
+.fs-subtitle{
+  font-weight:normal;
+  font-size:13px;
+  color:#666;
+  margin-bottom:20px;
+}
+
+/*progressbar*/
+#progressbar{
+  overflow:hidden;
+  margin-bottom:30px;
+  /*CSS COUNTER */
+  counter-reset:step;
+  position:relative;
+}
+#progressbar li{
+  list-style-type:none;
+  color:#fff;
+  text-transform:uppercase;
+  font-size:9px;
+  width:33.33%;
+  float:left;
+  position:relative;
+}
+#progressbar li:before{
+  content:counter(step);
+  counter-increment:step;
+  width:20px;
+  line-height:20px;
+  color:#333;
+  font-size:10px;
+  display:block;
+  background:white;
+  border-radius:3px;
+  margin:0 auto 5px auto;
+  
+}
+/*progress bar connectors*/
+#progressbar li:after{
+  content:'';
+  width:100%;
+  height:2px;
+  background:white;
+  position:absolute;
+  left:-50%;
+  top:9px;
+  z-index:-1;
+}
+
+#progressbar li:first-child:after {
+    /*connector not needed before the first step*/
+    content: none; 
+}
+/*marking active/completed steps green*/
+/*the number of the */
+#progressbar li.active:before,#progressbar li.active:after{
+  background:#27ae60;
+  color:white;
+}
+
+/* Nav Bar */
+@import url("http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800");
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+
+  color: white;
+  line-height: normal;
+  font-smoothing: antialiased;
+}
+
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  max-width: 50px;
+  min-width: 50px;
+  margin-top: 40px;
+  background: #81c5ef;
+  transition: all 0.5s ease-in-out;
+}
+#sidebar:hover {
+  max-width: 300px;
+}
+#sidebar .logo {
+  cursor: default;
+  width: 100%;
+  height: 50px;
+  background: white;
+  font-size: 22pt;
+  color: #81c5ef;
+  font-weight: 800;
+  line-height: 50px;
+  text-align: center;
+}
+#sidebar ul li {
+  overflow: hidden;
+  transition: all .3s ease;
+  white-space: nowrap;
+}
+#sidebar ul li a {
+  height: 50px;
+  border-top: 1px solid #6abbec;
+  display: block;
+  color: white;
+  line-height: 50px;
+  text-decoration: none;
+}
+#sidebar ul li a i {
+  width: 50px;
+  height: 50px;
+  box-shadow: 1px 0 #6abbec;
+  font-size: 12pt;
+  text-align: center;
+  line-height: 50px;
+}
+#sidebar ul li a span {
+  padding: 0 15px;
+  opacity: 0;
+  transform: translateX(15px);
+  transition: all 0.5s ease-in-out;
+}
+#sidebar ul li:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+#sidebar:hover ul li a span {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (min-width: 768px){
+    .navbar-nav{
+        float:none;
+        margin: 0 auto;
+        display: table;
+        table-layout: fixed;
+    }
+}
+
+
