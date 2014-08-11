@@ -33,7 +33,7 @@ $title_description = __("Polytech Abroad : L'unique passeport partagé entre tou
                     array('type' => 'icon')
                 );
                 
-                echo $this->Html->css(array('reset', 'bootstrap.min','http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'));
+                echo $this->Html->css(array('reset', 'bootstrap.min','http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css','default'));
                 echo $this->Html->script(array('jquery-1.11.0.min','bootstrap','modernizr.min','jquery.timeago','signup')); // Inclut la librairie Jquery
                 
                 //ajoute la langue en pour timeago
@@ -99,13 +99,13 @@ $title_description = __("Polytech Abroad : L'unique passeport partagé entre tou
                                     <?= $this->Html->link(
                                             __('mon profil'),
                                             array('controller'=>'users', 'action'=>'profile'),
-                                            array('class'=>'btn btn-default btn-blue'));?>
+                                            array('class'=>'btn btn-primary'));?>
                                 </li>
                                 <li>
                                     <?= $this->Html->link(
                                             __('déconnexion'),
                                             array('controller'=>'users', 'action'=>'logout'),
-                                            array('class'=>'btn btn-default btn-orange'));?>
+                                            array('class'=>'btn btn-danger'));?>
                                 </li>
                             <?php else:?>
                                 <li>
