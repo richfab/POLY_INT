@@ -138,6 +138,7 @@
             </div>
         </div>
         
+        <?php if($user['User']['firstname'] == 'Facebook') : ?>
         <div class="panel-group">
             <div class="panel panel-default panel-photos">
                 <div class="panel-heading panel-heading-photos">
@@ -153,6 +154,7 @@
                 </div>
             </div>
         </div>
+        <?php endif;?>
         
     </div>
     <?php endforeach; ?>
