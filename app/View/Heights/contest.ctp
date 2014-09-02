@@ -16,38 +16,9 @@
             <div id="graph_contest" class="" style="padding-top:20px;min-height: 371px;"><?php echo $this->element('heights_graph');?></div>
         </div>
             
-        <div class="row" id="heights_gallery_instructions">
-            <div class="col-md-4">
-                <div class="well">
-                    <h2 id="how_to_participate">Comment participer ?</h2>
-                    <?php if(AuthComponent::user('id')):?>
-                    <p><strong>1.</strong> <?= $this->Html->link('Télécharge','/img/heights-paperplanes/PaperPlaneContest-'.AuthComponent::user('school_id').'.pdf') ;?> et imprime le patron en papier de l'avion de ton école avec les instructions de pliage.</p>
-                            <?php else:?>
-                    <p><strong>1.</strong> <?= $this->Html->link('Télécharge',array('controller' => 'users', 'action' => 'login')) ;?> et imprime le patron de l'avion en papier de ton école avec les instructions de pliage.</p>
-                            <?php endif;?>
-                    <p><strong>2.</strong> Grimpe en haut du plus grand monument de la ville ou prends la pose devant.</p>
-                    <p><strong>3.</strong> Prends toi en photo et fais s'envoler l'avion !</p>
-                    <!-- Button trigger modal -->
-                    <div class="text-center" style="margin:10px 0">
-                        <button class="btn btn-primary btn " data-toggle="modal" data-target="#myModal">Envoyer un avion</button>
-                    </div>
-                </div>
-                    
-                <div class="well">
-                    <h2 id="rules">Les règles</h2>
-                    <p>&middot; Les écoles sont les unes contre les autres.</p>
-                    <p>&middot; Tu as du <strong>1er juin au 31 août</strong> 2014 pour faire gagner ton école.</p>
-                    <p>&middot; Le score est calculé en fonction de la <strong>hauteur des monuments</strong> de chaque photo.</p>
-                    <p>&middot; Il faut être <strong>à l’étranger</strong>.</p>
-                    <p>&middot; L'<strong>avion en papier</strong> doit être visible sur la photo.</p>
-                    <p>&middot; Les <strong>montagnes</strong> ne comptent pas dans les scores.</p>
-                    <p>&middot; L’école gagnante sera élue <strong>l’école la plus internationale</strong> du réseau Polytech.</p>
-                </div>
-            </div>
-                
-            <div class="col-md-8">
-                <div id="gallery"></div>
-            </div>
+        <div id="heights_gallery_instructions">
+            
+            <div id="gallery"></div>
                 
         </div>
     </div>
