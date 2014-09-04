@@ -55,9 +55,7 @@ $title_description = __("Polytech Abroad : L'unique passeport partagé entre tou
 		echo $this->fetch('css');
 		echo $this->fetch('script');
 	?>
-    </head>
-    <body>
-        
+    
         <!--google analytics-->
         <script>
             (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -69,6 +67,9 @@ $title_description = __("Polytech Abroad : L'unique passeport partagé entre tou
             ga('send', 'pageview');
 
         </script>
+    
+    </head>
+    <body>
         
         <div id="container">
             
