@@ -27,9 +27,11 @@ function eraseCookie(name) {
 // 'f_' for cookies related to fliters
 function createCookiesFromFilter(filter){
     
+	var days_to_expire = 1;
+	
     for (var key in filter) {
         if (filter.hasOwnProperty(key)) {
-            createCookie("f_"+key, filter[key]);
+            createCookie("f_"+key, filter[key],days_to_expire);
         }
     }
     
