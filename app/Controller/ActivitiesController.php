@@ -62,13 +62,14 @@ class ActivitiesController extends AppController {
         App::import('Controller', 'Users');
         $usersController = new UsersController;
         
-        //nombre de recommendations a recuperer
+        //nombre d'utilisateurs a recuperer
         $user_limit = 4;
             
         $users = $usersController->User->find('all', array(
             'limit' => $user_limit,
             'offset' => $user_limit * $offset,
             'order' => 'User.created DESC',
+			'conditions' => array('User.active' => 1),
             'recursive' => 0
         ));
         
