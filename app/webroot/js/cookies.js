@@ -23,6 +23,8 @@ function eraseCookie(name) {
     createCookie(name,"",-1);
 }
 
+
+// 'f_' for cookies related to fliters
 function createCookiesFromFilter(filter){
     
     for (var key in filter) {

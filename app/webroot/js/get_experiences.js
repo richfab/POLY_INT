@@ -166,8 +166,15 @@ function get_filter_params(){
 }
 
 function update_selects_from_filter(filter){
-    $('#department_id > [value='+ filter.department_id +']').click();
-    $('#motive_id > [value='+ filter.motive_id +']').click();
-    $('#school_id > [value='+ filter.school_id +']').click();
-    $('#period_id > [value='+ filter.period_id +']').click();
+	
+	//if no period was selected, define now as default
+	if(filter.period_id == undefined){
+		$('#period_id > [value=3]').click();
+	}
+	else{
+	    $('#department_id > [value='+ filter.department_id +']').click();
+	    $('#motive_id > [value='+ filter.motive_id +']').click();
+	    $('#school_id > [value='+ filter.school_id +']').click();
+	    $('#period_id > [value='+ filter.period_id +']').click();
+	}
 }
