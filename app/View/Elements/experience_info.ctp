@@ -28,6 +28,6 @@
     <div>"<?= nl2br($experience['Experience']['comment']);?>"</div>
 <?php else:?>
     <?php if($experience['Experience']['user_id'] == AuthComponent::user('id') && $this->params['action'] === 'profile') : ?>
-        <div><?= $this->Html->link(__("Ajouter un avis"), array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id'])); ?></div>
+        <div><?= $this->Html->link("<span class='glyphicon glyphicon-bullhorn'></span> ".__("Ajouter un avis"), array('controller'=>'experiences', 'action' => 'info', $experience['Experience']['id']),array('escape' => false)); ?></div>
     <?php endif; ?>
 <?php endif;?>
