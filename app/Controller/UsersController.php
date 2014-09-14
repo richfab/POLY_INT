@@ -26,6 +26,13 @@ class UsersController extends AppController {
             'order' => array('created' => 'DESC'),
             'conditions' => array('User.role' => 'user','User.active' => '1')
     );
+	
+    /**
+    * Components to handle json requests
+    *
+    * @var array
+    */
+    public $components = array("RequestHandler");
     
     /**
     * Helper to handle image resize
@@ -41,8 +48,69 @@ class UsersController extends AppController {
     */
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('signup','signup_request','activate','forgotten_password'); // Letting users signup themselves and retrieve password
+		// Letting users signup themselves and retrieve password
+        $this->Auth->allow('signup','signup_request','activate','forgotten_password','view','index','delete'); 
     }
+	
+	public function view($id) {
+        $user = $this->User->findById($id);
+        $this->set(array(
+            'user' => $user,
+            '_serialize' => array('user')
+        ));
+    }
+	
+	public function index() {
+        $users = $this->User->find('all');
+        $this->set(array(
+            'users' => $users,
+            '_serialize' => array('users')
+        ));
+    }
+	
+	public function delete($id) {
+		
+        $this->User->id = $id;
+		
+        if (!$this->User->exists()) {
+			$message = 'User does not exist';
+		}
+		else{
+	        $user = $this->User->findById($id);
+	        $experiences = $user['Experience'];
+
+	        App::import('Controller', 'Experiences');
+	        $experiencesController = new ExperiencesController;
+
+	        foreach($experiences as $experience){
+	            $experiencesController->delete_experience($experience['id']);
+	        }
+		
+	        if ($this->User->delete($id)) {
+	            $message = 'Deleted';
+	        } else {
+	            $message = 'Error';
+	        }
+		}
+	        
+        $this->set(array(
+            'message' => $message,
+            '_serialize' => array('message')
+        ));
+        
+    }
+	
+	public function add(){
+        if ($this->User->save($this->request->data)) {
+            $message = 'Saved';
+        } else {
+            $message = 'Error';
+        }
+        $this->set(array(
+            'message' => $message,
+            '_serialize' => array('message')
+        ));
+	}
         
     /**
     * This method allows anyone to login
@@ -541,38 +609,38 @@ class UsersController extends AppController {
     * @throws NotFoundException 
     * @return void
     */
-    public function delete(){
-        $this->request->onlyAllow('post');
-            
-        $user_id = $this->Auth->user('id');
-            
-        $user = $this->User->findById($user_id);
-        $experiences = $user['Experience'];
-            
-        App::import('Controller', 'Experiences');
-        $experiencesController = new ExperiencesController;
-            
-        foreach($experiences as $experience){
-            $experiencesController->delete_experience($experience['id']);
-        }
-            
-        $this->User->id = $user_id;
-        if (!$this->User->exists()) {
-            throw new NotFoundException(__("Le compte n'éxiste plus"));
-        }
-        if ($this->User->delete()) {
-            $this->Session->setFlash(__("Le compte a bien été supprimé"), 'alert', array(
-                'plugin' => 'BoostCake',
-                'class' => 'alert-success'
-            ));
-            return $this->redirect(array('action' => 'logout'));
-        }
-        $this->Session->setFlash(__("Le compte n'a pas pu être supprimé"), 'alert', array(
-            'plugin' => 'BoostCake',
-            'class' => 'alert-danger'
-        ));
-        return $this->redirect($this->referer());
-    }
+    // public function delete(){
+//         $this->request->onlyAllow('post');
+//
+//         $user_id = $this->Auth->user('id');
+//
+//         $user = $this->User->findById($user_id);
+//         $experiences = $user['Experience'];
+//
+//         App::import('Controller', 'Experiences');
+//         $experiencesController = new ExperiencesController;
+//
+//         foreach($experiences as $experience){
+//             $experiencesController->delete_experience($experience['id']);
+//         }
+//
+//         $this->User->id = $user_id;
+//         if (!$this->User->exists()) {
+//             throw new NotFoundException(__("Le compte n'éxiste plus"));
+//         }
+//         if ($this->User->delete()) {
+//             $this->Session->setFlash(__("Le compte a bien été supprimé"), 'alert', array(
+//                 'plugin' => 'BoostCake',
+//                 'class' => 'alert-success'
+//             ));
+//             return $this->redirect(array('action' => 'logout'));
+//         }
+//         $this->Session->setFlash(__("Le compte n'a pas pu être supprimé"), 'alert', array(
+//             'plugin' => 'BoostCake',
+//             'class' => 'alert-danger'
+//         ));
+//         return $this->redirect($this->referer());
+//     }
         
         
     //admin methods//
