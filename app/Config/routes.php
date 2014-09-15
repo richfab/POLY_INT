@@ -42,6 +42,7 @@
  * how to customize the loading of plugin routes.
  */
 	CakePlugin::routes();
+	Router::mapResources('recommendations');
         //permet a cakePHP de changer automatiquement les classes de vue quand une requête sera faite avec l’extension .json
 	Router::parseExtensions('json');
 

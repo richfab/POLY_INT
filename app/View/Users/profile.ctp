@@ -81,7 +81,7 @@
         
             <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
         
-        <div id="addRecommendation">
+        <div class="addRecommendation">
             <p><?= __("Partager un bon plan");?> : 
                 <?php foreach ($recommendationtypes as $recommendationtype) :?>
                 <span class="glyphicon glyphicon-<?= $recommendationtype['Recommendationtype']['icon'];?> recommendationtype-icon recommendationtype-icon-selectable" recommendationtype_description="<?= $recommendationtype['Recommendationtype']['description'];?>" recommendationtype_id="<?= $recommendationtype['Recommendationtype']['id'];?>" data-toggle="tooltip" title="<?= __($recommendationtype['Recommendationtype']['name']); ?>"></span>
@@ -90,7 +90,7 @@
             
             <div class="addRecommendationForm">
                 <div class="form-group">
-                    <textarea rows=6 placeholder="" experience_id="<?= $experience['Experience']['id']; ?>" recommendationtype_id="" class="RecommendationContent form-control"></textarea>
+                    <textarea rows=6 placeholder="" experience_id="<?= $experience['Experience']['id']; ?>" recommendation_id="" recommendationtype_id="" class="RecommendationContent form-control"></textarea>
                 </div>
                 <div class="form-group">    
                     <button type="button" onclick="add_recommendation($(this));" class="btn btn-blue">Partager</button>
@@ -102,41 +102,43 @@
         
             <?php endif; ?>
         
-        <div class="panel-group">
-            <div class="panel panel-default panel-recommendations">
-                <div class="panel-heading panel-heading-recommendations">
-                    <h5 class="panel-title panel-title-recommendations">
-                        <span style="width:20px" class="glyphicon glyphicon-comment"></span> <?= __("Bons plans");?>
-                    </h5>
-                </div>
-                <div class="panel-collapse">
-                    <div class="panel-body">
-                            <?php foreach ($experience['Recommendation'] as $recommendation):?>
-                        <div class="row">
-                            <div class="col-sm-1" style="text-align:right;">
-                                <p><?php echo $this->element('recommendation_icon',array('recommendationtype_icon'=>$recommendationtype_icons[$recommendation['recommendationtype_id']],'recommendationtype_name'=>$recommendationtype_names[$recommendation['recommendationtype_id']])); ?></p>
-                            </div>
-                            <div class="col-sm-11">
-                                    <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
-                                        <?= $this->Form->postLink('<span class="edit-delete-label"></span>',
-                                            array('controller'=>'recommendations', 'action' => 'delete', $recommendation['id']),
-                                            array('confirm' => __('Es-tu sûr de vouloir supprimer ce bon plan ?'),
-                                                'escape' => false,
-                                                'class' => 'glyphicon glyphicon-remove close edit-delete'
-                                            ));
-                                        ?>
-                                    <?php endif;?>
-                                    <?php echo $this->element('recommendation_text',array('recommendation'=>$recommendation)); ?>
-                            </div>
-                        </div>
-                            <?php endforeach;?>
-                            <?php if (!$experience['Recommendation']) :?>
-                        <p><?= __("Aucun bon plan");?></p>
-                            <?php endif;?>
-                    </div>
-                </div>
-            </div>
-        </div>
+		<div class="recommendations">
+	        <div class="panel-group">
+	            <div class="panel panel-default panel-recommendations">
+	                <div class="panel-heading panel-heading-recommendations">
+	                    <h5 class="panel-title panel-title-recommendations">
+	                        <span style="width:20px" class="glyphicon glyphicon-comment"></span> <?= __("Bons plans");?>
+	                    </h5>
+	                </div>
+	                <div class="panel-collapse">
+	                    <div class="panel-body">
+	                            <?php foreach ($experience['Recommendation'] as $recommendation):?>
+	                        <div class="row">
+	                            <div class="col-sm-1" style="text-align:right;">
+	                                <p><?php echo $this->element('recommendation_icon',array('recommendationtype_icon'=>$recommendationtype_icons[$recommendation['recommendationtype_id']],'recommendationtype_name'=>$recommendationtype_names[$recommendation['recommendationtype_id']])); ?></p>
+	                            </div>
+	                            <div class="col-sm-11">
+	                                    <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
+										
+											<a class="glyphicon glyphicon-remove close edit-delete" onclick="delete_recommendation(<?= $recommendation['id'];?>)">
+												<span class="edit-delete-label"></span>
+											</a>
+											<a class="glyphicon glyphicon-pencil close edit-delete" onclick="update_recommendation($(this), <?= $recommendation['id'];?>, <?= $recommendation['recommendationtype_id'];?>)">
+												<span class="edit-delete-label"></span>
+											</a>
+	                                    <?php endif;?>
+	                                    <?php echo $this->element('recommendation_text',array('recommendation'=>$recommendation)); ?>
+	                            </div>
+	                        </div>
+	                            <?php endforeach;?>
+	                            <?php if (!$experience['Recommendation']) :?>
+	                        <p><?= __("Aucun bon plan");?></p>
+	                            <?php endif;?>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+		</div>
         
         <div class="panel-group">
             <div class="panel panel-default panel-photos">
@@ -230,7 +232,6 @@
             $(this).on('click',function(){
                 $( '.recommendationtype-icon-selectable' ).removeClass('selected');
                 $(this).toggleClass('selected');
-                $('.addRecommendationForm').slideUp('fast');
                 $(this).parent().siblings('.addRecommendationForm').slideDown(function(){
                     $('.RecommendationContent').focus();
                 });

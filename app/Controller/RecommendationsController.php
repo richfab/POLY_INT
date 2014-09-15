@@ -40,60 +40,74 @@ class RecommendationsController extends AppController {
     */
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(array('search','get_recommendations')); //actions that anyone is allowed to call
+		//actions that anyone is allowed to call
+        $this->Auth->allow(array('search','get_recommendations')); 
     }
-        
-    /**
-    * This method allows user to add a recommendation
-    *
-    * @return void
-    */
-    public function add_recommendation(){
-        
-        $this->request->onlyAllow('ajax');
-                
-        //creates recommandation from request data
-        $this->Recommendation->create();
-        $recommendation = array();
-        $recommendation['Recommendation']['content'] = $this->request->data['content'];
-        $recommendation['Recommendation']['experience_id'] = $this->request->data['experience_id'];
-        $recommendation['Recommendation']['recommendationtype_id'] = $this->request->data['recommendationtype_id'];
-        
-        //saves recommendation
-        if($this->Recommendation->save($recommendation)){
-            return new CakeResponse(array('body'=> json_encode(array('errorMessage'=>0)),'status'=>200));
-        }
-        else{
-            return new CakeResponse(array('body'=> json_encode(array('errorMessage'=>"Erreur lors de l'enregistrement")),'status'=>500));
-        }
-        
+	
+	public function view($id) {
+        $recommendation = $this->Recommendation->findById($id);
+        $this->set(array(
+            'recommendation' => $recommendation,
+            '_serialize' => array('recommendation')
+        ));
     }
-    
-    /**
-    * This method allows user to delete a recommendation
-    *
-    * @param string $id
-    * @return void
-    */
-    public function delete($id = null) {
-        $this->Recommendation->id = $id;
-        if (!$this->Recommendation->exists()) {
-                throw new NotFoundException(__("Ce bon plan n'éxiste plus"));
-        }
-        $this->request->onlyAllow('post', 'delete');
-        if ($this->Recommendation->delete()) {
-                $this->Session->setFlash(__("Le bon plan a bien été supprimé"), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-success'
-                ));
+	
+	public function delete($id) {
+		if(!$this->recommendation_belongs_to_user($id)){
+			return;
+		}
+        if ($this->Recommendation->delete($id)) {
+            $message = 'Deleted';
         } else {
-                $this->Session->setFlash(__("Le bon plan n'a pas pu être supprimé"), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-danger'
-                ));
+            $message = 'Error';
         }
-        return $this->redirect($this->referer());
+        $this->set(array(
+            'message' => $message,
+            '_serialize' => array('message')
+        ));
     }
+	
+	public function add(){
+		if ($this->Recommendation->save($this->request->data)) {
+            $message = 'Saved';
+        } else {
+            $message = 'Error';
+        }
+        $this->set(array(
+            'message' => $message,
+            '_serialize' => array('message')
+        ));
+	}
+	
+	public function edit($id){
+		if(!$this->recommendation_belongs_to_user($id)){
+			return;
+		}
+		$this->Recommendation->id = $id;
+		if ($this->Recommendation->save($this->request->data)) {
+            $message = 'Saved';
+        } else {
+            $message = 'Error';
+        }
+        $this->set(array(
+            'message' => $message,
+            '_serialize' => array('message')
+        ));
+	}
+	
+    /**
+    * This method allows to determine wether a recommendation belongs to logged in user or not
+    *
+	* @param string $id (recommendation_id)
+    * @return boolean
+    */
+	public function recommendation_belongs_to_user($id){
+		$recommendation = $this->Recommendation->findById($id);
+        App::import('Controller', 'Experiences');
+        $experiencesController = new ExperiencesController;
+		$experience = $experiencesController->Experience->findById($recommendation['Experience']['id']);
+		return $experience['Experience']['user_id'] == $this->Auth->user('id');
+	}
     
     /**
     * This method allows user to search recommendations
