@@ -407,7 +407,7 @@ class UsersController extends AppController {
     * @param string $user_id
     * @return void
     */
-    public function profile($user_id = null) {
+    public function profile2($user_id = null) {
         
         //includes scripts to send ajax recommendations and to display "read more" button on long posts
         $jsIncludes = array('recommendations','readmore','photo_gallery');
