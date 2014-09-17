@@ -1,16 +1,3 @@
-<?php
-    
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */?>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.js"></script>
-<script type="text/javascript" src="https://code.angularjs.org/1.2.24/angular-route.js"></script>
-<script type="text/javascript" src="https://code.angularjs.org/1.2.24/angular-resource.js"></script>
-<script src="../js/controllers.js" type="text/javascript"></script>
-<script src="../js/app.js" type="text/javascript"></script>
-    
 <div ng-app="polyintApp">
 <?php foreach ($experiences as $experience): ?>
     <div ng-init="experienceId='<?php echo $experience['Experience']['id'];?>'">

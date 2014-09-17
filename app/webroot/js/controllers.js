@@ -35,3 +35,34 @@ polyintControllers.controller('RecommendationCtrl', ['$scope',
         };
         
     }]);
+
+polyintControllers.controller('SignupCtrl', ['$scope',
+    function($scope) {
+        $scope.user = {};
+        $scope.activeStep = 1;
+        
+        $scope.schools = [
+            {id:'1', name:'Grenoble'},
+            {id:'2', name:'Toulouse'}
+        ];
+        
+        $scope.departments = [
+            {id:'1', name:'Environnement'},
+            {id:'2', name:'Mécanique'}
+        ];
+        
+        $scope.user.school = $scope.schools[0];
+        $scope.user.department = $scope.departments[0];
+        
+        $scope.previous = function(){
+            $scope.activeStep--;
+        };
+        
+        $scope.next = function(){
+            $scope.activeStep++;
+        };
+        
+        $scope.save = function(){
+            console.log('save: '+JSON.stringify($scope.user));
+        };
+    }]);
