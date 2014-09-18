@@ -13,8 +13,12 @@ var polyintControllers = angular.module('polyintControllers', []);
 polyintControllers.controller('RecommendationCtrl', ['$scope',
     function($scope) {
         
+        $scope.recommendation = {};
+        
         $scope.submit = function(){
-            console.log('save: '+$scope.content+' '+$scope.recommendationId+' '+$scope.recommendationtypeId);
+            console.log('save: '+JSON.stringify($scope.recommendation));
+            $scope.recommendation.id = '';
+            $scope.recommendation.content = '';
         };
         
         $scope.recommendations = [
@@ -23,36 +27,40 @@ polyintControllers.controller('RecommendationCtrl', ['$scope',
         ];
         
         $scope.change_recommendationtype = function(i){
-            $scope.recommendationtypeId = i;
-            $scope.content = '';
-            $scope.recommendationId = '';
+            $scope.recommendation.id = '';
+            $scope.recommendation.content = '';
+            $scope.recommendation.recommendationtype_id = i;
         };
         
         $scope.edit_recommendation = function(recommendation){
-            $scope.content = recommendation.content;
-            $scope.recommendationId = recommendation.id;
-            $scope.recommendationtypeId = recommendation.recommendationtypeId;
+            $scope.recommendation.id = recommendation.id;
+            $scope.recommendation.content = recommendation.content;
+            $scope.recommendation.recommendationtype_id = recommendation.recommendationtypeId;
         };
         
     }]);
 
-polyintControllers.controller('SignupCtrl', ['$scope',
-    function($scope) {
+polyintControllers.controller('SignupCtrl', ['$scope','School','Department','User',
+    function($scope, School, Department, User) {
+       
         $scope.user = {};
         $scope.activeStep = 1;
         
-        $scope.schools = [
-            {id:'1', name:'Grenoble'},
-            {id:'2', name:'Toulouse'}
-        ];
+        //test
+        $scope.user.email = "fab@univ-nantes.fr";
+        $scope.user.password = "password";
+//        $scope.user.firstname = "Fab";
+//        $scope.user.lastname = "Richard";
         
-        $scope.departments = [
-            {id:'1', name:'Environnement'},
-            {id:'2', name:'Mécanique'}
-        ];
+        $scope.validEmails = /\b@(etu.univ-nantes.fr|univ-nantes.fr|polytech-lille.net|etud.univ-montp2.fr|etu.univ-tours.fr|etu.univ-orleans.fr|polytech.upmc.fr|u-psud.fr|etudiant.univ-bpclermont.fr|etu.univ-lyon1.fr|etu.univ-savoie.fr|polytech.unice.fr|etu.univ-provence.fr|etu.univ-amu.fr|e.ujf-grenoble.fr|univ-lyon1.fr)\b/;
         
-        $scope.user.school = $scope.schools[0];
-        $scope.user.department = $scope.departments[0];
+        $scope.schools = School.query(function() {
+            $scope.schools = $scope.schools.schools;
+        });
+        
+        $scope.departments = Department.query(function() {
+            $scope.departments = $scope.departments.departments;
+        });
         
         $scope.previous = function(){
             $scope.activeStep--;
@@ -62,7 +70,29 @@ polyintControllers.controller('SignupCtrl', ['$scope',
             $scope.activeStep++;
         };
         
+        $scope.backToStudentEmail = function(){
+            $scope.regularEmail = false;
+            delete $scope.user.password;
+        };
+        
+        $scope.useRegularEmail = function(){
+            $scope.regularEmail = true;
+            delete $scope.user.password;
+            delete $scope.user.email;
+        };
+        
         $scope.save = function(){
-            console.log('save: '+JSON.stringify($scope.user));
+            $scope.next();
+            
+            $scope.user.school_id = $scope.user.school.School.id;
+            $scope.user.department_id = $scope.user.department.Department.id;
+            delete $scope.user.department;
+            delete $scope.user.school;
+            
+            User.save($scope.user,function(data){
+                $scope.message = data.message;
+                $scope.errorCode = data.errorCode;
+            });
+            console.log($scope.user);
         };
     }]);

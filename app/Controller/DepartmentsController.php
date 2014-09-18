@@ -21,7 +21,30 @@ class DepartmentsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator');
+	public $components = array('Paginator','RequestHandler');
+    
+    
+    /**
+    * This method is called before the controller action. It is useful to define which actions are allowed publicly.
+    *
+    * @return void
+    */
+    public function beforeFilter() {
+        parent::beforeFilter();
+        //actions that anyone is allowed to call
+        $this->Auth->allow(array('index')); 
+    }
+        
+    public function index() {
+        $departments = $this->Department->find('all',
+            array('recursive' => 0,
+                    'fields' => array('id', 'name'), 
+                    'order' => array('Department.name')));
+        $this->set(array(
+            'departments' => $departments,
+            '_serialize' => array('departments')
+        ));
+    }
 
 /**
  * admin_index method

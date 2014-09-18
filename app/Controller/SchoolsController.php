@@ -21,7 +21,30 @@ class SchoolsController extends AppController {
  *
  * @var array
  */
-	public $components = array('Paginator');
+    public $components = array('Paginator','RequestHandler');
+    
+    
+    /**
+    * This method is called before the controller action. It is useful to define which actions are allowed publicly.
+    *
+    * @return void
+    */
+    public function beforeFilter() {
+        parent::beforeFilter();
+        //actions that anyone is allowed to call
+        $this->Auth->allow(array('index')); 
+    }
+        
+    public function index() {
+        $schools = $this->School->find('all',
+            array('recursive' => 0,
+                    'fields' => array('id', 'name'), 
+                    'order' => array('School.name')));
+        $this->set(array(
+            'schools' => $schools,
+            '_serialize' => array('schools')
+        ));
+    }
 
 /**
  * admin_index method

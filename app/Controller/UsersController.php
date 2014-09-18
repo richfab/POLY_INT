@@ -33,6 +33,13 @@ class UsersController extends AppController {
     * @var array
     */
     public $helpers = array('Image.Image');
+    
+    /**
+    * Components
+    *
+    * @var array
+    */
+    public $components = array('RequestHandler');
         
     /**
     * This method is called before the controller action. It is useful to define which actions are allowed publicly.
@@ -41,7 +48,7 @@ class UsersController extends AppController {
     */
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('signup','signup_request','activate','forgotten_password'); // Letting users signup themselves and retrieve password
+        $this->Auth->allow('signup','add','signup_request','activate','forgotten_password'); // Letting users signup themselves and retrieve password
     }
         
     /**
@@ -84,15 +91,6 @@ class UsersController extends AppController {
     public function logout() {
         return $this->redirect($this->Auth->logout());
     }
-    
-    /**
-    * This temp method allows users to import fb album
-    *
-    * @return void
-    */
-    public function fb_album(){
-        
-    }
         
     /**
     * This admin method allows administrator to accept a signup request done with a non verified email
@@ -123,64 +121,57 @@ class UsersController extends AppController {
         }
         return $this->redirect(array('action' => 'index'));
     }
+    
+    public function add(){
+        //user role is 'user'
+        $this->request->data['role'] = 'user';
         
-    /**
-    * This method allows anyone to signup with a verified email
-    * 
-    * @return void
-    */
-    public function signup() {
-        
-        //sets schools and departments by alphbetical order to populate select inputs
-        $this->__set_schools_and_departments();
+        //stores email at signup to keep track of student email
+        if(isset($this->request->data['email'])){
             
-        if ($this->request->is('post')) {
+            $this->request->data['email_at_signup'] = $this->request->data['email'];
             
-            //checks that password and confirmation password are identical
-            if (!($this->data['User']['password'] === $this->data['User']['password_confirm'])) {
-                $this->Session->setFlash(__("Les mots de passe ne correspondent pas"), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-danger'
-                ));              
-                return;
-            }
-                
             //TODO generate from database
             //list of verified emails
             $regexp_emails = "/@(etu.univ-nantes.fr|univ-nantes.fr|polytech-lille.net|etud.univ-montp2.fr|etu.univ-tours.fr|etu.univ-orleans.fr|polytech.upmc.fr|u-psud.fr|etudiant.univ-bpclermont.fr|etu.univ-lyon1.fr|etu.univ-savoie.fr|polytech.unice.fr|etu.univ-provence.fr|etu.univ-amu.fr|e.ujf-grenoble.fr|univ-lyon1.fr)/";
-                
+
             //checks that email belongs to list of verified emails
-            if (!preg_match($regexp_emails,$this->data['User']['email'])){
-                $this->Session->setFlash(__("Ton adresse étudiante est nécessaire pour l'inscription. Tu pourras la changer dans ton profil une fois inscrit."), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-danger'
-                ));              
+            if (!preg_match($regexp_emails,$this->data['email'])){
                 return;
             }
-                
-            $this->User->create();
-            //user role is 'user'
-            $this->request->data['User']['role'] = 'user';
-            //stores email at signup to keep track of student email
-            $this->request->data['User']['email_at_signup'] = $this->request->data['User']['email'];
-                
-            if ($this->User->save($this->request->data)) {
-                
-                //sends activation email
-                $user = $this->User->findByEmail($this->request->data['User']['email']);
-                $this->__send_activation_email($user);
-                    
-                $this->Session->setFlash(__("Ton inscription a bien été prise en compte. Un email d'activation te sera bientôt envoyé"), 'alert', array(
-                    'plugin' => 'BoostCake',
-                    'class' => 'alert-success'
-                ));
-                return $this->redirect(array('controller'=>'users','action' => 'login'));
-            }
-            $this->Session->setFlash(__("Erreur lors de l'inscription"), 'alert', array(
-                 'plugin' => 'BoostCake',
-                 'class' => 'alert-danger'
-             ));
         }
+        
+        if ($this->User->save($this->request->data)) {
+            
+            $errorCode = 0;
+            $message = __("Ton inscription a bien été prise en compte. Un email d'activation te sera bientôt envoyé");
+            
+            //sends activation or signup request email
+            $user = $this->User->findByEmailAtSignup($this->request->data['email_at_signup']);
+            
+            if($user['User']['email'] != NULL){
+                $this->__send_activation_email($user);
+            }
+            else{
+                $this->__send_signup_request_email($user);
+            }
+            
+        } else {
+            if($this->User->findByEmail($this->request->data['email_at_signup'])){
+                $errorCode = 1;
+                $message = __("Cet email est déjà utilisé");
+            }
+            else{
+                $errorCode = 2;
+                $message = __("Une erreur s'est produite lors de l'inscription");
+//                $message = $this->User->validationErrors;
+            }
+        }
+        $this->set(array(
+            'message' => $message,
+            'errorCode' => $errorCode,
+            '_serialize' => array('message','errorCode')
+        ));
     }
         
     /**
@@ -230,6 +221,24 @@ class UsersController extends AppController {
                  'class' => 'alert-danger'
              ));
         }
+    }
+    
+    /**
+    * This private method sends a signup request email to a user
+    *
+    * @param string $user
+    * @return void
+    */
+    private function __send_signup_request_email($user) {
+        
+        App::uses('CakeEmail','Network/Email');
+            $email = new CakeEmail('default');
+            $email->to($user['User']['email_at_signup'])
+                    ->subject('Bienvenue sur Polytech Abroad !')
+                    ->emailFormat('html')
+                    ->template('signup_request')
+                    ->viewVars(array('firstname' => $user['User']['firstname']))
+                    ->send();
     }
         
     /**

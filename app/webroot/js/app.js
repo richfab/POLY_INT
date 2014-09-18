@@ -9,5 +9,6 @@
 
 var polyintApp = angular.module('polyintApp', [
   'ngRoute',
-  'polyintControllers'
+  'polyintControllers',
+  'polyintServices'
 ]);

@@ -6,7 +6,7 @@
  * @property PaginatorComponent $Paginator
  */
 App::uses('AppController', 'Controller');
-
+    
 /**
  * Recommendations Controller
  *
@@ -22,7 +22,7 @@ class RecommendationsController extends AppController {
     * @var array
     */
     public $components = array('RequestHandler','Paginator', 'Session');
-
+        
     /**
     * Pagination options
     *
@@ -40,11 +40,11 @@ class RecommendationsController extends AppController {
     */
     public function beforeFilter() {
         parent::beforeFilter();
-		//actions that anyone is allowed to call
+        //actions that anyone is allowed to call
         $this->Auth->allow(array('search','get_recommendations')); 
     }
 	
-	public function view($id) {
+    public function view($id) {
         $recommendation = $this->Recommendation->findById($id);
         $this->set(array(
             'recommendation' => $recommendation,
@@ -52,10 +52,10 @@ class RecommendationsController extends AppController {
         ));
     }
 	
-	public function delete($id) {
-		if(!$this->recommendation_belongs_to_user($id)){
-			return;
-		}
+    public function delete($id) {
+        if(!$this->recommendation_belongs_to_user($id)){
+                return;
+        }
         if ($this->Recommendation->delete($id)) {
             $message = 'Deleted';
         } else {
@@ -67,8 +67,8 @@ class RecommendationsController extends AppController {
         ));
     }
 	
-	public function add(){
-		if ($this->Recommendation->save($this->request->data)) {
+    public function add(){
+        if ($this->Recommendation->save($this->request->data)) {
             $message = 'Saved';
         } else {
             $message = 'Error';
@@ -77,14 +77,14 @@ class RecommendationsController extends AppController {
             'message' => $message,
             '_serialize' => array('message')
         ));
-	}
-	
-	public function edit($id){
-		if(!$this->recommendation_belongs_to_user($id)){
-			return;
-		}
-		$this->Recommendation->id = $id;
-		if ($this->Recommendation->save($this->request->data)) {
+    }
+            
+    public function edit($id){
+        if(!$this->recommendation_belongs_to_user($id)){
+                return;
+        }
+        $this->Recommendation->id = $id;
+        if ($this->Recommendation->save($this->request->data)) {
             $message = 'Saved';
         } else {
             $message = 'Error';
@@ -93,22 +93,24 @@ class RecommendationsController extends AppController {
             'message' => $message,
             '_serialize' => array('message')
         ));
-	}
-	
+    }
+            
     /**
     * This method allows to determine wether a recommendation belongs to logged in user or not
     *
 	* @param string $id (recommendation_id)
     * @return boolean
     */
-	public function recommendation_belongs_to_user($id){
-		$recommendation = $this->Recommendation->findById($id);
+    public function recommendation_belongs_to_user($id){
+        
+        $recommendation = $this->Recommendation->findById($id);
         App::import('Controller', 'Experiences');
+        
         $experiencesController = new ExperiencesController;
-		$experience = $experiencesController->Experience->findById($recommendation['Experience']['id']);
-		return $experience['Experience']['user_id'] == $this->Auth->user('id');
-	}
-    
+        $experience = $experiencesController->Experience->findById($recommendation['Experience']['id']);
+        return $experience['Experience']['user_id'] == $this->Auth->user('id');
+    }
+            
     /**
     * This method allows user to search recommendations
     *
@@ -117,11 +119,11 @@ class RecommendationsController extends AppController {
     public function search(){
         //includes google maps script for place autocomplete and to get recommendation
     	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','get_recommendations','readmore','logo_fly'));
-        
+            
         //sets recommendation types
         $this->set('recommendationtypes',$this->Recommendation->Recommendationtype->find('all'));
     }
-    
+        
     /**
     * This method gets recommendations
     *
@@ -136,11 +138,11 @@ class RecommendationsController extends AppController {
         if($this->Auth->user('id')){
             //converts filter parameters into conditions
             $conditions = $this->_filters_to_conditions($this->request->data);
-            
+                
             //defines number of results and offset
             $offset = $this->request->data['offset'];
             $result_limit = 20;
-            
+                
             $this->set('result_limit',$result_limit);
             $this->set('offset',$offset);
                 
@@ -150,10 +152,10 @@ class RecommendationsController extends AppController {
                         'order' => array('Recommendation.modified' => 'DESC'),
                         'limit' => $result_limit,
                         'offset' => $offset)));
-            
+                            
             //sets next offset
             $this->set(array('next_offset' => $offset+$result_limit));
-            
+                
             //sets countries
             $this->set('countries',$this->Recommendation->Experience->City->Country->find('list'));
             //sets recommendationtypes (icons et names)
@@ -162,10 +164,10 @@ class RecommendationsController extends AppController {
                 'fields' => array('Recommendationtype.icon')
             )));
         }
-        
+            
         $this->render('/Recommendations/get_recommendations');
     }
-    
+        
     /**
     * This protected method converts filter parameters into conditions
     * 
@@ -190,7 +192,7 @@ class RecommendationsController extends AppController {
                 'conditions' => array('City.country_id' => $request_data['country_id']),
                 'fields' => array('City.id')
             ));
-            
+                
             $conditions['Experience.city_id'] = $city_ids;
         }
         //if city was selected in autocomplete
@@ -200,12 +202,12 @@ class RecommendationsController extends AppController {
                 'conditions' => array('City.name' => $request_data['city_name'], 'City.country_id' => $request_data['country_id']),
                 'fields' => array('City.id')
             ));
-            
+                
             $conditions['Experience.city_id'] = $city_ids;
         }
         return $conditions;
     }
-    
+        
     /**
  * admin_index method
  *
@@ -216,7 +218,7 @@ class RecommendationsController extends AppController {
             $this->Recommendation->recursive = 0;
             $this->set('recommendations', $this->Paginator->paginate());
 	}
-
+            
 /**
  * admin_view method
  *
@@ -231,7 +233,7 @@ class RecommendationsController extends AppController {
 		$options = array('conditions' => array('Recommendation.' . $this->Recommendation->primaryKey => $id));
 		$this->set('recommendation', $this->Recommendation->find('first', $options));
 	}
-
+            
 /**
  * admin_delete method
  *
@@ -239,19 +241,19 @@ class RecommendationsController extends AppController {
  * @param string $id
  * @return void
  */
-	public function admin_delete($id = null) {
-		$this->Recommendation->id = $id;
-		if (!$this->Recommendation->exists()) {
-			throw new NotFoundException(__('Invalid recommendation'));
-		}
-		$this->request->onlyAllow('post', 'delete');
-		if ($this->Recommendation->delete()) {
-			$this->Session->setFlash(__('The recommendation has been deleted.'));
-		} else {
-			$this->Session->setFlash(__('The recommendation could not be deleted. Please, try again.'));
-		}
-		return $this->redirect(array('action' => 'index'));
-	}
+    public function admin_delete($id = null) {
+        $this->Recommendation->id = $id;
+        if (!$this->Recommendation->exists()) {
+            throw new NotFoundException(__('Invalid recommendation'));
+        }
+        $this->request->onlyAllow('post', 'delete');
+        if ($this->Recommendation->delete()) {
+            $this->Session->setFlash(__('The recommendation has been deleted.'));
+        } else {
+            $this->Session->setFlash(__('The recommendation could not be deleted. Please, try again.'));
+        }
+        return $this->redirect(array('action' => 'index'));
+    }
             
 }
 ?>

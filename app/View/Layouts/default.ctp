@@ -18,7 +18,7 @@
 $title_description = __("Polytech Abroad : L'unique passeport partagé entre tous les étudiants de Polytech");
 ?>
 <!DOCTYPE html>
-<html>
+<html ng-app="polyintApp">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<?php echo $this->Html->charset(); ?>
@@ -34,7 +34,7 @@ $title_description = __("Polytech Abroad : L'unique passeport partagé entre tou
                 );
                 
                 echo $this->Html->css(array('bootstrap','default','http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css'));
-                echo $this->Html->script(array('jquery-1.11.0.min','bootstrap','modernizr.min','jquery.timeago','https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.js','https://code.angularjs.org/1.2.24/angular-resource.js','https://code.angularjs.org/1.2.24/angular-route.js','app','controllers','http://angular-ui.github.io/bootstrap/ui-bootstrap-0.11.0.js'));
+                echo $this->Html->script(array('jquery-1.11.0.min','bootstrap','modernizr.min','jquery.timeago','https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.js','https://code.angularjs.org/1.2.24/angular-resource.js','https://code.angularjs.org/1.2.24/angular-route.js','app','controllers','services','http://angular-ui.github.io/bootstrap/ui-bootstrap-0.11.0.js'));
                 
                 //ajoute la langue en pour timeago
                 if (Configure::read('Config.language') === 'eng') {
@@ -113,10 +113,7 @@ $title_description = __("Polytech Abroad : L'unique passeport partagé entre tou
                                 </li>
                             <?php else:?>
                                 <li>
-                                    <?= $this->Html->link(
-                                            __('inscription'),
-                                            array('controller'=>'users', 'action'=>'signup'),
-                                            array('class'=>'btn btn-default btn-blue'));?>
+                                    <a class="btn btn-default btn-blue" data-toggle="modal" data-target="#modalSignup">inscription</a>
                                 <li>
                                     <?= $this->Html->link(
                                             __('connexion'),
