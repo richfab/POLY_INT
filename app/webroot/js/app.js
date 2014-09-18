@@ -10,5 +10,6 @@
 var polyintApp = angular.module('polyintApp', [
   'ngRoute',
   'polyintControllers',
-  'polyintServices'
+  'polyintServices',
+  'polyintAnimations'
 ]);

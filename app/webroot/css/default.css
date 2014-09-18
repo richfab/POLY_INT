@@ -137,6 +137,21 @@ b {
     }
 }
 
+/*#modalSignup .modal-content{
+    overflow: hidden;
+}
+
+.animate-hide {
+    -webkit-transition:all ease-out 0.5s;
+    transition:all ease-out 0.5s;
+    position:relative;
+    left:0px
+}
+
+.animate-hide.ng-hide {
+    left:-1000px;
+}*/
+
 #presentation {
     background-attachment: fixed;
     background: #323234 url(../img/background3.jpg) no-repeat;
