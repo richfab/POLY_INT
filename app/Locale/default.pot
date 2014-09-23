@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2014-08-04 21:06+0200\n"
+"POT-Creation-Date: 2014-09-23 15:37+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -148,27 +148,15 @@ msgstr ""
 msgid "The motive could not be deleted. Please, try again."
 msgstr ""
 
-#: Controller/RecommendationsController.php:81
-msgid "Ce bon plan n'éxiste plus"
-msgstr ""
-
-#: Controller/RecommendationsController.php:85
-msgid "Le bon plan a bien été supprimé"
-msgstr ""
-
-#: Controller/RecommendationsController.php:90
-msgid "Le bon plan n'a pas pu être supprimé"
-msgstr ""
-
-#: Controller/RecommendationsController.php:215;231
+#: Controller/RecommendationsController.php:229;245
 msgid "Invalid recommendation"
 msgstr ""
 
-#: Controller/RecommendationsController.php:235
+#: Controller/RecommendationsController.php:249
 msgid "The recommendation has been deleted."
 msgstr ""
 
-#: Controller/RecommendationsController.php:237
+#: Controller/RecommendationsController.php:251
 msgid "The recommendation could not be deleted. Please, try again."
 msgstr ""
 
@@ -293,6 +281,7 @@ msgid "The user could not be deleted. Please, try again."
 msgstr ""
 
 #: Plugin/BoostCake/Controller/BoostCakeController.php:18
+#: webroot/test.php:93
 msgid "Debug setting does not allow access to this url."
 msgstr ""
 
@@ -887,6 +876,10 @@ msgid "Divers"
 msgstr ""
 
 #: View/Elements/fbalbum_import_button.ctp:11
+msgid "Es-tu sûr de vouloir supprimer cet album ?"
+msgstr ""
+
+#: View/Elements/fbalbum_import_button.ctp:11
 msgid "Supprimer l'album"
 msgstr ""
 
@@ -1092,7 +1085,7 @@ msgid "Nom ou prénom"
 msgstr ""
 
 #: View/Experiences/search.ctp:18
-#: View/Layouts/default.ctp:87
+#: View/Layouts/default.ctp:90
 #: View/Recommendations/search.ctp:28
 msgid "Rechercher"
 msgstr ""
@@ -1101,47 +1094,47 @@ msgstr ""
 msgid "Polytech Abroad : L'unique passeport partagé entre tous les étudiants de Polytech"
 msgstr ""
 
-#: View/Layouts/default.ctp:79
+#: View/Layouts/default.ctp:82
 msgid "Accueil"
 msgstr ""
 
-#: View/Layouts/default.ctp:83
+#: View/Layouts/default.ctp:86
 msgid "Explorer"
 msgstr ""
 
-#: View/Layouts/default.ctp:91
+#: View/Layouts/default.ctp:94
 msgid "Partager"
 msgstr ""
 
-#: View/Layouts/default.ctp:95
+#: View/Layouts/default.ctp:98
 msgid "Contest"
 msgstr ""
 
-#: View/Layouts/default.ctp:101
+#: View/Layouts/default.ctp:104
 msgid "mon profil"
 msgstr ""
 
-#: View/Layouts/default.ctp:107
+#: View/Layouts/default.ctp:110
 msgid "déconnexion"
 msgstr ""
 
-#: View/Layouts/default.ctp:114
+#: View/Layouts/default.ctp:117
 msgid "inscription"
 msgstr ""
 
-#: View/Layouts/default.ctp:119
+#: View/Layouts/default.ctp:122
 msgid "connexion"
 msgstr ""
 
-#: View/Layouts/default.ctp:149
+#: View/Layouts/default.ctp:152
 msgid "mentions légales"
 msgstr ""
 
-#: View/Layouts/default.ctp:151
+#: View/Layouts/default.ctp:154
 msgid "a propos"
 msgstr ""
 
-#: View/Layouts/default.ctp:153
+#: View/Layouts/default.ctp:156
 msgid "english"
 msgstr ""
 
@@ -1409,23 +1402,19 @@ msgstr ""
 msgid "Partager un bon plan"
 msgstr ""
 
-#: View/Users/profile.ctp:109
+#: View/Users/profile.ctp:110
 msgid "Bons plans"
 msgstr ""
 
-#: View/Users/profile.ctp:123
-msgid "Es-tu sûr de vouloir supprimer ce bon plan ?"
-msgstr ""
-
-#: View/Users/profile.ctp:134
+#: View/Users/profile.ctp:135
 msgid "Aucun bon plan"
 msgstr ""
 
-#: View/Users/profile.ctp:145
+#: View/Users/profile.ctp:147
 msgid "Photos"
 msgstr ""
 
-#: View/Users/profile.ctp:171
+#: View/Users/profile.ctp:173
 msgid "Modifier ma photo de profil"
 msgstr ""
 
@@ -1554,5 +1543,22 @@ msgstr ""
 
 #: Model/User.php:validation for field lastname
 msgid "Le nom doit comporter 20 caractères au maximum"
+msgstr ""
+
+#: View/Errors/error400.ctp:21
+#: View/Errors/error500.ctp:21
+msgid "Error"
+msgstr ""
+
+#: View/Errors/error400.ctp:23
+msgid "The requested address %s was not found on this server."
+msgstr ""
+
+#: View/Errors/error500.ctp:22
+msgid "An Internal Error Has Occurred."
+msgstr ""
+
+#: View/Layouts/error.ctp:19
+msgid "CakePHP: the rapid development php framework"
 msgstr ""
 

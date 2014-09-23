@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2014-08-04 21:06+0200\n"
-"PO-Revision-Date: 2014-08-04 21:25+0100\n"
+"POT-Creation-Date: 2014-09-23 15:37+0200\n"
+"PO-Revision-Date: 2014-09-23 09:38-0500\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: eng\n"
@@ -148,27 +148,15 @@ msgstr ""
 msgid "The motive could not be deleted. Please, try again."
 msgstr ""
 
-#: Controller/RecommendationsController.php:81
-msgid "Ce bon plan n'éxiste plus"
-msgstr "This recommendation no longer exists"
-
-#: Controller/RecommendationsController.php:85
-msgid "Le bon plan a bien été supprimé"
-msgstr "The recommendation has been deleted"
-
-#: Controller/RecommendationsController.php:90
-msgid "Le bon plan n'a pas pu être supprimé"
-msgstr "The recommendation could not be deleted"
-
-#: Controller/RecommendationsController.php:215;231
+#: Controller/RecommendationsController.php:229;245
 msgid "Invalid recommendation"
 msgstr ""
 
-#: Controller/RecommendationsController.php:235
+#: Controller/RecommendationsController.php:249
 msgid "The recommendation has been deleted."
 msgstr ""
 
-#: Controller/RecommendationsController.php:237
+#: Controller/RecommendationsController.php:251
 msgid "The recommendation could not be deleted. Please, try again."
 msgstr ""
 
@@ -309,7 +297,7 @@ msgstr ""
 msgid "The user could not be deleted. Please, try again."
 msgstr ""
 
-#: Plugin/BoostCake/Controller/BoostCakeController.php:18
+#: Plugin/BoostCake/Controller/BoostCakeController.php:18 webroot/test.php:93
 msgid "Debug setting does not allow access to this url."
 msgstr ""
 
@@ -778,6 +766,10 @@ msgid "Divers"
 msgstr "Other"
 
 #: View/Elements/fbalbum_import_button.ctp:11
+msgid "Es-tu sûr de vouloir supprimer cet album ?"
+msgstr "Are you sure you want to delete this album?"
+
+#: View/Elements/fbalbum_import_button.ctp:11
 msgid "Supprimer l'album"
 msgstr "Delete album"
 
@@ -969,7 +961,7 @@ msgstr "Keywords"
 msgid "Nom ou prénom"
 msgstr "First or last name"
 
-#: View/Experiences/search.ctp:18 View/Layouts/default.ctp:87
+#: View/Experiences/search.ctp:18 View/Layouts/default.ctp:90
 #: View/Recommendations/search.ctp:28
 msgid "Rechercher"
 msgstr "Search"
@@ -981,47 +973,47 @@ msgid ""
 msgstr ""
 "Polytech Abroad : The first shared passport between all Polytech students"
 
-#: View/Layouts/default.ctp:79
+#: View/Layouts/default.ctp:82
 msgid "Accueil"
 msgstr "Home"
 
-#: View/Layouts/default.ctp:83
+#: View/Layouts/default.ctp:86
 msgid "Explorer"
 msgstr "Explore"
 
-#: View/Layouts/default.ctp:91
+#: View/Layouts/default.ctp:94
 msgid "Partager"
 msgstr "Share"
 
-#: View/Layouts/default.ctp:95
+#: View/Layouts/default.ctp:98
 msgid "Contest"
 msgstr "Contest"
 
-#: View/Layouts/default.ctp:101
+#: View/Layouts/default.ctp:104
 msgid "mon profil"
 msgstr "profile"
 
-#: View/Layouts/default.ctp:107
+#: View/Layouts/default.ctp:110
 msgid "déconnexion"
 msgstr "log out"
 
-#: View/Layouts/default.ctp:114
+#: View/Layouts/default.ctp:117
 msgid "inscription"
 msgstr "sign up"
 
-#: View/Layouts/default.ctp:119
+#: View/Layouts/default.ctp:122
 msgid "connexion"
 msgstr "log in"
 
-#: View/Layouts/default.ctp:149
+#: View/Layouts/default.ctp:152
 msgid "mentions légales"
 msgstr "terms of use"
 
-#: View/Layouts/default.ctp:151
+#: View/Layouts/default.ctp:154
 msgid "a propos"
 msgstr "about"
 
-#: View/Layouts/default.ctp:153
+#: View/Layouts/default.ctp:156
 msgid "english"
 msgstr "french"
 
@@ -1295,23 +1287,19 @@ msgstr "Are you sure you want to delete this experience?"
 msgid "Partager un bon plan"
 msgstr "Share a recommendation"
 
-#: View/Users/profile.ctp:109
+#: View/Users/profile.ctp:110
 msgid "Bons plans"
 msgstr "Recommendations"
 
-#: View/Users/profile.ctp:123
-msgid "Es-tu sûr de vouloir supprimer ce bon plan ?"
-msgstr "Are you sure you want to delete this recommendation?"
-
-#: View/Users/profile.ctp:134
+#: View/Users/profile.ctp:135
 msgid "Aucun bon plan"
 msgstr "No recommendation"
 
-#: View/Users/profile.ctp:145
+#: View/Users/profile.ctp:147
 msgid "Photos"
 msgstr ""
 
-#: View/Users/profile.ctp:171
+#: View/Users/profile.ctp:173
 msgid "Modifier ma photo de profil"
 msgstr "Change profile picture"
 
@@ -1439,6 +1427,31 @@ msgstr "Firstname should be 20 characters maximum"
 #: Model/User.php:validation for field lastname
 msgid "Le nom doit comporter 20 caractères au maximum"
 msgstr "Lastname should be 20 characters maximum"
+
+#: View/Errors/error400.ctp:21 View/Errors/error500.ctp:21
+msgid "Error"
+msgstr ""
+
+#: View/Errors/error400.ctp:23
+msgid "The requested address %s was not found on this server."
+msgstr ""
+
+#: View/Errors/error500.ctp:22
+msgid "An Internal Error Has Occurred."
+msgstr ""
+
+#: View/Layouts/error.ctp:19
+msgid "CakePHP: the rapid development php framework"
+msgstr ""
+
+#~ msgid "Ce bon plan n'éxiste plus"
+#~ msgstr "This recommendation no longer exists"
+
+#~ msgid "Le bon plan a bien été supprimé"
+#~ msgstr "The recommendation has been deleted"
+
+#~ msgid "Le bon plan n'a pas pu être supprimé"
+#~ msgstr "The recommendation could not be deleted"
 
 #~ msgid "Jamais"
 #~ msgstr "Never"
