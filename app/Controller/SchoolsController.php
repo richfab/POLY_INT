@@ -35,6 +35,7 @@ class SchoolsController extends AppController {
         $email_domains = array();
         
         foreach($schools_email_domains as $school_email_domains){
+            
             $school_email_domains = explode(',', $school_email_domains);
             
             foreach($school_email_domains as $school_email_domain){

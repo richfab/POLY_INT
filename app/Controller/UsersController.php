@@ -150,12 +150,13 @@ class UsersController extends AppController {
             $schoolsController = new SchoolsController;
             $email_domains = $schoolsController->get_email_domains();
             
-            $regexp_emails = "/";
+            $regexp_emails = "/(";
             foreach($email_domains as $email_domain){
                 $regexp_emails = $regexp_emails.$email_domain;
+                //if not last element in list
                 if(end($email_domains) != $email_domain) $regexp_emails = $regexp_emails."|";
             }
-            $regexp_emails = $regexp_emails."/";
+            $regexp_emails = $regexp_emails.")$/";
                 
             //checks that email belongs to list of verified emails
             if (!preg_match($regexp_emails,$this->data['User']['email'])){
