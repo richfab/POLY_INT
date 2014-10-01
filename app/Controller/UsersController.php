@@ -145,9 +145,17 @@ class UsersController extends AppController {
                 return;
             }
                 
-            //TODO generate from database
-            //list of verified emails
-            $regexp_emails = "/@(etu.univ-nantes.fr|univ-nantes.fr|polytech-lille.net|etud.univ-montp2.fr|etu.univ-tours.fr|etu.univ-orleans.fr|polytech.upmc.fr|u-psud.fr|etudiant.univ-bpclermont.fr|etu.univ-lyon1.fr|etu.univ-savoie.fr|polytech.unice.fr|etu.univ-provence.fr|etu.univ-amu.fr|e.ujf-grenoble.fr|univ-lyon1.fr)/";
+            //generates email regexp
+            App::import('Controller', 'Schools');
+            $schoolsController = new SchoolsController;
+            $email_domains = $schoolsController->get_email_domains();
+            
+            $regexp_emails = "/";
+            foreach($email_domains as $email_domain){
+                $regexp_emails = $regexp_emails.$email_domain;
+                if(end($email_domains) != $email_domain) $regexp_emails = $regexp_emails."|";
+            }
+            $regexp_emails = $regexp_emails."/";
                 
             //checks that email belongs to list of verified emails
             if (!preg_match($regexp_emails,$this->data['User']['email'])){

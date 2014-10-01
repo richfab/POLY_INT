@@ -22,6 +22,28 @@ class SchoolsController extends AppController {
  * @var array
  */
 	public $components = array('Paginator');
+    
+    /**
+    * this methods returns all email domains in an array
+    *
+    **/
+    public function get_email_domains(){
+        
+        $schools_email_domains = $this->School->find('list', array(
+            'fields' => array('School.email_domains')
+        ));
+        $email_domains = array();
+        
+        foreach($schools_email_domains as $school_email_domains){
+            $school_email_domains = explode(',', $school_email_domains);
+            
+            foreach($school_email_domains as $school_email_domain){
+                if (preg_match('/^@/',$school_email_domain)) array_push($email_domains,$school_email_domain);
+            }
+        }
+        
+        return $email_domains;
+    }
 
 /**
  * admin_index method

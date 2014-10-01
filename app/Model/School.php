@@ -20,6 +20,16 @@ class School extends AppModel {
                 'rule'    => 'isUnique',
                 'message' => "Ce nom d'école est déjà utilisé"
             )
+        ),'email_domains' => array(
+            'between' => array(
+                'rule'    => array('between', 0, 255),
+                'message' => 'Les noms de domaines doivent comporter au maximum 255 charactères',
+                'allowEmpty' => true
+            ),
+            'domain_format' => array(
+                'rule' => '/^@/',
+                'message' => "Les noms de domaine d'email doivent commencer par '@'. Ex : @domain1.fr,@domain2.com"
+            )
         ),
         'color' => array(
             'between' => array(
