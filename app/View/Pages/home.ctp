@@ -5,7 +5,22 @@
  */
 ?>
 
-<div class="" id="presentation">
+<div id="slideshow" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#slideshow" data-slide-to="0" class="active"></li>
+        <li data-target="#slideshow" data-slide-to="1"></li>
+        <li data-target="#slideshow" data-slide-to="2"></li>
+        <li data-target="#slideshow" data-slide-to="3"></li>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" id="presentation">
+        <div class="item active" style="background-image:url('./img/background3.jpg')"></div>
+        <div class="item" style="background-image:url('./img/map.jpg')"></div>
+        <div class="item" style="background-image:url('./img/boats.jpg')"></div>
+        <div class="item" style="background-image:url('./img/houses.jpg')"></div>
+    </div>
 </div>
 
 <div class="block-color hidden-xs">
@@ -13,16 +28,16 @@
         <h2><?= __("Polytech Abroad est un véritable passeport partagé entre tous les étudiants du réseau Polytech. C'est l'unique plate-forme qui permet de contacter rapidement n'importe quel étudiant de Polytech parti en stage ou en semestre à l'étranger.");?></h2>
     </div>
 </div>
-    
+
 <div class="access">
     <?= $this->Html->link(
-        __('poster une experience'),
-        array('controller'=>'experiences', 'action'=>'info'),
-        array('class'=>'btn btn-default btn-blue',"role"=>"button"));?>
+     __('poster une experience'),
+     array('controller'=>'experiences', 'action'=>'info'),
+     array('class'=>'btn btn-default btn-blue',"role"=>"button"));?>
     <?= $this->Html->link(
-        __('explorer la carte'),
-        array('controller'=>'experiences', 'action'=>'explore'),
-        array('class'=>'btn btn-default btn-orange',"role"=>"button"));?>
+     __('explorer la carte'),
+     array('controller'=>'experiences', 'action'=>'explore'),
+     array('class'=>'btn btn-default btn-orange',"role"=>"button"));?>
 </div>
 
 <div class="container marketing">
@@ -52,5 +67,5 @@
 </div>
 
 <div class="access">
-    
+
 </div>

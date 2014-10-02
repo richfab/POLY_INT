@@ -138,8 +138,12 @@ b {
 }
 
 #presentation {
+    
+}
+
+#presentation .item{
     background-attachment: fixed;
-    background: #323234 url(../img/background3.jpg) no-repeat;
+    background: #323234;
     background-position: center;
     height: 300px;
     width: 100%;
