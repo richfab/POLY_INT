@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2014-09-23 15:37+0200\n"
-"PO-Revision-Date: 2014-09-23 09:38-0500\n"
+"POT-Creation-Date: 2014-10-11 21:36+0200\n"
+"PO-Revision-Date: 2014-10-11 15:38-0500\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: eng\n"
@@ -83,12 +83,12 @@ msgid "La date de fin doit être après la date de début"
 msgstr "End date must be after start date"
 
 #: Controller/ExperiencesController.php:121
-#: Controller/UsersController.php:379;440;487
+#: Controller/UsersController.php:388;449;496
 msgid "Les modifications ont bien été enregistrées"
 msgstr "Changes have been saved"
 
 #: Controller/ExperiencesController.php:127
-#: Controller/UsersController.php:385;445;493
+#: Controller/UsersController.php:394;454;502
 msgid "Erreur lors de l'enregistrement"
 msgstr "Changes could not be saved"
 
@@ -160,23 +160,23 @@ msgstr ""
 msgid "The recommendation could not be deleted. Please, try again."
 msgstr ""
 
-#: Controller/SchoolsController.php:45;84;109
+#: Controller/SchoolsController.php:68;107;132
 msgid "Invalid school"
 msgstr ""
 
-#: Controller/SchoolsController.php:64;88
+#: Controller/SchoolsController.php:87;111
 msgid "The school has been saved."
 msgstr ""
 
-#: Controller/SchoolsController.php:67;91
+#: Controller/SchoolsController.php:90;114
 msgid "The school could not be saved. Please, try again."
 msgstr ""
 
-#: Controller/SchoolsController.php:113
+#: Controller/SchoolsController.php:136
 msgid "The school has been deleted."
 msgstr ""
 
-#: Controller/SchoolsController.php:115
+#: Controller/SchoolsController.php:138
 msgid "The school could not be deleted. Please, try again."
 msgstr ""
 
@@ -192,7 +192,7 @@ msgstr ""
 msgid "Mot de passe ou email incorrect"
 msgstr "Incorrect email or password"
 
-#: Controller/UsersController.php:113;603;639;678
+#: Controller/UsersController.php:113;612;648;687
 msgid "Invalid user"
 msgstr ""
 
@@ -205,11 +205,11 @@ msgstr ""
 msgid "The user could not be accepted. Please, try again."
 msgstr ""
 
-#: Controller/UsersController.php:141;199;368
+#: Controller/UsersController.php:141;208;377
 msgid "Les mots de passe ne correspondent pas"
 msgstr "Passwords do not match"
 
-#: Controller/UsersController.php:154
+#: Controller/UsersController.php:163
 msgid ""
 "Ton adresse étudiante est nécessaire pour l'inscription. Tu pourras la "
 "changer dans ton profil une fois inscrit."
@@ -217,17 +217,17 @@ msgstr ""
 "Please use your student email address to sign up. You may change it in your "
 "profile afterwards."
 
-#: Controller/UsersController.php:173
+#: Controller/UsersController.php:182
 msgid ""
 "Ton inscription a bien été prise en compte. Un email d'activation te sera "
 "bientôt envoyé"
 msgstr "Welcome ! A confirmation email will soon be sent to you"
 
-#: Controller/UsersController.php:179
+#: Controller/UsersController.php:188
 msgid "Erreur lors de l'inscription"
 msgstr "Sign up could not be completed"
 
-#: Controller/UsersController.php:222
+#: Controller/UsersController.php:231
 msgid ""
 "Ta demande d'inscription a bien été prise en compte. Un email de "
 "confirmation te sera bientôt envoyé"
@@ -235,65 +235,65 @@ msgstr ""
 "Your request has been received ! A confirmation email will soon be sent to "
 "you"
 
-#: Controller/UsersController.php:228
+#: Controller/UsersController.php:237
 msgid "Erreur lors de la demande d'inscription"
 msgstr "Sign up request could not be completed"
 
-#: Controller/UsersController.php:269
+#: Controller/UsersController.php:278
 msgid "Ton compte a bien été activé"
 msgstr "Your account has been activated"
 
-#: Controller/UsersController.php:277
+#: Controller/UsersController.php:286
 msgid "Ce lien d'activation n'est pas valide"
 msgstr "This activation link is not valid"
 
-#: Controller/UsersController.php:314
+#: Controller/UsersController.php:323
 msgid "Ce lien n'est pas valide"
 msgstr "This link is not valid"
 
-#: Controller/UsersController.php:325
+#: Controller/UsersController.php:334
 msgid "Aucun utilisateur ne correspond à cet email"
 msgstr "No user matches this email"
 
-#: Controller/UsersController.php:343
+#: Controller/UsersController.php:352
 msgid ""
 "Un email avec un lien pour réinitialiser ton mot de passe vient de t'être "
 "envoyé"
 msgstr "An email with a link to reset your password was just sent to you"
 
-#: Controller/UsersController.php:363;433;483
+#: Controller/UsersController.php:372;442;492
 msgid "Cet utilisateur n'existe pas"
 msgstr "This user does not exist"
 
-#: Controller/UsersController.php:391
+#: Controller/UsersController.php:400
 msgid "L'ancien mot de passe est incorrect"
 msgstr "Old password is incorrect"
 
-#: Controller/UsersController.php:561
+#: Controller/UsersController.php:570
 msgid "Le compte n'éxiste plus"
 msgstr "The account no longer exist"
 
-#: Controller/UsersController.php:564
+#: Controller/UsersController.php:573
 msgid "Le compte a bien été supprimé"
 msgstr "The account has been deleted"
 
-#: Controller/UsersController.php:570
+#: Controller/UsersController.php:579
 msgid "Le compte n'a pas pu être supprimé"
 msgstr "The account could not be deleted"
 
-#: Controller/UsersController.php:619;643
+#: Controller/UsersController.php:628;652
 msgid "The user has been saved."
 msgstr ""
 
-#: Controller/UsersController.php:622;646
+#: Controller/UsersController.php:631;655
 msgid "The user could not be saved. Please, try again."
 msgstr ""
 
-#: Controller/UsersController.php:682
+#: Controller/UsersController.php:691
 msgid "The user has been deleted."
 msgstr ""
 
-#: Controller/UsersController.php:684
+#: Controller/UsersController.php:693
 msgid "The user could not be deleted. Please, try again."
 msgstr ""
 
@@ -375,8 +375,8 @@ msgstr ""
 #: View/Countries/admin_add.ctp:10 View/Countries/admin_edit.ctp:11
 #: View/Departments/admin_add.ctp:9 View/Departments/admin_edit.ctp:10
 #: View/Experiences/admin_edit.ctp:17 View/Motives/admin_add.ctp:9
-#: View/Motives/admin_edit.ctp:10 View/Schools/admin_add.ctp:10
-#: View/Schools/admin_edit.ctp:11 View/Users/admin_add.ctp:14
+#: View/Motives/admin_edit.ctp:10 View/Schools/admin_add.ctp:13
+#: View/Schools/admin_edit.ctp:14 View/Users/admin_add.ctp:14
 #: View/Users/admin_edit.ctp:14
 msgid "Submit"
 msgstr ""
@@ -391,8 +391,8 @@ msgstr ""
 #: View/Experiences/admin_view.ctp:62 View/Motives/admin_add.ctp:12
 #: View/Motives/admin_edit.ctp:13 View/Motives/admin_index.ctp:9;40
 #: View/Motives/admin_view.ctp:27;52 View/Recommendations/admin_index.ctp:11
-#: View/Recommendations/admin_view.ctp:37 View/Schools/admin_add.ctp:13
-#: View/Schools/admin_edit.ctp:14 View/Schools/admin_index.ctp:10;42
+#: View/Recommendations/admin_view.ctp:37 View/Schools/admin_add.ctp:16
+#: View/Schools/admin_edit.ctp:17 View/Schools/admin_index.ctp:11;44
 #: View/Schools/admin_view.ctp:32;53 View/Users/admin_add.ctp:17
 #: View/Users/admin_edit.ctp:17 View/Users/admin_index.ctp:14;53;92
 #: View/Users/admin_view.ctp:47;70
@@ -438,8 +438,8 @@ msgstr ""
 #: View/Departments/admin_view.ctp:62 View/Experiences/admin_edit.ctp:23
 #: View/Experiences/admin_index.ctp:39 View/Motives/admin_edit.ctp:16
 #: View/Motives/admin_index.ctp:20 View/Motives/admin_view.ctp:69
-#: View/Recommendations/admin_index.ctp:27 View/Schools/admin_edit.ctp:17
-#: View/Schools/admin_index.ctp:22 View/Schools/admin_view.ctp:69
+#: View/Recommendations/admin_index.ctp:27 View/Schools/admin_edit.ctp:20
+#: View/Schools/admin_index.ctp:24 View/Schools/admin_view.ctp:69
 #: View/Users/admin_edit.ctp:20 View/Users/admin_index.ctp:36;72
 #: View/Users/admin_view.ctp:87
 msgid "Delete"
@@ -453,8 +453,8 @@ msgstr ""
 #: View/Experiences/admin_index.ctp:39 View/Experiences/admin_view.ctp:64
 #: View/Motives/admin_edit.ctp:16 View/Motives/admin_index.ctp:20
 #: View/Motives/admin_view.ctp:30;69 View/Recommendations/admin_index.ctp:27
-#: View/Recommendations/admin_view.ctp:39 View/Schools/admin_edit.ctp:17
-#: View/Schools/admin_index.ctp:22 View/Schools/admin_view.ctp:35;69
+#: View/Recommendations/admin_view.ctp:39 View/Schools/admin_edit.ctp:20
+#: View/Schools/admin_index.ctp:24 View/Schools/admin_view.ctp:35;69
 #: View/Users/admin_edit.ctp:20 View/Users/admin_index.ctp:36;72
 #: View/Users/admin_view.ctp:50;87
 msgid "Are you sure you want to delete # %s?"
@@ -469,7 +469,7 @@ msgstr ""
 #: View/Departments/admin_index.ctp:18 View/Departments/admin_view.ctp:60
 #: View/Experiences/admin_index.ctp:38 View/Motives/admin_index.ctp:18
 #: View/Motives/admin_view.ctp:68 View/Recommendations/admin_index.ctp:26
-#: View/Schools/admin_index.ctp:20 View/Schools/admin_view.ctp:67
+#: View/Schools/admin_index.ctp:22 View/Schools/admin_view.ctp:67
 #: View/Users/admin_index.ctp:70 View/Users/admin_view.ctp:86
 msgid "View"
 msgstr ""
@@ -477,7 +477,7 @@ msgstr ""
 #: View/Cities/admin_index.ctp:29 View/Countries/admin_index.ctp:21
 #: View/Countries/admin_view.ctp:69 View/Departments/admin_index.ctp:19
 #: View/Departments/admin_view.ctp:61 View/Motives/admin_index.ctp:19
-#: View/Schools/admin_index.ctp:21 View/Schools/admin_view.ctp:68
+#: View/Schools/admin_index.ctp:23 View/Schools/admin_view.ctp:68
 #: View/Users/admin_index.ctp:71
 msgid "Edit"
 msgstr ""
@@ -485,7 +485,7 @@ msgstr ""
 #: View/Cities/admin_index.ctp:38 View/Countries/admin_index.ctp:30
 #: View/Departments/admin_index.ctp:28 View/Experiences/admin_index.ctp:47
 #: View/Motives/admin_index.ctp:28 View/Recommendations/admin_index.ctp:35
-#: View/Schools/admin_index.ctp:30 View/Users/admin_index.ctp:80
+#: View/Schools/admin_index.ctp:32 View/Users/admin_index.ctp:80
 msgid ""
 "Page {:page} of {:pages}, showing {:current} records out of {:count} total, "
 "starting on record {:start}, ending on {:end}"
@@ -494,7 +494,7 @@ msgstr ""
 #: View/Cities/admin_index.ctp:43 View/Countries/admin_index.ctp:35
 #: View/Departments/admin_index.ctp:33 View/Experiences/admin_index.ctp:52
 #: View/Motives/admin_index.ctp:33 View/Posts/index.ctp:26
-#: View/Recommendations/admin_index.ctp:40 View/Schools/admin_index.ctp:35
+#: View/Recommendations/admin_index.ctp:40 View/Schools/admin_index.ctp:37
 #: View/Users/admin_index.ctp:85
 msgid "previous"
 msgstr ""
@@ -502,7 +502,7 @@ msgstr ""
 #: View/Cities/admin_index.ctp:45 View/Countries/admin_index.ctp:37
 #: View/Departments/admin_index.ctp:35 View/Experiences/admin_index.ctp:54
 #: View/Motives/admin_index.ctp:35 View/Posts/index.ctp:33
-#: View/Recommendations/admin_index.ctp:42 View/Schools/admin_index.ctp:37
+#: View/Recommendations/admin_index.ctp:42 View/Schools/admin_index.ctp:39
 #: View/Users/admin_index.ctp:87
 msgid "next"
 msgstr ""
@@ -950,6 +950,7 @@ msgid "Retour"
 msgstr "Back"
 
 #: View/Experiences/info.ctp:46 View/Users/edit.ctp:36
+#: View/Users/profile.ctp:184
 msgid "Enregistrer"
 msgstr "Save"
 
@@ -1131,7 +1132,7 @@ msgstr "to read recommendations"
 msgid "Admin Add School"
 msgstr ""
 
-#: View/Schools/admin_add.ctp:16 View/Schools/admin_edit.ctp:18
+#: View/Schools/admin_add.ctp:19 View/Schools/admin_edit.ctp:21
 #: View/Schools/admin_view.ctp:36
 msgid "List Schools"
 msgstr ""
@@ -1144,7 +1145,7 @@ msgstr ""
 msgid "Schools"
 msgstr ""
 
-#: View/Schools/admin_index.ctp:44
+#: View/Schools/admin_index.ctp:46
 msgid "New School"
 msgstr ""
 
@@ -1303,6 +1304,14 @@ msgstr ""
 msgid "Modifier ma photo de profil"
 msgstr "Change profile picture"
 
+#: View/Users/profile.ctp:180
+msgid "Au format jpg, png ou jpeg."
+msgstr "The file extension should be jpg, png or jpeg."
+
+#: View/Users/profile.ctp:183
+msgid "Fermer"
+msgstr ""
+
 #: View/Users/signup.ctp:17
 msgid "Email étudiant"
 msgstr "Student email"
@@ -1396,6 +1405,16 @@ msgstr "Source should be 255 characters maximum"
 msgid "Ce nom d'école est déjà utilisé"
 msgstr "This school name already exists"
 
+#: Model/School.php:validation for field email_domains
+msgid "Les noms de domaines doivent comporter au maximum 255 charactères"
+msgstr "The domain name must be shorter than 255 characters"
+
+#: Model/School.php:validation for field email_domains
+msgid ""
+"Les noms de domaine d'email doivent commencer par '@'. Ex : @domain1.fr,"
+"@domain2.com"
+msgstr ""
+
 #: Model/School.php:validation for field color
 msgid "La couleur doit être du type FFFFFF"
 msgstr "Color format must be FFFFFF"
@@ -1443,6 +1462,30 @@ msgstr ""
 #: View/Layouts/error.ctp:19
 msgid "CakePHP: the rapid development php framework"
 msgstr ""
+
+#, fuzzy
+#~ msgid "%s modified"
+#~ msgstr "Edit"
+
+#, fuzzy
+#~ msgid "[D]atabase Configuration"
+#~ msgstr "Confirm"
+
+#, fuzzy
+#~ msgid "Model classes:"
+#~ msgstr "Password"
+
+#, fuzzy
+#~ msgid "Database Configuration:"
+#~ msgstr "Confirm"
+
+#, fuzzy
+#~ msgid "Associations:"
+#~ msgstr "Notifications"
+
+#, fuzzy
+#~ msgid "mon"
+#~ msgstr "less"
 
 #~ msgid "Ce bon plan n'éxiste plus"
 #~ msgstr "This recommendation no longer exists"

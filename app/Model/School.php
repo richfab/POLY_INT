@@ -23,7 +23,7 @@ class School extends AppModel {
         ),'email_domains' => array(
             'between' => array(
                 'rule'    => array('between', 0, 255),
-                'message' => 'Les noms de domaines doivent comporter au maximum 255 charactères',
+                'message' => 'Les noms de domaines doivent comporter au maximum 255 caractères',
                 'allowEmpty' => true
             ),
             'domain_format' => array(

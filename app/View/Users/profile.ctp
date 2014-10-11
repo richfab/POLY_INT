@@ -177,11 +177,11 @@
                     echo $this->Form->create('User', array('type'=>'file'));
                     echo $this->Form->input('avatar_file', array('label' => false, 'type' => 'file'));
                 ?>
-                <p class="help-block">Au format jpg, png ou jpeg.</p>
+                <p class="help-block"><?= __('Au format jpg, png ou jpeg.');?></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-orange" data-dismiss="modal">Fermer</button>
-                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                <button type="button" class="btn btn-orange" data-dismiss="modal"><?= __('Fermer');?></button>
+                <button type="submit" class="btn btn-primary"><?= __('Enregistrer');?></button>
             </div>
         </div>
     </div>
