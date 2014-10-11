@@ -145,3 +145,6 @@ a:hover {
     50% { margin-top: 5px }
     100% { margin-top: -15px }
 }
+#links {
+    text-align: center;
+}
