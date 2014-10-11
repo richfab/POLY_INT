@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2014-10-11 21:36+0200\n"
-"PO-Revision-Date: 2014-10-11 15:38-0500\n"
+"POT-Creation-Date: 2014-10-11 21:38+0200\n"
+"PO-Revision-Date: 2014-10-11 15:41-0500\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: eng\n"
@@ -1310,7 +1310,7 @@ msgstr "The file extension should be jpg, png or jpeg."
 
 #: View/Users/profile.ctp:183
 msgid "Fermer"
-msgstr ""
+msgstr "Close"
 
 #: View/Users/signup.ctp:17
 msgid "Email étudiant"
