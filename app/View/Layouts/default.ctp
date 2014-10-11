@@ -95,7 +95,7 @@ $title_description = __("Polytech Abroad : L'unique passeport partagé entre tou
                             </li>
                             <li class="menu-separator"></li>
                             <li class="menu-item">
-                                <?= $this->Html->link(__('Contest'),'/contest',array('style'=>'display:inline-block','escape'=>false));?>
+                                <?= $this->Html->link(__('selfies'),'/contest',array('style'=>'display:inline-block','escape'=>false));?>
                             </li>
                             <li class="menu-separator"></li>
                             <?php if(AuthComponent::user('id')): ?>

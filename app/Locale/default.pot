@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2014-10-11 21:38+0200\n"
+"POT-Creation-Date: 2014-10-11 21:53+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -1091,6 +1091,10 @@ msgstr ""
 msgid "Rechercher"
 msgstr ""
 
+#: View/Heights/contest.ctp:6
+msgid "autour du monde"
+msgstr ""
+
 #: View/Layouts/default.ctp:18
 msgid "Polytech Abroad : L'unique passeport partagé entre tous les étudiants de Polytech"
 msgstr ""
@@ -1108,7 +1112,7 @@ msgid "Partager"
 msgstr ""
 
 #: View/Layouts/default.ctp:98
-msgid "Contest"
+msgid "selfies"
 msgstr ""
 
 #: View/Layouts/default.ctp:104
@@ -1523,7 +1527,7 @@ msgid "Ce nom d'école est déjà utilisé"
 msgstr ""
 
 #: Model/School.php:validation for field email_domains
-msgid "Les noms de domaines doivent comporter au maximum 255 charactères"
+msgid "Les noms de domaines doivent comporter au maximum 255 caractères"
 msgstr ""
 
 #: Model/School.php:validation for field email_domains

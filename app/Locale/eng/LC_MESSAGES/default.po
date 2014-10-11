@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2014-10-11 21:38+0200\n"
-"PO-Revision-Date: 2014-10-11 15:41-0500\n"
+"POT-Creation-Date: 2014-10-11 21:53+0200\n"
+"PO-Revision-Date: 2014-10-11 15:54-0500\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: eng\n"
@@ -967,6 +967,10 @@ msgstr "First or last name"
 msgid "Rechercher"
 msgstr "Search"
 
+#: View/Heights/contest.ctp:6
+msgid "autour du monde"
+msgstr "around the world"
+
 #: View/Layouts/default.ctp:18
 msgid ""
 "Polytech Abroad : L'unique passeport partagé entre tous les étudiants de "
@@ -987,8 +991,8 @@ msgid "Partager"
 msgstr "Share"
 
 #: View/Layouts/default.ctp:98
-msgid "Contest"
-msgstr "Contest"
+msgid "selfies"
+msgstr ""
 
 #: View/Layouts/default.ctp:104
 msgid "mon profil"
@@ -1016,7 +1020,7 @@ msgstr "about"
 
 #: View/Layouts/default.ctp:156
 msgid "english"
-msgstr "french"
+msgstr "français"
 
 #: View/Motives/admin_add.ctp:4
 msgid "Admin Add Motive"
@@ -1406,7 +1410,8 @@ msgid "Ce nom d'école est déjà utilisé"
 msgstr "This school name already exists"
 
 #: Model/School.php:validation for field email_domains
-msgid "Les noms de domaines doivent comporter au maximum 255 charactères"
+#, fuzzy
+msgid "Les noms de domaines doivent comporter au maximum 255 caractères"
 msgstr "The domain name must be shorter than 255 characters"
 
 #: Model/School.php:validation for field email_domains
@@ -1462,6 +1467,9 @@ msgstr ""
 #: View/Layouts/error.ctp:19
 msgid "CakePHP: the rapid development php framework"
 msgstr ""
+
+#~ msgid "Contest"
+#~ msgstr "Contest"
 
 #, fuzzy
 #~ msgid "%s modified"
