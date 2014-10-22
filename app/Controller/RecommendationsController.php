@@ -116,7 +116,7 @@ class RecommendationsController extends AppController {
     */
     public function search(){
         //includes google maps script for place autocomplete and to get recommendation
-    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','get_recommendations','readmore','logo_fly'));
+    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','masonry.pkgd.min','get_recommendations','logo_fly'));
         
         //sets recommendation types
         $this->set('recommendationtypes',$this->Recommendation->Recommendationtype->find('all'));

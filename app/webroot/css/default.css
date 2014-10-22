@@ -417,6 +417,12 @@ h2 > span.wut {
     font-weight: 300;
 }
 
+.recommendation-item{
+    width: 30%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 .well-experience-search:hover{
     cursor: pointer;
     border-color: #ABABAB;
@@ -664,6 +670,10 @@ h2 > span.wut {
     padding: 15px 30px 15px 30px;
     border-left: 1px solid #e7e7e7;
     min-height: 100px;
+}
+
+.type-recommendation-search{
+    padding: 15px 30px 15px 30px;
 }
 
 .experience-info > div{
