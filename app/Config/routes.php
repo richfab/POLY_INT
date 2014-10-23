@@ -28,6 +28,9 @@
         
         //conects contest with heights controller
         Router::connect('/contest', array('controller' => 'heights', 'action' => 'contest'));
+
+        //conects bde with dashboard controller
+        Router::connect('/bde', array('controller' => 'dashboards', 'action' => 'bde'));
 /**
  * ...and connect the rest of 'Pages' controller's URLs.
  */
