@@ -9,6 +9,7 @@ echo $this->Form->input('email_domains');?>
         <?php 
 echo $this->Form->input('color',array('class' => 'color {required:true}'));
         ?>
+        <?php echo $this->Form->input('number_of_students'); ?>
     </fieldset>
     <?php echo $this->Form->end(__('Submit')); ?>
 </div>

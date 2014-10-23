@@ -16,6 +16,11 @@
 			<?php echo h($school['School']['color']); ?>
 			&nbsp;
 		</dd>
+        <dt><?php echo __('Number of students'); ?></dt>
+		<dd>
+			<?php echo h($school['School']['number_of_students']); ?>
+			&nbsp;
+		</dd>
 		<dt><?php echo __('Created'); ?></dt>
 		<dd>
 			<?php echo h($school['School']['created']); ?>

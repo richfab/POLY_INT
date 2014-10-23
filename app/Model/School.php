@@ -1,6 +1,6 @@
 <?php
 class School extends AppModel {
-    
+
     public $hasMany = array(
         'User' => array(
             'className' => 'User',
@@ -8,7 +8,7 @@ class School extends AppModel {
             'conditions' => array('User.role' => 'user','User.active' => '1')
         )
     );
-	
+
     public $validate = array(
         'name' => array(
             'between' => array(
@@ -37,11 +37,16 @@ class School extends AppModel {
                 'message' => 'La couleur doit être du type FFFFFF',
                 'allowEmpty' => false
             )
+        ),
+        'number_of_students' => array(
+            'rule'    => 'numeric',
+            'message' => "Nombre d'étudiants inscrits à l'école",
+            'allowEmpty' => true
         )
     );
-        
+
     public function beforeSave($options = array()) {
-    	
+
         return true;
     }
 }

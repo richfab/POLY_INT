@@ -15,7 +15,7 @@ App::uses('AppController', 'Controller');
  * @package		app.Controller
  */
 class DashboardsController extends AppController {
-    
+
     /**
     * This method is called before the controller action. It is useful to define which actions are allowed publicly.
     *
@@ -23,9 +23,9 @@ class DashboardsController extends AppController {
     */
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow(array('index')); //actions that anyone is allowed to call
+        $this->Auth->allow(array('index','bde')); //actions that anyone is allowed to call
     }
-    
+
     /**
     * This method allows anyone to see website stats but doesnt allow actions
     *
@@ -35,14 +35,14 @@ class DashboardsController extends AppController {
         //on charge la vue admin_index mais les actions ne seront pas autorisées si on n'est pas admin
         $this->admin_index();
     }
-    
+
     /**
     * This method allows admin to see website stats and interacts with them
     *
     * @return void
     */
     public function admin_index() {
-        
+
         App::import('Controller', 'Users');
         $usersController = new UsersController;
         //number of active users
@@ -55,7 +55,7 @@ class DashboardsController extends AppController {
         $this->set('signup_requests_count',$usersController->User->find('count',array(
             'conditions' => array('User.email' => NULL)
         )));
-        
+
         App::import('Controller', 'Experiences');
         $experiencesController = new ExperiencesController;
         //number of experiences
@@ -68,15 +68,54 @@ class DashboardsController extends AppController {
         $this->set('countries_count',count($experiencesController->Experience->find('all',array(
             'group' => 'City.country_id'
         ))));
-        
+
         App::import('Controller', 'Recommendations');
         $recommendationsController = new RecommendationsController;
         //number of recommendations
         $this->set('recommendations_count',$recommendationsController->Recommendation->find('count'));
         //ordered by recommendation types
         $this->set('recommendationtypes',$recommendationsController->Recommendation->Recommendationtype->find('all'));
-        
+
         $this->render('admin_index');
+    }
+
+    /**
+    * This method allows each school to compare the number of students signed up compared to the other schools
+    *
+    * @return void
+    */
+    public function bde() {
+
+        App::import('Controller', 'Users');
+        $usersController = new UsersController;
+        //number of active users
+        $this->set('users_count',$usersController->User->find('count',array(
+            'conditions' => array('User.active' => 1, 'User.role' => 'user')
+        )));
+        //ordered by school
+        $schools = $usersController->User->School->find('all');
+
+        foreach($schools as &$school){
+            $school['School']['signed_up'] = count($school['User']);
+            $school['School']['percentage'] = count($school['User'])/$school['School']['number_of_students']*100;
+            unset($school['User']);
+        }
+
+        //sort schools by percentage
+        function cmp($a, $b) {
+            if ($a['School']['percentage'] == $b['School']['percentage']) {
+                return 0;
+            }
+            return ($a['School']['percentage'] < $b['School']['percentage']) ? 1 : -1;
+        }
+
+        usort($schools, "cmp");
+
+        $this->set('schools',$schools);
+        //number of signup requests
+        $this->set('signup_requests_count',$usersController->User->find('count',array(
+            'conditions' => array('User.email' => NULL)
+        )));
     }
 }
 ?>
