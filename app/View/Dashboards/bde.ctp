@@ -1,5 +1,7 @@
-<h2 style="text-align:center">Ton école est-elle prête à conquérir le monde ?</h2>
-<h4 style="text-align:center">Compare le pourcentage d'étudiants inscrits sur Polytech Abroad dans ton école par rapport aux autres écoles</h4>
+<div style="margin-top:40px;margin-bottom:40px;text-align:center">
+    <h2>Ton école est-elle prête à conquérir le monde ?</h2>
+    <h4 style="color:#56585f">Compare le pourcentage d'étudiants inscrits sur Polytech Abroad dans ton école par rapport aux autres écoles</h4>
+</div>
 <div class="well">
     <?php foreach ($schools as $school): ?>
     <div class="row">
