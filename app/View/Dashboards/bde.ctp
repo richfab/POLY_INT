@@ -9,7 +9,7 @@
         <div class="col-sm-7">
             <div class="progress">
                 <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $school['School']['percentage'];?>" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo $school['School']['percentage'];?>%;">
-                    <span class="sr-only"><?php echo $school['School']['percentage'];?>% Complete</span>
+                    <?php echo round($school['School']['percentage']);?>%
                 </div>
             </div>
         </div>
