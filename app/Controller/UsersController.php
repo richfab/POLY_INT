@@ -41,7 +41,7 @@ class UsersController extends AppController {
     */
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('signup','signup_request','activate','forgotten_password'); // Letting users signup themselves and retrieve password
+        $this->Auth->allow('signup','signup_complete','signup_request','activate','forgotten_password'); // Letting users signup themselves and retrieve password
     }
         
     /**
@@ -183,13 +183,21 @@ class UsersController extends AppController {
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));
-                return $this->redirect(array('controller'=>'users','action' => 'login'));
+                return $this->redirect(array('controller'=>'users','action' => 'signup_complete'));
             }
             $this->Session->setFlash(__("Erreur lors de l'inscription"), 'alert', array(
                  'plugin' => 'BoostCake',
                  'class' => 'alert-danger'
              ));
         }
+    }
+    
+    /**
+    * This method shows signup complete page
+    * 
+    * @return void
+    */
+    public function signup_complete() {
     }
         
     /**
@@ -232,7 +240,7 @@ class UsersController extends AppController {
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
                 ));
-                return $this->redirect(array('controller'=>'users','action' => 'login'));
+                return $this->redirect(array('controller'=>'users','action' => 'signup_complete'));
             }
             $this->Session->setFlash(__("Erreur lors de la demande d'inscription"), 'alert', array(
                  'plugin' => 'BoostCake',
