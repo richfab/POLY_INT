@@ -25,7 +25,7 @@
     <div class="row" style="text-align:center;">
         <div class="col-md-4">
             <h1><span style="color:rgb(53, 145, 42)" class="glyphicon glyphicon-envelope"></span></h1>
-            <p>Envoie un email à tous les étudiants de ton école pour les informer de l'éxistence de ce site.</p>
+            <p>Envoie un email aux étudiants de ton école pour les informer de l'éxistence de ce site génial.</p>
         </div>
         <div class="col-md-4">
             <h1><span style="color:#3B5998" class="glyphicon glyphicon-thumbs-up"></span></h1>
@@ -34,7 +34,7 @@
         </div>
         <div class="col-md-4">
             <h1><span style="color:rgb(216, 41, 68)" class="glyphicon glyphicon-bullhorn"></span></h1>
-            <p>Parle du site autour de toi ! Plus on est nombreux à l'utiliser, plus ce sera facile de partir à l'étranger.</p>
+            <p>Parles-en autour de toi ! Plus on est nombreux à l'utiliser, plus ce sera facile de partir à l'étranger.</p>
         </div>
     </div>
 </div>
