@@ -39,10 +39,10 @@ function get_recommendations(offset){
 }
 
 function masonry_init(){
-    var $container = $('#recommendation-list');
-    // initialize
+    var $container = $('.recommendation-masonry');
     $container.masonry({
-        itemSelector: '.recommendation-item'
+        itemSelector: '.recommendation-item',
+        gutter: 0
     });
 }
 
@@ -82,6 +82,6 @@ function get_filter_params(){
     }
 
     $.extend(filter,city_name,country_id,recommendationtypes);
-    console.log(filter);
+    
     return filter;
 }

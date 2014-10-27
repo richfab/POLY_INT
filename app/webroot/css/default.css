@@ -84,7 +84,7 @@ b {
     -moz-transition: opacity 0.7s ease;
     -o-transition: opacity 0.7s ease;
     transition: opacity 0.7s ease;
-    
+
 }
 
 .navbar-brand:hover > span{
@@ -92,7 +92,7 @@ b {
     height: 16px;
     font-size: 12px;
     opacity: 1;
-    
+
 }
 
 .navbar > .container .navbar-brand {
@@ -113,15 +113,15 @@ b {
         float: left;
         margin-top: 4px;
     }
-    
+
     .menu-item:hover{
         border-bottom: 5px solid #e7e7e7;
     }
-    
+
     .menu-separator{
         width: 30px;
     }
-    
+
     .nav > li > a.btn {
         padding: 5px 10px;
         margin-left: 5px;
@@ -334,11 +334,11 @@ h2 > span.wut {
         left: 0px;
         width: 100%;
     }
-    
+
     #filter-map .dropdown-wrap {
         display: inline-block;
     }
-    
+
     #filter-map .dropdown-wrap:nth-child(1){
         width: 28%;
     }
@@ -418,9 +418,23 @@ h2 > span.wut {
 }
 
 .recommendation-item{
-    width: 30%;
-    margin-left: 10px;
-    margin-right: 10px;
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+    .recommendation-masonry{
+        margin-left: -10px;
+        margin-right: -10px;
+    }
+
+    .recommendation-item{
+        width: 33.333333%;
+        padding: 10px;
+    }
+
+    .recommendation-item .well{
+        margin-bottom: 0px;
+    }
 }
 
 .well-experience-search:hover{
@@ -485,13 +499,13 @@ h2 > span.wut {
     -o-transition: all 1s ease-in-out;
     -ms-transition: all 1s ease-in-out;
     transition: all 1s ease-in-out;
-    
+
     -webkit-animation-direction: normal;
     -webkit-animation-duration: 1.5s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-name: blink;
     -webkit-animation-timing-function: ease-in-out;
-    
+
     -moz-animation-direction: normal;
     -moz-animation-duration: 1.5s;
     -moz-animation-iteration-count: infinite;
@@ -579,7 +593,7 @@ h2 > span.wut {
     .activity-content .photo_el_wrap .close {
         display: none;
     }
-    
+
     .activity-content .photo_el{
         width: 40px;
         height: 40px;
@@ -616,7 +630,7 @@ h2 > span.wut {
     font-family: "Open Sans", sans-serif;
     font-weight: 300;
     font-size: 14px;
-    
+
 }
 
 .nombre{
@@ -658,7 +672,7 @@ h2 > span.wut {
 .profile-info-search > div{
     margin: 0 0 5px;
     color: black;
-    
+
 }
 
 .profile-info-search {
@@ -852,22 +866,22 @@ h2 > span.wut {
 }
 
 .activity-photo {
-    
+
 }
 
 .activity-recommendation {
-    
+
 }
 
 .activity-experience {
-    
+
 }
 
 @media (max-width: 768px) {
     .news {
         padding: 0px 13px;
     }
-    
+
     .activity-content{
         padding-left: 0px;
     }
@@ -906,11 +920,11 @@ h2 > span.wut {
 }
 
 .activity-post {
-    
+
 }
 
 .activity .content {
-    
+
 }
 
 .activity-profil-picture {

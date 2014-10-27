@@ -118,6 +118,14 @@ class RecommendationsController extends AppController {
         //includes google maps script for place autocomplete and to get recommendation
     	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete','masonry.pkgd.min','get_recommendations','logo_fly'));
         
+        $today = date('Y-m-d');
+        App::import('Controller', 'Experiences');
+        $experiencesController = new ExperiencesController;
+        $experience = $experiencesController->Experience->find('first',array(
+            'conditions' => array('Experience.user_id' => $this->Auth->user('id'), 'Experience.dateEnd >=' => $today,'Experience.dateStart <=' => $today)
+        ));
+        $this->set('experience',$experience);
+        
         //sets recommendation types
         $this->set('recommendationtypes',$this->Recommendation->Recommendationtype->find('all'));
     }
