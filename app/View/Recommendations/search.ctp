@@ -1,17 +1,21 @@
-<?php
-    
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+<?php 
+//    define current city for user
+    if($experience){
+        $city_name = $experience['City']['name'];
+        $country_id = $experience['City']['country_id'];
+        $city_name_and_country_id = $city_name . ", " . $country_id;
+    } else {
+        $city_name = $country_id = $city_name_and_country_id = "";
+    }
 ?>
+
 <div id="search-filters">
     <div class="row" id="filter-search-inputs">
         <div class="col-sm-5" id="ExperienceInputDiv">
-            <input type="text" id="ExperienceInput" location-types="(regions)" name="input" class="form-control">
+            <input type="text" id="ExperienceInput" location-types="(regions)" name="input" class="form-control" value="<?= $city_name_and_country_id;?>">
         </div>
-        <input type="hidden" id="CityName" name="city_name"><input type="hidden" id="CityCountryId" name="country_id">
+        <input type="hidden" id="CityName" name="city_name" value="<?= $city_name;?>">
+        <input type="hidden" id="CityCountryId" name="country_id" value="<?= $country_id;?>">
         <input type="hidden" id="CityLat"><input type="hidden" id="CityLon"><input type="hidden" id="CityCountryName">
         <!--utile pour le nombre de resultats a afficher-->
         <input type="hidden" name="offset" id="offset" value="0">
