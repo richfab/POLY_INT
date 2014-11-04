@@ -107,7 +107,7 @@ class UsersController extends AppController {
         if(!$user['User']['active']){
             $this->__send_activation_email($user);
 
-            $this->Session->setFlash(__("Un nouvel email d'activation sera bientôt envoyé à ".$user['User']['email_at_signup']), 'alert', array(
+            $this->Session->setFlash(__("Un nouvel email d'activation te sera bientôt envoyé"), 'alert', array(
                 'plugin' => 'BoostCake',
                 'class' => 'alert-success'
             ));
