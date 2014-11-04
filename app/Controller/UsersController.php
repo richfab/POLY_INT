@@ -62,9 +62,10 @@ class UsersController extends AppController {
                 //else log user out
                 else{
                     // access the html helper
-                    $Html = (new View($this))->loadHelper('Html');
+                    $view = new View($this);
+                    $html = $view->loadHelper('Html');
                     // use it to generate a link    
-                    $resend = $Html->link(__("Renvoyer l'email"), array(
+                    $resend = $html->link(__("Renvoyer l'email"), array(
                         'controller' => 'users',
                         'action' => 'resend',
                         $this->Auth->user('id')
