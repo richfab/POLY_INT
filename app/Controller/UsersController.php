@@ -88,7 +88,7 @@ class UsersController extends AppController {
 
 
     /**
-    * This method allows users to resend activation email
+    * This method allows users to resend activation email 
     *
     * @return void
     */
