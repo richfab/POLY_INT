@@ -15,25 +15,25 @@ App::uses('AppController', 'Controller');
  * @package		app.Controller
  */
 class UsersController extends AppController {
-    
+
     /**
     * Pagination options
     *
     * @var array
     */
     public $paginate = array(
-            'limit' => 20,
-            'order' => array('created' => 'DESC'),
-            'conditions' => array('User.role' => 'user','User.active' => '1')
+        'limit' => 20,
+        'order' => array('created' => 'DESC'),
+        'conditions' => array('User.role' => 'user','User.active' => '1')
     );
-    
+
     /**
     * Helper to handle image resize
     *
     * @var array
     */
     public $helpers = array('Image.Image');
-        
+
     /**
     * This method is called before the controller action. It is useful to define which actions are allowed publicly.
     *
@@ -41,9 +41,9 @@ class UsersController extends AppController {
     */
     public function beforeFilter() {
         parent::beforeFilter();
-        $this->Auth->allow('signup','signup_complete','signup_request','activate','forgotten_password'); // Letting users signup themselves and retrieve password
+        $this->Auth->allow('signup','signup_complete','signup_request','activate','forgotten_password','resend'); // Letting users signup themselves and retrieve password
     }
-        
+
     /**
     * This method allows anyone to login
     *
@@ -61,7 +61,16 @@ class UsersController extends AppController {
                 }
                 //else log user out
                 else{
-                    $this->Session->setFlash(__("Tu dois d'abord activer ton compte à l'aide du lien d'activation qui t'a été envoyé par email (cela peut prendre un peu de temps)"), 'alert', array(
+                    // access the html helper
+                    $Html = (new View($this))->loadHelper('Html');
+                    // use it to generate a link    
+                    $resend = $Html->link(__("Renvoyer l'email"), array(
+                        'controller' => 'users',
+                        'action' => 'resend',
+                        $this->Auth->user('id')
+                    ));
+                    // sprintf to insert the link to your standard message text!
+                    $this->Session->setFlash(sprintf(_("Tu dois d'abord activer ton compte à l'aide du lien d'activation qui t'a été envoyé par email. %s"), $resend), 'alert', array(
                         'plugin' => 'BoostCake',
                         'class' => 'alert-danger'
                     ));
@@ -75,7 +84,36 @@ class UsersController extends AppController {
             ));
         }
     }
+
+
+
+    /**
+    * This method allows users to resend activation email
+    *
+    * @return void
+    */
+    public function resend($user_id = null) {
         
+        $this->User->create();
+        $this->User->id = $user_id;
+
+        $user = $this->User->findById($user_id);
+
+        if (!$this->User->exists()) {
+            throw new NotFoundException(__('Invalid user'));
+        }
+
+        if(!$user['User']['active']){
+            $this->__send_activation_email($user);
+
+            $this->Session->setFlash(__("Un nouvel email d'activation sera bientôt envoyé à ".$user['User']['email_at_signup']), 'alert', array(
+                'plugin' => 'BoostCake',
+                'class' => 'alert-success'
+            ));
+        }
+        return $this->redirect(array('controller'=>'users','action' => 'login'));
+    }
+
     /**
     * This method allows users to logout
     *
@@ -84,16 +122,16 @@ class UsersController extends AppController {
     public function logout() {
         return $this->redirect($this->Auth->logout());
     }
-    
+
     /**
     * This temp method allows users to import fb album
     *
     * @return void
     */
     public function fb_album(){
-        
+
     }
-        
+
     /**
     * This admin method allows administrator to accept a signup request done with a non verified email
     * 
@@ -102,40 +140,40 @@ class UsersController extends AppController {
     * @return void
     */
     public function admin_accept_request($id) {
-        
+
         $this->User->create();
         $this->User->id = $id;
-            
+
         $user = $this->User->findById($id);
         $user['User']['email'] = $user['User']['email_at_signup'];
-            
+
         if (!$this->User->exists()) {
-                throw new NotFoundException(__('Invalid user'));
+            throw new NotFoundException(__('Invalid user'));
         }
         $this->request->onlyAllow('post', 'accept_request');
-            
+
         if($this->User->saveField('email',$user['User']['email'])){
-                //sends activation email to user
-                $this->__send_activation_email($user);
-                $this->Session->setFlash(__('The user has been accepted. An activation email has been sent to the user.'));
+            //sends activation email to user
+            $this->__send_activation_email($user);
+            $this->Session->setFlash(__('The user has been accepted. An activation email has been sent to the user.'));
         } else {
-                $this->Session->setFlash(__('The user could not be accepted. Please, try again.'));
+            $this->Session->setFlash(__('The user could not be accepted. Please, try again.'));
         }
         return $this->redirect(array('action' => 'index'));
     }
-        
+
     /**
     * This method allows anyone to signup with a verified email
     * 
     * @return void
     */
     public function signup() {
-        
+
         //sets schools and departments by alphbetical order to populate select inputs
         $this->__set_schools_and_departments();
-            
+
         if ($this->request->is('post')) {
-            
+
             //checks that password and confirmation password are identical
             if (!($this->data['User']['password'] === $this->data['User']['password_confirm'])) {
                 $this->Session->setFlash(__("Les mots de passe ne correspondent pas"), 'alert', array(
@@ -144,12 +182,12 @@ class UsersController extends AppController {
                 ));              
                 return;
             }
-                
+
             //generates email regexp
             App::import('Controller', 'Schools');
             $schoolsController = new SchoolsController;
             $email_domains = $schoolsController->get_email_domains();
-            
+
             $regexp_emails = "/(";
             foreach($email_domains as $email_domain){
                 $regexp_emails = $regexp_emails.$email_domain;
@@ -157,7 +195,7 @@ class UsersController extends AppController {
                 if(end($email_domains) != $email_domain) $regexp_emails = $regexp_emails."|";
             }
             $regexp_emails = $regexp_emails.")$/";
-                
+
             //checks that email belongs to list of verified emails
             if (!preg_match($regexp_emails,$this->data['User']['email'])){
                 $this->Session->setFlash(__("Ton adresse étudiante est nécessaire pour l'inscription. Tu pourras la changer dans ton profil une fois inscrit."), 'alert', array(
@@ -166,19 +204,19 @@ class UsersController extends AppController {
                 ));              
                 return;
             }
-                
+
             $this->User->create();
             //user role is 'user'
             $this->request->data['User']['role'] = 'user';
             //stores email at signup to keep track of student email
             $this->request->data['User']['email_at_signup'] = $this->request->data['User']['email'];
-                
+
             if ($this->User->save($this->request->data)) {
-                
+
                 //sends activation email
                 $user = $this->User->findByEmail($this->request->data['User']['email']);
                 $this->__send_activation_email($user);
-                    
+
                 $this->Session->setFlash(__("Ton inscription a bien été prise en compte. Un email d'activation te sera bientôt envoyé"), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
@@ -186,12 +224,12 @@ class UsersController extends AppController {
                 return $this->redirect(array('controller'=>'users','action' => 'signup_complete'));
             }
             $this->Session->setFlash(__("Erreur lors de l'inscription"), 'alert', array(
-                 'plugin' => 'BoostCake',
-                 'class' => 'alert-danger'
-             ));
+                'plugin' => 'BoostCake',
+                'class' => 'alert-danger'
+            ));
         }
     }
-    
+
     /**
     * This method shows signup complete page
     * 
@@ -199,19 +237,19 @@ class UsersController extends AppController {
     */
     public function signup_complete() {
     }
-        
+
     /**
     * This method allows anyone to send a signup request with a non verified email
     * 
     * @return void
     */
     public function signup_request() {
-        
+
         //sets schools and departments by alphbetical order to populate select inputs
         $this->__set_schools_and_departments();
-            
+
         if ($this->request->is('post')) {
-            
+
             if (!($this->data['User']['password'] === $this->data['User']['password_confirm'])) {
                 $this->Session->setFlash(__("Les mots de passe ne correspondent pas"), 'alert', array(
                     'plugin' => 'BoostCake',
@@ -219,23 +257,23 @@ class UsersController extends AppController {
                 ));              
                 return;
             }
-                
+
             $this->User->create();
             //on force le role a être user
             $this->request->data['User']['role'] = 'user';
-                
+
             if ($this->User->save($this->request->data)) {
-                
+
                 App::uses('CakeEmail','Network/Email');
-            	$user = $this->request->data;
+                $user = $this->request->data;
                 $email = new CakeEmail('default');
                 $email->to($user['User']['email_at_signup'])
-                        ->subject('Bienvenue sur Polytech Abroad !')
-                        ->emailFormat('html')
-                        ->template('signup_request')
-                        ->viewVars(array('firstname' => $user['User']['firstname']))
-                        ->send();
-                            
+                    ->subject('Bienvenue sur Polytech Abroad !')
+                    ->emailFormat('html')
+                    ->template('signup_request')
+                    ->viewVars(array('firstname' => $user['User']['firstname']))
+                    ->send();
+
                 $this->Session->setFlash(__("Ta demande d'inscription a bien été prise en compte. Un email de confirmation te sera bientôt envoyé"), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
@@ -243,12 +281,12 @@ class UsersController extends AppController {
                 return $this->redirect(array('controller'=>'users','action' => 'signup_complete'));
             }
             $this->Session->setFlash(__("Erreur lors de la demande d'inscription"), 'alert', array(
-                 'plugin' => 'BoostCake',
-                 'class' => 'alert-danger'
-             ));
+                'plugin' => 'BoostCake',
+                'class' => 'alert-danger'
+            ));
         }
     }
-        
+
     /**
     * This private method sends an activation email to a user
     *
@@ -256,19 +294,19 @@ class UsersController extends AppController {
     * @return void
     */
     private function __send_activation_email($user) {
-        
+
         $activation_link = array('controller'=>'users', 'action' => 'activate','admin'=>false, $this->User->id.'-'.md5($user['User']['password']));
-            
+
         App::uses('CakeEmail','Network/Email');
         $email = new CakeEmail('default');
         $email->to($user['User']['email'])
-                ->subject('Bienvenue sur Polytech Abroad !')
-                ->emailFormat('html')
-                ->template('signup')
-                ->viewVars(array('firstname' => $user['User']['firstname'],'activation_link' => $activation_link))
-                ->send();
+            ->subject('Bienvenue sur Polytech Abroad !')
+            ->emailFormat('html')
+            ->template('signup')
+            ->viewVars(array('firstname' => $user['User']['firstname'],'activation_link' => $activation_link))
+            ->send();
     }
-        
+
     /**
     * This method allows user to activate his account with a token sent in activation email
     *
@@ -284,44 +322,46 @@ class UsersController extends AppController {
             $this->User->id = $user['User']['id'];
             $this->User->saveField('active',1);
             $this->Session->setFlash(__("Ton compte a bien été activé"), 'alert', array(
-                 'plugin' => 'BoostCake',
-                 'class' => 'alert-success'
-             ));
+                'plugin' => 'BoostCake',
+                'class' => 'alert-success'
+            ));
             $this->Auth->login($user['User']);
             return $this->redirect(array('controller'=>'users','action' => 'profile'));
         }
         else{
             $this->Session->setFlash(__("Ce lien d'activation n'est pas valide"), 'alert', array(
-                 'plugin' => 'BoostCake',
-                 'class' => 'alert-danger'
-             ));
+                'plugin' => 'BoostCake',
+                'class' => 'alert-danger'
+            ));
             return $this->redirect(array('controller'=>'users','action' => 'login'));
         }
-            
+
     }
-        
+
     /**
     * This method allows user to reinitialize his password from the link sent by email or to request reinitialization link
     *
     * @return void
     */
     public function forgotten_password(){
-        
+
         //user cliked reinitialization link in email
         if(!empty($this->request->params['named']['token'])){
-            
+
             $token = $this->request->params['named']['token'];
             $token = explode('-',$token);
-                
+
             $user = $this->User->find('first',array('conditions'=> array('User.id'=>$token[0],'MD5(User.password)'=>$token[1])));
-                
+
             if($user){
-                
+
                 $this->User->id = $user['User']['id'];
-                    
+
                 $password = substr(md5(uniqid(rand(),true)),0,8);
                 $this->User->saveField('password',$password);
-                    
+                //if the user had not activated his account, it is now active
+                $this->User->saveField('active',1);
+
                 $this->Session->setFlash(__("Voici ton nouveau mot de passe : $password. Il est conseillé de le changer dans les paramêtres de ton profil"), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
@@ -334,7 +374,7 @@ class UsersController extends AppController {
                 ));
             }
         }
-            
+
         //user requests reinitialization link
         if($this->request->is('post')) {
             $user = $this->User->findByEmail($this->request->data['User']['email']);
@@ -346,17 +386,17 @@ class UsersController extends AppController {
             }
             else{
                 App::uses('CakeEmail','Network/Email');
-                    
+
                 $link = array('controller'=>'users','action'=>'forgotten_password','token'=>$user['User']['id'].'-'.md5($user['User']['password']));
-                    
+
                 $email = new CakeEmail('default');
                 $email->to($user['User']['email'])
-                        ->subject('Réinitialisation mot de passe')
-                        ->emailFormat('html')
-                        ->template('forgotten_password')
-                        ->viewVars(array('firstname'=>$user['User']['firstname'],'link'=>$link))
-                        ->send();
-                            
+                    ->subject('Réinitialisation mot de passe')
+                    ->emailFormat('html')
+                    ->template('forgotten_password')
+                    ->viewVars(array('firstname'=>$user['User']['firstname'],'link'=>$link))
+                    ->send();
+
                 $this->Session->setFlash(__("Un email avec un lien pour réinitialiser ton mot de passe vient de t'être envoyé"), 'alert', array(
                     'plugin' => 'BoostCake',
                     'class' => 'alert-success'
@@ -364,7 +404,7 @@ class UsersController extends AppController {
             }
         }
     }
-        
+
     /**
     * This method allows user to change his password
     *
@@ -372,14 +412,14 @@ class UsersController extends AppController {
     * @return void
     */
     public function change_password() {
-        
+
         $id = $this->Auth->user('id');
         $this->User->id = $id;
-            
+
         if (!$this->User->exists()) {
             throw new NotFoundException(__("Cet utilisateur n'existe pas"));
         }
-            
+
         if ($this->request->is('post') || $this->request->is('put')) {
             if (!($this->data['User']['password'] === $this->data['User']['password_confirm'])) {
                 $this->Session->setFlash(__("Les mots de passe ne correspondent pas"), 'alert', array(
@@ -391,7 +431,7 @@ class UsersController extends AppController {
             //checks that old password is correct
             $user = $this->User->findById($id);
             if(AuthComponent::password($this->request->data['User']['old_password']) === $user['User']['password']){
-                
+
                 if ($this->User->save($this->request->data)) {
                     $this->Session->setFlash(__("Les modifications ont bien été enregistrées"), 'alert', array(
                         'plugin' => 'BoostCake',
@@ -416,7 +456,7 @@ class UsersController extends AppController {
             unset($this->request->data['User']['password']);
         }
     }
-        
+
     /**
     * This method displays user profile (current user if user_id is null)
     *
@@ -425,10 +465,10 @@ class UsersController extends AppController {
     * @return void
     */
     public function profile($user_id = null) {
-        
+
         //includes scripts to send ajax recommendations and to display "read more" button on long posts
         $jsIncludes = array('recommendations','readmore','photo_gallery');
-        
+
         //user wants to see his own profile
         if($user_id==null){
             $user_id = $this->Auth->user('id');
@@ -439,17 +479,17 @@ class UsersController extends AppController {
         else if($user_id == $this->Auth->user('id')){
             return $this->redirect(array('action' => 'profile'));
         }
-    	
+
         $this->set('jsIncludes',$jsIncludes);
         $this->set('cssIncludes',array('blueimp-gallery'));
-        
+
         //user wants to see someone else profile
         $this->User->id = $user_id;
-            
+
         if (!$this->User->exists()) {
             throw new NotFoundException(__("Cet utilisateur n'existe pas"));
         }
-        
+
         //change profile picture
         if ($this->request->is('post') || $this->request->is('put')) {
             $this->User->id = $this->Auth->user('id');
@@ -465,7 +505,7 @@ class UsersController extends AppController {
                 ));
             }
         }
-        
+
         $this->set('user',$this->User->read(null, $user_id));
         $this->set('countries',$this->User->Experience->City->Country->find('list'));
         $this->set('experiences',$this->User->Experience->find('all', array(
@@ -481,7 +521,7 @@ class UsersController extends AppController {
             'fields' => array('Recommendationtype.icon')
         )));
     }
-        
+
     /**
     * This method allows user to edit his own information
     *
@@ -489,13 +529,13 @@ class UsersController extends AppController {
     * @return void
     */
     public function edit() {
-        
+
         $user_id = $this->Auth->user('id');
         $this->User->id = $user_id;
-            
+
         //sets schools and departments by alphbetical order to populate select inputs
         $this->__set_schools_and_departments();
-            
+
         if (!$this->User->exists()) {
             throw new NotFoundException(__("Cet utilisateur n'existe pas"));
         }
@@ -516,7 +556,7 @@ class UsersController extends AppController {
             unset($this->request->data['User']['password']);
         }
     }
-        
+
     /**
     * This private method sets schools and departments by alphbetical order to populate select inputs
     * 
@@ -525,33 +565,33 @@ class UsersController extends AppController {
     private function __set_schools_and_departments() {
         //selects schools by alphabetical order
         $this->set('schools', $this->User->School->find('list', array(
-                        'order' => array('School.name' => 'ASC'))));
+            'order' => array('School.name' => 'ASC'))));
         //selects departments by alphabetical order
         $this->set('departments', $this->User->Department->find('list', array(
-                        'order' => array('Department.name' => 'ASC'))));
+            'order' => array('Department.name' => 'ASC'))));
     }
-    
+
     public function get_people_around($city_id){
-        
+
         $conditions['AND'] = array('Experience.dateEnd >=' => date('Y-m-d'),
-                'Experience.dateStart <=' => date('Y-m-d'));
-        
+                                   'Experience.dateStart <=' => date('Y-m-d'));
+
         $conditions['Experience.city_id'] = $city_id;
-        
+
         $experiences = $this->User->Experience->find('all',array(
             'conditions' => $conditions,
             'recursive' => 0,
             'group' => 'Experience.user_id'
         ));
-        
+
         $users = array();
         foreach ($experiences as $experience) {
             array_push($users, $experience['User']);
         }
-        
+
         return $users;
     }
-        
+
     /**
     * This method allows user to delete his account
     *
@@ -560,19 +600,19 @@ class UsersController extends AppController {
     */
     public function delete(){
         $this->request->onlyAllow('post');
-            
+
         $user_id = $this->Auth->user('id');
-            
+
         $user = $this->User->findById($user_id);
         $experiences = $user['Experience'];
-            
+
         App::import('Controller', 'Experiences');
         $experiencesController = new ExperiencesController;
-            
+
         foreach($experiences as $experience){
             $experiencesController->delete_experience($experience['id']);
         }
-            
+
         $this->User->id = $user_id;
         if (!$this->User->exists()) {
             throw new NotFoundException(__("Le compte n'éxiste plus"));
@@ -590,10 +630,10 @@ class UsersController extends AppController {
         ));
         return $this->redirect($this->referer());
     }
-        
-        
+
+
     //admin methods//
-    
+
     /**
     * This admin method displays all active users present in the database
     *
