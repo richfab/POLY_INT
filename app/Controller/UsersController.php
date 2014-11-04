@@ -71,7 +71,7 @@ class UsersController extends AppController {
                         $this->Auth->user('id')
                     ));
                     // sprintf to insert the link to your standard message text!
-                    $this->Session->setFlash(sprintf(_("Tu dois d'abord activer ton compte à l'aide du lien d'activation qui t'a été envoyé par email. %s"), $resend), 'alert', array(
+                    $this->Session->setFlash(sprintf(__("Tu dois d'abord activer ton compte à l'aide du lien d'activation qui t'a été envoyé par email. %s"), $resend), 'alert', array(
                         'plugin' => 'BoostCake',
                         'class' => 'alert-danger'
                     ));
