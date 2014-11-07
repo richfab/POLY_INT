@@ -8,3 +8,4 @@ git-rev.txt
 app/Config/database.php
 app/Config/core.php
 app/webroot/img/heights-photos
+app/webroot/img/avatars

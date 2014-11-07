@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2014-11-04 05:25+0100\n"
-"PO-Revision-Date: 2014-11-03 23:25-0500\n"
+"POT-Creation-Date: 2014-11-07 22:03+0100\n"
+"PO-Revision-Date: 2014-11-07 16:04-0500\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: eng\n"
@@ -1274,9 +1274,9 @@ msgstr "Sign up"
 msgid "Profil LinkedIn"
 msgstr "LinkedIn profile"
 
-#: View/Users/profile.ctp:30;74
-msgid "Modifier"
-msgstr "Edit"
+#: View/Users/profile.ctp:30
+msgid "Paramètres"
+msgstr "Settings"
 
 #: View/Users/profile.ctp:40
 msgid "Changer ma photo"
@@ -1297,6 +1297,10 @@ msgstr "Delete"
 #: View/Users/profile.ctp:69
 msgid "Es-tu sûr de vouloir supprimer cette expérience ?"
 msgstr "Are you sure you want to delete this experience?"
+
+#: View/Users/profile.ctp:74
+msgid "Modifier"
+msgstr "Edit"
 
 #: View/Users/profile.ctp:85
 msgid "Partager un bon plan"

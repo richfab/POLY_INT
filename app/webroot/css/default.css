@@ -520,6 +520,11 @@ h2 > span.wut {
 
 #edit_profile_button{
     margin-top: 30px;
+    text-transform: uppercase;
+}
+
+#edit_profile_button a:hover{
+    text-decoration: none!important;
 }
 
 .fb_album_el{

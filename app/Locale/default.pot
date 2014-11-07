@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2014-11-04 05:25+0100\n"
+"POT-Creation-Date: 2014-11-07 22:03+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -1391,8 +1391,8 @@ msgstr ""
 msgid "Profil LinkedIn"
 msgstr ""
 
-#: View/Users/profile.ctp:30;74
-msgid "Modifier"
+#: View/Users/profile.ctp:30
+msgid "Paramètres"
 msgstr ""
 
 #: View/Users/profile.ctp:40
@@ -1413,6 +1413,10 @@ msgstr ""
 
 #: View/Users/profile.ctp:69
 msgid "Es-tu sûr de vouloir supprimer cette expérience ?"
+msgstr ""
+
+#: View/Users/profile.ctp:74
+msgid "Modifier"
 msgstr ""
 
 #: View/Users/profile.ctp:85

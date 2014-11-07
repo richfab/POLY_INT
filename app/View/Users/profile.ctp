@@ -27,9 +27,9 @@
         </h4>
         <?php if($user['User']['id'] == AuthComponent::user('id')) : ?>
         <p id="edit_profile_button">
-            <?= $this->Html->link('<span class="edit-delete-label">'.__("Modifier").'</span>', array('action' => 'edit'),
+            <?= $this->Html->link('<span class="edit-delete-label"> '.__("Paramètres").'</span>', array('action' => 'edit'),
                 array('escape' => false,
-                    'class' => 'glyphicon glyphicon-pencil edit-delete'
+                    'class' => 'glyphicon glyphicon-cog edit-delete'
                     )); ?>
         </p>
     <?php endif; ?>
