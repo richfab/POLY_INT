@@ -285,7 +285,7 @@ class ExperiencesController extends AppController {
     * @return void
     */
     public function get_map_init(){
-//        $this->request->onlyAllow('ajax');
+        //        $this->request->onlyAllow('ajax');
         $this->set('countries', $this->Experience->City->Country->find('all',array(
             'conditions' => array('Country.experienceNumber >' => 0)
         )));
@@ -372,27 +372,22 @@ class ExperiencesController extends AppController {
     * @return void
     */
     public function get_establishments(){
-        
-        $experiences = $this->Experience->find('all', array('fields' => array('id', 'establishment', 'City.country_id', 'City.lat', 'City.lon'),
-                                                           'recursive' => 0,
-                                                           'conditions' => array('establishment <>' => null)));
+
+        $experiences = $this->Experience->find('all', array('fields' => array('id', 'establishment', 'City.id', 'City.lat', 'City.lon', 'City.name', 'City.country_id'),
+                                                            'recursive' => 0,
+                                                            'conditions' => array('establishment <>' => null)));
         $this->set('experiences', $experiences);
 
     }
-    
+
     /**
     * This method gets the establishment of all experiences
     * 
     * @return void
     */
     public function get_establishments_google(){
-        
+
         $this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places'));
-        
-        $experiences = $this->Experience->find('all', array('fields' => array('id', 'establishment', 'City.country_id'),
-                                                           'recursive' => 0,
-                                                           'conditions' => array('establishment <>' => null)));
-        $this->set('experiences', $experiences);
 
     }
 
@@ -404,6 +399,26 @@ class ExperiencesController extends AppController {
     public function echarlemagne(){
         //on inclut les scripts pour la recuperation des experiences et google maps pour l'autocomplete des lieux
         $this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','add_experiences'));
+    }
+
+    /**
+    * Fonction utile a l'update de l'id d'établissement d'une expérience
+    * 
+    * @return void
+    */
+    public function save_experience_establishment_ajax(){
+
+        $this->request->onlyAllow('ajax');
+
+        $this->Experience->create();
+        $this->Experience->id = $this->request->data['Experience']['id'];
+
+        if($this->Experience->saveField('establishment_id', $this->request->data['Experience']['establishment_id'])){
+            return new CakeResponse(array('body'=> json_encode(array('errorMessage'=>0)),'status'=>200));
+        }
+
+        return new CakeResponse(array('body'=> json_encode(array('errorMessage'=>"Erreur lors de l'ajout")),'status'=>500));
+
     }
 
     /**
