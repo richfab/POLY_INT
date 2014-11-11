@@ -36,7 +36,7 @@ function fetch_map_values(filter){
         dataType : 'json',
         success : function(data) {
             update_map(data);
-            update_number_of_experiences(data.cities.experienceNumbers);
+            update_number_of_experiences(data);
         },
         error : function(data) {
             //alert("Une erreur est survenue, veuillez réessayer dans quelques instants.");
@@ -48,11 +48,15 @@ function fetch_map_values(filter){
     });
 }
 
-function update_number_of_experiences(experienceNumbers){
+function update_number_of_experiences(data){
 
     var total = 0;
-    for(var i in experienceNumbers){
-        total += parseInt(experienceNumbers[i]);
+
+    if(data.cities){
+        var experienceNumbers = data.cities.experienceNumbers;
+        for(var i in experienceNumbers){
+            total += parseInt(experienceNumbers[i]);
+        }
     }
 
     $({someValue: 0}).animate({someValue: total}, {
@@ -186,14 +190,14 @@ function get_filter_params(){
 
 function update_selects_from_filter(filter){
 
-    //if no period was selected, define now as default
-    if(filter.period_id == undefined){
-        $('#period_id > [value=3]').click();
-    }
-    else{
+//    //if no period was selected, define now as default
+//    if(filter.period_id == undefined){
+//        $('#period_id > [value=3]').click();
+//    }
+//    else{
         $('#department_id > [value='+ filter.department_id +']').click();
         $('#motive_id > [value='+ filter.motive_id +']').click();
         $('#school_id > [value='+ filter.school_id +']').click();
         $('#period_id > [value='+ filter.period_id +']').click();
-    }
+//    }
 }
