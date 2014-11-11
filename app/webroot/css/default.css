@@ -288,6 +288,35 @@ h2 > span.wut {
     left: 30px;
 }
 
+#numberOfExperiences {
+    position: absolute;
+    z-index: 10;
+    top: 70px;
+    right: 30px;
+    padding: 5px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+
+#numberOfExperiencesSpan {
+    font-weight: bold;
+    display: inline-block;
+    min-width: 25px;
+    text-align: center;
+}
+
+#addExperienceFromMap {
+    cursor: pointer;
+    display: inline-block;
+    border-left: 1px solid #cccccc;
+    padding-left: 5px;
+    padding-right: 2px;
+}
+
+#addExperienceFromMap:hover {
+    color: #3498db;
+}
+
 #filter-map button{
     font-weight: 300;
     padding: 4px 8px;

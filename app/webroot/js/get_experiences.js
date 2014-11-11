@@ -4,7 +4,7 @@
 function get_map(){
     var filter = get_filter_params();
     fetch_map_values(filter);
-    
+
     //si une region (ville ou pays) est selectionnee on raffraichit aussi la liste correspondante
     if(selected_region.type){
         //on ajoute le parametre country_id
@@ -17,10 +17,10 @@ function get_map(){
 
 //recupere les infos dans la bdd a partir des paramêtres de filtre
 function fetch_map_values(filter){
-    
+
     //on affiche le loader au milieu de la carte
     start_logo_fly();
-    
+
     //si les parametres de filtre sont vides, on charge les infos de la carte par défaut
     if($.isEmptyObject(filter)){
         var url = 'get_map_init';
@@ -28,7 +28,7 @@ function fetch_map_values(filter){
     else{
         var url = 'get_map';
     }
-    
+
     $.ajax({
         type:"POST",
         url : url,
@@ -36,6 +36,7 @@ function fetch_map_values(filter){
         dataType : 'json',
         success : function(data) {
             update_map(data);
+            update_number_of_experiences(data.cities.experienceNumbers);
         },
         error : function(data) {
             //alert("Une erreur est survenue, veuillez réessayer dans quelques instants.");
@@ -47,16 +48,34 @@ function fetch_map_values(filter){
     });
 }
 
+function update_number_of_experiences(experienceNumbers){
+
+    var total = 0;
+    for(var i in experienceNumbers){
+        total += parseInt(experienceNumbers[i]);
+    }
+
+    $({someValue: 0}).animate({someValue: total}, {
+        duration: 1000,
+        easing:'swing', // can be anything
+        step: function() { // called on every step
+            // Update the element's text with rounded-up value:
+            $('#numberOfExperiencesSpan').text(Math.ceil(this.someValue));
+        }
+    });
+
+}
+
 //recuperer les experiences dans la base de donnees pour l'affichage de la liste
 function get_experiences(_view_to_render, _filter, offset){
-    
+
     if(!offset){
         offset = 0;
     }
-    
+
     var filter = get_filter_params();
     filter.offset = offset;
-    
+
     //si une region (ville ou pays) est selectionnee on raffraichit aussi la liste correspondante
     if(_view_to_render === 'get_experiences_map' && selected_region.type){
         //on ajoute le parametre country_id
@@ -64,14 +83,14 @@ function get_experiences(_view_to_render, _filter, offset){
         //on join les deux tableaux de parametres
         $.extend(filter,country_or_city_json);
     }
-    
+
     //on ajoute le parametre de vue a rendre
     var view_to_render = $.parseJSON('{"view_to_render":"'+_view_to_render+'"}');
     //on join les trois tableaux de parametres
     $.extend(filter,_filter,view_to_render);
-    
+
     start_logo_fly();
-    
+
     $.ajax({
         type:"POST",
         url : 'get_experiences',
@@ -107,21 +126,21 @@ function open_list_experiences(){
 function new_search(view_to_render,filter){
     //on vide la liste des resultats
     $('.experience-list').empty();
-    
+
     //on remet le offset a 0
     if(filter){
         filter.offset = "0";
     }
-    
+
     //on lance la recherche
     get_experiences(view_to_render,filter);
 }
 
 //recupere les parametres de filtres
 function get_filter_params(){
-    
+
     var filter = {};
-    
+
     if($('#department_id').attr('value') !== '0'){
         var deparment_id = $.parseJSON('{"department_id":"'+$('#department_id').attr('value')+'"}');
     }
@@ -152,29 +171,29 @@ function get_filter_params(){
     if($('#period_id').attr('value') !== '0'){
         var period_id = $.parseJSON('{"period_id":"'+$('#period_id').attr('value')+'"}');
     }
-    
+
     $.extend(filter,deparment_id,motive_id,school_id,key_word,city_name,country_id,user_name,date_min,date_max,period_id);
-    
+
     var filter_cookie = {};
     filter_cookie["department_id"] = $('#department_id').attr('value');
     filter_cookie["motive_id"] = $('#motive_id').attr('value');
     filter_cookie["school_id"] = $('#school_id').attr('value');
     filter_cookie["period_id"] = $('#period_id').attr('value');
     createCookiesFromFilter(filter_cookie);
-    
+
     return filter;
 }
 
 function update_selects_from_filter(filter){
-	
-	//if no period was selected, define now as default
-	if(filter.period_id == undefined){
-		$('#period_id > [value=3]').click();
-	}
-	else{
-	    $('#department_id > [value='+ filter.department_id +']').click();
-	    $('#motive_id > [value='+ filter.motive_id +']').click();
-	    $('#school_id > [value='+ filter.school_id +']').click();
-	    $('#period_id > [value='+ filter.period_id +']').click();
-	}
+
+    //if no period was selected, define now as default
+    if(filter.period_id == undefined){
+        $('#period_id > [value=3]').click();
+    }
+    else{
+        $('#department_id > [value='+ filter.department_id +']').click();
+        $('#motive_id > [value='+ filter.motive_id +']').click();
+        $('#school_id > [value='+ filter.school_id +']').click();
+        $('#period_id > [value='+ filter.period_id +']').click();
+    }
 }
