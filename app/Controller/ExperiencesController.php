@@ -76,7 +76,7 @@ class ExperiencesController extends AppController {
                         'order' => array('Typenotification.id' => 'DESC'))));
                             
         //includes google maps script for place autocomplete
-    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete'));
+    	$this->set('jsIncludes',array('http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=fr&libraries=places','places_autocomplete', 'establishment_autocomplete'));
             
         $user_id = $this->Auth->user('id');
         $this->request->data['Experience']['user_id'] = $user_id;
