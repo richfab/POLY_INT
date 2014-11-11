@@ -65,7 +65,7 @@ echo $this->Form->input('typenotification_id', array('value'=>'3','type'=>'hidde
         var experienceMotiveIdDiv = $('#ExperienceMotiveId').parent().parent();
         var experienceEstablishmentDiv = $('#ExperienceEstablishmentinput').parent().parent();
         var experienceDescriptionDiv = $('#ExperienceDescription').parent().parent();
-        var experienceInputDiv = $('#ExperienceInput').parent().parent();
+        var experienceInputDiv = $('#ExperienceInputDiv');
 
         $('#ExperienceMotiveId').change(checkIfVoyage);
         checkIfVoyage();
