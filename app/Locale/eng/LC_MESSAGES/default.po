@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2014-11-07 22:03+0100\n"
-"PO-Revision-Date: 2014-11-07 16:04-0500\n"
+"POT-Creation-Date: 2014-11-12 01:16+0100\n"
+"PO-Revision-Date: 2014-11-11 19:17-0500\n"
 "Last-Translator: \n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "Language: eng\n"
@@ -100,23 +100,23 @@ msgstr "The experience has been deleted"
 msgid "L'expérience n'a pas pu être supprimée"
 msgstr "The experience could not be deleted"
 
-#: Controller/ExperiencesController.php:572;587;617
+#: Controller/ExperiencesController.php:561;576;606
 msgid "Invalid experience"
 msgstr ""
 
-#: Controller/ExperiencesController.php:591
+#: Controller/ExperiencesController.php:580
 msgid "The experience has been saved."
 msgstr ""
 
-#: Controller/ExperiencesController.php:594
+#: Controller/ExperiencesController.php:583
 msgid "The experience could not be saved. Please, try again."
 msgstr ""
 
-#: Controller/ExperiencesController.php:621
+#: Controller/ExperiencesController.php:610
 msgid "The experience has been deleted."
 msgstr ""
 
-#: Controller/ExperiencesController.php:623
+#: Controller/ExperiencesController.php:612
 msgid "The experience could not be deleted. Please, try again."
 msgstr ""
 
@@ -596,7 +596,7 @@ msgid "Establishment"
 msgstr ""
 
 #: View/Cities/admin_view.ctp:67 View/Experiences/admin_view.ctp:24
-#: View/Experiences/info.ctp:32 View/Motives/admin_view.ctp:45
+#: View/Experiences/info.ctp:44 View/Motives/admin_view.ctp:45
 #: View/Users/admin_view.ctp:63
 msgid "Description"
 msgstr ""
@@ -875,6 +875,14 @@ msgstr ""
 msgid "Delete Experience"
 msgstr ""
 
+#: View/Experiences/explore.ctp:12
+msgid "expériences"
+msgstr "experiences"
+
+#: View/Experiences/explore.ctp:13 View/Users/profile.ctp:58
+msgid "Ajouter une expérience"
+msgstr "Add an experience"
+
 #: View/Experiences/get_experiences_map.ctp:45
 #: View/Experiences/get_experiences_search.ctp:42
 #: View/Recommendations/get_recommendations.ctp:35
@@ -910,14 +918,6 @@ msgstr "From"
 msgid "Au"
 msgstr "To"
 
-#: View/Experiences/info.ctp:27
-msgid "Ville"
-msgstr "City"
-
-#: View/Experiences/info.ctp:27
-msgid "De préférence une grande ville pour une meilleure visibilité"
-msgstr "Prefer a larger city for better visibility"
-
 #: View/Experiences/info.ctp:31
 msgid "Établissement"
 msgstr "Establishment"
@@ -926,36 +926,28 @@ msgstr "Establishment"
 msgid "Nom de l'entreprise ou de l'université"
 msgstr "Name of the company or university"
 
-#: View/Experiences/info.ctp:32
+#: View/Experiences/info.ctp:36
+msgid "Ville"
+msgstr "City"
+
+#: View/Experiences/info.ctp:44
 msgid "Description de la mission"
 msgstr "Description of your mission"
 
-#: View/Experiences/info.ctp:38
+#: View/Experiences/info.ctp:45
 msgid "Avis"
 msgstr "Comment"
 
-#: View/Experiences/info.ctp:38
+#: View/Experiences/info.ctp:45
 msgid "Avis sur l'expérience"
 msgstr "How was it ?"
 
-#: View/Experiences/info.ctp:40
-msgid "Notifications"
-msgstr "Notifications"
-
-#: View/Experiences/info.ctp:40
-msgid "Fonctionnalité à venir"
-msgstr "Upcoming feature"
-
-#: View/Experiences/info.ctp:40
-msgid "Recevoir un email si quelqu'un est au même en endroit en même temps"
-msgstr "Send me an email if someone is at the same location at the same time"
-
-#: View/Experiences/info.ctp:43 View/Users/edit.ctp:33
+#: View/Experiences/info.ctp:50 View/Users/edit.ctp:33
 #: View/Users/forgotten_password.ctp:21
 msgid "Retour"
 msgstr "Back"
 
-#: View/Experiences/info.ctp:46 View/Users/edit.ctp:36
+#: View/Experiences/info.ctp:53 View/Users/edit.ctp:36
 #: View/Users/profile.ctp:184
 msgid "Enregistrer"
 msgstr "Save"
@@ -1286,10 +1278,6 @@ msgstr "Change my picture"
 msgid "Expériences"
 msgstr "Experiences"
 
-#: View/Users/profile.ctp:58
-msgid "Ajouter une expérience"
-msgstr "Add an experience"
-
 #: View/Users/profile.ctp:67
 msgid "Supprimer"
 msgstr "Delete"
@@ -1485,6 +1473,19 @@ msgstr ""
 #: View/Layouts/error.ctp:19
 msgid "CakePHP: the rapid development php framework"
 msgstr ""
+
+#~ msgid "De préférence une grande ville pour une meilleure visibilité"
+#~ msgstr "Prefer a larger city for better visibility"
+
+#~ msgid "Notifications"
+#~ msgstr "Notifications"
+
+#~ msgid "Fonctionnalité à venir"
+#~ msgstr "Upcoming feature"
+
+#~ msgid "Recevoir un email si quelqu'un est au même en endroit en même temps"
+#~ msgstr ""
+#~ "Send me an email if someone is at the same location at the same time"
 
 #~ msgid "Contest"
 #~ msgstr "Contest"

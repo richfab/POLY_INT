@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2014-11-07 22:03+0100\n"
+"POT-Creation-Date: 2014-11-12 01:16+0100\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -100,23 +100,23 @@ msgstr ""
 msgid "L'expérience n'a pas pu être supprimée"
 msgstr ""
 
-#: Controller/ExperiencesController.php:572;587;617
+#: Controller/ExperiencesController.php:561;576;606
 msgid "Invalid experience"
 msgstr ""
 
-#: Controller/ExperiencesController.php:591
+#: Controller/ExperiencesController.php:580
 msgid "The experience has been saved."
 msgstr ""
 
-#: Controller/ExperiencesController.php:594
+#: Controller/ExperiencesController.php:583
 msgid "The experience could not be saved. Please, try again."
 msgstr ""
 
-#: Controller/ExperiencesController.php:621
+#: Controller/ExperiencesController.php:610
 msgid "The experience has been deleted."
 msgstr ""
 
-#: Controller/ExperiencesController.php:623
+#: Controller/ExperiencesController.php:612
 msgid "The experience could not be deleted. Please, try again."
 msgstr ""
 
@@ -690,7 +690,7 @@ msgstr ""
 
 #: View/Cities/admin_view.ctp:67
 #: View/Experiences/admin_view.ctp:24
-#: View/Experiences/info.ctp:32
+#: View/Experiences/info.ctp:44
 #: View/Motives/admin_view.ctp:45
 #: View/Users/admin_view.ctp:63
 msgid "Description"
@@ -998,6 +998,15 @@ msgstr ""
 msgid "Delete Experience"
 msgstr ""
 
+#: View/Experiences/explore.ctp:12
+msgid "expériences"
+msgstr ""
+
+#: View/Experiences/explore.ctp:13
+#: View/Users/profile.ctp:58
+msgid "Ajouter une expérience"
+msgstr ""
+
 #: View/Experiences/get_experiences_map.ctp:45
 #: View/Experiences/get_experiences_search.ctp:42
 #: View/Recommendations/get_recommendations.ctp:35
@@ -1033,14 +1042,6 @@ msgstr ""
 msgid "Au"
 msgstr ""
 
-#: View/Experiences/info.ctp:27
-msgid "Ville"
-msgstr ""
-
-#: View/Experiences/info.ctp:27
-msgid "De préférence une grande ville pour une meilleure visibilité"
-msgstr ""
-
 #: View/Experiences/info.ctp:31
 msgid "Établissement"
 msgstr ""
@@ -1049,37 +1050,29 @@ msgstr ""
 msgid "Nom de l'entreprise ou de l'université"
 msgstr ""
 
-#: View/Experiences/info.ctp:32
+#: View/Experiences/info.ctp:36
+msgid "Ville"
+msgstr ""
+
+#: View/Experiences/info.ctp:44
 msgid "Description de la mission"
 msgstr ""
 
-#: View/Experiences/info.ctp:38
+#: View/Experiences/info.ctp:45
 msgid "Avis"
 msgstr ""
 
-#: View/Experiences/info.ctp:38
+#: View/Experiences/info.ctp:45
 msgid "Avis sur l'expérience"
 msgstr ""
 
-#: View/Experiences/info.ctp:40
-msgid "Notifications"
-msgstr ""
-
-#: View/Experiences/info.ctp:40
-msgid "Fonctionnalité à venir"
-msgstr ""
-
-#: View/Experiences/info.ctp:40
-msgid "Recevoir un email si quelqu'un est au même en endroit en même temps"
-msgstr ""
-
-#: View/Experiences/info.ctp:43
+#: View/Experiences/info.ctp:50
 #: View/Users/edit.ctp:33
 #: View/Users/forgotten_password.ctp:21
 msgid "Retour"
 msgstr ""
 
-#: View/Experiences/info.ctp:46
+#: View/Experiences/info.ctp:53
 #: View/Users/edit.ctp:36
 #: View/Users/profile.ctp:184
 msgid "Enregistrer"
@@ -1401,10 +1394,6 @@ msgstr ""
 
 #: View/Users/profile.ctp:54
 msgid "Expériences"
-msgstr ""
-
-#: View/Users/profile.ctp:58
-msgid "Ajouter une expérience"
 msgstr ""
 
 #: View/Users/profile.ctp:67
