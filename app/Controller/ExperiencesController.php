@@ -279,17 +279,6 @@ class ExperiencesController extends AppController {
         return false;
     }
     
-    /**
-    * This method gets experiences to color the map for map initialization
-    * 
-    * @return void
-    */
-    public function get_map_init(){
-        $this->request->onlyAllow('ajax');
-        $this->set('countries', $this->Experience->City->Country->find('all',array(
-            'conditions' => array('Country.experienceNumber >' => 0)
-        )));
-    }
     
     /**
     * This method gets experiences to color the map

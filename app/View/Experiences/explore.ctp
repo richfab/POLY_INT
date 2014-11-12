@@ -9,8 +9,8 @@
 </div>
 
 <div id="numberOfExperiences" class="well hidden-xs">
-    <div><span id="numberOfExperiencesSpan">0</span> expériences 
-        <div id="addExperienceFromMap">
+    <div><span id="numberOfExperiencesSpan">0</span> <?php echo __("expériences");?> 
+        <div id="addExperienceFromMap" data-toggle="tooltip" data-placement="bottom" title="<?php echo __("Ajouter une expérience");?>">
             <?= $this->Html->link('<span class="glyphicon glyphicon-plus"></span>', array('action' => 'info'),
                 array('escape' => false)); ?>
         </div>
@@ -49,6 +49,8 @@
         $(".dropdown-li").click(function() {
             get_map();
         });
+        
+        $('#addExperienceFromMap').tooltip(); 
 
         //au click d'une option on referme la liste
         $(".dropdown").click(function(){

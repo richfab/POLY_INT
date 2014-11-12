@@ -21,17 +21,10 @@ function fetch_map_values(filter){
     //on affiche le loader au milieu de la carte
     start_logo_fly();
 
-    //si les parametres de filtre sont vides, on charge les infos de la carte par défaut
-    if($.isEmptyObject(filter)){
-        var url = 'get_map_init';
-    }
-    else{
-        var url = 'get_map';
-    }
 
     $.ajax({
         type:"POST",
-        url : url,
+        url : 'get_map',
         data : filter,
         dataType : 'json',
         success : function(data) {
