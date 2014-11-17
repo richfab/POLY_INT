@@ -27,7 +27,7 @@ function initialize() {
 
         if(place.place_id){
             google_place_id.value = place.place_id;
-            establishment.value = place.name;
+            establishment.value = establishment_input.value = place.name;
         } else {
             google_place_id.value = "";
         }
