@@ -80,34 +80,6 @@ class ActivitiesController extends AppController {
             array_push($activities,$user);
         }
         
-        //recuperation des dernieres photos postees
-        App::import('Controller', 'Photos');
-        $photosController = new PhotosController;
-        
-        //nombre de photos a recuperer
-        $photo_limit = 8;
-            
-        $photos_users = $photosController->Photo->find('all', array(
-            'limit' => $photo_limit,
-            'offset' => $photo_limit * $offset,
-            'order' => 'MAX(Photo.fb_created) DESC',
-            'fields' => array('Experience.user_id'),
-            'group' => 'Experience.user_id'
-        ));
-        
-        foreach ($photos_users as $photos_user){
-            $photo = $photosController->Photo->find('first', array(
-                'order' => 'Photo.fb_created DESC',
-                'conditions' => array('user_id' => $photos_user['Experience']['user_id']),
-                'recursive' => 2
-            ));
-            $photo['Activity']['type'] = 'photo';
-            $photo['Activity']['created'] = $photo['Photo']['created'];
-            $photo['Activity']['people_around'] = $usersController->get_people_around($photo['Experience']['city_id']);
-            $photo['Activity']['User'] = $photo['Experience']['User'];
-            array_push($activities, $photo);
-        }
-        
         //recuperation des dernieres recommendations postees
         App::import('Controller', 'Recommendations');
         $recommendationsController = new RecommendationsController;

@@ -140,24 +140,6 @@
 	        </div>
 		</div>
         
-        <div class="panel-group">
-            <div class="panel panel-default panel-photos">
-                <div class="panel-heading panel-heading-photos">
-                    <h5 class="panel-title panel-title-photos">
-                        <span style="width:20px" class="glyphicon glyphicon-picture"></span> <?= __("Photos");?> 
-                            <?php if($experience['Experience']['user_id'] == AuthComponent::user('id')) : ?>
-                                <?php echo $this->element('fbalbum_import_button', array('experience' => $experience)); ?>
-                            <?php endif; ?>
-                    </h5>
-                </div>
-                <div class="panel-collapse">
-                    <div class="panel-body photo_gallery" experience_id="<?= $experience['Experience']['id']; ?>">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-        
     </div>
     <?php endforeach; ?>
 </div>
