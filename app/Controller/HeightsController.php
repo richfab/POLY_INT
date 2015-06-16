@@ -185,6 +185,48 @@ class HeightsController extends AppController {
         $this->set('school_colors',$this->Height->User->School->find('list',array(
                                                             'fields' => array('School.color'))));
     }
+
+    /**
+    * admin_view method
+    *
+    * @throws NotFoundException
+    * @param string $id
+    * @return void
+    */
+    public function admin_validate($offset = 0) {
+        
+        $conditions = array();
+            
+        $conditions['Height.verified'] = 0;
+        $conditions['Height.url !='] = NULL;
+        $conditions['Height.created >='] = "2015-06-01";
+
+        $photo = $this->Height->find('first', array(
+                    'conditions' => $conditions,
+                    'recursive' => 2,
+                    'offset' => $offset,
+                    'order' => array('Height.created' => 'ASC')));
+
+        if($photo){
+            $this->Height->id = $photo['Height']['id'];
+
+            if ($this->request->is(array('post', 'put'))) {
+                $this->Height->id = $photo['Height']['id'];
+                if ($this->Height->save($this->request->data)) {
+                    $this->Session->setFlash(__('The photo has been validated.'));
+                    return $this->redirect(array('action' => 'validate'));
+                }
+                $this->Session->setFlash(__('Unable to validate the photo.'));
+            }
+
+            $this->set('offset', $offset);
+            $this->set('photo', $photo);
+        }
+    }
+
+    public function admin_next($offset = 1) {
+        return $this->redirect(array('action' => 'validate', 1));
+    }
         
 }
 ?>
