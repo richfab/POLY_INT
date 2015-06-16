@@ -42,10 +42,6 @@ ul, li, rect {
     margin-bottom: 30px;
 }
 
-#links {
-    text-align: center;
-}
-
 #links a img {
     margin: 5.5px;
     padding: 2px;
@@ -93,6 +89,12 @@ a:hover {
     width: 28px;
     height: 44px;
 }
+
+.pac-container {
+  z-index:2147483647;
+}
+
+
 @keyframes "cloud-bounce" { 
     0% { margin-top: 10px }
     50% { margin-top: -15px }

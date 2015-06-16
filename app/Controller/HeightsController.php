@@ -73,6 +73,7 @@ class HeightsController extends AppController {
                     $user_id = $this->Auth->user('id');
                         
                     $this->request->data['Height']['user_id'] = $user_id;
+                    $this->request->data['Height']['place'] = ucwords($this->request->data['Height']['place']);
                         
                     $this->Height->save($this->request->data);
                         
@@ -147,6 +148,7 @@ class HeightsController extends AppController {
             
         $conditions['Height.verified'] = 1;
         $conditions['Height.url !='] = NULL;
+        $conditions['Height.created >='] = "2015-06-01";
             
         if(!empty($this->request->data['school_id'])){
             $conditions['User.school_id'] = $this->request->data['school_id'];
@@ -167,9 +169,14 @@ class HeightsController extends AppController {
     * @return void
     */
     public function get_heights(){
+
+        $conditions = array();
+
+        $conditions['Height.created >='] = "2015-06-01";
+        $conditions['Height.verified'] = 1;
     
         $this->set('heights', $this->Height->find('all', array(
-                    'conditions' => array('Height.verified' => 1),
+                    'conditions' => $conditions,
                     'group' => 'User.school_id',
                     'order' => array('SUM(height)' => 'DESC'),
                     'fields' => array('User.school_id','SUM(height) AS total' ))));
