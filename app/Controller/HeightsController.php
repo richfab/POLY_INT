@@ -145,7 +145,8 @@ class HeightsController extends AppController {
     public function get_heights_gallery(){
     
         $conditions = array();
-            
+        
+        $conditions['User.role'] = 'user';
         $conditions['Height.verified'] = 1;
         $conditions['Height.url !='] = NULL;
         $conditions['Height.created >='] = "2015-06-01";
@@ -172,6 +173,7 @@ class HeightsController extends AppController {
 
         $conditions = array();
 
+        $conditions['User.role'] = 'user';
         $conditions['Height.created >='] = "2015-06-01";
         $conditions['Height.verified'] = 1;
     
@@ -196,7 +198,8 @@ class HeightsController extends AppController {
     public function admin_validate($offset = 0) {
         
         $conditions = array();
-            
+        
+        $conditions['User.role'] = 'user';
         $conditions['Height.verified'] = 0;
         $conditions['Height.url !='] = NULL;
         $conditions['Height.created >='] = "2015-06-01";
@@ -206,8 +209,17 @@ class HeightsController extends AppController {
                     'recursive' => 2,
                     'offset' => $offset,
                     'order' => array('Height.created' => 'ASC')));
+        $photo_count = $this->Height->find('count', array('conditions' => $conditions));
 
         if($photo){
+            $conditions['Height.user_id'] = $photo['Height']['user_id'];
+            $conditions['Height.verified'] = 1;
+            $user_photo_count['validated'] = $this->Height->find('count', array('conditions' => $conditions));
+            $conditions['Height.verified'] = 0;
+            $user_photo_count['not_validated'] = $this->Height->find('count', array('conditions' => $conditions));
+            $conditions['Height.verified'] = -1;
+            $user_photo_count['rejected'] = $this->Height->find('count', array('conditions' => $conditions));
+
             $this->Height->id = $photo['Height']['id'];
 
             if ($this->request->is(array('post', 'put'))) {
@@ -221,6 +233,8 @@ class HeightsController extends AppController {
 
             $this->set('offset', $offset);
             $this->set('photo', $photo);
+            $this->set('photo_count',$photo_count);
+            $this->set('user_photo_count', $user_photo_count);
         }
     }
 

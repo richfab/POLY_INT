@@ -33,11 +33,11 @@
                 <div class="well">
                     <h2 id="rules">Les règles</h2>
                     <p>&middot; Les <strong>écoles Polytech</strong> sont les unes contre les autres.</p>
-                    <p>&middot; Tu as du <strong>20 juin au 31 août</strong> 2015 pour faire gagner ton école.</p>
+                    <p>&middot; Tu as du <strong>18 juin au 31 août</strong> 2015 pour faire gagner ton école.</p>
                     <p>&middot; Le score est calculé en fonction de la <strong>hauteur des monuments</strong> de chaque photo.</p>
                     <p>&middot; Il faut être <strong>à l’étranger</strong>.</p>
                     <p>&middot; L'<strong>avion en papier</strong> doit être visible sur la photo.</p>
-                    <p>&middot; Maximum <strong>une photo</strong> par personne par ville.</p>
+                    <p>&middot; Maximum <strong>3 photos</strong> par personne, par ville visitée.</p>
                     <p>&middot; L’école gagnante sera élue <strong>l’école la plus internationale</strong> du réseau Polytech.</p>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                                 echo $this->Form->input('photo_file',array('type'=>'file','label'=>'<span class="glyphicon glyphicon-camera"></span>',"afterInput"=>"<span class='help-block'>Photo de toi <strong>avec l'avion en papier</strong> devant ou en haut du monument (Max 3.4Mo)</span>"));
                                 echo $this->Form->input('place',array('label'=>'<span class="glyphicon glyphicon-globe"></span>',"afterInput"=>"<span class='help-block'>Nom du bâtiment</span>"));
                                 echo $this->Form->input('input',array('label'=>'<span class="glyphicon glyphicon-map-marker"></span>',"afterInput"=>"<span class='help-block'>Ville où se trouve le bâtiment</span>", 'location-types'=>'(cities)', 'type' => 'text', 'id' => 'ExperienceInput'));
-                                echo $this->Form->input('Height.height',array('label'=>'<span class="glyphicon glyphicon-send"></span>',"afterInput"=>"<span class='help-block'>Hauteur (en mètres)</span>", 'type' => 'number'));
+                                echo $this->Form->input('Height.height',array('label'=>'<span class="glyphicon glyphicon-send"></span>',"afterInput"=>"<span class='help-block'>Hauteur en mètres (sera vérifiée)</span>", 'type' => 'number'));
                                 echo $this->Form->input('Height.city',array('label'=>'city_name','type'=>'hidden', 'id' => 'CityName'));
                                 echo $this->Form->input('Height.country', array('label'=>'country_name','type'=>'hidden', 'id' => 'CityCountryName'));
                         else:

@@ -1,8 +1,11 @@
 <div>
 	<h2 class="page-title">Contest validation</h2>
 	<?php if (isset($photo)):?>
+	<p><b><?= $offset+1;?>/<?= $photo_count;?></b> photo(s) en cours de validation</p>
 	<p><?= $this->Html->image('heights-photos/' . $photo['Height']['url']);?></p>
-	<p>Utilisateur : <?= $photo['User']['firstname']. " " .$photo['User']['lastname'];?> (<?= $photo['User']['email'];?>) – Polytech <?= $photo['User']['School']['name'];?></p>
+	<h3>Utilisateur</h3>
+	<p><?= $photo['User']['firstname']. " " .$photo['User']['lastname'];?> (<?= $photo['User']['email'];?>) – Polytech <?= $photo['User']['School']['name'];?></p>
+	<p><b><?= $user_photo_count['validated'];?></b> photo(s) validée(s), <b><?= $user_photo_count['not_validated'];?></b> photo(s) en cours de validation, <b><?= $user_photo_count['rejected'];?></b> photo(s) rejetée(s)</p>
 	<p><a href="https://www.google.fr/?gws_rd=cr&ei=IoqA#q=hauteur <?php echo $photo['Height']['place'].' '.$photo['Height']['city'];?>" target="_blank">Recherche google de la hauteur</a>
 	<?php 
 		echo $this->Form->create('Height');
