@@ -207,7 +207,7 @@ class HeightsController extends AppController {
                     'conditions' => $conditions,
                     'recursive' => 2,
                     'offset' => $offset,
-                    'order' => array('Height.created' => 'ASC')));
+                    'order' => array('Height.created' => 'DESC')));
 
         $total_photo_count['all'] = $this->Height->find('count', array('conditions' => $conditions));
         $conditions['Height.verified'] = 1;
@@ -226,7 +226,7 @@ class HeightsController extends AppController {
             $similar_photos = $this->Height->find('all', array(
                         'conditions' => $conditions,
                         'order' => array('Height.created' => 'DESC')));
-            
+
             $conditions['Height.created >='] = "2015-06-01";
             $conditions['Height.user_id'] = $photo['Height']['user_id'];
             $conditions['Height.verified'] = 1;

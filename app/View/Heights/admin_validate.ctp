@@ -3,6 +3,23 @@
 	<?php if (isset($photo)):?>
 	<p><b><?= $total_photo_count['validated'];?></b> photo(s) validée(s), <b><?= $total_photo_count['not_validated'];?></b> photo(s) en cours de validation, <b><?= $total_photo_count['rejected'];?></b> photo(s) rejetée(s)</p>
 	<p>Photo <b><?= $offset+1;?>/<?= $total_photo_count['all'];?></b></p>
+	<p><?php echo $this->Html->link('<<', array('action'=>'nav'));
+	echo " ";
+	if($offset > 0){
+		echo $this->Html->link('<', array('action'=>'nav', $offset-1));
+	}
+	else{
+		echo "<";
+	}
+	echo " | ";
+	if($offset+1 < $total_photo_count['all']){
+		echo $this->Html->link('>', array('action'=>'nav', $offset+1));
+	}
+	else{
+		echo ">";
+	}
+	echo " ";
+	echo $this->Html->link('>>', array('action'=>'nav', $total_photo_count['all']-1));?></p>
 	<p><?= $this->Html->image('heights-photos/' . $photo['Height']['url']);?></p>
 	<p>Autres photos validées à <b><?= $photo['Height']['city'];?>, <?= $photo['Height']['country'];?></b> :</p>
 	<p><?php if($similar_photos): 
@@ -27,23 +44,6 @@
 		echo $this->Form->input('country',array('label'=>'Country', 'value' => $photo['Height']['country']));
 		echo $this->Form->input('verified',array('label'=>'Verified (0=En cours, 1=Validée, -1=Rejetée)', 'value' => $photo['Height']['verified']));
 		echo $this->Form->end('Submit');
-		echo $this->Html->link('<<', array('action'=>'nav'));
-		echo " ";
-		if($offset > 0){
-			echo $this->Html->link('<', array('action'=>'nav', $offset-1));
-		}
-		else{
-			echo "<";
-		}
-		echo " | ";
-		if($offset+1 < $total_photo_count['all']){
-			echo $this->Html->link('>', array('action'=>'nav', $offset+1));
-		}
-		else{
-			echo ">";
-		}
-		echo " ";
-		echo $this->Html->link('>>', array('action'=>'nav', $total_photo_count['all']-1));
 	?>
 	<?php else:?>
 		<p>Toutes les photos sont validées.</p>
