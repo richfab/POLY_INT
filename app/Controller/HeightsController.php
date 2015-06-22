@@ -200,7 +200,6 @@ class HeightsController extends AppController {
         $conditions = array();
         
         $conditions['User.role'] = 'user';
-        $conditions['Height.verified'] = 0;
         $conditions['Height.url !='] = NULL;
         $conditions['Height.created >='] = "2015-06-01";
 
@@ -209,9 +208,26 @@ class HeightsController extends AppController {
                     'recursive' => 2,
                     'offset' => $offset,
                     'order' => array('Height.created' => 'ASC')));
-        $photo_count = $this->Height->find('count', array('conditions' => $conditions));
+
+        $total_photo_count['all'] = $this->Height->find('count', array('conditions' => $conditions));
+        $conditions['Height.verified'] = 1;
+        $total_photo_count['validated'] = $this->Height->find('count', array('conditions' => $conditions));
+        $conditions['Height.verified'] = 0;
+        $total_photo_count['not_validated'] = $this->Height->find('count', array('conditions' => $conditions));
+        $conditions['Height.verified'] = -1;
+        $total_photo_count['rejected'] = $this->Height->find('count', array('conditions' => $conditions));
 
         if($photo){
+            $conditions['Height.verified'] = 1;
+            $conditions['Height.id <>'] = $photo['Height']['id'];
+            $conditions['Height.city'] = $photo['Height']['city'];
+            $conditions['Height.country'] = $photo['Height']['country'];
+            unset($conditions['Height.created >=']);
+            $similar_photos = $this->Height->find('all', array(
+                        'conditions' => $conditions,
+                        'order' => array('Height.created' => 'DESC')));
+            
+            $conditions['Height.created >='] = "2015-06-01";
             $conditions['Height.user_id'] = $photo['Height']['user_id'];
             $conditions['Height.verified'] = 1;
             $user_photo_count['validated'] = $this->Height->find('count', array('conditions' => $conditions));
@@ -226,20 +242,21 @@ class HeightsController extends AppController {
                 $this->Height->id = $photo['Height']['id'];
                 if ($this->Height->save($this->request->data)) {
                     $this->Session->setFlash(__('The photo has been validated.'));
-                    return $this->redirect(array('action' => 'validate'));
+                    return $this->redirect(array('action' => 'validate', $offset));
                 }
                 $this->Session->setFlash(__('Unable to validate the photo.'));
             }
 
             $this->set('offset', $offset);
             $this->set('photo', $photo);
-            $this->set('photo_count',$photo_count);
+            $this->set('total_photo_count',$total_photo_count);
             $this->set('user_photo_count', $user_photo_count);
+            $this->set('similar_photos', $similar_photos);
         }
     }
 
-    public function admin_next($offset = 1) {
-        return $this->redirect(array('action' => 'validate', 1));
+    public function admin_nav($offset = 0) {
+        return $this->redirect(array('action' => 'validate', $offset));
     }
         
 }
