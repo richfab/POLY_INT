@@ -33,10 +33,10 @@
 	</p>
 	<h3>Utilisateur</h3>
 	<p><b><?= $photo['User']['firstname']. " " .$photo['User']['lastname'];?> </b>(<?= $photo['User']['email'];?>) – <b>Polytech <?= $photo['User']['School']['name'];?></b></p>
-	<p><mark><b><?= $user_photo_count['validated'];?></b> photo(s) validée(s)</mark>, <mark><b><?= $user_photo_count['not_validated'];?></b> photo(s) en cours de validation</mark>, <mark><b><?= $user_photo_count['rejected'];?></b> photo(s) rejetée(s)</mark></p>
+	<p>Au <b>total</b> : <b><?= $user_photo_count['validated'];?></b> photo(s) validée(s), <b><?= $user_photo_count['not_validated'];?></b> photo(s) en cours de validation, <b><?= $user_photo_count['rejected'];?></b> photo(s) rejetée(s)</p>
+	<p>A <b><?= $photo['Height']['city'];?>, <?= $photo['Height']['country'];?></b> : <mark><b><?= $user_photo_count['in_city'];?></b> photo(s) validée(s)</mark></p>
 	<p><a href="https://www.google.fr/?gws_rd=cr&ei=IoqA#q=hauteur <?php echo $photo['Height']['place'].' '.$photo['Height']['city'];?>" target="_blank">Recherche google de la hauteur</a>
 	<?php 
-	debug($photo['Height']);
 		echo $this->Form->create('Height');
 		echo $this->Form->input('id', array('type' => 'hidden', 'value' => $photo['Height']['id']));
 		echo $this->Form->input('place',array('label'=>'Monument', 'value' => $photo['Height']['place']));
