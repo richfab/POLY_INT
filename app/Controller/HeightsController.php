@@ -217,6 +217,10 @@ class HeightsController extends AppController {
         $conditions['Height.verified'] = -1;
         $total_photo_count['rejected'] = $this->Height->find('count', array('conditions' => $conditions));
 
+        if ($offset == $total_photo_count['all']){
+            return $this->redirect(array('action' => 'validate', $offset-1));            
+        }
+
         if($photo){
             $conditions['Height.verified'] = 1;
             $conditions['Height.id <>'] = $photo['Height']['id'];
@@ -227,6 +231,7 @@ class HeightsController extends AppController {
                         'conditions' => $conditions,
                         'order' => array('Height.created' => 'DESC')));
 
+            unset($conditions['Height.id <>']);
             $conditions['Height.created >='] = "2015-06-01";
             $conditions['Height.user_id'] = $photo['Height']['user_id'];
             $conditions['Height.verified'] = 1;
@@ -241,10 +246,10 @@ class HeightsController extends AppController {
             if ($this->request->is(array('post', 'put'))) {
                 $this->Height->id = $photo['Height']['id'];
                 if ($this->Height->save($this->request->data)) {
-                    $this->Session->setFlash(__('The photo has been validated.'));
-                    return $this->redirect(array('action' => 'validate', $offset));
+                    $this->Session->setFlash(__('Saved.'));
+                    return $this->redirect(array('action' => 'validate', $offset+1));
                 }
-                $this->Session->setFlash(__('Unable to validate the photo.'));
+                $this->Session->setFlash(__('Error.'));
             }
 
             $this->set('offset', $offset);
