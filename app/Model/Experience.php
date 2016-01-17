@@ -76,7 +76,7 @@ class Experience extends AppModel {
             'maxLength' => array(
                 'rule'    => array('maxLength', '140'),
                 'message' => "L'établissement doit comporter 140 caractères au maximum",
-                'allowEmpty' => false
+                'allowEmpty' => true
             )
         ),
         'description' => array(
